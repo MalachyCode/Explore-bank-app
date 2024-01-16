@@ -1,9 +1,28 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-} */
+// #root {
+//   max-width: 1280px;
+//   margin: 0 auto;
+//   padding: 2rem;
+//   text-align: center;
+// }
+* {
+  overflow-x: hidden;
+}
+.app {
+  height: 100vh;
+}
+
+.container {
+  // margin: auto;
+  width: 100%;
+  height: calc(100vh - 70px);
+  background-color: pink;
+  position: relative;
+  top: 70px;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 .logo {
   height: 6em;
@@ -16,13 +35,6 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-.container {
-  background-color: pink;
-  margin: auto;
-  width: 80%;
-  height: 80%;
 }
 
 @keyframes logo-spin {
@@ -41,10 +53,6 @@
 }
 
 .welcome-note {
-  padding: 2em;
-}
-
-.card {
   padding: 2em;
 }
 
