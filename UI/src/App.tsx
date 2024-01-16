@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage';
 import TopBar from './pages/sections/topbar/TopBar';
 
 function App() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
