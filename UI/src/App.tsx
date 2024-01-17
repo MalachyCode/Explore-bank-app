@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.scss';
 import LoginPage from './pages/LoginPage';
-import HomePage from './pages/HomePage';
-import TopBar from './pages/sections/topbar/TopBar';
-import Menu from './pages/sections/menu/Menu';
+import HomePage from './pages/HomePage/HomePage';
+import TopBar from './pages/HomePage/sections/topbar/TopBar';
+import Menu from './pages/HomePage/sections/menu/Menu';
 
 function App() {
-  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   return (
@@ -19,7 +18,6 @@ function App() {
           <Route path='/login' element={<LoginPage />} />
           <Route path='/' element={<HomePage />} />
         </Routes>
-        <button onClick={() => navigate('/login')}>To login page</button>
       </div>
     </div>
   );

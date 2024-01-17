@@ -1,4 +1,4 @@
-@import '../../../global.scss';
+@import '../../../../global.scss';
 
 .menu {
   width: 100%;
@@ -42,5 +42,13 @@
         color: aquamarine;
       }
     }
+  }
+
+  .buttons {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-between;
   }
 }
