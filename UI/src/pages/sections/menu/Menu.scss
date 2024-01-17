@@ -1,0 +1,44 @@
+@import '../../../global.scss';
+
+.menu {
+  width: 100%;
+  height: 0;
+  position: relative;
+  top: 70px;
+  background-color: $mainColor;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s ease;
+
+  &.active {
+    height: calc(70vh - 70px);
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 30px;
+    font-weight: 300;
+    color: white;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    li {
+      margin-bottom: 25px;
+      a {
+        font-size: inherit;
+        color: inherit;
+        text-decoration: none;
+      }
+      &:hover {
+        font-weight: 500;
+      }
+    }
+  }
+}

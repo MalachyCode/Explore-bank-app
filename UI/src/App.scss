@@ -9,6 +9,10 @@
 }
 .app {
   height: 100vh;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .container {
