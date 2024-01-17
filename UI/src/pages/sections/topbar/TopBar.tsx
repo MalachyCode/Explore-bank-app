@@ -1,8 +1,11 @@
 import './TopBar.scss';
 
-const TopBar = ({ menuOpen, setMenuOpen }) => {
+const TopBar = (props: {
+  menuOpen: boolean;
+  setMenuOpen: (arg0: boolean) => void | boolean;
+}) => {
   return (
-    <div className={'topbar ' + (menuOpen && 'active')}>
+    <div className={'topbar ' + (props.menuOpen && 'active')}>
       <div className='wrapper'>
         <div className='left'>
           <a href='#intro' className='explore-logo'>
@@ -10,7 +13,10 @@ const TopBar = ({ menuOpen, setMenuOpen }) => {
           </a>
         </div>
         <div className='right'>
-          <div className='hamburger' onClick={() => setMenuOpen(!menuOpen)}>
+          <div
+            className='hamburger'
+            onClick={() => props.setMenuOpen(!props.menuOpen)}
+          >
             <span className='line1'></span>
             <span className='line2'></span>
             <span className='line3'></span>

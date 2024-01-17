@@ -7,7 +7,7 @@ import TopBar from './pages/sections/topbar/TopBar';
 
 function App() {
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   return (
     <div className='app'>
@@ -17,7 +17,7 @@ function App() {
           <Route path='/login' element={<LoginPage />} />
           <Route path='/' element={<HomePage />} />
         </Routes>
-        {/* <button onClick={() => navigate('/login')}>To login page</button> */}
+        <button onClick={() => navigate('/login')}>To login page</button>
       </div>
     </div>
   );
