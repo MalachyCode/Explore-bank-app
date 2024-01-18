@@ -46,7 +46,7 @@ const Menu = (props: {
             props.setMenuOpen(false);
           }}
         >
-          To login page
+          Login
         </button>
         <button
           onClick={() => {
@@ -54,7 +54,7 @@ const Menu = (props: {
             props.setMenuOpen(false);
           }}
         >
-          To login page
+          Signup
         </button>
       </div>
     </div>

@@ -19,7 +19,11 @@
   // margin: auto;
   width: 100%;
   height: calc(100vh - 70px);
-  background-color: pink;
+  // background-color: pink;
+  background: url('./assets/pexels-jess-bailey-designs-1097930.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   position: relative;
   top: 70px;
   scrollbar-width: none;
