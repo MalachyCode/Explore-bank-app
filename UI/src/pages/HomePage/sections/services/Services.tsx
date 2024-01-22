@@ -18,99 +18,148 @@ const Services = () => {
     <div className='services' id='services'>
       <h3>Our Services Include</h3>
       <div className='services-list'>
-        <div
-          className='service'
-          onClick={() => {
-            setPersonalBankingOpen(!personalBankingOpen);
-            setBusinessBankingOpen(false);
-            setWealthManagementOpen(false);
-            setDigitalServiceOpen(false);
-            setCustomerServiceOpen(false);
-          }}
-        >
-          <strong>Personal Banking </strong>
-          <div className='service-arrow'>
-            <ArrowDropDownCircleIcon
-              className={'arrow ' + (personalBankingOpen && 'active')}
-            />
+        <div className='service'>
+          <div
+            className='service-header'
+            onClick={() => {
+              setPersonalBankingOpen(!personalBankingOpen);
+              setBusinessBankingOpen(false);
+              setWealthManagementOpen(false);
+              setDigitalServiceOpen(false);
+              setCustomerServiceOpen(false);
+            }}
+          >
+            <strong>Personal Banking </strong>
+            <div className='service-arrow'>
+              <ArrowDropDownCircleIcon
+                className={'arrow ' + (personalBankingOpen && 'active')}
+              />
+            </div>
           </div>
-          {/* Comprehensive checking and savings accounts Competitive interest rates
-          on deposits Online and mobile banking services Personal loans and
-          credit cards. */}
+          <div
+            className={'service-list-box ' + (personalBankingOpen && 'active')}
+          >
+            <ul>
+              <li>Comprehensive checking and savings accounts</li>
+              <li>Competitive interest rates on deposits</li>
+              <li>Online and mobile banking services</li>
+              <li>Personal loans and credit cards</li>
+            </ul>
+          </div>
         </div>
-        <div
-          className='service'
-          onClick={() => {
-            setBusinessBankingOpen(!businessBankingOpen);
-            setPersonalBankingOpen(false);
-            setWealthManagementOpen(false);
-            setDigitalServiceOpen(false);
-            setCustomerServiceOpen(false);
-          }}
-        >
-          <strong>Business Banking </strong>
-          <div className='service-arrow'>
-            <ArrowDropDownCircleIcon
-              className={'arrow ' + (businessBankingOpen && 'active')}
-            />
+        <div className='service'>
+          <div
+            className={'service-header ' + (businessBankingOpen && 'active')}
+            onClick={() => {
+              setBusinessBankingOpen(!businessBankingOpen);
+              setPersonalBankingOpen(false);
+              setWealthManagementOpen(false);
+              setDigitalServiceOpen(false);
+              setCustomerServiceOpen(false);
+            }}
+          >
+            <strong>Business Banking </strong>
+            <div className='service-arrow'>
+              <ArrowDropDownCircleIcon
+                className={'arrow ' + (businessBankingOpen && 'active')}
+              />
+            </div>
           </div>
-          {/* Business accounts and commercial loans Merchant services and payment
-          processing Payroll services Business credit cards */}
+          <div
+            className={'service-list-box ' + (businessBankingOpen && 'active')}
+          >
+            <ul>
+              <li>Business accounts and commercial loans</li>
+              <li>Merchant services and payment processing</li>
+              <li>Payroll services Business credit cards</li>
+            </ul>
+          </div>
         </div>
-        <div
-          className='service'
-          onClick={() => {
-            setWealthManagementOpen(!wealthManagementOpen);
-            setBusinessBankingOpen(false);
-            setPersonalBankingOpen(false);
-            setDigitalServiceOpen(false);
-            setCustomerServiceOpen(false);
-          }}
-        >
-          <strong>Wealth Management </strong>
-          <div className='service-arrow'>
-            <ArrowDropDownCircleIcon
-              className={'arrow ' + (wealthManagementOpen && 'active')}
-            />
+        <div className='service'>
+          <div
+            className='service-header'
+            onClick={() => {
+              setWealthManagementOpen(!wealthManagementOpen);
+              setBusinessBankingOpen(false);
+              setPersonalBankingOpen(false);
+              setDigitalServiceOpen(false);
+              setCustomerServiceOpen(false);
+            }}
+          >
+            <strong>Wealth Management </strong>
+            <div className='service-arrow'>
+              <ArrowDropDownCircleIcon
+                className={'arrow ' + (wealthManagementOpen && 'active')}
+              />
+            </div>
           </div>
-          {/* Investment advisory services Retirement planning Estate planning Trust
-          services */}
+          <div
+            className={'service-list-box ' + (wealthManagementOpen && 'active')}
+          >
+            <ul>
+              <li>Investment advisory services Retirement planning</li>
+              <li>Estate planning</li>
+              <li>Trust services</li>
+            </ul>
+          </div>
         </div>
-        <div
-          className='service'
-          onClick={() => {
-            setDigitalServiceOpen(!digitalServiceOpen);
-            setWealthManagementOpen(false);
-            setBusinessBankingOpen(false);
-            setPersonalBankingOpen(false);
-            setCustomerServiceOpen(false);
-          }}
-        >
-          <strong>Digital Services </strong>
-          <div className='service-arrow'>
-            <ArrowDropDownCircleIcon
-              className={'arrow ' + (digitalServiceOpen && 'active')}
-            />
+        <div className='service'>
+          <div
+            className='service-header'
+            onClick={() => {
+              setDigitalServiceOpen(!digitalServiceOpen);
+              setWealthManagementOpen(false);
+              setBusinessBankingOpen(false);
+              setPersonalBankingOpen(false);
+              setCustomerServiceOpen(false);
+            }}
+          >
+            <strong>Digital Services </strong>
+            <div className='service-arrow'>
+              <ArrowDropDownCircleIcon
+                className={'arrow ' + (digitalServiceOpen && 'active')}
+              />
+            </div>
           </div>
-          {/* 24/7 online and mobile banking Mobile check deposit Bill pay and money transfer services Real-time account alerts */}
+          <div
+            className={'service-list-box ' + (digitalServiceOpen && 'active')}
+          >
+            <ul>
+              <li>24/7 online and mobile banking</li>
+              <li>Mobile check deposit</li>
+              <li>Bill pay and money transfer services</li>
+              <li>Real-time account alerts</li>
+            </ul>
+          </div>
         </div>
-        <div
-          className='service'
-          onClick={() => {
-            setCustomerServiceOpen(!customerServiceOpen);
-            setDigitalServiceOpen(false);
-            setWealthManagementOpen(false);
-            setBusinessBankingOpen(false);
-            setPersonalBankingOpen(false);
-          }}
-        >
-          <strong>Customer Service </strong>
-          <div className='service-arrow'>
-            <ArrowDropDownCircleIcon
-              className={'arrow ' + (customerServiceOpen && 'active')}
-            />
+        <div className='service'>
+          <div
+            className='service-header'
+            onClick={() => {
+              setCustomerServiceOpen(!customerServiceOpen);
+              setDigitalServiceOpen(false);
+              setWealthManagementOpen(false);
+              setBusinessBankingOpen(false);
+              setPersonalBankingOpen(false);
+            }}
+          >
+            <strong>Customer Service </strong>
+            <div className='service-arrow'>
+              <ArrowDropDownCircleIcon
+                className={'arrow ' + (customerServiceOpen && 'active')}
+              />
+            </div>
           </div>
-          {/* Dedicated customer service available 24/7 In-branch services Financial education resources Community outreach programs */}
+          <div
+            className={'service-list-box ' + (customerServiceOpen && 'active')}
+          >
+            <ul>
+              <li>Dedicated customer service available 24/7</li>
+              <li>In-branch services</li>
+              <li>Financial education resources</li>
+              <li>Community outreach programs</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
