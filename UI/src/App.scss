@@ -19,8 +19,8 @@
   // margin: auto;
   width: 100%;
   height: calc(100vh - 70px);
-  // background-color: pink;
-  background: url('./assets/pexels-jess-bailey-designs-1097930.jpg');
+  background-color: pink;
+  background: url('./assets/pexels-la-miko-3615736.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -58,10 +58,6 @@
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
-}
-
-.welcome-note {
-  padding: 2em;
 }
 
 .read-the-docs {

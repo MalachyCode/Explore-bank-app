@@ -1,9 +1,118 @@
+import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
+
 import './Services.scss';
+import { useState } from 'react';
 
 const Services = () => {
+  const [personalBankingOpen, setPersonalBankingOpen] =
+    useState<boolean>(false);
+  const [businessBankingOpen, setBusinessBankingOpen] =
+    useState<boolean>(false);
+  const [wealthManagementOpen, setWealthManagementOpen] =
+    useState<boolean>(false);
+  const [digitalServiceOpen, setDigitalServiceOpen] = useState<boolean>(false);
+  const [customerServiceOpen, setCustomerServiceOpen] =
+    useState<boolean>(false);
+
   return (
     <div className='services' id='services'>
-      Services page
+      <h3>Our Services Include</h3>
+      <div className='services-list'>
+        <div
+          className='service'
+          onClick={() => {
+            setPersonalBankingOpen(!personalBankingOpen);
+            setBusinessBankingOpen(false);
+            setWealthManagementOpen(false);
+            setDigitalServiceOpen(false);
+            setCustomerServiceOpen(false);
+          }}
+        >
+          <strong>Personal Banking </strong>
+          <div className='service-arrow'>
+            <ArrowDropDownCircleIcon
+              className={'arrow ' + (personalBankingOpen && 'active')}
+            />
+          </div>
+          {/* Comprehensive checking and savings accounts Competitive interest rates
+          on deposits Online and mobile banking services Personal loans and
+          credit cards. */}
+        </div>
+        <div
+          className='service'
+          onClick={() => {
+            setBusinessBankingOpen(!businessBankingOpen);
+            setPersonalBankingOpen(false);
+            setWealthManagementOpen(false);
+            setDigitalServiceOpen(false);
+            setCustomerServiceOpen(false);
+          }}
+        >
+          <strong>Business Banking </strong>
+          <div className='service-arrow'>
+            <ArrowDropDownCircleIcon
+              className={'arrow ' + (businessBankingOpen && 'active')}
+            />
+          </div>
+          {/* Business accounts and commercial loans Merchant services and payment
+          processing Payroll services Business credit cards */}
+        </div>
+        <div
+          className='service'
+          onClick={() => {
+            setWealthManagementOpen(!wealthManagementOpen);
+            setBusinessBankingOpen(false);
+            setPersonalBankingOpen(false);
+            setDigitalServiceOpen(false);
+            setCustomerServiceOpen(false);
+          }}
+        >
+          <strong>Wealth Management </strong>
+          <div className='service-arrow'>
+            <ArrowDropDownCircleIcon
+              className={'arrow ' + (wealthManagementOpen && 'active')}
+            />
+          </div>
+          {/* Investment advisory services Retirement planning Estate planning Trust
+          services */}
+        </div>
+        <div
+          className='service'
+          onClick={() => {
+            setDigitalServiceOpen(!digitalServiceOpen);
+            setWealthManagementOpen(false);
+            setBusinessBankingOpen(false);
+            setPersonalBankingOpen(false);
+            setCustomerServiceOpen(false);
+          }}
+        >
+          <strong>Digital Services </strong>
+          <div className='service-arrow'>
+            <ArrowDropDownCircleIcon
+              className={'arrow ' + (digitalServiceOpen && 'active')}
+            />
+          </div>
+          {/* 24/7 online and mobile banking Mobile check deposit Bill pay and money transfer services Real-time account alerts */}
+        </div>
+        <div
+          className='service'
+          onClick={() => {
+            setCustomerServiceOpen(!customerServiceOpen);
+            setDigitalServiceOpen(false);
+            setWealthManagementOpen(false);
+            setBusinessBankingOpen(false);
+            setPersonalBankingOpen(false);
+          }}
+        >
+          <strong>Customer Service </strong>
+          <div className='service-arrow'>
+            <ArrowDropDownCircleIcon
+              className={'arrow ' + (customerServiceOpen && 'active')}
+            />
+          </div>
+          {/* Dedicated customer service available 24/7 In-branch services Financial education resources Community outreach programs */}
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,9 @@
+import './intro.scss';
+
 const Intro = () => {
   return (
-    <div>
-      <div className='welcome-note intro' id='intro'>
+    <div className='intro' id='intro'>
+      <div className='welcome-note'>
         <h3>Welcome to Explore bank</h3>
         <p>
           At Explore bank, your financial success is our priority. We're

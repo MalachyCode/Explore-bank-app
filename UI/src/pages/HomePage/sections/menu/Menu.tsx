@@ -40,22 +40,34 @@ const Menu = (props: {
         <ListItem message='Contact' open={props.setMenuOpen} href='#contact' />
       </ul>
       <div className='buttons'>
-        <button
+        <a
+          href='#'
+          className='button type--B'
           onClick={() => {
             navigate('/login');
             props.setMenuOpen(false);
           }}
         >
-          Login
-        </button>
-        <button
+          <div className='button__line'></div>
+          <div className='button__line'></div>
+          <span className='button__text'>Login</span>
+          <div className='button__drow1'></div>
+          {/* <div className='button__drow2'></div> */}
+        </a>
+        <a
+          href='#'
+          className='button type--A'
           onClick={() => {
             navigate('/signup');
             props.setMenuOpen(false);
           }}
         >
-          Signup
-        </button>
+          <div className='button__line'></div>
+          <div className='button__line'></div>
+          <span className='button__text'>Signup</span>
+          <div className='button__drow1'></div>
+          {/* <div className='button__drow2'></div> */}
+        </a>
       </div>
     </div>
   );

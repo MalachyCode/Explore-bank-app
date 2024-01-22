@@ -1,3 +1,37 @@
+@import '../../../../global.scss';
+
 .services {
-  background-color: burlywood;
+  background: url('../../../../assets/pexels-gdtography-911738.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  .services-list {
+    .service {
+      background: yellow;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      cursor: pointer;
+      .service-arrow {
+        width: 32px;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .arrow {
+          width: 100%;
+          position: relative;
+          top: 12px;
+          margin-left: 5px;
+          transition: all 2s ease;
+
+          &.active {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
 }
