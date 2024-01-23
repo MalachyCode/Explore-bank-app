@@ -7,9 +7,9 @@
   height: calc(100vh - 70px);
   text-align: center;
   width: 100%;
-  scroll-behavior: smooth;
+  // scroll-behavior: smooth;
+  // scroll-snap-type: y mandatory;
   transition: all 1s ease;
-  scroll-snap-type: y mandatory;
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
