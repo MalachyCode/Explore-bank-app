@@ -15,6 +15,7 @@ const Services = () => {
     useState<boolean>(false);
 
   return (
+    // service page houses the various services identified by clickable headers (divs with service-header class)
     <div className='services' id='services'>
       <h3>Our Services Include</h3>
       <div className='services-list'>
