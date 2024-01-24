@@ -98,7 +98,8 @@ const Services = () => {
             className={'service-list-box ' + (wealthManagementOpen && 'active')}
           >
             <ul>
-              <li>Investment advisory services Retirement planning</li>
+              <li>Investment advisory services</li>
+              <li>Retirement planning</li>
               <li>Estate planning</li>
               <li>Trust services</li>
             </ul>

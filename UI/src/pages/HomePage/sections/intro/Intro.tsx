@@ -3,6 +3,10 @@ import './intro.scss';
 
 const Intro = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
+
+  setTimeout(() => {
+    setCurrentSlide(currentSlide !== 2 ? currentSlide + 1 : 0);
+  }, 5000);
   console.log(currentSlide);
 
   return (
@@ -32,13 +36,38 @@ const Intro = () => {
             together!
           </p>
         </div>
+        <div
+          className='services-highlight'
+          style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
+        >
+          <div className='highlight-container'>
+            <div className='highlight-1'>
+              <p>Send Money</p>
+            </div>
+            <div>
+              <p>Recieve Money</p>
+            </div>
+            <div>
+              <p>Personal and Commercial Loans</p>
+            </div>
+            <div>
+              <p>Investment Advisory Service</p>
+            </div>
+            <div>
+              <p>Mobile Banking</p>
+            </div>
+            <div>
+              <p>247 Customer Service</p>
+            </div>
+          </div>
+        </div>
       </div>
       <div className='slider-btn-container'>
         <span className='line-1' onClick={() => setCurrentSlide(0)}></span>
         <span className='line-2' onClick={() => setCurrentSlide(1)}></span>
         <span className='line-3' onClick={() => setCurrentSlide(2)}></span>
       </div>
-      <div className='intro-footer'>
+      <div className='intro-footer' onClick={() => setCurrentSlide(0)}>
         <div className='intro-footnote-sidebar'></div>
         <div className='intro-footnote'>
           <p>
