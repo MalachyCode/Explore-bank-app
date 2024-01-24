@@ -3,4 +3,72 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  display: flex;
+  flex-direction: column;
+  .social-container {
+    background: rgba(255, 255, 255, 0.5);
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .icons-container {
+      display: flex;
+      align-items: center;
+      margin-top: 40px;
+      justify-content: space-between;
+      width: 60%;
+    }
+  }
+  .footer {
+    background: #32435f;
+    width: 100%;
+    height: 50%;
+    .footer-container {
+      width: 90%;
+      margin: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      color: #e1dcd9;
+      overflow: hidden;
+      .footer-column-1 {
+        // background: white;
+        height: 90%;
+        width: 30%;
+        position: relative;
+        top: 20px;
+        .line {
+          background: #e1dcd9;
+          height: 3px;
+          width: 50px;
+        }
+      }
+      .footer-column-2 {
+        // background: white;
+        height: 90%;
+        width: 30%;
+        position: relative;
+        top: 20px;
+        .line {
+          background: #e1dcd9;
+          height: 3px;
+          width: 50px;
+        }
+      }
+      .footer-column-3 {
+        // background: white;
+        height: 90%;
+        width: 30%;
+        position: relative;
+        top: 20px;
+        .line {
+          background: #e1dcd9;
+          height: 3px;
+          width: 50px;
+        }
+      }
+    }
+  }
 }
