@@ -146,8 +146,9 @@
         width: 90%;
         height: 60%;
         justify-content: space-between;
+        transition: all 2s ease;
         div {
-          flex: 30%;
+          flex: 40%;
           background: #32435f;
           width: 10px;
           margin: 2px;
@@ -157,32 +158,34 @@
           justify-content: center;
           border-radius: 50px;
           overflow: hidden;
-          // animation: blink 3s linear infinite;
-          // -webkit-animation: blink 3s linear infinite;
-          // .highlight-1 {
-          //   animation: blink 2s linear infinite;
-          //   -webkit-animation: blink 2s linear infinite;
-          // }
-          @keyframes blink {
-            0%,
-            100% {
-              opacity: 1;
-              background: #a67f78;
-              color: #32435f;
+          &:hover {
+            animation: blink 2s linear infinite;
+            -webkit-animation: blink 2s linear infinite;
+            // .highlight-1 {
+            //   animation: blink 2s linear infinite;
+            //   -webkit-animation: blink 2s linear infinite;
+            // }
+            @keyframes blink {
+              0%,
+              100% {
+                opacity: 1;
+                background: #8f8681;
+                color: #32435f;
+              }
+              50% {
+                opacity: 0;
+                background: #8f8681;
+                color: #32435f;
+              }
             }
-            50% {
-              opacity: 0;
-              background: #8f8681;
-              color: #32435f;
-            }
-          }
-          @-webkit-keyframes blink {
-            0%,
-            100% {
-              opacity: 1;
-            }
-            50% {
-              opacity: 0;
+            @-webkit-keyframes blink {
+              0%,
+              100% {
+                opacity: 1;
+              }
+              50% {
+                opacity: 0;
+              }
             }
           }
         }
