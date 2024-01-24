@@ -3,4 +3,79 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  .container {
+    margin: auto;
+    width: 90%;
+    height: 90%;
+    background: black;
+    position: relative;
+    top: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    div {
+      padding: 10%;
+      background: white;
+      width: 30%;
+      height: 70%;
+      border-radius: 10px;
+      transition: all 2s ease;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      &:hover {
+        background: #8f8681;
+        height: 80%;
+        width: 80%;
+        // .tools {
+        //   visibility: visible;
+        // }
+      }
+
+      .tools {
+        // visibility: hidden;
+        width: 100%;
+        overflow: hidden;
+        height: 100%;
+        transition: all 2s ease;
+      }
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    .container {
+      background: blue;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      width: 90%;
+      div {
+        padding: 10%;
+        background: white;
+        width: 90%;
+        height: 33%;
+        border-radius: 10px;
+        transition: all 2s ease;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        &:hover {
+          background: #8f8681;
+          height: 80%;
+          width: 90%;
+          // .tools {
+          //   visibility: visible;
+          // }
+        }
+      }
+    }
+  }
 }

@@ -3,11 +3,13 @@ import './intro.scss';
 
 const Intro = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [timer, setTimer] = useState<number>(5000);
 
-  setTimeout(() => {
-    setCurrentSlide(currentSlide !== 2 ? currentSlide + 1 : 0);
-  }, 5000);
+  // setTimeout(() => {
+  //   setCurrentSlide(currentSlide === 2 ? 0 : currentSlide + 1);
+  // }, timer);
   console.log(currentSlide);
+  console.log(timer);
 
   return (
     <div className='intro' id='intro'>
@@ -63,9 +65,27 @@ const Intro = () => {
         </div>
       </div>
       <div className='slider-btn-container'>
-        <span className='line-1' onClick={() => setCurrentSlide(0)}></span>
-        <span className='line-2' onClick={() => setCurrentSlide(1)}></span>
-        <span className='line-3' onClick={() => setCurrentSlide(2)}></span>
+        <span
+          className='line-1'
+          onClick={() => {
+            setCurrentSlide(0);
+            setTimer(5000);
+          }}
+        ></span>
+        <span
+          className='line-2'
+          onClick={() => {
+            setCurrentSlide(1);
+            setTimer(5000);
+          }}
+        ></span>
+        <span
+          className='line-3'
+          onClick={() => {
+            setCurrentSlide(2);
+            setTimer(5000);
+          }}
+        ></span>
       </div>
       <div className='intro-footer' onClick={() => setCurrentSlide(0)}>
         <div className='intro-footnote-sidebar'></div>
