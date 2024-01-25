@@ -10,30 +10,45 @@ const Contact = () => {
       <div className='social-container'>
         <h2>Connect on Social Media</h2>
         <div className='icons-container'>
-          <XIcon fontSize='large' />
-          <FacebookIcon fontSize='large' />
-          <InstagramIcon fontSize='large' />
-          <LinkedInIcon fontSize='large' />
+          <a href='https://www.x.com/explorebank' target='blank'>
+            <XIcon fontSize='large' className='icon' />
+          </a>
+          <a href='https://www.facebook.com/explorebank' target='blank'>
+            <FacebookIcon fontSize='large' className='icon' />
+          </a>
+          <a href='https://www.instagram.com/explorebank' target='blank'>
+            <InstagramIcon fontSize='large' className='icon' />
+          </a>
+          <a href='https://www.linkedin.com/explorebank' target='blank'>
+            <LinkedInIcon fontSize='large' className='icon' />
+          </a>
         </div>
       </div>
       <div className='footer'>
         <div className='footer-container'>
-          <div className='footer-column-1'>
-            <span className='line'></span>
+          <div className='footer-column one'>
+            <div className='line'></div>
             <h4>Our Location</h4>
-            <span className='line'></span>
+            <div className='line'></div>
           </div>
-          <div className='footer-column-2'>
-            <span className='line'></span>
+          <div className='footer-column two'>
+            <div className='line'></div>
             <h4>Our Location</h4>
-            <span className='line'></span>
+            <div className='line'></div>
           </div>
-          <div className='footer-column-3'>
-            <span className='line'></span>
+          <div className='footer-column three'>
+            <div className='line'></div>
             <h4>Our Location</h4>
-            <span className='line'></span>
+            <div className='line'></div>
+          </div>
+          <div className='footer-column four'>
+            <div className='line'></div>
+            <h4>Our Location</h4>
+            <div className='line'></div>
           </div>
         </div>
+        <div className='footer-divider'></div>
+        <span>&copy; explorebankplc.com</span>
       </div>
     </div>
   );
