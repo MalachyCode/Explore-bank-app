@@ -11,99 +11,159 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  .services-list {
-    margin: auto;
-    width: 70%;
-    background: white;
-    border-radius: 13px;
-    box-shadow: 10px 10px 25px 3px rgb(72, 72, 72);
-    .service {
-      // background: yellow;
+  position: relative;
+
+  .arrow {
+    position: absolute;
+    cursor: pointer;
+
+    &.left {
+      left: 100px;
+      transform: rotateY(180deg);
+    }
+    &.right {
+      right: 100px;
+    }
+    // @media (max-width: 768px) {
+    //   display: none;
+    // }
+  }
+
+  .services-slider {
+    height: 350px;
+    display: flex;
+    position: absolute;
+    left: 0;
+    transition: all 2s ease;
+    .container {
+      width: 100vw;
+      background: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
+      height: 80%;
 
-      .service-header {
-        background: white;
-        width: 80%;
+      .service-card {
+        width: 700px;
+        height: 100%;
+        background: crimson;
+        border-radius: 20px;
         display: flex;
-        flex-direction: row;
         align-items: center;
-        justify-content: space-between;
-        z-index: 2;
-        transition: all 0.5s ease-in;
-        padding: 5px;
-        cursor: pointer;
-        .service-arrow {
-          width: 32px;
-          height: 50px;
-          .arrow {
-            width: 100%;
-            position: relative;
-            top: 10px;
-            margin-left: 5px;
-            transition: all 2s ease;
+        justify-content: center;
+        transition: all 1s ease;
+        transform-origin: center;
+        &:hover {
+          background: blue;
+        }
 
-            &.active {
-              transform: rotate(180deg);
-            }
-          }
-        }
-      }
-      @media only screen and (min-width: 768px) {
-        .service-header {
-          width: 40%;
-        }
-      }
-
-      .service-list-box {
-        background: white;
-        color: $mainColor;
-        transition: all 2s ease;
-        width: 80%;
-        position: relative;
-        margin-left: -80px;
-        height: 0;
-        top: -160px;
-        overflow: hidden;
-        width: 80%;
-        text-align: left;
-        // background: blue;
-        &.active {
-          top: 0;
-          transition: all 2s ease;
-          height: 190px;
-          overflow: hidden;
-        }
-        ul {
-          position: relative;
-          top: -20px;
-          li {
-            // background: red;
-            margin: 3px 0;
-            transition: all 0.5s ease;
-            border-radius: 5px;
-            padding: 1px;
-            &:hover {
-              background: $mainColor;
-              color: white;
-              font-size: large;
-              padding-left: 12px;
-            }
-          }
-        }
-      }
-      @media only screen and (min-width: 768px) {
-        .service-list-box {
+        .left {
+          flex: 4;
+          height: 80%;
+          display: flex;
           align-items: center;
           justify-content: center;
-          width: 40%;
-          text-align: left;
+        }
+        .right {
+          flex: 8;
+          height: 100%;
         }
       }
     }
   }
+  // .services-list {
+  //   margin: auto;
+  //   width: 70%;
+  //   background: white;
+  //   border-radius: 13px;
+  //   box-shadow: 10px 10px 25px 3px rgb(72, 72, 72);
+  //   .service {
+  //     // background: yellow;
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: center;
+  //     flex-direction: column;
+
+  //     .service-header {
+  //       background: white;
+  //       width: 80%;
+  //       display: flex;
+  //       flex-direction: row;
+  //       align-items: center;
+  //       justify-content: space-between;
+  //       z-index: 2;
+  //       transition: all 0.5s ease-in;
+  //       padding: 5px;
+  //       cursor: pointer;
+  //       .service-arrow {
+  //         width: 32px;
+  //         height: 50px;
+  //         .arrow {
+  //           width: 100%;
+  //           position: relative;
+  //           top: 10px;
+  //           margin-left: 5px;
+  //           transition: all 2s ease;
+
+  //           &.active {
+  //             transform: rotate(180deg);
+  //           }
+  //         }
+  //       }
+  //     }
+  //     @media only screen and (min-width: 768px) {
+  //       .service-header {
+  //         width: 40%;
+  //       }
+  //     }
+
+  //     .service-list-box {
+  //       background: white;
+  //       color: $mainColor;
+  //       transition: all 2s ease;
+  //       width: 80%;
+  //       position: relative;
+  //       margin-left: -80px;
+  //       height: 0;
+  //       top: -160px;
+  //       overflow: hidden;
+  //       width: 80%;
+  //       text-align: left;
+  //       // background: blue;
+  //       &.active {
+  //         top: 0;
+  //         transition: all 2s ease;
+  //         height: 190px;
+  //         overflow: hidden;
+  //       }
+  //       ul {
+  //         position: relative;
+  //         top: -20px;
+  //         li {
+  //           // background: red;
+  //           margin: 3px 0;
+  //           transition: all 0.5s ease;
+  //           border-radius: 5px;
+  //           padding: 1px;
+  //           &:hover {
+  //             background: $mainColor;
+  //             color: white;
+  //             font-size: large;
+  //             padding-left: 12px;
+  //           }
+  //         }
+  //       }
+  //     }
+  //     @media only screen and (min-width: 768px) {
+  //       .service-list-box {
+  //         align-items: center;
+  //         justify-content: center;
+  //         width: 40%;
+  //         text-align: left;
+  //       }
+  //     }
+  //   }
+  // }
   h3 {
     margin-bottom: -100px;
     margin-top: 120px;

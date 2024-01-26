@@ -1,24 +1,105 @@
-import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
+// import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import './Services.scss';
 import { useState } from 'react';
+// import { useState } from 'react';
 
 const Services = () => {
-  const [personalBankingOpen, setPersonalBankingOpen] =
-    useState<boolean>(false);
-  const [businessBankingOpen, setBusinessBankingOpen] =
-    useState<boolean>(false);
-  const [wealthManagementOpen, setWealthManagementOpen] =
-    useState<boolean>(false);
-  const [digitalServiceOpen, setDigitalServiceOpen] = useState<boolean>(false);
-  const [customerServiceOpen, setCustomerServiceOpen] =
-    useState<boolean>(false);
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  // const [personalBankingOpen, setPersonalBankingOpen] =
+  //   useState<boolean>(false);
+  // const [businessBankingOpen, setBusinessBankingOpen] =
+  //   useState<boolean>(false);
+  // const [wealthManagementOpen, setWealthManagementOpen] =
+  //   useState<boolean>(false);
+  // const [digitalServiceOpen, setDigitalServiceOpen] = useState<boolean>(false);
+  // const [customerServiceOpen, setCustomerServiceOpen] =
+  //   useState<boolean>(false);
+
+  const handleClick = (way: string) => {
+    way === 'left'
+      ? setCurrentSlide(currentSlide > 0 ? currentSlide - 1 : 4)
+      : setCurrentSlide(currentSlide < 4 ? currentSlide + 1 : 0);
+  };
+
+  console.log(currentSlide);
 
   return (
     // service page houses the various services identified by clickable headers (divs with service-header class)
     <div className='services' id='services'>
       <h3>Our Services Include</h3>
-      <div className='services-list'>
+      <div
+        className='services-slider'
+        style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
+      >
+        <div className='container'>
+          <div className='service-card'>
+            <div className='left'>
+              ONE
+              <div className='left-container'>
+                <div className='img-container'></div>
+              </div>
+            </div>
+            <div className='right'></div>
+          </div>
+        </div>
+        <div className='container'>
+          <div className='service-card'>
+            <div className='left'>
+              TWO
+              <div className='left-container'>
+                <div className='img-container'></div>
+              </div>
+            </div>
+            <div className='right'></div>
+          </div>
+        </div>
+        <div className='container'>
+          <div className='service-card'>
+            <div className='left'>
+              THREE
+              <div className='left-container'>
+                <div className='img-container'></div>
+              </div>
+            </div>
+            <div className='right'></div>
+          </div>
+        </div>
+        <div className='container'>
+          <div className='service-card'>
+            <div className='left'>
+              FOUR
+              <div className='left-container'>
+                <div className='img-container'></div>
+              </div>
+            </div>
+            <div className='right'></div>
+          </div>
+        </div>
+        <div className='container'>
+          <div className='service-card'>
+            <div className='left'>
+              FIVE
+              <div className='left-container'>
+                <div className='img-container'></div>
+              </div>
+            </div>
+            <div className='right'></div>
+          </div>
+        </div>
+      </div>
+      <ArrowForwardIosIcon
+        className='arrow left'
+        fontSize='large'
+        onClick={() => handleClick('left')}
+      />
+      <ArrowForwardIosIcon
+        className='arrow right'
+        fontSize='large'
+        onClick={() => handleClick('right')}
+      />
+      {/* <div className='services-list'>
         <div className='service'>
           <div
             className='service-header'
@@ -163,7 +244,7 @@ const Services = () => {
             </ul>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
