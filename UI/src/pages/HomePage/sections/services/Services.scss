@@ -13,6 +13,20 @@
   justify-content: center;
   position: relative;
 
+  .logos {
+    overflow: hidden;
+    padding: 60px 0;
+    background: blue;
+    .logos-slide {
+      white-space: nowrap;
+      div {
+        width: 200px;
+        background: red;
+        height: 50px;
+      }
+    }
+  }
+
   .arrow {
     position: absolute;
     cursor: pointer;
@@ -29,48 +43,55 @@
     // }
   }
 
-  .services-slider {
-    height: 350px;
-    display: flex;
-    position: absolute;
-    left: 0;
-    transition: all 2s ease;
-    .container {
-      width: 100vw;
-      background: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 80%;
+  // .services-slider {
+  //   height: 40%;
 
-      .service-card {
-        width: 700px;
-        height: 100%;
-        background: crimson;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 1s ease;
-        transform-origin: center;
-        &:hover {
-          background: blue;
-        }
+  //   // height: 350px;
+  //   display: flex;
+  //   position: absolute;
+  //   left: 0;
+  //   background: blue;
+  //   transition: all 2s ease;
+  //   .container {
+  //     width: 100vw;
+  //     background: none;
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: center;
+  //     // justify-content: space-between;
+  //     margin-top: -45px;
+  //     height: 80%;
 
-        .left {
-          flex: 4;
-          height: 80%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .right {
-          flex: 8;
-          height: 100%;
-        }
-      }
-    }
-  }
+  //     .service-card {
+  //       margin: 20px;
+  //       width: 200px;
+  //       // float: left;
+  //       // width: 33.33%;
+  //       height: 100%;
+  //       background: crimson;
+  //       display: flex;
+  //       align-items: center;
+  //       justify-content: center;
+  //       transition: all 1s ease;
+  //       transform-origin: center;
+  //       &:hover {
+  //         background: green;
+  //       }
+
+  //       .left {
+  //         flex: 4;
+  //         height: 80%;
+  //         display: flex;
+  //         align-items: center;
+  //         justify-content: center;
+  //       }
+  //       .right {
+  //         flex: 8;
+  //         height: 100%;
+  //       }
+  //     }
+  //   }
+  // }
   // .services-list {
   //   margin: auto;
   //   width: 70%;
