@@ -207,8 +207,11 @@
       background-color: #32435f;
       transform-origin: left;
       transition: all 0.5s ease;
-      &:hover {
+      &.active {
         background: white;
+      }
+      &:hover {
+        background: #d6ba73;
       }
     }
   }
@@ -241,7 +244,7 @@
     &:hover {
       color: $mainColor;
       .intro-footnote-sidebar {
-        background: rgba(225, 166, 225, 0.8);
+        background: rgba(143, 134, 129, 0.5);
       }
       .intro-footnote {
         color: $mainColor;
