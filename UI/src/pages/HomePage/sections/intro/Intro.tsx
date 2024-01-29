@@ -4,12 +4,15 @@ import './intro.scss';
 const Intro = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [timer, setTimer] = useState<number>(5000);
+  const [isLine1Active, setIsLine1Active] = useState<boolean>(true);
+  const [isLine2Active, setIsLine2Active] = useState<boolean>(false);
+  const [isLine3Active, setIsLine3Active] = useState<boolean>(false);
 
   // setTimeout(() => {
   //   setCurrentSlide(currentSlide === 2 ? 0 : currentSlide + 1);
   // }, timer);
-  console.log(currentSlide);
-  console.log(timer);
+  // console.log(currentSlide);
+  // console.log(timer);
 
   return (
     <div className='intro' id='intro'>
@@ -66,24 +69,33 @@ const Intro = () => {
       </div>
       <div className='slider-btn-container'>
         <span
-          className='line-1'
+          className={'line-1 ' + (isLine1Active && 'active')}
           onClick={() => {
             setCurrentSlide(0);
             setTimer(5000);
+            setIsLine1Active(true);
+            setIsLine2Active(false);
+            setIsLine3Active(false);
           }}
         ></span>
         <span
-          className='line-2'
+          className={'line-2 ' + (isLine2Active && 'active')}
           onClick={() => {
             setCurrentSlide(1);
             setTimer(5000);
+            setIsLine2Active(true);
+            setIsLine1Active(false);
+            setIsLine3Active(false);
           }}
         ></span>
         <span
-          className='line-3'
+          className={'line-3 ' + (isLine3Active && 'active')}
           onClick={() => {
             setCurrentSlide(2);
             setTimer(5000);
+            setIsLine3Active(true);
+            setIsLine2Active(false);
+            setIsLine1Active(false);
           }}
         ></span>
       </div>

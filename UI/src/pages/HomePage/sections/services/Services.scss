@@ -14,11 +14,52 @@
   position: relative;
 
   @keyframes slide {
-    from {
+    0% {
       transform: translateX(0);
     }
-    to {
-      transform: translateX(-100%);
+    100% {
+      transform: translateX(-300vw);
+    }
+  }
+  .boxes {
+    height: 80px;
+    width: 100%;
+    overflow: hidden;
+    padding: 60px 0;
+    background: white;
+    // white-space: nowrap;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .div-slide {
+      width: 200vw;
+      height: 100%;
+      background: green;
+      position: absolute;
+      left: 100vw;
+      animation: 10s slide infinite linear;
+      transition: all 1s ease;
+
+      @media (max-width: 992px) {
+      }
+      @media (max-width: 768px) {
+      }
+      @media (max-width: 576px) {
+      }
+    }
+    &:hover {
+      .div-slide {
+        animation-play-state: paused;
+        background: url('../../../../assets/pexels-gdtography-911738.jpg');
+
+        background-color: #8f8681;
+        background-blend-mode: multiply;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
     }
   }
   .logos {

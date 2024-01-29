@@ -29,7 +29,7 @@ const Services = () => {
     // service page houses the various services identified by clickable headers (divs with service-header class)
     <div className='services' id='services'>
       <h3>Our Services Include</h3>
-      <div className='logos'>
+      {/* <div className='logos'>
         <div className='logos-slide'>
           <img src='/assets/logos/3m.svg' alt='1' />
           <img src='/assets/logos/barstool-store.svg' alt='2' />
@@ -51,6 +51,9 @@ const Services = () => {
           <img src='/assets/logos/menshealth.svg' alt='7' />
           <img src='/assets/logos/mrbeast.svg' alt='8' />
         </div>
+      </div> */}
+      <div className='boxes'>
+        <div className='div-slide'></div>
       </div>
       {/* <div
         className='services-slider'
