@@ -29,32 +29,7 @@ const Services = () => {
     // service page houses the various services identified by clickable headers (divs with service-header class)
     <div className='services' id='services'>
       <h3>Our Services Include</h3>
-      {/* <div className='logos'>
-        <div className='logos-slide'>
-          <img src='/assets/logos/3m.svg' alt='1' />
-          <img src='/assets/logos/barstool-store.svg' alt='2' />
-          <img src='/assets/logos/budweiser.svg' alt='3' />
-          <img src='/assets/logos/buzzfeed.svg' alt='4' />
-          <img src='/assets/logos/forbes.svg' alt='5' />
-          <img src='/assets/logos/macys.svg' alt='6' />
-          <img src='/assets/logos/menshealth.svg' alt='7' />
-          <img src='/assets/logos/mrbeast.svg' alt='8' />
-        </div>
 
-        <div className='logos-slide'>
-          <img src='/assets/logos/3m.svg' alt='1' />
-          <img src='/assets/logos/barstool-store.svg' alt='2' />
-          <img src='/assets/logos/budweiser.svg' alt='3' />
-          <img src='/assets/logos/buzzfeed.svg' alt='4' />
-          <img src='/assets/logos/forbes.svg' alt='5' />
-          <img src='/assets/logos/macys.svg' alt='6' />
-          <img src='/assets/logos/menshealth.svg' alt='7' />
-          <img src='/assets/logos/mrbeast.svg' alt='8' />
-        </div>
-      </div> */}
-      <div className='boxes'>
-        <div className='div-slide'></div>
-      </div>
       {/* <div
         className='services-slider'
         style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
