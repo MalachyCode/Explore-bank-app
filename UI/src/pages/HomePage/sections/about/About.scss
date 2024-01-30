@@ -11,13 +11,15 @@
   // margin: auto;
 
   .about-message {
-    margin-top: 3em;
     width: 90%;
+    padding-right: 65px;
+    overflow: hidden;
   }
 
   h4 {
     margin-bottom: -50px;
     overflow: hidden;
+    padding-right: 65px;
   }
 
   @keyframes slide {
@@ -29,7 +31,8 @@
     }
   }
   .boxes {
-    height: 80px;
+    // height: 80px;
+    height: 20vh;
     width: 100vw;
     overflow: hidden;
     padding: 60px 0;
@@ -45,13 +48,13 @@
     .div-slide {
       width: 200vw;
       height: 100%;
-      background: whitesmoke;
+      // background: whitesmoke;
       position: absolute;
       left: 100vw;
       display: flex;
       flex-direction: row;
       align-items: center;
-      animation: 15s slide infinite linear;
+      animation: 25s slide infinite linear;
       transition: all 1s ease;
       overflow: hidden;
 
@@ -63,7 +66,7 @@
       }
 
       div {
-        background-color: greenyellow;
+        background-color: #e1dcd9;
         margin: 10px;
         width: 40vw;
         height: 100%;
@@ -72,21 +75,101 @@
         justify-content: space-around;
         transition: all 1s ease;
         &:hover {
+          p {
+            background: #32435f;
+            border-radius: 3px;
+            color: #e1dcd9;
+          }
           &.tool {
+            transition: all 2s ease;
             background: #8f8681;
             cursor: pointer;
             font-size: large;
+          }
+          &.one {
+            background: url('../../../../assets/Budget\ Planner.jpeg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+          }
+          &.two {
+            background: url('../../../../assets/Savings\ Planner.jpeg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+          }
+          &.three {
+            background: url('../../../../assets/Retirement\ Planner.jpeg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+          }
+          &.four {
+            background: url('../../../../assets/pexels-pratikxox-4025825.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+          }
+          &.five {
+            background: url('../../../../assets/Currency\ converter.jpeg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
           }
         }
       }
     }
 
     @media (min-width: 768px) {
-      background: orange;
       margin-top: 100px;
       &:hover {
         .div-slide {
           animation-play-state: paused;
+        }
+      }
+    }
+    @media (max-width: 768px) {
+      div {
+        p {
+          background: #32435f;
+          border-radius: 3px;
+          color: #e1dcd9;
+        }
+        &.tool {
+          transition: all 2s ease;
+          background: #8f8681;
+          cursor: pointer;
+          font-size: large;
+        }
+        &.one {
+          background: url('../../../../assets/Budget\ Planner.jpeg');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+        }
+        &.two {
+          background: url('../../../../assets/Savings\ Planner.jpeg');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+        }
+        &.three {
+          background: url('../../../../assets/Retirement\ Planner.jpeg');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+        }
+        &.four {
+          background: url('../../../../assets/pexels-pratikxox-4025825.jpg');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+        }
+        &.five {
+          background: url('../../../../assets/Currency\ converter.jpeg');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
         }
       }
     }

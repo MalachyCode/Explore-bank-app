@@ -21,20 +21,22 @@ const About = () => {
       <h4>Financial Tools</h4>
       <div className='boxes'>
         <div className='div-slide'>
-          <div className='tool 1'>
-            Budget Planner: Track your income and expenses.
+          <div className='tool one'>
+            <p>Budget Planner: Track your income and expenses.</p>
           </div>
-          <div className='tool 2'>
-            Savings Calculator: See how your savings can grow.
+          <div className='tool two'>
+            <p>Savings Calculator: See how your savings can grow.</p>
           </div>
-          <div className='tool 3'>
-            Retirement Planner: Plan your retirement savings.
+          <div className='tool three'>
+            <p>Retirement Planner: Plan your retirement savings.</p>
           </div>
-          <div className='tool 4'>
-            Financial Health Check: Get a snapshot of your financial health.
+          <div className='tool four'>
+            <p>
+              Financial Health Check: Get a snapshot of your financial health.
+            </p>
           </div>
-          <div className='tool 5'>
-            Currency Converter: Check live exchange rates.
+          <div className='tool five'>
+            <p>Currency Converter: Check live exchange rates.</p>
           </div>
         </div>
       </div>
