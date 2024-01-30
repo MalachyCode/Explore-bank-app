@@ -5,10 +5,135 @@
   background-position: center;
   width: 100%;
   padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   // margin: auto;
-}
 
-.about-message {
-  margin-top: 3em;
-  width: 90%;
+  .about-message {
+    margin-top: 3em;
+    width: 90%;
+  }
+
+  h4 {
+    margin-bottom: -50px;
+    overflow: hidden;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-300vw);
+    }
+  }
+  .boxes {
+    height: 80px;
+    width: 100vw;
+    overflow: hidden;
+    padding: 60px 0;
+    background: white;
+    // white-space: nowrap;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    left: -30px;
+    margin-top: 70px;
+
+    .div-slide {
+      width: 200vw;
+      height: 100%;
+      background: whitesmoke;
+      position: absolute;
+      left: 100vw;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      animation: 15s slide infinite linear;
+      transition: all 1s ease;
+      overflow: hidden;
+
+      @media (max-width: 992px) {
+      }
+      @media (max-width: 768px) {
+      }
+      @media (max-width: 576px) {
+      }
+
+      div {
+        background-color: greenyellow;
+        margin: 10px;
+        width: 40vw;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        transition: all 1s ease;
+        &:hover {
+          &.tool {
+            background: #8f8681;
+            cursor: pointer;
+            font-size: large;
+          }
+        }
+      }
+    }
+
+    @media (min-width: 768px) {
+      background: orange;
+      margin-top: 100px;
+      &:hover {
+        .div-slide {
+          animation-play-state: paused;
+        }
+      }
+    }
+  }
+  .logos {
+    overflow: hidden;
+    padding: 60px 0;
+    background: white;
+    white-space: nowrap;
+    position: relative;
+
+    .logos-slide {
+      display: inline-block;
+      animation: 35s slide infinite linear;
+      img {
+        height: 50px;
+        margin: 0 40px;
+      }
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      display: block;
+      z-index: 2;
+      // background: linear-gradient(to left, rgba(255, 255, 255, 0), white);
+      background: red;
+    }
+    &:after {
+      display: block;
+      position: absolute;
+      top: 0;
+      width: 250px;
+      height: 100%;
+      content: '';
+      z-index: 2;
+      right: 0;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
+    }
+    &:hover {
+      .logos-slide {
+        animation-play-state: paused;
+      }
+    }
+  }
 }

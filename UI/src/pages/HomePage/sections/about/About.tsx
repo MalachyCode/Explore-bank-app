@@ -18,6 +18,26 @@ const About = () => {
           our bank. We look forward to serving you.
         </p>
       </div>
+      <h4>Financial Tools</h4>
+      <div className='boxes'>
+        <div className='div-slide'>
+          <div className='tool 1'>
+            Budget Planner: Track your income and expenses.
+          </div>
+          <div className='tool 2'>
+            Savings Calculator: See how your savings can grow.
+          </div>
+          <div className='tool 3'>
+            Retirement Planner: Plan your retirement savings.
+          </div>
+          <div className='tool 4'>
+            Financial Health Check: Get a snapshot of your financial health.
+          </div>
+          <div className='tool 5'>
+            Currency Converter: Check live exchange rates.
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
