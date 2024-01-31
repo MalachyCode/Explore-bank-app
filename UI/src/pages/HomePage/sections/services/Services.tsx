@@ -1,134 +1,54 @@
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { servicesData } from './servicesData';
+import RenderServices from './RenderService';
 
 import './Services.scss';
-import { useState } from 'react';
 
 const Services = () => {
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
-
-  const handleClick = (way: string) => {
-    way === 'left'
-      ? setCurrentSlide(currentSlide > 0 ? currentSlide - 1 : 4)
-      : setCurrentSlide(currentSlide < 4 ? currentSlide + 1 : 0);
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
   };
-
-  // console.log(currentSlide);
 
   return (
     // service page houses the various services identified by clickable headers (divs with service-header class)
     <div className='services' id='services'>
       <h3>Our Services Include</h3>
-
-      <div
-        className='services-slider'
-        style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
+      <Carousel
+        showDots={true}
+        responsive={responsive}
+        ssr={true} // means to render carousel on server-side.
+        infinite={true}
+        // autoPlay={this.props.deviceType !== 'mobile' ? true : false}
+        autoPlay={true}
+        autoPlaySpeed={5000}
+        keyBoardControl={true}
+        transitionDuration={2000}
+        containerClass='carousel-container'
+        removeArrowOnDeviceType={['tablet', 'mobile']}
+        // deviceType={this.props.deviceType}
+        dotListClass='custom-dot-list-style'
+        itemClass='carousel-item-padding-40-px'
       >
-        <div className='container'>
-          <div className='service-card'>
-            <div className='left'>
-              <strong>Personal Banking </strong>
-
-              <div className='left-container'>
-                <div className='img-container'></div>
-              </div>
-            </div>
-            <div className='right'>
-              <ul>
-                <li>Comprehensive checking and savings accounts</li>
-                <li>Competitive interest rates on deposits</li>
-                <li>Online and mobile banking services</li>
-                <li>Personal loans and credit cards</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className='container'>
-          <div className='service-card'>
-            <div className='left'>
-              <strong>Business Banking </strong>
-
-              <div className='left-container'>
-                <div className='img-container'></div>
-              </div>
-            </div>
-            <div className='right'>
-              <ul>
-                <li>Business accounts and commercial loans</li>
-                <li>Merchant services and payment processing</li>
-                <li>Payroll services Business credit cards</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className='container'>
-          <div className='service-card'>
-            <div className='left'>
-              <strong>Wealth Management </strong>
-
-              <div className='left-container'>
-                <div className='img-container'></div>
-              </div>
-            </div>
-            <div className='right'>
-              <ul>
-                <li>Investment advisory services</li>
-                <li>Retirement planning</li>
-                <li>Estate planning</li>
-                <li>Trust services</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className='container'>
-          <div className='service-card'>
-            <div className='left'>
-              <strong>Digital Services </strong>
-
-              <div className='left-container'>
-                <div className='img-container'></div>
-              </div>
-            </div>
-            <div className='right'>
-              <ul>
-                <li>24/7 online and mobile banking</li>
-                <li>Mobile check deposit</li>
-                <li>Bill pay and money transfer services</li>
-                <li>Real-time account alerts</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className='container'>
-          <div className='service-card'>
-            <div className='left'>
-              <strong>Customer Service </strong>
-
-              <div className='left-container'>
-                <div className='img-container'></div>
-              </div>
-            </div>
-            <div className='right'>
-              <ul>
-                <li>Dedicated customer service available 24/7</li>
-                <li>In-branch services</li>
-                <li>Financial education resources</li>
-                <li>Community outreach programs</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <ArrowForwardIosIcon
-        className='arrow left'
-        fontSize='large'
-        onClick={() => handleClick('left')}
-      />
-      <ArrowForwardIosIcon
-        className='arrow right'
-        fontSize='large'
-        onClick={() => handleClick('right')}
-      />
+        {servicesData.map((service) => (
+          <RenderServices service={service} />
+        ))}
+      </Carousel>
     </div>
   );
 };
