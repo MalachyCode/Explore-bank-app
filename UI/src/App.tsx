@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import 'react-multi-carousel/lib/styles.css';
+
 import { Routes, Route } from 'react-router-dom';
 import './App.scss';
 import LoginPage from './pages/LoginPage';
