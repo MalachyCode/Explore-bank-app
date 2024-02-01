@@ -10,9 +10,6 @@ const LoginPage = () => {
     password: password,
   };
 
-  console.log(password);
-  console.log(userName);
-
   return (
     <div className='login'>
       <form
