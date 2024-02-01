@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './intro.scss';
+import { useNavigate } from 'react-router-dom';
 
 const Intro = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -7,6 +8,8 @@ const Intro = () => {
   const [isLine1Active, setIsLine1Active] = useState<boolean>(true);
   const [isLine2Active, setIsLine2Active] = useState<boolean>(false);
   const [isLine3Active, setIsLine3Active] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   // setTimeout(() => {
   //   setCurrentSlide(currentSlide === 2 ? 0 : currentSlide + 1);
@@ -25,8 +28,22 @@ const Intro = () => {
             <h1 className='header'>Explore bank</h1>
             <h3>Explore endless opportunities</h3>
             <div className='buttons-container'>
-              <button className='button-1'>Get Started</button>
-              <button className='button-2'>Continue</button>
+              <button
+                className='button-1'
+                onClick={() => {
+                  navigate('/signup');
+                }}
+              >
+                Get Started
+              </button>
+              <button
+                className='button-2'
+                onClick={() => {
+                  navigate('/login');
+                }}
+              >
+                Continue
+              </button>
             </div>
           </div>
         </div>
