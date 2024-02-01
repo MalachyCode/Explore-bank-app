@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Signup.scss';
+import FormInput from './FormInput';
 
 const SignupPage = () => {
   const [email, setEmail] = useState<string>('');
@@ -37,89 +38,55 @@ const SignupPage = () => {
       <form className='form' onSubmit={handleSubmit}>
         <strong className='form-header'>Welcome</strong>
         <div className='form-header-seperator'></div>
-        <label htmlFor='mail'>
-          <p className='.form-label'>Email</p>
-          <input
-            type='email'
-            className='form-input'
-            id='mail'
-            placeholder='Email'
-            value={email}
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label htmlFor='first-name'>
-          <p className='.form-label'>First name</p>
-          <input
-            type='text'
-            className='form-input'
-            id='first-name'
-            placeholder='First name'
-            value={firstName}
-            required
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </label>
-        <label htmlFor='middle-name'>
-          <p className='.form-label'>Middle name</p>
-          <input
-            type='text'
-            className='form-input'
-            id='middle-name'
-            placeholder='Middle name'
-            value={middleName}
-            onChange={(e) => setMiddleName(e.target.value)}
-          />
-        </label>
-        <label htmlFor='last-name'>
-          <p className='.form-label'>Last name</p>
-          <input
-            type='text'
-            className='form-input'
-            id='last-name'
-            placeholder='Last name'
-            value={lastName}
-            required
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </label>
-        <label htmlFor='DOB'>
-          <p className='.form-label'>Date of Birth</p>
-          <input
-            type='date'
-            className='form-input'
-            id='DOB'
-            placeholder='Date of Birth'
-            value={dateOfBirth}
-            required
-            onChange={(e) => setDateOfBirth(e.target.value)}
-          />
-        </label>
-        <label htmlFor='password'>
-          <p className='.form-label'>Password</p>
-          <input
-            type='password'
-            className='form-input'
-            id='password'
-            placeholder='Password'
-            value={password}
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <label htmlFor='confirm-password'>
-          <p className='.form-label'>Confirm password</p>
-          <input
-            type='password'
-            className='form-input'
-            id='confirm-password'
-            placeholder='Confirm password'
-            value={confirmPassword}
-            required
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </label>
+        <FormInput
+          type='email'
+          id='mail'
+          value={email}
+          label='Email'
+          setValueFunction={setEmail}
+        />
+        <FormInput
+          type='text'
+          id='first-name'
+          value={firstName}
+          label='First name'
+          setValueFunction={setFirstName}
+        />
+        <FormInput
+          type='text'
+          id='middle-name'
+          value={middleName}
+          label='Middle name'
+          setValueFunction={setMiddleName}
+        />
+        <FormInput
+          type='text'
+          id='last-name'
+          value={lastName}
+          label='Last name'
+          setValueFunction={setLastName}
+        />
+        <FormInput
+          type='date'
+          id='DOB'
+          value={dateOfBirth}
+          label='Date of Birth'
+          setValueFunction={setDateOfBirth}
+        />
+        <FormInput
+          type='password'
+          id='password'
+          value={password}
+          label='Password'
+          setValueFunction={setPassword}
+        />
+        <FormInput
+          type='password'
+          id='confirm-password'
+          value={confirmPassword}
+          label='Confirm password'
+          setValueFunction={setConfirmPassword}
+        />
         <button type='submit' className='btn'>
           Login
         </button>

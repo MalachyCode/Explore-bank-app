@@ -56,8 +56,8 @@
     .form-input,
     .form-textarea {
       width: 90%;
-      padding: 0.375rem 0.75rem;
-      border-radius: $borderRadius;
+      padding: 15px;
+      border-radius: 4px;
       background: $backgroundColor;
       border: 1px solid $grey-200;
       margin: auto;
@@ -74,16 +74,15 @@
     }
     .btn {
       width: 95%;
-      // margin: auto;
-      margin-top: 35px;
+      margin-top: 50px;
       margin-bottom: 35px;
       cursor: pointer;
       color: $white;
       background: $primary-500;
       border: transparent;
-      border-radius: $borderRadius;
+      border-radius: 4px;
       letter-spacing: $letterSpacing;
-      padding: 0.375rem 0.75rem;
+      padding: 15px;
       box-shadow: $shadow-1;
       transition: $transition;
       text-transform: capitalize;
@@ -96,10 +95,10 @@
         width: 97%;
       }
       @media (min-width: 768px) {
-        width: 93%;
+        width: 94%;
       }
       @media (max-width: 576px) {
-        width: 97%;
+        width: 98%;
       }
     }
     @media (min-width: 992px) {
@@ -107,7 +106,7 @@
     }
     @media (min-width: 576px) {
       width: 80%;
-      padding: 2rem 0.5rem 2rem 3rem;
+      padding: 2rem 1rem 2rem 3rem;
     }
     @media (max-width: 576px) {
       width: 70%;

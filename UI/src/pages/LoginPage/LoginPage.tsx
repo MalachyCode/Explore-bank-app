@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import './LoginPage.scss';
+import FormInput from '../SignupPage/FormInput';
 
 const LoginPage = () => {
-  const [userName, setUserName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const credentials = {
-    userName: userName,
+    email: email,
     password: password,
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(
-      `${credentials.userName} with password ${credentials.password} logged in`
+      `${credentials.email} with password ${credentials.password} logged in`
     );
-    setUserName('');
+    setEmail('');
     setPassword('');
   };
 
@@ -24,28 +25,20 @@ const LoginPage = () => {
       <form className='form' onSubmit={handleSubmit}>
         <strong className='form-header'>Welcome Back</strong>
         <div className='form-header-seperator'></div>
-        <label htmlFor='name'>
-          <p className='.form-label'>Email or Username</p>
-          <input
-            type='text'
-            className='form-input'
-            id='name'
-            placeholder='Username'
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </label>
-        <label htmlFor='password'>
-          <p className='.form-label'>Password</p>
-          <input
-            type='password'
-            className='form-input'
-            id='password'
-            placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
+        <FormInput
+          id='name'
+          label='Email'
+          type='text'
+          value={email}
+          setValueFunction={setEmail}
+        />
+        <FormInput
+          type='password'
+          id='password'
+          value={password}
+          label='Password'
+          setValueFunction={setPassword}
+        />
         <button type='submit' className='btn'>
           Login
         </button>
