@@ -46,7 +46,7 @@ const Services = () => {
         itemClass='carousel-item-padding-40-px'
       >
         {servicesData.map((service) => (
-          <RenderServices service={service} />
+          <RenderServices service={service} key={service.id} />
         ))}
       </Carousel>
     </div>

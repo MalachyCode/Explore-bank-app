@@ -10,19 +10,18 @@ const LoginPage = () => {
     password: password,
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(
+      `${credentials.userName} with password ${credentials.password} logged in`
+    );
+    setUserName('');
+    setPassword('');
+  };
+
   return (
     <div className='login'>
-      <form
-        className='form'
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log(
-            `${credentials.userName} with password ${credentials.password} logged in`
-          );
-          setUserName('');
-          setPassword('');
-        }}
-      >
+      <form className='form' onSubmit={handleSubmit}>
         <strong className='form-header'>Welcome Back</strong>
         <div className='form-header-seperator'></div>
         <label htmlFor='name'>
