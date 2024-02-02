@@ -5,7 +5,7 @@ export const servicesData = [
     contents: [
       {
         id: '1a',
-        text: 'Comprehensive checking and savings accounts',
+        text: 'Savings accounts',
       },
       {
         id: '1b',
@@ -89,7 +89,7 @@ export const servicesData = [
     contents: [
       {
         id: '5a',
-        text: 'Dedicated customer service available 24/7',
+        text: '24/7 dedicated customer service',
       },
       {
         id: '5b',

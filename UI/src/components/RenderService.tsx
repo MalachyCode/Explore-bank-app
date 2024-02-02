@@ -1,9 +1,13 @@
 import { Service } from '../types';
+import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 
 const RenderServices = (props: { service: Service }) => (
   <div className='item'>
     <div className='header'>
       <strong>{props.service.title}</strong>
+      <div className='arrows-container'>
+        <ArrowDropDownCircleIcon className='arrow ' />
+      </div>
     </div>
     <div className='body'>
       <ul>
