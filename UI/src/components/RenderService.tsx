@@ -1,4 +1,4 @@
-import { Service } from '../../../../types';
+import { Service } from '../types';
 
 const RenderServices = (props: { service: Service }) => (
   <div className='item'>
@@ -8,7 +8,7 @@ const RenderServices = (props: { service: Service }) => (
     <div className='body'>
       <ul>
         {props.service.contents.map((content) => (
-          <li>{content}</li>
+          <li key={content.id}>{content.text}</li>
         ))}
       </ul>
     </div>

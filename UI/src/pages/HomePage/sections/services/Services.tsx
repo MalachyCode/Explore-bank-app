@@ -1,7 +1,7 @@
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { servicesData } from './servicesData';
-import RenderServices from './RenderService';
+import RenderServices from '../../../../components/RenderService';
 
 import './Services.scss';
 
