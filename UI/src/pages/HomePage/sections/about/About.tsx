@@ -18,7 +18,15 @@ const About = () => {
           our bank. We look forward to serving you.
         </p>
       </div>
-      <h4>Financial Tools</h4>
+      <div className='financial-tools-writeup'>
+        <h4>Financial Tools</h4>
+        <p>
+          At Eplore bank, we offer a range of financial tools from budget
+          planner to savings calculator, to financial health checks and currency
+          converter to keep you in th knoe of your finances and various currency
+          trends
+        </p>
+      </div>
       <div className='boxes'>
         <div className='div-slide'>
           <div className='tool one'>

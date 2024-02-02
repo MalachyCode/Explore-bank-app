@@ -1,3 +1,4 @@
+@import '../../../../global.scss';
 .about {
   background: url('../../../../assets/pexels-ben-neale-380330.jpg');
   background-repeat: no-repeat;
@@ -11,15 +12,41 @@
   // margin: auto;
 
   .about-message {
-    width: 90%;
-    padding-right: 65px;
-    overflow: hidden;
+    position: relative;
+    top: -32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    height: 506px;
+    margin-left: -70px;
+    margin-bottom: -90px;
+
+    p {
+      overflow: hidden;
+    }
   }
 
-  h4 {
+  .financial-tools-writeup {
+    height: 230px;
+    width: 95%;
+    margin-left: -70px;
     margin-bottom: -50px;
-    overflow: hidden;
-    padding-right: 65px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    top: 50px;
+    padding: 8px 20;
+    p,
+    h4 {
+      overflow: hidden;
+    }
+    p {
+      margin-top: -20px;
+    }
   }
 
   @keyframes slide {
@@ -35,19 +62,24 @@
     height: 20vh;
     width: 100vw;
     overflow: hidden;
+    margin-bottom: -50px;
     padding: 60px 0;
-    background: white;
+    background: linear-gradient(
+      to bottom,
+      rgb(143, 134, 129, 0.3),
+      rgb(255, 255, 255)
+    );
     // white-space: nowrap;
     position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
     left: -30px;
-    margin-top: 70px;
+    margin-top: 90px;
 
     .div-slide {
       width: 200vw;
-      height: 100%;
+      height: 90%;
       // background: whitesmoke;
       position: absolute;
       left: 100vw;
@@ -66,7 +98,13 @@
       }
 
       div {
-        background-color: #e1dcd9;
+        background: linear-gradient(
+          to bottom right,
+          rgb(50, 67, 95, 0.9),
+          #8f8681
+        );
+        border: 5px solid gold;
+        color: #e1dcd9;
         margin: 10px;
         width: 40vw;
         height: 100%;
@@ -74,6 +112,9 @@
         align-items: center;
         justify-content: space-around;
         transition: all 1s ease;
+        border-radius: 10px;
+        box-shadow: $shadow-2;
+
         &:hover {
           p {
             background: #32435f;
@@ -121,7 +162,7 @@
     }
 
     @media (min-width: 768px) {
-      margin-top: 100px;
+      // margin-top: 100px;
       &:hover {
         .div-slide {
           animation-play-state: paused;
