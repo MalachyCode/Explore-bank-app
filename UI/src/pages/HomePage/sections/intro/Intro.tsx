@@ -11,11 +11,22 @@ const Intro = () => {
 
   const navigate = useNavigate();
 
-  // setTimeout(() => {
-  //   setCurrentSlide(currentSlide === 2 ? 0 : currentSlide + 1);
-  // }, timer);
-  // console.log(currentSlide);
-  // console.log(timer);
+  setTimeout(() => {
+    setCurrentSlide(currentSlide === 2 ? 0 : currentSlide + 1);
+    if (currentSlide === 0) {
+      setIsLine2Active(true);
+      setIsLine1Active(false);
+      setIsLine3Active(false);
+    } else if (currentSlide === 1) {
+      setIsLine3Active(true);
+      setIsLine2Active(false);
+      setIsLine1Active(false);
+    } else {
+      setIsLine1Active(true);
+      setIsLine2Active(false);
+      setIsLine3Active(false);
+    }
+  }, timer);
 
   return (
     <div className='intro' id='intro'>
@@ -88,8 +99,8 @@ const Intro = () => {
         <span
           className={'line-1 ' + (isLine1Active && 'active')}
           onClick={() => {
-            setCurrentSlide(0);
             setTimer(5000);
+            setCurrentSlide(0);
             setIsLine1Active(true);
             setIsLine2Active(false);
             setIsLine3Active(false);
@@ -98,8 +109,8 @@ const Intro = () => {
         <span
           className={'line-2 ' + (isLine2Active && 'active')}
           onClick={() => {
-            setCurrentSlide(1);
             setTimer(5000);
+            setCurrentSlide(1);
             setIsLine2Active(true);
             setIsLine1Active(false);
             setIsLine3Active(false);
@@ -108,8 +119,8 @@ const Intro = () => {
         <span
           className={'line-3 ' + (isLine3Active && 'active')}
           onClick={() => {
-            setCurrentSlide(2);
             setTimer(5000);
+            setCurrentSlide(2);
             setIsLine3Active(true);
             setIsLine2Active(false);
             setIsLine1Active(false);

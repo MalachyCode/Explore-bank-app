@@ -251,4 +251,9 @@
       }
     }
   }
+  @media (max-width: 768px) {
+    .slider-btn-container {
+      display: none;
+    }
+  }
 }
