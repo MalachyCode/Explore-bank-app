@@ -28,7 +28,15 @@ const Services = () => {
   return (
     // service page houses the various services identified by clickable headers (divs with service-header class)
     <div className='services' id='services'>
-      <h3>Our Services Include</h3>
+      <div className='services-message'>
+        <h3>Our Services</h3>
+        <p>
+          From 247 online and customer services to savings accounts and
+          business/ personal loans, we offer a range of services at Explore to
+          enable you financial security and ease of access to round the clock
+          assistance.
+        </p>
+      </div>
       <Carousel
         // showDots={true}
         responsive={responsive}
