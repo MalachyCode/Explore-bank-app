@@ -1,80 +1,80 @@
 .resources {
-  // background: url('../../../../assets/pexels-jess-bailey-designs-1157804.jpg');
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  // background-position: center;
   .container {
+    background: url('../../../../assets/pexels-jess-bailey-designs-1157804.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     margin: auto;
     width: 90%;
     height: 90%;
-    background: black;
     position: relative;
     top: 25px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    div {
-      padding: 10%;
+    justify-content: space-between;
+    padding: 10px;
+    .box-1 {
+      margin: auto;
+      height: 90%;
+      width: 90%;
       background: white;
-      width: 30%;
-      height: 70%;
-      border-radius: 10px;
-      transition: all 2s ease;
-      overflow: hidden;
+      border-radius: 5px;
+      border: 1px solid gold;
+      transition: all 1s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 0;
-      margin: 0;
-      &:hover {
-        background: #8f8681;
-        height: 80%;
-        width: 80%;
-        // .tools {
-        //   visibility: visible;
-        // }
+      strong {
+        overflow: hidden;
+        margin: 10px;
       }
 
-      .tools {
-        // visibility: hidden;
-        width: 100%;
-        overflow: hidden;
-        height: 100%;
-        transition: all 2s ease;
-      }
-    }
-  }
-  @media only screen and (min-width: 768px) {
-    .container {
-      background: blue;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-around;
-      width: 90%;
-      div {
-        padding: 10%;
-        background: white;
-        width: 90%;
-        height: 33%;
-        border-radius: 10px;
-        transition: all 2s ease;
-        overflow: hidden;
+      .question {
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 90%;
+      }
+      .answer {
+        width: 90%;
+        padding: 10px;
+        border-bottom: 1px solid #32435f;
+      }
+
+      &:hover {
+        border: 5px solid gold;
+        transform: scale(1.03);
+      }
+      .seperator-container {
+        width: 95%;
+        height: 25px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         justify-content: center;
-        padding: 0;
-        margin: 0;
-        &:hover {
-          background: #8f8681;
-          height: 80%;
-          width: 90%;
-          // .tools {
-          //   visibility: visible;
-          // }
+        margin-top: -15px;
+        overflow: hidden;
+        .circle {
+          transform: scale(0.5);
+          color: #32435f;
         }
+        span {
+          width: 50%;
+          height: 2px;
+          background: #32435f;
+        }
+      }
+    }
+    @media (max-width: 768px) {
+      .box-1 {
+        height: 95%;
+        width: 95%;
+      }
+    }
+    @media (min-width: 576px) {
+      .box-1 {
+        padding-top: 3em;
       }
     }
   }

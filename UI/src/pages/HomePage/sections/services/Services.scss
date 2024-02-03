@@ -19,7 +19,7 @@
     width: 95%;
     height: 500px;
     overflow: hidden;
-    // background: white;
+    background: linear-gradient(#8f8681, #e1dcd9, white);
 
     .carousel-item-padding-40-px {
       transition: all 1s ease;
@@ -84,7 +84,7 @@
           margin-bottom: 7px;
           background: rgb(122, 104, 1);
           .arrow {
-            transform: rotate(180deg);
+            transform: rotate(270deg);
             animation: blink 2s linear infinite;
             -webkit-animation: blink 2s linear infinite;
             @keyframes blink {
@@ -149,5 +149,13 @@
         }
       }
     }
+  }
+  .services-message {
+    background: linear-gradient(#8f8681, #aca5a1);
+    color: #e1dcd9;
+    overflow: hidden;
+    padding: 10px 15px;
+    margin-bottom: -90px;
+    z-index: 2;
   }
 }
