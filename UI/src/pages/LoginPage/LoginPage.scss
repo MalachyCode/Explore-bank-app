@@ -112,5 +112,15 @@
       width: 70%;
       padding: 2rem 2.5rem 2rem 3rem;
     }
+    .for-signup {
+      margin-top: 0;
+      .to-signup {
+        color: #8f8681;
+        cursor: pointer;
+        &:hover {
+          color: #32435f;
+        }
+      }
+    }
   }
 }

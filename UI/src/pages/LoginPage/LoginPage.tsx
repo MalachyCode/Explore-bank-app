@@ -61,6 +61,12 @@ const LoginPage = () => {
         <button type='submit' className='btn'>
           Login
         </button>
+        <p className='for-signup'>
+          Don't have an account?{' '}
+          <span className='to-signup' onClick={() => navigate('/signup')}>
+            Signup
+          </span>
+        </p>
       </form>
     </div>
   );
