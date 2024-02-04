@@ -124,6 +124,12 @@ const SignupPage = () => {
         <button type='submit' className='btn'>
           Login
         </button>
+        <p className='for-login'>
+          Have an account?{' '}
+          <span className='to-login' onClick={() => navigate('/login')}>
+            Login
+          </span>
+        </p>
       </form>
     </div>
   );
