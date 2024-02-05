@@ -43,3 +43,9 @@ export interface LoginType {
   email: string;
   password: string;
 }
+
+export interface ForgotPasswordType {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
