@@ -8,7 +8,7 @@ const Resources = () => {
       <div className='container'>
         <div className='box-1'>
           <div className='question one'>
-            <strong>Where can I find branch</strong>
+            <strong>Where can I find a branch</strong>
             <div className='seperator-container'>
               <span></span>
               <PanoramaFishEyeIcon className='circle' />
