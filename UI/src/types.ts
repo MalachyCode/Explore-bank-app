@@ -2,11 +2,21 @@ interface Content {
   id: string;
   text: string;
 }
+interface InfoContent {
+  id: string;
+  text: string;
+}
 
 export interface Service {
   id: number;
   title: string;
   contents: Array<Content>;
+}
+
+export interface Info {
+  id: number;
+  title: string;
+  infoContents: Array<InfoContent>;
 }
 export interface FormInputType {
   name: string;

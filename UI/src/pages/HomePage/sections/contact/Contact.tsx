@@ -5,6 +5,8 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import { useState } from 'react';
+import { contactsData } from './contactsData';
+import RenderFooterContactInfoBigScreen from '../../../../components/RenderFooterContactInfoBigScreen';
 
 const Contact = () => {
   const [ourHoursOpen, setOurHoursOpen] = useState<boolean>(false);
@@ -33,46 +35,9 @@ const Contact = () => {
       </div>
       <div className='footer'>
         <div className='footer-container'>
-          <div className='footer-column one'>
-            <div className='line'></div>
-            <h4>OUR HOURS</h4>
-            <div className='line'></div>
-            <ul>
-              <li>247 Online Banking</li>
-              <li>9am to 6pm Mon to Fri at Our Branches</li>
-              <li>247 Mobile Banking</li>
-            </ul>
-          </div>
-          <div className='footer-column two'>
-            <div className='line'></div>
-            <h4>CONTACT US</h4>
-            <div className='line'></div>
-            <ul>
-              <li>We Care +2347080000000</li>
-              <li>explorebank@mail.com</li>
-              <li>Branch Locator</li>
-            </ul>
-          </div>
-          <div className='footer-column three'>
-            <div className='line'></div>
-            <h4>QUICK LINKS</h4>
-            <div className='line'></div>
-            <ul>
-              <li>Online Banking</li>
-              <li>Support Center</li>
-              <li>Report Scam and Fraud Attempts</li>
-            </ul>
-          </div>
-          <div className='footer-column four'>
-            <div className='line'></div>
-            <h4>ABOUT US</h4>
-            <div className='line'></div>
-            <ul>
-              <li>Our History</li>
-              <li>Corporate profile</li>
-              <li>Board and Management Team</li>
-            </ul>
-          </div>
+          {contactsData.map((info) => (
+            <RenderFooterContactInfoBigScreen info={info} key={info.id} />
+          ))}
         </div>
         <div className='footer-container-small-screen'>
           <div className='service'>
