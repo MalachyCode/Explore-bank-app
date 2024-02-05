@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import './LoginPage.scss';
+import './ForgotPasswordPage.scss';
 import FormInput from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { LoginType } from '../../types';
+import { ForgotPasswordType } from '../../types';
 
-const LoginPage = () => {
+const ForgotPasswordPage = () => {
   const navigate = useNavigate();
-  const [credentials, setCredentials] = useState<LoginType>({
+  const [credentials, setCredentials] = useState<ForgotPasswordType>({
     email: '',
     password: '',
+    confirmPassword: '',
   });
 
   const formInputs = [
@@ -26,19 +27,34 @@ const LoginPage = () => {
       name: 'password',
       type: 'password',
       placeholder: 'Password',
-      errorMessage: 'Enter password',
+      errorMessage:
+        'Password should be between 8 - 20 characters and include 1 letter, 1 number and 1 special character',
       label: 'Password',
+      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      required: true,
+    },
+    {
+      id: 'confirm-password',
+      name: 'confirmPassword',
+      type: 'password',
+      placeholder: 'Confirm Password',
+      errorMessage: `Passwords don't match`,
+      label: 'Confirm Password',
+      pattern: credentials.password,
       required: true,
     },
   ];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/');
-    console.log(
-      `${credentials.email} with password ${credentials.password} logged in`
-    );
-    setCredentials({ ...credentials, email: '', password: '' });
+    navigate('/login');
+    console.log(`New password is ${credentials.password}`);
+    setCredentials({
+      ...credentials,
+      email: '',
+      password: '',
+      confirmPassword: '',
+    });
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,38 +62,24 @@ const LoginPage = () => {
   };
 
   return (
-    <div className='login'>
+    <div className='forgot-password'>
       <form className='form' onSubmit={handleSubmit}>
-        <strong className='form-header'>Welcome Back</strong>
+        <strong className='form-header'>Reset Password</strong>
         <div className='form-header-seperator'></div>
         {formInputs.map((input) => (
           <FormInput
             key={input.id}
             {...input}
-            value={credentials[input.name as keyof LoginType]}
+            value={credentials[input.name as keyof ForgotPasswordType]}
             onChange={onChange}
           />
         ))}
         <button type='submit' className='btn'>
-          Login
+          Reset
         </button>
-        <div className='form-footer'>
-          <p className='for-signup'>
-            Don't have an account?{' '}
-            <span className='to-signup' onClick={() => navigate('/signup')}>
-              Signup
-            </span>
-          </p>
-          <span
-            className='forgot-password'
-            onClick={() => navigate('/password-reset')}
-          >
-            Forgot password
-          </span>
-        </div>
       </form>
     </div>
   );
 };
 
-export default LoginPage;
+export default ForgotPasswordPage;

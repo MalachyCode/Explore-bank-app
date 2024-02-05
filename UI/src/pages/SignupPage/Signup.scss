@@ -14,7 +14,9 @@
   background-size: cover;
   background-position: center;
   display: flex;
+  // position: fixed;
   align-items: center;
+  padding: 50px 0;
   .form {
     width: 90%;
     max-width: $fixed-width;
@@ -113,6 +115,7 @@
     }
     .for-login {
       margin-top: 0;
+      text-align: center;
       .to-login {
         color: #8f8681;
         cursor: pointer;
