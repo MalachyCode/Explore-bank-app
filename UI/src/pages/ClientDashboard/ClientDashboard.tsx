@@ -37,6 +37,7 @@ const ClientDashboard = () => {
               <p className='savings-percentage'>Saved 20%</p>
             </div>
           </div>
+          <div className='menu-icons-container'></div>
         </div>
       </div>
     </div>
