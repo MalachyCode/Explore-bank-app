@@ -1,0 +1,136 @@
+.dashboard {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  background: #e1dcd9;
+
+  .sidebar {
+    width: 30vw;
+    background: #5f4945;
+    margin-right: 20px;
+  }
+  .body {
+    padding-right: 50px;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    // height: calc(100vh - 100px);
+    justify-content: space-between;
+    overflow: hidden;
+    .top {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      width: 100%;
+      margin: auto;
+      overflow: hidden;
+      background: #fff;
+      margin: 0 40px 10px 10px;
+
+      h3 {
+        color: #5f4945;
+        margin-left: 10px;
+        .account-name {
+          font-size: larger;
+          color: #32435f;
+          padding: 0 7px;
+        }
+      }
+      .notification-icon-container {
+        display: flex;
+        flex-direction: row;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: all 1s ease;
+        padding: 10px 5px 10px 10px;
+
+        .notification-icon {
+          position: relative;
+          z-index: 1;
+          transition: all 1s ease;
+        }
+        .notification-alert {
+          position: relative;
+          z-index: 2;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: red;
+          margin-top: 4px;
+          right: 17px;
+          top: 2px;
+        }
+        &:hover {
+          background: #e1dcd9;
+        }
+      }
+    }
+
+    .container {
+      height: 100%;
+      width: 100%;
+      background: #fff;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 10px 40px 10px 10px;
+      position: relative;
+      .total {
+        height: 150px;
+        width: 35vw;
+        background: #8f8681;
+        color: white;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        transition: all 1s ease;
+        margin: 20px;
+        padding: 20px 0;
+
+        .total-info {
+          display: flex;
+          flex-direction: column;
+          h3,
+          strong,
+          p {
+            padding-left: 30px;
+            margin-bottom: -8px;
+          }
+          .amount {
+            font-size: 35px;
+            margin: 10px 0;
+          }
+          .savings-percentage {
+            margin: -2px 0;
+          }
+        }
+        &.two {
+          background: #a67f78;
+        }
+        &:hover {
+          background: #32435f;
+        }
+        @media (max-width: 768px) {
+          width: 90%;
+          height: 150px;
+        }
+      }
+      @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .sidebar {
+      display: none;
+    }
+    .body {
+      width: 100%;
+      padding-left: 20px;
+    }
+  }
+}
