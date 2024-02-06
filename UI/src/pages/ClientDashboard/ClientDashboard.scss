@@ -1,5 +1,5 @@
 .dashboard {
-  height: 100vh;
+  // height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: row;
@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: column;
     // height: calc(100vh - 100px);
-    justify-content: space-between;
+    // justify-content: space-between;
     overflow: hidden;
     .top {
       display: flex;
@@ -45,7 +45,8 @@
         cursor: pointer;
         border-radius: 50%;
         transition: all 1s ease;
-        padding: 10px 5px 10px 10px;
+        padding: 10px 0 10px 10px;
+        margin-right: 13px;
 
         .notification-icon {
           position: relative;
@@ -70,13 +71,13 @@
     }
 
     .container {
-      height: 100%;
+      // height: 100%;
+      height: calc(100% - 70px);
       width: 100%;
       background: #fff;
       display: flex;
       flex-direction: row;
-      align-items: center;
-      margin: 10px 40px 10px 10px;
+      margin: 10px 40px 0 10px;
       position: relative;
       .total {
         height: 150px;
@@ -118,6 +119,14 @@
           height: 150px;
         }
       }
+      .menu-icons-container {
+        width: 90%;
+        height: 500px;
+        background: green;
+        margin: auto;
+        border-radius: 10px;
+        margin-top: 25px;
+      }
       @media (max-width: 768px) {
         display: flex;
         flex-direction: column;
@@ -129,8 +138,47 @@
       display: none;
     }
     .body {
-      width: 100%;
-      padding-left: 20px;
+      width: 100vw;
+      padding: 0;
+      .top {
+        width: 100%;
+        margin-left: 0;
+      }
+      .container {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+  }
+  @media (min-width: 768px) {
+    height: 100vh;
+    .sidebar {
+      display: none;
+    }
+    .body {
+      width: 100vw;
+      height: 100%;
+      padding: 0;
+
+      .top {
+        width: 100%;
+        margin-left: 0;
+      }
+      .container {
+        width: 100%;
+        margin-left: 0;
+        .total {
+          width: 45%;
+        }
+        .menu-icons-container {
+          display: none;
+        }
+      }
+    }
+  }
+  @media (min-width: 992px) {
+    .sidebar {
+      display: flex;
     }
   }
 }
