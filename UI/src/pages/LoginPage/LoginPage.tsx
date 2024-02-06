@@ -34,7 +34,7 @@ const LoginPage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/');
+    navigate('/dashboard-client');
     console.log(
       `${credentials.email} with password ${credentials.password} logged in`
     );
@@ -68,12 +68,9 @@ const LoginPage = () => {
               Signup
             </span>
           </p>
-          <span
-            className='forgot-password'
-            onClick={() => navigate('/password-reset')}
-          >
-            Forgot password
-          </span>
+          <p className='reset' onClick={() => navigate('/password-reset')}>
+            Forgot Password
+          </p>
         </div>
       </form>
     </div>

@@ -7,12 +7,14 @@ import HomePage from './pages/HomePage/HomePage';
 
 import SignupPage from './pages/SignupPage/SignupPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPassword';
+import ClientDashboard from './pages/ClientDashboard/ClientDashboard';
 
 function App() {
   return (
     <div className='app'>
       <div className='container'>
         <Routes>
+          <Route path='/dashboard-client' element={<ClientDashboard />} />
           <Route path='/password-reset' element={<ForgotPasswordPage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignupPage />} />
