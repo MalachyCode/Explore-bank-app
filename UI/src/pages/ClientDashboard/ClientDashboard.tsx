@@ -2,12 +2,15 @@ import './ClientDashboard.scss';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import HistoryIcon from '@mui/icons-material/History';
 import { useNavigate } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useState } from 'react';
 
 const ClientDashboard = () => {
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
   return (
     <div className='dashboard'>
-      <div className='sidebar'>
+      <div className={'sidebar ' + (menuOpen && 'active')}>
         <div className='sidebar-container'>
           <div className='item'>
             <img
@@ -69,6 +72,11 @@ const ClientDashboard = () => {
       </div>
       <div className='body'>
         <div className='top'>
+          <MenuIcon
+            fontSize='large'
+            className='menu-hamburger'
+            onClick={() => setMenuOpen(!menuOpen ? true : false)}
+          />
           <h3>
             Welcome back <strong className='account-name'>Malachy</strong>
           </h3>
