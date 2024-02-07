@@ -13,9 +13,7 @@
     background: #846965;
     margin-right: 20px;
     display: flex;
-    // flex-direction: column;
-    // scrollbar-width: 0;
-    overflow: hidden;
+    transition: all 2s ease;
 
     .sidebar-container {
       width: 90%;
@@ -86,8 +84,6 @@
     width: 70vw;
     display: flex;
     flex-direction: column;
-    // height: calc(100vh - 100px);
-    // justify-content: space-between;
     overflow: hidden;
     .top {
       display: flex;
@@ -100,6 +96,11 @@
       overflow: hidden;
       background: #fff;
       margin: 0 40px 10px 10px;
+
+      .menu-hamburger {
+        margin: 10px;
+        cursor: pointer;
+      }
 
       h3 {
         color: #5f4945;
@@ -250,6 +251,9 @@
       .top {
         width: 100%;
         margin-left: 0;
+        .menu-hamburger {
+          display: none;
+        }
       }
       .container {
         width: 100%;
@@ -257,10 +261,23 @@
       }
     }
   }
-  @media (min-width: 768px) {
+  @media (min-width: 768px) and (max-width: 992px) {
     height: 100vh;
     .sidebar {
-      display: none;
+      width: 0;
+      position: relative;
+      margin-right: 0;
+      left: -30vw;
+      &.active {
+        width: 30vw;
+        left: 0vw;
+        margin-right: 20px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &:-webkit-scrollbar {
+          display: none;
+        }
+      }
     }
     .body {
       width: 100vw;
@@ -286,6 +303,24 @@
   @media (min-width: 992px) {
     .sidebar {
       display: flex;
+      overflow: hidden;
+      width: 30vw;
+      margin-right: 20px;
+    }
+    .body {
+      width: 100vw;
+      height: 100vh;
+      padding-right: 20px;
+      .top {
+        .menu-hamburger {
+          display: none;
+        }
+      }
+      .container {
+        .menu-icons-container {
+          display: none;
+        }
+      }
     }
   }
 }
