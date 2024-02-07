@@ -1,8 +1,10 @@
 import './ClientDashboard.scss';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import HistoryIcon from '@mui/icons-material/History';
+import { useNavigate } from 'react-router-dom';
 
 const ClientDashboard = () => {
+  const navigate = useNavigate();
   return (
     <div className='dashboard'>
       <div className='sidebar'>
@@ -60,8 +62,10 @@ const ClientDashboard = () => {
             <span>Transaction History</span>
           </div>
           <div className='item free'></div>
+          <button className='logout-btn' onClick={() => navigate('/login')}>
+            Logout
+          </button>
         </div>
-        {/* <button className='logout-btn'>Logout</button> */}
       </div>
       <div className='body'>
         <div className='top'>
