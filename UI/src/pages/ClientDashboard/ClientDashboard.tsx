@@ -89,22 +89,24 @@ const ClientDashboard = () => {
           </div>
         </div>
         <div className='container'>
-          <div className='total'>
-            <div className='total-info'>
-              <h3>Total balance</h3>
-              <strong>
-                <h2 className='amount'>$54,376</h2>
-              </strong>
-              <p className='savings-percentage'>Saved 20%</p>
+          <div className='totals-container'>
+            <div className='total'>
+              <div className='total-info'>
+                <h3>Total balance</h3>
+                <strong>
+                  <h2 className='amount'>$54,376</h2>
+                </strong>
+                <p className='savings-percentage'>Saved 20%</p>
+              </div>
             </div>
-          </div>
-          <div className='total two'>
-            <div className='total-info'>
-              <h3>Total balance</h3>
-              <strong>
-                <h2 className='amount'>$54,376</h2>
-              </strong>
-              <p className='savings-percentage'>Saved 20%</p>
+            <div className='total two'>
+              <div className='total-info'>
+                <h3>Total balance</h3>
+                <strong>
+                  <h2 className='amount'>$54,376</h2>
+                </strong>
+                <p className='savings-percentage'>Saved 20%</p>
+              </div>
             </div>
           </div>
           <div className='menu-icons-container'>
@@ -162,6 +164,7 @@ const ClientDashboard = () => {
             </div>
             <div className='item free'></div>
           </div>
+          <div className='chart-container'></div>
         </div>
       </div>
     </div>
