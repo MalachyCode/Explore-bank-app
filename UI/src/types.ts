@@ -13,6 +13,13 @@ export interface Service {
   contents: Array<Content>;
 }
 
+export interface Icons {
+  label: string;
+  icon: string;
+  iconClassName?: string;
+  spanClassName?: string;
+}
+
 export interface Info {
   id: number;
   title: string;
