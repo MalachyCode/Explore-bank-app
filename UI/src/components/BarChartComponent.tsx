@@ -1,5 +1,4 @@
 // import { PureComponent } from 'react';
-import { useState } from 'react';
 import {
   BarChart,
   Bar,
