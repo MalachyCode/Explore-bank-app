@@ -13,6 +13,7 @@ import {
 const ClientDashboard = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const id = 1;
 
   return (
     <div className='dashboard'>
@@ -33,6 +34,7 @@ const ClientDashboard = () => {
           <RenderIcons
             label='Transfer'
             icon='./assets/icons8-money-transfer-48.png'
+            onClick={() => navigate(`/dashboard-client/${id}/transfer`)}
           />
           <RenderIcons
             iconClassName='loan-icon'
@@ -107,6 +109,7 @@ const ClientDashboard = () => {
             <RenderIcons
               label='Transfer'
               icon='./assets/icons8-money-transfer-48.png'
+              onClick={() => navigate(`/dashboard-client/${id}/transfer`)}
             />
             <RenderIcons
               iconClassName='loan-icon'

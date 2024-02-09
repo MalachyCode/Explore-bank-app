@@ -1,7 +1,7 @@
 import { Icons } from '../types';
 
 export const RenderIcons = (props: Icons) => (
-  <div className='item'>
+  <div className='item' onClick={props.onClick}>
     <img src={props.icon} alt='' className={props.iconClassName} />
     <span className={props.spanClassName}>{props.label}</span>
   </div>

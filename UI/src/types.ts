@@ -18,6 +18,7 @@ export interface Icons {
   icon: string;
   iconClassName?: string;
   spanClassName?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }
 
 export interface Info {
@@ -49,6 +50,12 @@ export interface SignUpType {
 export interface LoginType {
   email: string;
   password: string;
+}
+
+export interface TransferType {
+  bankName: string;
+  accountNumber: string;
+  amount: string;
 }
 
 export interface ForgotPasswordType {
