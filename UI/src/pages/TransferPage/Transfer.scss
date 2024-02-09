@@ -1,0 +1,16 @@
+.transfer {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background: #e1dcd9;
+  .account-balance {
+    background: #32435f;
+    border-radius: 5px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    margin: auto;
+  }
+}

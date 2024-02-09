@@ -14,6 +14,7 @@ import {
 const BarChartComponent = () => {
   const date = new Date();
   let month = date.getMonth();
+  const numberOfMonthsToShow = 6;
 
   const months = [
     'January',
@@ -30,9 +31,9 @@ const BarChartComponent = () => {
     'December',
   ];
   const monthsToUse: Array<string> = [];
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < numberOfMonthsToShow; i++) {
     if (month < 0) {
-      month = 11;
+      month = months.length - 1;
     }
     monthsToUse.push(months[month]);
     month -= 1;

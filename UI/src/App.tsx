@@ -8,12 +8,14 @@ import HomePage from './pages/HomePage/HomePage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPassword';
 import ClientDashboard from './pages/ClientDashboard/ClientDashboard';
+import Transfer from './pages/TransferPage/Transfer';
 
 function App() {
   return (
     <div className='app'>
       <div className='container'>
         <Routes>
+          <Route path='/dashboard-client/:id/transfer' element={<Transfer />} />
           <Route path='/dashboard-client' element={<ClientDashboard />} />
           <Route path='/password-reset' element={<ForgotPasswordPage />} />
           <Route path='/login' element={<LoginPage />} />
