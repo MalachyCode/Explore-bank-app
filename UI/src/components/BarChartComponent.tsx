@@ -13,7 +13,7 @@ import {
 
 const BarChartComponent = () => {
   const date = new Date();
-  const month = date.getMonth();
+  let month = date.getMonth();
 
   const months = [
     'January',
@@ -29,24 +29,32 @@ const BarChartComponent = () => {
     'November',
     'December',
   ];
-
   const monthsToUse: Array<string> = [];
-
-  let count: number = 0;
-
-  const monthsToShow = (n: number) => {
-    count += 1;
-    if (count === 7) {
-      count = 0;
-      return;
+  for (let i = 0; i < 6; i++) {
+    if (month < 0) {
+      month = 11;
     }
-    if (n < 0) {
-      n = 11;
-    }
-    monthsToUse.push(months[n]);
-    monthsToShow(n - 1);
-  };
-  monthsToShow(month);
+    monthsToUse.push(months[month]);
+    month -= 1;
+  }
+  console.log(monthsToUse);
+
+  // OLD RECURSION LEFT IN FOR LEARNING PURPOSES
+  // let count: number = 0;
+
+  // const monthsToShow = (n: number) => {
+  //   count += 1;
+  //   if (count === 7) {
+  //     count = 0;
+  //     return;
+  //   }
+  //   if (n < 0) {
+  //     n = 11;
+  //   }
+  //   monthsToUse.push(months[n]);
+  //   monthsToShow(n - 1);
+  // };
+  // monthsToShow(month);
 
   const data = [
     {
