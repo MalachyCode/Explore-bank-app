@@ -1,16 +1,99 @@
+@import '../../global.scss';
+
 .transfer {
   width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   background: #e1dcd9;
   .account-balance {
-    background: #32435f;
-    border-radius: 5px;
-    width: 90%;
+    width: 70%;
+    background: #a67f78;
+    color: white;
+    border-radius: 3px;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
+    padding: 20px 0;
+    margin-bottom: -25px;
+  }
+  .daily-limit-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 68%;
     margin: auto;
+    margin-bottom: -50px;
+    margin-top: 60px;
+    border: 1px solid #32435f;
+    padding: 3px;
+    // background: #a67f78;
+    .total {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .remaining {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .form {
+    width: 90%;
+    max-width: $fixed-width;
+    // background: $white;
+    // border-radius: $borderRadius;
+    // box-shadow: $shadow-2;
+    padding: 2rem 0.3rem 2rem 3rem;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    .btn {
+      width: 95%;
+      margin-top: 50px;
+      margin-bottom: 35px;
+      cursor: pointer;
+      color: $white;
+      background: $primary-500;
+      border: transparent;
+      border-radius: 4px;
+      letter-spacing: $letterSpacing;
+      padding: 15px;
+      box-shadow: $shadow-1;
+      transition: $transition;
+      text-transform: capitalize;
+      display: inline-block;
+      &:hover {
+        background: $primary-700;
+        box-shadow: $shadow-3;
+      }
+      @media (min-width: 992px) {
+        width: 97%;
+      }
+      @media (min-width: 768px) {
+        width: 94%;
+      }
+      @media (max-width: 576px) {
+        width: 98%;
+      }
+    }
+    @media (min-width: 992px) {
+      width: 90%;
+    }
+    @media (min-width: 576px) {
+      width: 80%;
+      padding: 2rem 1rem 2rem 3rem;
+    }
+    @media (max-width: 576px) {
+      width: 70%;
+      padding: 2rem 2.5rem 2rem 3rem;
+    }
   }
 }

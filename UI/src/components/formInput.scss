@@ -1,3 +1,5 @@
+@import '../global.scss';
+
 .error-message {
   font-size: 12px;
   padding: 3px;
@@ -11,4 +13,31 @@ input:invalid[focused='true'] {
 
 input:invalid[focused='true'] ~ .error-message {
   display: block;
+}
+
+.form-label {
+  display: block;
+  font-size: $smallText;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+  letter-spacing: $letterSpacing;
+}
+.form-input,
+.form-textarea {
+  width: 90%;
+  padding: 15px;
+  border-radius: 4px;
+  background: $backgroundColor;
+  border: 1px solid $grey-200;
+  margin: auto;
+  &::placeholder {
+    font-family: inherit;
+    color: $grey-400;
+  }
+}
+.form-row {
+  margin-bottom: 1rem;
+}
+.form-textarea {
+  height: 7rem;
 }
