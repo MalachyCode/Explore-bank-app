@@ -45,7 +45,7 @@ const Transfer = () => {
     e.preventDefault();
     navigate('/dashboard-client');
     console.log(
-      `transfered ${transferDetials.amount} to ${transferDetials.accountNumber} of bank ${transferDetials.bankName}`
+      `You transfered ${transferDetials.amount} to ${transferDetials.accountNumber} of bank ${transferDetials.bankName}`
     );
     setTransferDetials({
       ...transferDetials,
