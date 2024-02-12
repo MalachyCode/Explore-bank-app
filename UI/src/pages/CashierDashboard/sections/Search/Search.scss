@@ -1,0 +1,26 @@
+@import '../../../../global.scss';
+
+.search {
+  background: #e1dcd9;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  form {
+    .input {
+      width: 70vw;
+      padding: 15px;
+      border-radius: 25px;
+      background: $backgroundColor;
+      border: none;
+      margin: auto;
+      position: relative;
+      top: 70px;
+      &::placeholder {
+        font-family: inherit;
+        color: $grey-400;
+      }
+    }
+  }
+}

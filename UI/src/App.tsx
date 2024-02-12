@@ -10,12 +10,14 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPassword';
 import ClientDashboard from './pages/ClientDashboard/ClientDashboard';
 import Transfer from './pages/TransferPage/Transfer';
 import CashierDashboard from './pages/CashierDashboard/CashierDashboard';
+import Search from './pages/CashierDashboard/sections/Search/Search';
 
 function App() {
   return (
     <div className='app'>
       <div className='container'>
         <Routes>
+          <Route path='/dashboard-cashier/search' element={<Search />} />
           <Route path='/dashboard-client/:id/transfer' element={<Transfer />} />
           <Route path='/dashboard-cashier' element={<CashierDashboard />} />
           <Route path='/dashboard-client' element={<ClientDashboard />} />
