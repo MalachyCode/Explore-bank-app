@@ -1,7 +1,17 @@
 import './CahsierDashboard.scss';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 const CashierDashboard = () => (
   <div className='cashier-dashboard'>
+    <div className='top'>
+      <h3>
+        Welcome back <strong className='account-name'>Staff</strong>
+      </h3>
+      <div className='notification-icon-container'>
+        <NotificationsNoneIcon fontSize='large' className='notification-icon' />
+        <div className='notification-alert'></div>
+      </div>
+    </div>
     <div className='container'>
       <div className='left'>
         <div className='box'>Search for Client</div>
