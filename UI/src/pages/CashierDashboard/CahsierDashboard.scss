@@ -1,0 +1,114 @@
+@import '../../global.scss';
+
+.cashier-dashboard {
+  background: #e1dcd9;
+  width: 100vw;
+  height: 100vh;
+  // padding-bottom: 25px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &:-webkit-scrollbar {
+    display: none;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    background: #fff;
+    // margin: 0 40px 10px 10px;
+
+    h3 {
+      color: #5f4945;
+      margin-left: 10px;
+      .account-name {
+        font-size: larger;
+        color: #32435f;
+        padding: 0 7px;
+      }
+    }
+    .notification-icon-container {
+      display: flex;
+      flex-direction: row;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 1s ease;
+      padding: 10px 0 10px 10px;
+      margin-right: 13px;
+
+      .notification-icon {
+        position: relative;
+        z-index: 1;
+        transition: all 1s ease;
+      }
+      .notification-alert {
+        position: relative;
+        z-index: 2;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: red;
+        margin-top: 4px;
+        right: 17px;
+        top: 2px;
+      }
+      &:hover {
+        background: #e1dcd9;
+      }
+    }
+  }
+
+  .container {
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    position: relative;
+    top: 5%;
+    border-radius: 5px;
+    box-shadow: $shadow-2;
+    background: white;
+    display: flex;
+    flex-direction: row;
+
+    div {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      .box {
+        width: 80%;
+        margin: auto;
+        height: 100px;
+        background: #8f8681;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: large;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 1s ease;
+
+        &.two {
+          background: #a67f78;
+        }
+
+        &:hover {
+          transform: scale(1.1);
+          background: #32435f;
+          color: #e1dcd9;
+        }
+      }
+      &.left {
+        background: pink;
+      }
+      &.right {
+        background: gold;
+      }
+    }
+  }
+}

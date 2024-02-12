@@ -9,6 +9,7 @@ import SignupPage from './pages/SignupPage/SignupPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPassword';
 import ClientDashboard from './pages/ClientDashboard/ClientDashboard';
 import Transfer from './pages/TransferPage/Transfer';
+import CashierDashboard from './pages/CashierDashboard/CashierDashboard';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <div className='container'>
         <Routes>
           <Route path='/dashboard-client/:id/transfer' element={<Transfer />} />
+          <Route path='/dashboard-cashier' element={<CashierDashboard />} />
           <Route path='/dashboard-client' element={<ClientDashboard />} />
           <Route path='/password-reset' element={<ForgotPasswordPage />} />
           <Route path='/login' element={<LoginPage />} />
