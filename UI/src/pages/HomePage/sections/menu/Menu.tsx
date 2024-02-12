@@ -41,7 +41,7 @@ const Menu = (props: {
       </ul>
       <div className='buttons'>
         <a
-          href='#'
+          // href='/login'
           className='button type--B'
           onClick={() => {
             navigate('/login');
@@ -55,7 +55,7 @@ const Menu = (props: {
           {/* <div className='button__drow2'></div> */}
         </a>
         <a
-          href='#'
+          // href='/signup'
           className='button type--A'
           onClick={() => {
             navigate('/signup');
