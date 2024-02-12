@@ -16,7 +16,7 @@ const ClientDashboard = () => {
   const id = 1;
 
   return (
-    <div className='dashboard'>
+    <div className='client-dashboard'>
       <div className={'sidebar ' + (menuOpen && 'active')}>
         <div className='sidebar-container'>
           <RenderIcons
