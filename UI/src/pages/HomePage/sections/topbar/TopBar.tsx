@@ -22,11 +22,26 @@ const TopBar = (props: {
             <span className='line3'></span>
           </div>
           <div className='menu-items'>
-            <a href='#intro'>Home</a>
-            <a href='#about'>About</a>
-            <a href='#resources'>Resources</a>
-            <a href='#services'>Services</a>
-            <a href='#contact'>Contact</a>
+            <div>
+              <a href='#intro'>Home</a>
+              <span className='line'></span>
+            </div>
+            <div>
+              <a href='#about'>About</a>
+              <span className='line'></span>
+            </div>
+            <div>
+              <a href='#resources'>Resources</a>
+              <span className='line'></span>
+            </div>
+            <div>
+              <a href='#services'>Services</a>
+              <span className='line'></span>
+            </div>
+            <div>
+              <a href='#contact'>Contact</a>
+              <span className='line'></span>
+            </div>
           </div>
         </div>
       </div>
