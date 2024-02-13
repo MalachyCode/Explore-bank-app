@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "julie@yahoo.com",
+      "firstName": "Juliet",
+      "lastName": "Oma",
+      "password": "Juliet22@",
+      "type": "client",
+      "isAdmin": false,
+      "number": "08100000000"
+    },
+    {
+      "id": 2,
+      "email": "jameswilly@gmail.com",
+      "firstName": "James",
+      "lastName": "Williams",
+      "password": "James22@",
+      "type": "client",
+      "isAdmin": false,
+      "number": "08111111111"
+    },
+    {
+      "id": 3,
+      "email": "ahmedali012@gmail.com",
+      "firstName": "Ahmed",
+      "lastName": "Ali",
+      "password": "Ahmed22@",
+      "type": "client",
+      "isAdmin": false,
+      "number": "09022222222"
+    },
+    {
+      "id": 4,
+      "email": "gracefunsho@gmail.com",
+      "firstName": "Grace",
+      "lastName": "Funsho",
+      "password": "Grace22@",
+      "type": "client",
+      "isAdmin": false,
+      "number": "09033333333"
+    }
+  ]
+}
