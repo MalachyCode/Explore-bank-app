@@ -63,3 +63,14 @@ export interface ForgotPasswordType {
   password: string;
   confirmPassword: string;
 }
+
+export interface User {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  type: string;
+  isAdmin: boolean;
+  number: string;
+}
