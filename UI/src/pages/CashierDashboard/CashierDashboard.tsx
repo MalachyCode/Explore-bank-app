@@ -20,21 +20,28 @@ const CashierDashboard = () => {
       </div>
       <div className='container'>
         <div className='left'>
+          <div className='box one'>All Clients</div>
+          <div
+            className='box two'
+            onClick={() => navigate('/dashboard-cashier/search')}
+          >
+            Debit Cards
+          </div>
+          {/* <div className='box one'>
+            Credit Client Account Dedit Client Account
+          </div>
+          <div className='box two'>Update Account Info</div> */}
+        </div>
+        <div className='right'>
+          <div className='box two'>Open Client Account</div>
           <div
             className='box one'
             onClick={() => navigate('/dashboard-cashier/search')}
           >
-            Search for Client
+            Manage Accounts
           </div>
-          <div className='box two'>Open Client Account</div>
-          <div className='box one'>Credit Client Account</div>
-          <div className='box two'>Generate Statement</div>
-        </div>
-        <div className='right'>
-          <div className='box two'>All Clients</div>
-          <div className='box one'>Money Transfer</div>
-          <div className='box two'>Dedit Client Account</div>
-          <div className='box one'>Update Account Info</div>
+          {/* <div className='box two'>Generate Statement</div>
+          <div className='box one'>Close Accounts</div> */}
         </div>
       </div>
     </div>
