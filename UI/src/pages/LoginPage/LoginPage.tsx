@@ -44,6 +44,10 @@ const LoginPage = () => {
       const user = users.find((user) => user.email === credentials.email);
       console.log(user);
       if (user?.password === credentials.password) {
+        window.localStorage.setItem(
+          'loggedBloglistappUser',
+          JSON.stringify(user)
+        );
         navigate('/dashboard-client');
         console.log(
           `${credentials.email} with password ${credentials.password} logged in`

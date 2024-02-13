@@ -3,17 +3,28 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import HistoryIcon from '@mui/icons-material/History';
 import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BarChartComponent from '../../components/BarChartComponent';
 import {
   RenderIcons,
   RenderTotals,
 } from '../../components/RenderIconsandTotals';
+import { User } from '../../types';
 
 const ClientDashboard = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [user, setUser] = useState<User>();
   const id = 1;
+  // const user = 'Malachy';
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBloglistappUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
+  }, []);
 
   return (
     <div className='client-dashboard'>
@@ -68,7 +79,8 @@ const ClientDashboard = () => {
             onClick={() => setMenuOpen(!menuOpen ? true : false)}
           />
           <h3>
-            Welcome back <strong className='account-name'>Malachy</strong>
+            Welcome back{' '}
+            <strong className='account-name'>{user?.firstName}</strong>
           </h3>
           <div className='notification-icon-container'>
             <NotificationsNoneIcon
