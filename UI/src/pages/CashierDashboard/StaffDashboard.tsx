@@ -40,10 +40,8 @@ const CashierDashboard = () => {
           >
             Debit Cards
           </div>
-          {/* <div className='box one'>
-            Credit Client Account Dedit Client Account
-          </div>
-          <div className='box two'>Update Account Info</div> */}
+          {user?.isAdmin && <div className='box one'>Create Admin Account</div>}
+          {/* <div className='box two'>Update Account Info</div> */}
         </div>
         <div className='right'>
           <div className='box two'>Open Client Account</div>
@@ -53,8 +51,8 @@ const CashierDashboard = () => {
           >
             Manage Accounts
           </div>
-          {/* <div className='box two'>Generate Statement</div>
-          <div className='box one'>Close Accounts</div> */}
+          {user?.isAdmin && <div className='box two'>Create Staff Account</div>}
+          {/* <div className='box one'>Close Accounts</div> */}
         </div>
       </div>
     </div>
