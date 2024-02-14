@@ -1,113 +1,189 @@
 @import '../../global.scss';
 
-.cashier-dashboard {
-  background: #e1dcd9;
-  width: 100vw;
-  height: 100vh;
-  // padding-bottom: 25px;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &:-webkit-scrollbar {
-    display: none;
+div {
+  // width: 100vw;
+  // height: 100vh;
+  .login-message {
+    width: 80vw;
+    height: 30%;
+    margin-left: 10vw;
+    margin-top: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .header {
+      font-size: 35px;
+    }
+    .link {
+      color: blue;
+      cursor: pointer;
+    }
   }
 
-  .top {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    height: 70px;
-    width: 100%;
-    margin: auto;
-    overflow: hidden;
-    background: #fff;
-    // margin: 0 40px 10px 10px;
-
-    h3 {
-      color: #5f4945;
-      margin-left: 10px;
-      .account-name {
-        font-size: larger;
-        color: #32435f;
-        padding: 0 7px;
-      }
+  .cashier-dashboard {
+    background: #e1dcd9;
+    width: 100vw;
+    height: 100vh;
+    // padding-bottom: 25px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &:-webkit-scrollbar {
+      display: none;
     }
-    .notification-icon-container {
+
+    .top {
       display: flex;
       flex-direction: row;
-      cursor: pointer;
-      border-radius: 50%;
-      transition: all 1s ease;
-      padding: 10px 0 10px 10px;
-      margin-right: 13px;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      width: 100%;
+      margin: auto;
+      overflow: hidden;
+      background: #fff;
+      // margin: 0 40px 10px 10px;
 
-      .notification-icon {
-        position: relative;
-        z-index: 1;
-        transition: all 1s ease;
+      h3 {
+        color: #5f4945;
+        margin-left: 10px;
+        .account-name {
+          font-size: larger;
+          color: #32435f;
+          padding: 0 7px;
+        }
       }
-      .notification-alert {
-        position: relative;
-        z-index: 2;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: red;
-        margin-top: 4px;
-        right: 17px;
-        top: 2px;
-      }
-      &:hover {
-        background: #e1dcd9;
+      .right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 10px;
+        .account-icon {
+          cursor: pointer;
+        }
+        .notification-icon-container {
+          display: flex;
+          flex-direction: row;
+          cursor: pointer;
+          border-radius: 50%;
+          transition: all 1s ease;
+          padding: 10px 0 10px 10px;
+          margin-right: 13px;
+
+          .notification-icon {
+            position: relative;
+            z-index: 1;
+            transition: all 1s ease;
+          }
+          .notification-alert {
+            position: relative;
+            z-index: 2;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: red;
+            margin-top: 4px;
+            right: 17px;
+            top: 2px;
+          }
+          &:hover {
+            background: #e1dcd9;
+          }
+        }
       }
     }
-  }
 
-  .container {
-    width: 80%;
-    height: 80%;
-    margin: auto;
-    position: relative;
-    top: 5%;
-    border-radius: 5px;
-    box-shadow: $shadow-2;
-    background: white;
-    display: flex;
-    flex-direction: row;
-
-    div {
-      width: 50%;
-      height: 100%;
+    .body {
+      height: calc(100vh - 70px);
       display: flex;
-      flex-direction: column;
-      .box {
-        width: 80%;
-        margin: auto;
-        height: 100px;
-        background: #8f8681;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: large;
-        cursor: pointer;
+      flex-direction: row;
+
+      .account-menu {
+        width: 200px;
+        height: 200px;
+        background: white;
+        color: #32435f;
+        position: fixed;
+        top: 70px;
+        right: -200px;
         border-radius: 5px;
-        transition: all 1s ease;
-
-        &.two {
-          background: #a67f78;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 2;
+        transition: all 2s ease;
+        padding: 10px 0;
+        &.active {
+          right: 0;
         }
-
-        &:hover {
-          transform: scale(1.1);
+        span {
+          width: 80%;
+          height: 1px;
           background: #32435f;
+        }
+        .div {
+          width: 90%;
+        }
+        .logout {
+          width: 90%;
+          height: 30px;
+          border-radius: 5px;
+          padding: 2.5px;
+          text-align: center;
+          background: #5f4945;
           color: #e1dcd9;
+          cursor: pointer;
         }
       }
-      &.left {
-        background: pink;
-      }
-      &.right {
-        background: pink;
+
+      .container {
+        width: 80%;
+        height: 80%;
+        margin: auto;
+        position: relative;
+        z-index: 1;
+        border-radius: 5px;
+        box-shadow: $shadow-2;
+        background: white;
+        display: flex;
+        flex-direction: row;
+
+        div {
+          width: 50%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          .box {
+            width: 80%;
+            margin: auto;
+            height: 100px;
+            background: #8f8681;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: large;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 1s ease;
+
+            &.two {
+              background: #a67f78;
+            }
+
+            &:hover {
+              transform: scale(1.1);
+              background: #32435f;
+              color: #e1dcd9;
+            }
+          }
+          &.left {
+            background: pink;
+          }
+          &.right {
+            background: pink;
+          }
+        }
       }
     }
   }
