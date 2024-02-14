@@ -1,14 +1,27 @@
 import { useNavigate } from 'react-router-dom';
-import './CahsierDashboard.scss';
+import './StaffDashboard.scss';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { useEffect, useState } from 'react';
+import { User } from '../../types';
 
 const CashierDashboard = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState<User>();
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBloglistappUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
+  }, []);
+
   return (
     <div className='cashier-dashboard'>
       <div className='top'>
         <h3>
-          Welcome back <strong className='account-name'>Staff</strong>
+          Welcome back{' '}
+          <strong className='account-name'>{user?.firstName}</strong>
         </h3>
         <div className='notification-icon-container'>
           <NotificationsNoneIcon

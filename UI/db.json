@@ -39,6 +39,26 @@
       "type": "client",
       "isAdmin": false,
       "number": "09033333333"
+    },
+    {
+      "id": 5,
+      "email": "martinsF@gmail.com",
+      "firstName": "Martins",
+      "lastName": "Fowler",
+      "password": "Martins22@",
+      "type": "staff",
+      "isAdmin": false,
+      "number": "0904678894"
+    },
+    {
+      "id": 5,
+      "email": "malachyN3@gmail.com",
+      "firstName": "Malachy",
+      "lastName": "Nwafor",
+      "password": "Malachy22@",
+      "type": "staff",
+      "isAdmin": true,
+      "number": "0904678894"
     }
   ]
 }

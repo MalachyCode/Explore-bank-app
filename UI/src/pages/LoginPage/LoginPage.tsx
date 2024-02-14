@@ -48,7 +48,12 @@ const LoginPage = () => {
           'loggedBloglistappUser',
           JSON.stringify(user)
         );
-        navigate('/dashboard-client');
+        if (user.type === 'client') {
+          navigate('/dashboard-client');
+        }
+        if (user.type === 'staff') {
+          navigate('/dashboard-staff');
+        }
         console.log(
           `${credentials.email} with password ${credentials.password} logged in`
         );
