@@ -59,26 +59,6 @@
       "type": "staff",
       "isAdmin": true,
       "number": "0904678894"
-    },
-    {
-      "id": 7,
-      "email": "emmaA12@gmail.com",
-      "firstName": "Emma",
-      "lastName": "Azodo",
-      "password": "EmmaAZ22@",
-      "type": "staff",
-      "isAdmin": false,
-      "number": "07063345799"
-    },
-    {
-      "id": 8,
-      "email": "ekereEC4@gmail.com",
-      "firstName": "Ephraim",
-      "lastName": "Ekere",
-      "password": "Ephraim22@",
-      "type": "staff",
-      "isAdmin": true,
-      "number": "07033467899"
     }
   ]
 }

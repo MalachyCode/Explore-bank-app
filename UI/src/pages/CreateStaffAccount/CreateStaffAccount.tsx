@@ -17,9 +17,7 @@ const CreateStaffAccount = () => {
     confirmPassword: '',
   });
   const [accountType, setAccountType] = useState('cashier');
-  // const [isAdmin, setIsAdmin] = useState(false);
   const [users, setUsers] = useState<Array<User>>([]);
-  const [createdStaff, setCreatedStaff] = useState<User>();
 
   useEffect(() => {
     userService.getAll().then((users) => setUsers(users));
@@ -111,14 +109,11 @@ const CreateStaffAccount = () => {
 
     userService
       .create(newStaff)
-      .then((staffCreated) => setCreatedStaff(staffCreated));
+      .then((staffCreated) => console.log(staffCreated));
 
     navigate('/dashboard-staff');
 
-    console.log(
-      `user with firstname: ${values.firstName}, lastname: ${values.lastName}, dob: ${values.dateOfBirth} and password ${values.password} created an account`
-    );
-    console.log(newStaff);
+    // console.log(newStaff);
 
     setValues({
       ...values,
@@ -134,9 +129,6 @@ const CreateStaffAccount = () => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-
-  console.log(accountType);
-  console.log(createdStaff);
 
   return (
     <div className='create-staff'>
