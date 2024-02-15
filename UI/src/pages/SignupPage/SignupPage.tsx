@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Signup.scss';
 import FormInput from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { SignUpType } from '../../types';
+import { SignUpType, User } from '../../types';
+import userService from '../../services/users';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -12,9 +13,15 @@ const SignupPage = () => {
     middleName: '',
     lastName: '',
     dateOfBirth: '',
+    phoneNumber: '',
     password: '',
     confirmPassword: '',
   });
+  const [users, setUsers] = useState<Array<User>>([]);
+
+  useEffect(() => {
+    userService.getAll().then((users) => setUsers(users));
+  }, []);
 
   const formInputs = [
     {
@@ -64,6 +71,16 @@ const SignupPage = () => {
       required: true,
     },
     {
+      id: 'phone-number',
+      name: 'phoneNumber',
+      type: 'text',
+      placeholder: 'Phone Number',
+      errorMessage: `Phone number should be 11 numbers and shouldn't include any letters`,
+      pattern: '^[0-9]{11}$',
+      label: 'Phone Number',
+      required: true,
+    },
+    {
       id: 'password',
       name: 'password',
       type: 'password',
@@ -88,7 +105,22 @@ const SignupPage = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate('/');
+    const newClient: User = {
+      id: users.length + 1,
+      email: values.email,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      middleName: values.middleName,
+      password: values.password,
+      type: 'client',
+      isAdmin: false,
+      number: values.phoneNumber,
+    };
+
+    userService
+      .create(newClient)
+      .then((clientCreated) => console.log(clientCreated));
+    navigate('/login');
     console.log(
       `user with firstname: ${values.firstName}, middlename: ${values.middleName}, lastname: ${values.lastName}, dob: ${values.dateOfBirth} and password ${values.password} created an account`
     );
@@ -99,6 +131,7 @@ const SignupPage = () => {
       middleName: '',
       lastName: '',
       dateOfBirth: '',
+      phoneNumber: '',
       password: '',
       confirmPassword: '',
     });
@@ -122,7 +155,7 @@ const SignupPage = () => {
           />
         ))}
         <button type='submit' className='btn'>
-          Login
+          Signup
         </button>
         <p className='for-login'>
           Have an account?{' '}
