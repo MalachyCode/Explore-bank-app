@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "email": "julie@yahoo.com",
       "firstName": "Juliet",
       "lastName": "Oma",
@@ -11,7 +11,7 @@
       "number": "08100000000"
     },
     {
-      "id": "2",
+      "id": 2,
       "email": "jameswilly@gmail.com",
       "firstName": "James",
       "lastName": "Williams",
@@ -21,7 +21,7 @@
       "number": "08111111111"
     },
     {
-      "id": "3",
+      "id": 3,
       "email": "ahmedali012@gmail.com",
       "firstName": "Ahmed",
       "lastName": "Ali",
@@ -31,7 +31,7 @@
       "number": "09022222222"
     },
     {
-      "id": "4",
+      "id": 4,
       "email": "gracefunsho@gmail.com",
       "firstName": "Grace",
       "lastName": "Funsho",
@@ -41,7 +41,7 @@
       "number": "09033333333"
     },
     {
-      "id": "5",
+      "id": 5,
       "email": "martinsF@gmail.com",
       "firstName": "Martins",
       "lastName": "Fowler",
@@ -51,7 +51,7 @@
       "number": "0904678894"
     },
     {
-      "id": "6",
+      "id": 6,
       "email": "malachyN3@gmail.com",
       "firstName": "Malachy",
       "lastName": "Nwafor",
