@@ -11,12 +11,17 @@ import ClientDashboard from './pages/ClientDashboard/ClientDashboard';
 import Transfer from './pages/TransferPage/Transfer';
 import StaffDashboard from './pages/CashierDashboard/StaffDashboard';
 import Search from './pages/CashierDashboard/sections/Search/Search';
+import CreateStaffAccount from './pages/CreateStaffAccount/CreateStaffAccount';
 
 function App() {
   return (
     <div className='app'>
       <div className='container'>
         <Routes>
+          <Route
+            path='/dashboard-staff/create-staff'
+            element={<CreateStaffAccount />}
+          />
           <Route path='/dashboard-staff/search' element={<Search />} />
           <Route path='/dashboard-client/:id/transfer' element={<Transfer />} />
           <Route path='/dashboard-staff' element={<StaffDashboard />} />
