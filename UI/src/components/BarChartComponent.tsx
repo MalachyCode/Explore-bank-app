@@ -17,18 +17,18 @@ const BarChartComponent = () => {
   const numberOfMonthsToShow = 6;
 
   const months = [
-    'January',
-    'February',
-    'March',
-    'April',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
     'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ];
   const monthsToUse: Array<string> = [];
   for (let i = 0; i < numberOfMonthsToShow; i++) {
@@ -38,7 +38,6 @@ const BarChartComponent = () => {
     monthsToUse.push(months[month]);
     month -= 1;
   }
-  console.log(monthsToUse);
 
   // OLD RECURSION LEFT IN FOR LEARNING PURPOSES
   // let count: number = 0;

@@ -43,6 +43,7 @@ export interface SignUpType {
   middleName: string;
   lastName: string;
   dateOfBirth: string;
+  phoneNumber: string;
   password: string;
   confirmPassword: string;
 }
@@ -79,6 +80,7 @@ export interface User {
   id: number;
   email: string;
   firstName: string;
+  middleName?: string;
   lastName: string;
   password: string;
   type: string;

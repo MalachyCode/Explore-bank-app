@@ -59,6 +59,17 @@
       "type": "staff",
       "isAdmin": true,
       "number": "0904678894"
+    },
+    {
+      "id": 7,
+      "email": "Kennedy@gmail.com",
+      "firstName": "Kennedy",
+      "lastName": "Jideofor",
+      "middleName": "Chiedozie",
+      "password": "Kennedy22@",
+      "type": "client",
+      "isAdmin": false,
+      "number": "09044877395"
     }
   ]
 }
