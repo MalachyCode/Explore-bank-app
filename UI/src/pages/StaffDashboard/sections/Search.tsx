@@ -1,7 +1,7 @@
 import './Search.scss';
-import userService from '../../../../services/users';
+import userService from '../../../services/users';
 import { useEffect, useState } from 'react';
-import { User } from '../../../../types';
+import { User } from '../../../types';
 
 const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();

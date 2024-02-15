@@ -44,10 +44,7 @@ const LoginPage = () => {
       const user = users.find((user) => user.email === credentials.email);
       console.log(user);
       if (user?.password === credentials.password) {
-        window.localStorage.setItem(
-          'loggedBloglistappUser',
-          JSON.stringify(user)
-        );
+        window.localStorage.setItem('loggedAppUser', JSON.stringify(user));
         if (user.type === 'client') {
           navigate('/dashboard-client');
         }

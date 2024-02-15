@@ -11,7 +11,7 @@ import {
 } from '../../components/RenderIconsandTotals';
 import { User } from '../../types';
 
-const ClientDashboard = () => {
+const ClientDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [user, setUser] = useState<User>();
@@ -66,7 +66,7 @@ const ClientDashboard = () => {
             <HistoryIcon className='icon' />
             <span>Transaction History</span>
           </div>
-          <button className='logout-btn' onClick={() => navigate('/login')}>
+          <button className='logout-btn' onClick={props.handleLogout}>
             Logout
           </button>
         </div>

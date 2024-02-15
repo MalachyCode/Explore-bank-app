@@ -5,13 +5,13 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useEffect, useState } from 'react';
 import { User } from '../../types';
 
-const StaffDashboard = () => {
+const StaffDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>();
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBloglistappUser');
+    const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
@@ -22,11 +22,14 @@ const StaffDashboard = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const handleLogout = () => {
-    window.localStorage.removeItem('loggedBloglistappUser');
-    setUser(null);
-    navigate('/login');
-  };
+  console.log(user);
+
+  // const handleLogout = () => {
+  //   // window.localStorage.removeItem('loggedAppUser');
+  //   window.localStorage.clear();
+  //   // setUser(null);
+  //   navigate('/login');
+  // };
 
   return (
     <div>
@@ -58,7 +61,7 @@ const StaffDashboard = () => {
               <span></span>
               <div>Update Profile</div>
               <span></span>
-              <div className='logout' onClick={handleLogout}>
+              <div className='logout' onClick={props.handleLogout}>
                 Logout
               </div>
             </div>
