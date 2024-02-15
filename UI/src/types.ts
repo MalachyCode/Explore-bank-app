@@ -46,6 +46,15 @@ export interface SignUpType {
   password: string;
   confirmPassword: string;
 }
+export interface CreateStaff {
+  email: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  phoneNumber: string;
+  password: string;
+  confirmPassword: string;
+}
 
 export interface LoginType {
   email: string;
@@ -63,6 +72,8 @@ export interface ForgotPasswordType {
   password: string;
   confirmPassword: string;
 }
+
+// const AccountType =  "staff" | "client"
 
 export interface User {
   id: number;

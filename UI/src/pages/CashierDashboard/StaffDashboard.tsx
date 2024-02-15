@@ -71,9 +71,7 @@ const StaffDashboard = () => {
                 >
                   Debit Cards
                 </div>
-                {user?.isAdmin && (
-                  <div className='box one'>Create Admin Account</div>
-                )}
+                {user?.isAdmin && <div className='box one'>All Staff</div>}
                 {/* <div className='box two'>Update Account Info</div> */}
               </div>
               <div className='right'>
@@ -85,7 +83,12 @@ const StaffDashboard = () => {
                   Manage Accounts
                 </div>
                 {user?.isAdmin && (
-                  <div className='box two'>Create Staff Account</div>
+                  <div
+                    className='box two'
+                    onClick={() => navigate('/dashboard-staff/create-staff')}
+                  >
+                    Create Staff Account
+                  </div>
                 )}
                 {/* <div className='box one'>Close Accounts</div> */}
               </div>
