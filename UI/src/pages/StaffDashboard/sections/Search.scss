@@ -6,16 +6,20 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   form {
-    width: 80vw;
+    width: 90vw;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
     margin-bottom: -200px;
+    position: relative;
+    top: -80px;
 
     .input {
-      width: 90%;
+      width: 100%;
       padding: 15px;
       border-radius: 25px;
       background: $backgroundColor;
@@ -27,9 +31,42 @@
     }
   }
   .users {
-    width: 80vw;
-    border: 1px solid black;
-    border-radius: 10px;
+    width: 90vw;
+    // height: 70vh;
+    border: 1px solid #5f4945;
+    border-radius: 5px;
     margin: auto;
+    margin-top: 150px;
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      td {
+        cursor: pointer;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      @media (max-width: 768px) {
+        .phone {
+          display: none;
+        }
+      }
+      @media (max-width: 768px) {
+        .phone {
+          display: none;
+        }
+      }
+    }
   }
 }

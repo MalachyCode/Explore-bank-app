@@ -68,7 +68,7 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
                 <div className='box one'>All Clients</div>
                 <div
                   className='box two'
-                  onClick={() => navigate('/dashboard-cashier/search')}
+                  onClick={() => navigate('/dashboard-staff/search')}
                 >
                   Debit Cards
                 </div>
@@ -79,7 +79,7 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
                 <div className='box two'>Open Client Account</div>
                 <div
                   className='box one'
-                  onClick={() => navigate('/dashboard-cashier/search')}
+                  onClick={() => navigate('/dashboard-staff/search')}
                 >
                   Manage Accounts
                 </div>
