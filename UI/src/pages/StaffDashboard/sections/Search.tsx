@@ -21,7 +21,6 @@ const Search = () => {
         (user) =>
           user.lastName.includes(search) || user.firstName.includes(search)
       );
-  // console.log(users.map((user) => user.firstName.includes(search)));
 
   return (
     <div className='search'>
