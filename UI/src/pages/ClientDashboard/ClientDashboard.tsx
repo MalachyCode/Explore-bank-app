@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useEffect, useState } from 'react';
 import BarChartComponent from '../../components/BarChartComponent';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {
   RenderIcons,
   RenderTotals,
@@ -15,16 +16,21 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [user, setUser] = useState<User>();
+  const [profileOpen, setProfileOpen] = useState(false);
   const id = 1;
   // const user = 'Malachy';
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBloglistappUser');
+    const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
     }
   }, []);
+
+  const handleClick = () => {
+    setProfileOpen(!profileOpen);
+  };
 
   return (
     <div className='client-dashboard'>
@@ -66,9 +72,9 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             <HistoryIcon className='icon' />
             <span>Transaction History</span>
           </div>
-          <button className='logout-btn' onClick={props.handleLogout}>
+          {/* <button className='logout-btn' onClick={props.handleLogout}>
             Logout
-          </button>
+          </button> */}
         </div>
       </div>
       <div className='body'>
@@ -82,15 +88,29 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             Welcome back{' '}
             <strong className='account-name'>{user?.firstName}</strong>
           </h3>
-          <div className='notification-icon-container'>
-            <NotificationsNoneIcon
+          <div className='right'>
+            <div className='notification-icon-container'>
+              <NotificationsNoneIcon
+                fontSize='large'
+                className='notification-icon'
+              />
+              <div className='notification-alert'></div>
+            </div>
+            <AccountCircleIcon
               fontSize='large'
-              className='notification-icon'
+              className='account-icon'
+              onClick={handleClick}
             />
-            <div className='notification-alert'></div>
           </div>
         </div>
         <div className='container'>
+          <div className={'profile-menu ' + (profileOpen && 'active')}>
+            <div>Profile</div>
+            <span></span>
+            <div className='logout' onClick={props.handleLogout}>
+              Logout
+            </div>
+          </div>
           <div className='totals-container'>
             <RenderTotals
               label='Total balance'

@@ -99,8 +99,8 @@ div {
       flex-direction: row;
 
       .account-menu {
-        width: 200px;
-        height: 200px;
+        width: 120px;
+        height: 100px;
         background: white;
         color: #32435f;
         position: fixed;
@@ -122,11 +122,14 @@ div {
           height: 1px;
           background: #32435f;
         }
-        .div {
+        div {
           width: 90%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
         }
         .logout {
-          width: 90%;
           height: 30px;
           border-radius: 5px;
           padding: 2.5px;
