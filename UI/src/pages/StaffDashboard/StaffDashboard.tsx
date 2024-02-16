@@ -59,8 +59,6 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
             <div className={'account-menu ' + (menuOpen && 'active')}>
               <div>Profile</div>
               <span></span>
-              <div>Update Profile</div>
-              <span></span>
               <div className='logout' onClick={props.handleLogout}>
                 Logout
               </div>
