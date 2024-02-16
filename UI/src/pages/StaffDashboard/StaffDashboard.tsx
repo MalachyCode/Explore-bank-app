@@ -22,15 +22,6 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
     setMenuOpen(!menuOpen);
   };
 
-  console.log(user);
-
-  // const handleLogout = () => {
-  //   // window.localStorage.removeItem('loggedAppUser');
-  //   window.localStorage.clear();
-  //   // setUser(null);
-  //   navigate('/login');
-  // };
-
   return (
     <div>
       {user ? (
