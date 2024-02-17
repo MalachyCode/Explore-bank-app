@@ -58,7 +58,8 @@
         background-color: #dddddd;
       }
       @media (max-width: 768px) {
-        .phone {
+        .phone,
+        .account-number {
           display: none;
         }
       }
