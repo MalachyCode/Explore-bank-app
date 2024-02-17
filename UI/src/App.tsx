@@ -12,10 +12,10 @@ import Transfer from './pages/TransferPage/Transfer';
 import StaffDashboard from './pages/StaffDashboard/StaffDashboard';
 import Search from './pages/StaffDashboard/sections/Search';
 import CreateStaffAccount from './pages/CreateStaffAccount/CreateStaffAccount';
-import UserPage from './pages/UserPage/UserPage';
 import { useEffect, useState } from 'react';
 import userService from './services/users';
 import { User } from './types';
+import AccountPage from './pages/AccountPage/AccountPage';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -47,7 +47,7 @@ function App() {
           />
           <Route
             path='/dashboard-staff/search/users/:id'
-            element={<UserPage user={user} />}
+            element={<AccountPage user={user} />}
           />
           <Route path='/dashboard-staff/search/users' element={<Search />} />
           <Route path='/dashboard-client/:id/transfer' element={<Transfer />} />
