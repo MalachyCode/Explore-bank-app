@@ -1,6 +1,6 @@
 import 'react-multi-carousel/lib/styles.css';
 
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useMatch } from 'react-router-dom';
 import './App.scss';
 import LoginPage from './pages/LoginPage/LoginPage';
 import HomePage from './pages/HomePage/HomePage';
@@ -12,8 +12,22 @@ import Transfer from './pages/TransferPage/Transfer';
 import StaffDashboard from './pages/StaffDashboard/StaffDashboard';
 import Search from './pages/StaffDashboard/sections/Search';
 import CreateStaffAccount from './pages/CreateStaffAccount/CreateStaffAccount';
+import UserPage from './pages/UserPage/UserPage';
+import { useEffect, useState } from 'react';
+import userService from './services/users';
+import { User } from './types';
 
 function App() {
+  const [users, setUsers] = useState<Array<User>>([]);
+  const match = useMatch('/dashboard-staff/search/users/:id');
+  const user = match
+    ? users.find((user) => user.id === Number(match.params.id))
+    : null;
+
+  useEffect(() => {
+    userService.getAll().then((users) => setUsers(users));
+  }, []);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -31,7 +45,11 @@ function App() {
             path='/dashboard-staff/create-staff'
             element={<CreateStaffAccount />}
           />
-          <Route path='/dashboard-staff/search' element={<Search />} />
+          <Route
+            path='/dashboard-staff/search/users/:id'
+            element={<UserPage user={user} />}
+          />
+          <Route path='/dashboard-staff/search/users' element={<Search />} />
           <Route path='/dashboard-client/:id/transfer' element={<Transfer />} />
           <Route
             path='/dashboard-staff'

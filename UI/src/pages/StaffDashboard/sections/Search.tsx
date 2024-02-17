@@ -2,6 +2,7 @@ import './Search.scss';
 import userService from '../../../services/users';
 import { useEffect, useState } from 'react';
 import { User } from '../../../types';
+import { Link } from 'react-router-dom';
 
 const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
@@ -41,7 +42,8 @@ const Search = () => {
             <tr>
               <th>Client Name</th>
               <th>Email</th>
-              <th>Account Number</th>
+              <th>Account Type</th>
+              <th className='account-number'>Account Number</th>
               <th className='phone'>Phone</th>
             </tr>
           </thead>
@@ -49,10 +51,20 @@ const Search = () => {
             {usersToShow.map((user) => (
               <tr key={user.id}>
                 <td>
-                  {user.firstName} {user.lastName}
+                  <Link to={`/dashboard-staff/search/users/${user.id}`}>
+                    {user.firstName} {user.lastName}
+                  </Link>
                 </td>
                 <td>{user.email}</td>
-                <td>{user.number}</td>
+                <td>
+                  {user.type}
+                  {user.type === 'staff' && user.isAdmin
+                    ? ' / Admin'
+                    : user.type === 'staff' && !user.isAdmin
+                    ? ' / Cashier'
+                    : ''}
+                </td>
+                <td className='account-number'>{user.number}</td>
                 <td className='phone'>{user.number}</td>
               </tr>
             ))}
