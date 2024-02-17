@@ -1,0 +1,62 @@
+.account-page {
+  background: #e1dcd9;
+  width: 100vw;
+  height: 100vh;
+  .container {
+    width: 90%;
+    margin: auto;
+    margin-top: 5vh;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .details-container {
+      width: 100%;
+      height: 70%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+
+      .name-container,
+      .account-number-container,
+      .number-container,
+      .mail-container {
+        background: pink;
+        width: 45%;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        font-size: 20px;
+
+        span {
+          font-size: small;
+        }
+      }
+    }
+
+    .buttons-container {
+      width: 98%;
+      height: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin-top: -80px;
+      padding: 0 10px;
+
+      button {
+        width: 22%;
+        height: 80px;
+        background: blue;
+        &.delete {
+          background: red;
+        }
+      }
+    }
+  }
+}
