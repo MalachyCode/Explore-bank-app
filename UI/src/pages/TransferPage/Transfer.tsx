@@ -41,6 +41,9 @@ const Transfer = () => {
     },
   ];
 
+  // const date = new Date();
+  // console.log(date);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate('/dashboard-client');

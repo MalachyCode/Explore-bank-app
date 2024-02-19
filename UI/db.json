@@ -71,5 +71,25 @@
       "isAdmin": false,
       "number": "09044877395"
     }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "accountNumber": 1008796844,
+      "createdOn": 1912024,
+      "owner": 1,
+      "type": "savings",
+      "status": "active",
+      "balance": 56376.0
+    },
+    {
+      "id": 2,
+      "accountNumber": 1019945683,
+      "createdOn": 1912024,
+      "owner": 3,
+      "type": "savings",
+      "status": "active",
+      "balance": 1676.0
+    }
   ]
 }
