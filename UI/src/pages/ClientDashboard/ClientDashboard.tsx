@@ -17,7 +17,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [user, setUser] = useState<User>();
   const [profileOpen, setProfileOpen] = useState(false);
-  const id = 1;
+  // const id = 1;
   // const user = 'Malachy';
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
           <RenderIcons
             label='Transfer'
             icon='./assets/icons8-money-transfer-48.png'
-            onClick={() => navigate(`/dashboard-client/${id}/transfer`)}
+            onClick={() => navigate(`/dashboard-client/${user?.id}/transfer`)}
           />
           <RenderIcons
             iconClassName='loan-icon'
@@ -141,7 +141,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             <RenderIcons
               label='Transfer'
               icon='./assets/icons8-money-transfer-48.png'
-              onClick={() => navigate(`/dashboard-client/${id}/transfer`)}
+              onClick={() => navigate(`/dashboard-client/${user?.id}/transfer`)}
             />
             <RenderIcons
               iconClassName='loan-icon'

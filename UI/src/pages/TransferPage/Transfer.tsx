@@ -61,16 +61,16 @@ const Transfer = () => {
 
   return (
     <div className='transfer'>
-      <div className='account-balance'>56,376</div>
-      <div className='daily-limit-box'>
-        <div className='total'>
-          <span>daily limit</span>1,000,000
-        </div>
-        <div className='remaining'>
-          <span>remaining</span>950,000
-        </div>
-      </div>
       <form className='form' onSubmit={handleSubmit}>
+        <div className='account-balance'>56,376</div>
+        <div className='daily-limit-box'>
+          <div className='total'>
+            <span>daily limit</span>1,000,000
+          </div>
+          <div className='remaining'>
+            <span>remaining</span>950,000
+          </div>
+        </div>
         {formInputs.map((input) => (
           <FormInput
             key={input.id}
