@@ -87,3 +87,13 @@ export interface User {
   isAdmin: boolean;
   number: string;
 }
+
+export interface Account {
+  id: number;
+  accountNumber: number;
+  createdOn: Date;
+  owner: number;
+  type: string;
+  status: string;
+  balance: number;
+}

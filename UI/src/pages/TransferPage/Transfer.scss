@@ -86,21 +86,6 @@
       overflow: hidden;
     }
 
-    .form-input,
-    .form-textarea {
-      width: 90%;
-      padding: 15px;
-      border-radius: 4px;
-      background: $backgroundColor;
-      border: 1px solid $grey-200;
-      margin: auto;
-
-      &::placeholder {
-        font-family: inherit;
-        color: $grey-400;
-      }
-    }
-
     .btn {
       width: 95%;
       margin-top: 50px;
