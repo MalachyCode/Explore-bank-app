@@ -18,7 +18,7 @@ const FormInput = (props: FormInputType) => {
   };
 
   return (
-    <div>
+    <div className='form-input-container'>
       <label htmlFor={id} className='.form-label'>
         <p>{label}</p>
       </label>
