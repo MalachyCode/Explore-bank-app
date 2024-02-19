@@ -80,7 +80,7 @@
       "owner": 1,
       "type": "savings",
       "status": "active",
-      "balance": 56376.0
+      "balance": 56376
     },
     {
       "id": 2,
@@ -89,7 +89,25 @@
       "owner": 3,
       "type": "savings",
       "status": "active",
-      "balance": 1676.0
+      "balance": 1676
+    },
+    {
+      "id": 3,
+      "balance": 0,
+      "createdOn": "2024-02-19T21:19:13.728Z",
+      "owner": 1,
+      "status": "active",
+      "accountNumber": 7665140104,
+      "type": "savings"
+    },
+    {
+      "id": 4,
+      "balance": 0,
+      "createdOn": "2024-02-19T21:21:02.594Z",
+      "owner": 7,
+      "status": "active",
+      "accountNumber": 3466969487,
+      "type": "current"
     }
   ]
 }
