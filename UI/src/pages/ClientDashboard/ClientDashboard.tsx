@@ -39,6 +39,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
           <RenderIcons
             label='Open Account'
             icon='./assets/icons8-bank-account-48.png'
+            onClick={() => navigate(`/open-account`)}
           />
           <RenderIcons
             label='Bill Payment'
@@ -129,6 +130,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             <RenderIcons
               label='Open Account'
               icon='./assets/icons8-bank-account-48.png'
+              onClick={() => navigate(`/open-account`)}
             />
             <RenderIcons
               label='Bill Payment'

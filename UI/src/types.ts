@@ -97,3 +97,12 @@ export interface Account {
   status: string;
   balance: number;
 }
+
+export interface OpenAccountType {
+  // accountNumber: number,
+  firstName: string;
+  lastName: string;
+  email: string;
+  // type: string;
+  // openingBalance : number,
+}

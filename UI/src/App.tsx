@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 import userService from './services/users';
 import { User } from './types';
 import AccountPage from './pages/AccountPage/AccountPage';
+import OpenAccount from './pages/OpenAccount/OpenAccount';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -55,6 +56,7 @@ function App() {
             path='/dashboard-staff'
             element={<StaffDashboard handleLogout={handleLogout} />}
           />
+          <Route path='/open-account' element={<OpenAccount />} />
           <Route
             path='/dashboard-client'
             element={<ClientDashboard handleLogout={handleLogout} />}
