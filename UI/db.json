@@ -75,38 +75,29 @@
   "accounts": [
     {
       "id": 1,
-      "accountNumber": 1008796844,
-      "createdOn": 1912024,
+      "balance": 0,
+      "createdOn": "2024-02-20T12:42:01.100Z",
       "owner": 1,
-      "type": "savings",
       "status": "active",
-      "balance": 56376.0
+      "accountNumber": 1131461207,
+      "type": "savings"
     },
     {
       "id": 2,
-      "accountNumber": 1019945683,
-      "createdOn": 1912024,
+      "balance": 0,
+      "createdOn": "2024-02-20T12:42:34.319Z",
       "owner": 3,
-      "type": "savings",
       "status": "active",
-      "balance": 1676.0
+      "accountNumber": 1099499337,
+      "type": "savings"
     },
     {
       "id": 3,
       "balance": 0,
-      "createdOn": "2024-02-19T21:19:13.728Z",
-      "owner": 1,
-      "status": "active",
-      "accountNumber": 7665140104,
-      "type": "savings"
-    },
-    {
-      "id": 4,
-      "balance": 0,
-      "createdOn": "2024-02-19T21:21:02.594Z",
+      "createdOn": "2024-02-20T12:43:32.529Z",
       "owner": 7,
       "status": "active",
-      "accountNumber": 3466969487,
+      "accountNumber": 264784713,
       "type": "current"
     }
   ]
