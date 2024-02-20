@@ -31,9 +31,6 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
-  console.log(accounts);
-  console.log(userAccounts);
-
   const handleClick = () => {
     setProfileOpen(!profileOpen);
   };
@@ -121,6 +118,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
           <div className='totals-container'>
             {userAccounts.map((account) => (
               <RenderTotals
+                key={account.id}
                 label='Total balance'
                 balance={account.balance}
                 accountNum={account.accountNumber}

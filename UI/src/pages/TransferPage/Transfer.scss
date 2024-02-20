@@ -2,7 +2,7 @@
 
 .transfer {
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   display: flex;
   flex-direction: column;
 
@@ -27,7 +27,7 @@
       overflow: hidden;
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
       .account-balance {
         width: 47%;
         background: #a67f78;
@@ -38,8 +38,13 @@
         align-items: center;
         justify-content: center;
         padding: 10px 0;
-        margin: 10px 10px 0 0;
+        margin-top: 10px;
         overflow: hidden;
+        cursor: pointer;
+
+        &.active {
+          border: 5px solid #32435f;
+        }
       }
       @media (min-width: 992px) {
         width: 97%;

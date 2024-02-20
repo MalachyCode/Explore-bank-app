@@ -7,13 +7,17 @@ import accountService from '../../services/accounts';
 
 const Transfer = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState<User>();
+  const [accounts, setAccounts] = useState<Array<Account>>([]);
+  const [accountForTransfer, setAccountForTransfer] = useState<number>();
+  const [selected, setSelected] = useState(false);
+
   const [transferDetials, setTransferDetials] = useState<TransferType>({
     bankName: '',
     accountNumber: '',
     amount: '',
+    from: '',
   });
-  const [user, setUser] = useState<User>();
-  const [accounts, setAccounts] = useState<Array<Account>>([]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -55,16 +59,46 @@ const Transfer = () => {
       required: true,
     },
   ];
+  console.log(accountForTransfer);
 
   // const date = new Date();
   // console.log(date);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/dashboard-client');
-    console.log(
-      `You transfered ${transferDetials.amount} to ${transferDetials.accountNumber} of bank ${transferDetials.bankName}`
+
+    const originAccount = accounts.find(
+      (account) => account.accountNumber === accountForTransfer
     );
+    const destinationAccount = accounts.find(
+      (account) =>
+        account.accountNumber === Number(transferDetials.accountNumber)
+    );
+    const updatedOriginAccount = {
+      ...originAccount,
+      balance: originAccount?.balance - Number(transferDetials.amount),
+    };
+    const updatedDestinationAccount = {
+      ...destinationAccount,
+      balance: destinationAccount?.balance + Number(transferDetials.amount),
+    };
+
+    accountService
+      .transfer(
+        originAccount?.id as number,
+        updatedOriginAccount as Account,
+        destinationAccount?.id as number,
+        updatedDestinationAccount as Account
+      )
+      .then((response) => console.log(response));
+
+    // console.log(updatedOriginAccount);
+    // console.log(updatedDestinationAccount);
+
+    navigate('/dashboard-client');
+    // console.log(
+    //   `You transfered ${transferDetials.amount} to ${transferDetials.accountNumber} of bank ${transferDetials.bankName}`
+    // );
     setTransferDetials({
       ...transferDetials,
       bankName: '',
@@ -82,7 +116,21 @@ const Transfer = () => {
       <form className='form' onSubmit={handleSubmit}>
         <div className='account-balance-container'>
           {userAccounts.map((account) => (
-            <div className='account-balance'>&#8358; {account.balance}</div>
+            <div
+              key={account.id}
+              className={
+                'account-balance ' +
+                (selected && account.accountNumber === accountForTransfer
+                  ? 'active'
+                  : '')
+              }
+              onClick={() => {
+                setSelected(true);
+                setAccountForTransfer(account.accountNumber);
+              }}
+            >
+              &#8358; {account.balance}
+            </div>
           ))}
         </div>
         <div className='daily-limit-box'>
