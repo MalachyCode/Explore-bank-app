@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormInput from '../../components/FormInput';
 import './Transfer.scss';
-import { TransferType } from '../../types';
+import { Account, TransferType, User } from '../../types';
 import { useNavigate } from 'react-router-dom';
+import accountService from '../../services/accounts';
 
 const Transfer = () => {
   const navigate = useNavigate();
@@ -11,6 +12,20 @@ const Transfer = () => {
     accountNumber: '',
     amount: '',
   });
+  const [user, setUser] = useState<User>();
+  const [accounts, setAccounts] = useState<Array<Account>>([]);
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
+    accountService.getAll().then((accounts) => setAccounts(accounts));
+  }, []);
+
+  const userAccounts = accounts.filter((account) => account.owner === user?.id);
+
   const formInputs = [
     {
       id: 'bankName',
@@ -65,7 +80,11 @@ const Transfer = () => {
   return (
     <div className='transfer'>
       <form className='form' onSubmit={handleSubmit}>
-        <div className='account-balance'>56,376</div>
+        <div className='account-balance-container'>
+          {userAccounts.map((account) => (
+            <div className='account-balance'>&#8358; {account.balance}</div>
+          ))}
+        </div>
         <div className='daily-limit-box'>
           <div className='total'>
             <span>daily limit</span>1,000,000

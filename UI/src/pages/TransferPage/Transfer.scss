@@ -22,19 +22,25 @@
     flex-direction: column;
     background: #e1dcd9;
 
-    .account-balance {
+    .account-balance-container {
       width: 98%;
-      background: #a67f78;
-      color: white;
-      border-radius: 3px;
-      // margin: auto;
+      overflow: hidden;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 20px 0;
-      margin-bottom: -25px;
-      overflow: hidden;
-
+      justify-content: space-around;
+      .account-balance {
+        width: 47%;
+        background: #a67f78;
+        color: white;
+        border-radius: 3px;
+        // margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 0;
+        margin: 10px 10px 0 0;
+        overflow: hidden;
+      }
       @media (min-width: 992px) {
         width: 97%;
       }
@@ -52,7 +58,7 @@
       justify-content: space-between;
       width: 96%;
       // margin: auto;
-      margin-top: 50px;
+      margin-top: 30px;
       border: 1px solid #32435f;
       padding: 3px;
       // background: #a67f78;

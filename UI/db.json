@@ -99,6 +99,15 @@
       "status": "active",
       "accountNumber": 264784713,
       "type": "current"
+    },
+    {
+      "id": 4,
+      "balance": 548365,
+      "createdOn": "2024-02-20T16:30:32.246Z",
+      "owner": 1,
+      "status": "active",
+      "accountNumber": 2592522943,
+      "type": "savings"
     }
   ]
 }
