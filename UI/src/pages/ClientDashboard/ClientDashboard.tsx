@@ -10,15 +10,15 @@ import {
   RenderIcons,
   RenderTotals,
 } from '../../components/RenderIconsandTotals';
-import { User } from '../../types';
+import { Account, User } from '../../types';
+import accountService from '../../services/accounts';
 
 const ClientDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [user, setUser] = useState<User>();
   const [profileOpen, setProfileOpen] = useState(false);
-  // const id = 1;
-  // const user = 'Malachy';
+  const [accounts, setAccounts] = useState<Array<Account>>([]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -26,7 +26,10 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
     }
+    accountService.getAll().then((accounts) => setAccounts(accounts));
   }, []);
+
+  const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
   const handleClick = () => {
     setProfileOpen(!profileOpen);
@@ -113,18 +116,15 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             </div>
           </div>
           <div className='totals-container'>
-            <RenderTotals
-              label='Total balance'
-              amount='$54,376'
-              percentage='Saved 20%'
-              className='total'
-            />
-            <RenderTotals
-              label='Total balance'
-              amount='$54,376'
-              percentage='Saved 20%'
-              className='total two'
-            />
+            {userAccounts.map((account) => (
+              <RenderTotals
+                key={account.id}
+                label='Total balance'
+                balance={account.balance}
+                accountNum={account.accountNumber}
+                className='total'
+              />
+            ))}
           </div>
           <div className='menu-icons-container'>
             <RenderIcons

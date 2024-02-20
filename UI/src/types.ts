@@ -66,6 +66,7 @@ export interface TransferType {
   bankName: string;
   accountNumber: string;
   amount: string;
+  from: string;
 }
 
 export interface ForgotPasswordType {

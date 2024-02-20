@@ -12,4 +12,21 @@ const create = async (newAccount: Account) => {
   return response.data;
 };
 
-export default { getAll, create };
+const transfer = async (
+  idDebit: number,
+  updatedDebitedAccount: Account,
+  idCredit: number,
+  updatedCreditedAccount: Account
+) => {
+  const debitResponse = await axios.put(
+    `${baseUrl}/${idDebit}`,
+    updatedDebitedAccount
+  );
+  const creditResponse = await axios.put(
+    `${baseUrl}/${idCredit}`,
+    updatedCreditedAccount
+  );
+  return debitResponse.data, creditResponse.data;
+};
+
+export default { getAll, create, transfer };
