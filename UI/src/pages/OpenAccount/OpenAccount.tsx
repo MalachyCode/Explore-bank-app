@@ -1,31 +1,40 @@
 import { useEffect, useState } from 'react';
 import './OpenAccount.scss';
 import FormInput from '../../components/FormInput';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Account, OpenAccountType, User } from '../../types';
 import accountService from '../../services/accounts';
 import userService from '../../services/users';
 
 const OpenAccount = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [accountType, setAccountType] = useState('savings');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [users, setUsers] = useState<Array<User>>([]);
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
     userService.getAll().then((users) => setUsers(users));
+    accountService.getAll().then((accounts) => setAccounts(accounts));
+    const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
   }, []);
+
+  // useEffect(() => {
+  // }, []);
+
+  // useEffect(() => {
+  // }, []);
 
   const [details, setDetails] = useState<OpenAccountType>({
     firstName: '',
     lastName: '',
     email: '',
   });
-
-  useEffect(() => {
-    accountService.getAll().then((accounts) => setAccounts(accounts));
-  }, []);
 
   const formInputs = [
     {
@@ -59,6 +68,10 @@ const OpenAccount = () => {
     },
   ];
 
+  console.log(accounts);
+  console.log(users);
+  console.log(user);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -78,6 +91,12 @@ const OpenAccount = () => {
       accountService
         .create(newAccount)
         .then((createdAccount) => console.log(createdAccount));
+
+      if (user?.type === 'staff') {
+        navigate('/dashboard-staff');
+      } else {
+        navigate('/dashboard-client');
+      }
     } else {
       setErrorMessage('User not found');
       setTimeout(() => {
