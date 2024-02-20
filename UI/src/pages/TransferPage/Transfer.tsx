@@ -10,7 +10,9 @@ const Transfer = () => {
   const [user, setUser] = useState<User>();
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [accountForTransfer, setAccountForTransfer] = useState<number>();
+  const [transferPin, setTransferPin] = useState<string>('');
   const [selected, setSelected] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
 
   const [transferDetials, setTransferDetials] = useState<TransferType>({
     bankName: '',
@@ -29,6 +31,13 @@ const Transfer = () => {
   }, []);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
+
+  const originAccount = accounts.find(
+    (account) => account.accountNumber === accountForTransfer
+  );
+  const destinationAccount = accounts.find(
+    (account) => account.accountNumber === Number(transferDetials.accountNumber)
+  );
 
   const formInputs = [
     {
@@ -67,13 +76,6 @@ const Transfer = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const originAccount = accounts.find(
-      (account) => account.accountNumber === accountForTransfer
-    );
-    const destinationAccount = accounts.find(
-      (account) =>
-        account.accountNumber === Number(transferDetials.accountNumber)
-    );
     const updatedOriginAccount = {
       ...originAccount,
       balance: originAccount?.balance - Number(transferDetials.amount),
@@ -83,17 +85,18 @@ const Transfer = () => {
       balance: destinationAccount?.balance + Number(transferDetials.amount),
     };
 
-    accountService
-      .transfer(
-        originAccount?.id as number,
-        updatedOriginAccount as Account,
-        destinationAccount?.id as number,
-        updatedDestinationAccount as Account
-      )
-      .then((response) => console.log(response));
+    // accountService
+    //   .transfer(
+    //     originAccount?.id as number,
+    //     updatedOriginAccount as Account,
+    //     destinationAccount?.id as number,
+    //     updatedDestinationAccount as Account
+    //   )
+    //   .then((response) => console.log(response));
 
-    // console.log(updatedOriginAccount);
-    // console.log(updatedDestinationAccount);
+    console.log(updatedOriginAccount);
+    console.log(updatedDestinationAccount);
+    console.log(Number(transferPin));
 
     navigate('/dashboard-client');
     // console.log(
@@ -113,46 +116,80 @@ const Transfer = () => {
 
   return (
     <div className='transfer'>
-      <form className='form' onSubmit={handleSubmit}>
-        <div className='account-balance-container'>
-          {userAccounts.map((account) => (
-            <div
-              key={account.id}
-              className={
-                'account-balance ' +
-                (selected && account.accountNumber === accountForTransfer
-                  ? 'active'
-                  : '')
-              }
-              onClick={() => {
-                setSelected(true);
-                setAccountForTransfer(account.accountNumber);
-              }}
-            >
-              &#8358; {account.balance}
+      <div className={'confirm-container ' + (openConfirm && 'active')}>
+        <div className='confirm'>
+          <h3>Tranfer Confirmation</h3>
+          <div className='seperator'></div>
+          Transfer {transferDetials.amount} to{' '}
+          {destinationAccount?.accountNumber}
+          <div className='confirmation-form'>
+            <form className='form' onSubmit={handleSubmit}>
+              <label htmlFor='pin' className='form-label'>
+                <p>Enter Pin</p>
+              </label>
+              <input
+                value={transferPin}
+                className='form-input'
+                id='pin'
+                onChange={(e) => setTransferPin(e.target.value)}
+                required
+              />
+              <button type='submit' className='btn'>
+                Transfer
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div className='form-container'>
+        <form
+          className='form'
+          onSubmit={(e) => {
+            e.preventDefault();
+            setOpenConfirm(true);
+          }}
+        >
+          <div className='account-balance-container'>
+            {userAccounts.map((account) => (
+              <div
+                key={account.id}
+                className={
+                  'account-balance ' +
+                  (selected && account.accountNumber === accountForTransfer
+                    ? 'active'
+                    : '')
+                }
+                onClick={() => {
+                  setSelected(true);
+                  setAccountForTransfer(account.accountNumber);
+                }}
+              >
+                &#8358; {account.balance}
+              </div>
+            ))}
+          </div>
+          <div className='daily-limit-box'>
+            <div className='total'>
+              <span>daily limit</span>1,000,000
             </div>
+            <div className='remaining'>
+              <span>remaining</span>950,000
+            </div>
+          </div>
+          {formInputs.map((input) => (
+            <FormInput
+              key={input.id}
+              {...input}
+              value={transferDetials[input.name as keyof TransferType]}
+              onChange={onChange}
+            />
           ))}
-        </div>
-        <div className='daily-limit-box'>
-          <div className='total'>
-            <span>daily limit</span>1,000,000
-          </div>
-          <div className='remaining'>
-            <span>remaining</span>950,000
-          </div>
-        </div>
-        {formInputs.map((input) => (
-          <FormInput
-            key={input.id}
-            {...input}
-            value={transferDetials[input.name as keyof TransferType]}
-            onChange={onChange}
-          />
-        ))}
-        <button type='submit' className='btn'>
-          Transfer
-        </button>
-      </form>
+          <button type='submit' className='btn'>
+            Transfer
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
