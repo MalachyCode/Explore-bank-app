@@ -4,10 +4,12 @@ import './Transfer.scss';
 import { Account, TransferType, User } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import accountService from '../../services/accounts';
+import userService from '../../services/users';
 
 const Transfer = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User>();
+  const [users, setUsers] = useState<Array<User>>();
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [accountForTransfer, setAccountForTransfer] = useState<number>();
   const [transferPin, setTransferPin] = useState<string>('');
@@ -27,16 +29,21 @@ const Transfer = () => {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
     }
+    userService.getAll().then((users) => setUsers(users));
     accountService.getAll().then((accounts) => setAccounts(accounts));
   }, []);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
-  const originAccount = accounts.find(
+  const sendingAccount = accounts.find(
     (account) => account.accountNumber === accountForTransfer
   );
   const destinationAccount = accounts.find(
     (account) => account.accountNumber === Number(transferDetials.accountNumber)
+  );
+
+  const destinationAccountOwner = users?.find(
+    (user) => user.id === destinationAccount?.owner
   );
 
   const formInputs = [
@@ -77,17 +84,21 @@ const Transfer = () => {
     e.preventDefault();
 
     const updatedOriginAccount = {
-      ...originAccount,
-      balance: originAccount?.balance - Number(transferDetials.amount),
+      ...sendingAccount,
+      balance:
+        sendingAccount &&
+        sendingAccount?.balance - Number(transferDetials.amount),
     };
     const updatedDestinationAccount = {
       ...destinationAccount,
-      balance: destinationAccount?.balance + Number(transferDetials.amount),
+      balance:
+        destinationAccount &&
+        destinationAccount?.balance + Number(transferDetials.amount),
     };
 
     accountService
       .transfer(
-        originAccount?.id as string,
+        sendingAccount?.id as string,
         updatedOriginAccount as Account,
         destinationAccount?.id as string,
         updatedDestinationAccount as Account
@@ -121,6 +132,8 @@ const Transfer = () => {
           <h3>Tranfer Confirmation</h3>
           <div className='seperator'></div>
           Transfer &#8358;{transferDetials.amount} to{' '}
+          {destinationAccountOwner?.firstName}{' '}
+          {destinationAccountOwner?.lastName} with account number{' '}
           {destinationAccount?.accountNumber} of {transferDetials.bankName}
           <div className='confirmation-form'>
             <form className='form' onSubmit={handleSubmit}>
