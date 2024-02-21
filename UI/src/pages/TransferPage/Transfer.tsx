@@ -120,8 +120,8 @@ const Transfer = () => {
         <div className='confirm'>
           <h3>Tranfer Confirmation</h3>
           <div className='seperator'></div>
-          Transfer {transferDetials.amount} to{' '}
-          {destinationAccount?.accountNumber}
+          Transfer &#8358;{transferDetials.amount} to{' '}
+          {destinationAccount?.accountNumber} of {transferDetials.bankName}
           <div className='confirmation-form'>
             <form className='form' onSubmit={handleSubmit}>
               <label htmlFor='pin' className='form-label'>
@@ -138,6 +138,9 @@ const Transfer = () => {
                 Transfer
               </button>
             </form>
+          </div>
+          <div className='cancel' onClick={() => setOpenConfirm(false)}>
+            Cancel
           </div>
         </div>
       </div>

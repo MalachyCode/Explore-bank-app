@@ -101,7 +101,7 @@
   "accounts": [
     {
       "id": "9346",
-      "balance": 0,
+      "balance": 48365,
       "createdOn": "2024-02-21T12:10:16.922Z",
       "owner": "9cac",
       "status": "active",
@@ -110,7 +110,7 @@
     },
     {
       "id": "5fa5",
-      "balance": 548365,
+      "balance": 500000,
       "createdOn": "2024-02-21T12:10:48.988Z",
       "owner": "9cac",
       "status": "active",
