@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './OpenAccount.scss';
 import FormInput from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { Account, OpenAccountType, User } from '../../types';
+import { Account, NewAccount, OpenAccountType, User } from '../../types';
 import accountService from '../../services/accounts';
 import userService from '../../services/users';
 
@@ -23,12 +23,6 @@ const OpenAccount = () => {
       setUser(user);
     }
   }, []);
-
-  // useEffect(() => {
-  // }, []);
-
-  // useEffect(() => {
-  // }, []);
 
   const [details, setDetails] = useState<OpenAccountType>({
     firstName: '',
@@ -77,12 +71,13 @@ const OpenAccount = () => {
 
     if (users.find((user) => user.email === details.email)) {
       const accountOwner = users.find((user) => user.email === details.email);
-      // console.log(details);
-      const newAccount: Account = {
-        id: accounts.length + 1,
+
+      const newAccount: NewAccount = {
+        // id: accounts.length + 1,
         balance: 0,
         createdOn: new Date(),
-        owner: accountOwner?.id as number,
+        owner: accountOwner?.id as string,
+        // owner: accountOwner?.id as number,
         status: 'active',
         accountNumber: Math.floor(Math.random() * 10000000000 + 1),
         type: accountType === 'current' ? 'current' : 'savings',
@@ -104,11 +99,6 @@ const OpenAccount = () => {
       }, 5000);
       console.log('User not found');
     }
-
-    //   if (users.find((user) => user.email === credentials.email)) {
-    //     const user = users.find((user) => user.email === credentials.email);
-    //     console.log(user);
-    //     setDetails({ ...details, email: '', firstName: '', lastName: '', type: '' });
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

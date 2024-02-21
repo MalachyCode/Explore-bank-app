@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Account } from '../types';
+import { Account, NewAccount } from '../types';
 const baseUrl = 'http://localhost:3001/accounts';
 
 const getAll = async () => {
@@ -7,15 +7,17 @@ const getAll = async () => {
   return response.data;
 };
 
-const create = async (newAccount: Account) => {
+const create = async (newAccount: NewAccount) => {
   const response = await axios.post(baseUrl, newAccount);
   return response.data;
 };
 
 const transfer = async (
-  idDebit: number,
+  idDebit: string,
+  // idDebit: number,
   updatedDebitedAccount: Account,
-  idCredit: number,
+  idCredit: string,
+  // idCredit: number,
   updatedCreditedAccount: Account
 ) => {
   const debitResponse = await axios.put(
