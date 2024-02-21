@@ -1,16 +1,26 @@
 import { useEffect, useState } from 'react';
-import { User } from '../../types';
+import { Account, User } from '../../types';
 import './AccountPage.scss';
+import accountsService from '../../services/accounts';
 
 const AccountPage = (props: { user: User | null | undefined }) => {
   const [user, setUser] = useState<User | null>();
+  const [accounts, setAccounts] = useState<Array<Account>>([]);
+
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
     }
+    accountsService.getAll().then((accounts) => setAccounts(accounts));
   }, []);
+
+  // const userAccounts = [1234567899, 5566774433];
+  const userAccounts = accounts.filter(
+    (account) => account.owner === props.user?.id
+  );
+
   return (
     <div className='account-page'>
       <div className='container'>
@@ -20,8 +30,11 @@ const AccountPage = (props: { user: User | null | undefined }) => {
             {props.user?.firstName} {props.user?.lastName}
           </div>
           <div className='account-number-container'>
-            <span>Account Number</span>
-            {props.user?.number}
+            <span>Account Number(s)</span>
+            {/* {props.user?.number} */}
+            {userAccounts.map((account) => (
+              <div>{account.accountNumber}</div>
+            ))}
           </div>
           <div className='mail-container'>
             <span>Mail</span>
