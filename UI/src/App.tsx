@@ -22,8 +22,9 @@ function App() {
   const [users, setUsers] = useState<Array<User>>([]);
   const match = useMatch('/dashboard-staff/search/users/:id');
   const user = match
-    ? users.find((user) => user.id === Number(match.params.id))
-    : null;
+    ? users.find((user) => user.id === match.params.id)
+    : // ? users.find((user) => user.id === Number(match.params.id))
+      null;
 
   useEffect(() => {
     userService.getAll().then((users) => setUsers(users));
