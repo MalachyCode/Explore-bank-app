@@ -1,67 +1,73 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "9cac",
       "email": "julie@yahoo.com",
       "firstName": "Juliet",
       "lastName": "Oma",
+      "middleName": "",
       "password": "Juliet22@",
       "type": "client",
       "isAdmin": false,
       "number": "08100000000"
     },
     {
-      "id": 2,
+      "id": "6344",
       "email": "jameswilly@gmail.com",
       "firstName": "James",
       "lastName": "Williams",
+      "middleName": "",
       "password": "James22@",
       "type": "client",
       "isAdmin": false,
       "number": "08111111111"
     },
     {
-      "id": 3,
+      "id": "c59f",
       "email": "ahmedali012@gmail.com",
       "firstName": "Ahmed",
       "lastName": "Ali",
+      "middleName": "",
       "password": "Ahmed22@",
       "type": "client",
       "isAdmin": false,
       "number": "09022222222"
     },
     {
-      "id": 4,
+      "id": "dc6a",
       "email": "gracefunsho@gmail.com",
       "firstName": "Grace",
       "lastName": "Funsho",
+      "middleName": "",
       "password": "Grace22@",
       "type": "client",
       "isAdmin": false,
       "number": "09033333333"
     },
     {
-      "id": 5,
+      "id": "64a6",
       "email": "martinsF@gmail.com",
       "firstName": "Martins",
       "lastName": "Fowler",
+      "middleName": "",
       "password": "Martins22@",
       "type": "staff",
       "isAdmin": false,
       "number": "09047863821"
     },
     {
-      "id": 6,
+      "id": "f0b1",
       "email": "malachyN3@gmail.com",
       "firstName": "Malachy",
       "lastName": "Nwafor",
+      "middleName": "",
       "password": "Malachy22@",
       "type": "staff",
       "isAdmin": true,
       "number": "09046788945"
     },
     {
-      "id": 7,
+      "id": "6069",
       "email": "Kennedy@gmail.com",
       "firstName": "Kennedy",
       "lastName": "Jideofor",
@@ -70,43 +76,63 @@
       "type": "client",
       "isAdmin": false,
       "number": "09044877395"
+    },
+    {
+      "id": "9db1",
+      "email": "gboyegaA@gmail.com",
+      "firstName": "Gboyega",
+      "lastName": "Abayomi",
+      "password": "Gboyega22@",
+      "type": "staff",
+      "isAdmin": false,
+      "number": "09033334452"
+    },
+    {
+      "id": "92f6",
+      "email": "charityM@gmail.com",
+      "firstName": "Charity",
+      "lastName": "Maduka",
+      "password": "Charity22@",
+      "type": "staff",
+      "isAdmin": true,
+      "number": "09066557788"
     }
   ],
   "accounts": [
     {
-      "id": 1,
+      "id": "9346",
       "balance": 0,
-      "createdOn": "2024-02-20T12:42:01.100Z",
-      "owner": 1,
+      "createdOn": "2024-02-21T12:10:16.922Z",
+      "owner": "9cac",
       "status": "active",
-      "accountNumber": 1131461207,
+      "accountNumber": 1849520131,
       "type": "savings"
     },
     {
-      "id": 2,
-      "balance": 0,
-      "createdOn": "2024-02-20T12:42:34.319Z",
-      "owner": 3,
-      "status": "active",
-      "accountNumber": 1099499337,
-      "type": "savings"
-    },
-    {
-      "id": 3,
-      "balance": 0,
-      "createdOn": "2024-02-20T12:43:32.529Z",
-      "owner": 7,
-      "status": "active",
-      "accountNumber": 264784713,
-      "type": "current"
-    },
-    {
-      "id": 4,
+      "id": "5fa5",
       "balance": 548365,
-      "createdOn": "2024-02-20T16:30:32.246Z",
-      "owner": 1,
+      "createdOn": "2024-02-21T12:10:48.988Z",
+      "owner": "9cac",
       "status": "active",
-      "accountNumber": 2592522943,
+      "accountNumber": 7286559523,
+      "type": "savings"
+    },
+    {
+      "id": "53b5",
+      "balance": 0,
+      "createdOn": "2024-02-21T12:12:02.227Z",
+      "owner": "c59f",
+      "status": "active",
+      "accountNumber": 9582888994,
+      "type": "savings"
+    },
+    {
+      "id": "ae7c",
+      "balance": 0,
+      "createdOn": "2024-02-21T12:12:55.326Z",
+      "owner": "6069",
+      "status": "active",
+      "accountNumber": 5408399080,
       "type": "savings"
     }
   ]

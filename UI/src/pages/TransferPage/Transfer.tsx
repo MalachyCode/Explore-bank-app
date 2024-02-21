@@ -85,14 +85,14 @@ const Transfer = () => {
       balance: destinationAccount?.balance + Number(transferDetials.amount),
     };
 
-    // accountService
-    //   .transfer(
-    //     originAccount?.id as number,
-    //     updatedOriginAccount as Account,
-    //     destinationAccount?.id as number,
-    //     updatedDestinationAccount as Account
-    //   )
-    //   .then((response) => console.log(response));
+    accountService
+      .transfer(
+        originAccount?.id as string,
+        updatedOriginAccount as Account,
+        destinationAccount?.id as string,
+        updatedDestinationAccount as Account
+      )
+      .then((response) => console.log(response));
 
     console.log(updatedOriginAccount);
     console.log(updatedDestinationAccount);

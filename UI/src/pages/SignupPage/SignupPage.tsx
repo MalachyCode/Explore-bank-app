@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Signup.scss';
 import FormInput from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { SignUpType, User } from '../../types';
+import { NewUser, SignUpType } from '../../types';
 import userService from '../../services/users';
 
 const SignupPage = () => {
@@ -17,11 +17,6 @@ const SignupPage = () => {
     password: '',
     confirmPassword: '',
   });
-  const [users, setUsers] = useState<Array<User>>([]);
-
-  useEffect(() => {
-    userService.getAll().then((users) => setUsers(users));
-  }, []);
 
   const formInputs = [
     {
@@ -105,8 +100,8 @@ const SignupPage = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newClient: User = {
-      id: users.length + 1,
+    const newClient: NewUser = {
+      // id: users.length + 1,
       email: values.email,
       firstName: values.firstName,
       lastName: values.lastName,

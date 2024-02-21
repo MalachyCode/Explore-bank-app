@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CreateStaffAccount.scss';
 import FormInput from '../../components/FormInput';
-import { CreateStaff, User } from '../../types';
+import { CreateStaff, NewUser } from '../../types';
 import userService from '../../services/users';
 
 const CreateStaffAccount = () => {
@@ -17,11 +17,6 @@ const CreateStaffAccount = () => {
     confirmPassword: '',
   });
   const [accountType, setAccountType] = useState('cashier');
-  const [users, setUsers] = useState<Array<User>>([]);
-
-  useEffect(() => {
-    userService.getAll().then((users) => setUsers(users));
-  }, []);
 
   const formInputs = [
     {
@@ -96,8 +91,8 @@ const CreateStaffAccount = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newStaff: User = {
-      id: users.length + 1,
+    const newStaff: NewUser = {
+      // id: users.length + 1,
       email: values.email,
       firstName: values.firstName,
       lastName: values.lastName,

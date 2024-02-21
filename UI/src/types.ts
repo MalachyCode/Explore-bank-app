@@ -78,7 +78,7 @@ export interface ForgotPasswordType {
 // const AccountType =  "staff" | "client"
 
 export interface User {
-  id: number;
+  id: string;
   email: string;
   firstName: string;
   middleName?: string;
@@ -88,16 +88,40 @@ export interface User {
   isAdmin: boolean;
   number: string;
 }
+// export interface User {
+//   id: number;
+//   email: string;
+//   firstName: string;
+//   middleName?: string;
+//   lastName: string;
+//   password: string;
+//   type: string;
+//   isAdmin: boolean;
+//   number: string;
+// }
+
+export type NewUser = Omit<User, 'id'>;
 
 export interface Account {
-  id: number;
+  id: string;
   accountNumber: number;
   createdOn: Date;
-  owner: number;
+  owner: string;
   type: string;
   status: string;
   balance: number;
 }
+// export interface Account {
+//   id: number;
+//   accountNumber: number;
+//   createdOn: Date;
+//   owner: number;
+//   type: string;
+//   status: string;
+//   balance: number;
+// }
+
+export type NewAccount = Omit<Account, 'id'>;
 
 export interface OpenAccountType {
   // accountNumber: number,
