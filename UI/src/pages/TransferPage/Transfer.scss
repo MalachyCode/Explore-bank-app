@@ -9,7 +9,7 @@
   .confirm-container {
     width: 100vw;
     height: 100vh;
-    background: rgb(0, 0, 255, 0.3);
+    background: rgb(50, 67, 95, 0.3);
     z-index: 5;
     position: fixed;
     display: flex;
@@ -28,17 +28,19 @@
       justify-content: center;
       .seperator {
         width: 90%;
-        height: 3px;
+        height: 2px;
         background: #32435f;
       }
       h3,
       .seperator {
         position: relative;
-        top: -200px;
+        top: -50px;
       }
       .confirmation-form {
-        border: 1px solid black;
+        border: 1px solid #32435f;
+        border-radius: 5px;
         padding: 10px 10px 10px 40px;
+        margin-top: 40px;
         .form {
           width: 90%;
 
@@ -95,6 +97,17 @@
             }
           }
         }
+      }
+      .cancel {
+        // border: 1px solid #32435f;
+        padding: 6px;
+        margin-bottom: -20px;
+        margin-top: 10px;
+        border-radius: 3px;
+        position: relative;
+        left: 135px;
+        color: #32435f;
+        cursor: pointer;
       }
     }
 
