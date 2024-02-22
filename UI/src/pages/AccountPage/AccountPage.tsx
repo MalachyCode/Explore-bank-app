@@ -16,7 +16,6 @@ const AccountPage = (props: { user: User | null | undefined }) => {
     accountsService.getAll().then((accounts) => setAccounts(accounts));
   }, []);
 
-  // const userAccounts = [1234567899, 5566774433];
   const userAccounts = accounts.filter(
     (account) => account.owner === props.user?.id
   );
@@ -31,7 +30,6 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           </div>
           <div className='account-number-container'>
             <span>Account Number(s)</span>
-            {/* {props.user?.number} */}
             {userAccounts.map((account) => (
               <div>{account.accountNumber}</div>
             ))}
