@@ -106,10 +106,6 @@ const CreateStaffAccount = () => {
       .create(newStaff)
       .then((staffCreated) => console.log(staffCreated));
 
-    // console.log(
-    //   `user with firstname: ${values.firstName}, lastname: ${values.lastName}, dob: ${values.dateOfBirth} and password ${values.password} created an account`
-    // );
-
     navigate('/dashboard-staff');
 
     // console.log(newStaff);

@@ -69,7 +69,6 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
                   Debit Cards
                 </div>
                 {user?.isAdmin && <div className='box one'>All Staff</div>}
-                {/* <div className='box two'>Update Account Info</div> */}
               </div>
               <div className='right'>
                 <div className='box two'>Open Client Account</div>
@@ -87,7 +86,6 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
                     Create Staff Account
                   </div>
                 )}
-                {/* <div className='box one'>Close Accounts</div> */}
               </div>
             </div>
           </div>
