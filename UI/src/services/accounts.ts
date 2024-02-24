@@ -31,4 +31,10 @@ const transfer = async (
   return debitResponse.data, creditResponse.data;
 };
 
-export default { getAll, create, transfer };
+const deleteAccount = async (id: string | undefined) => {
+  const response = await axios.delete(`${baseUrl}/${id}`);
+
+  return response.data;
+};
+
+export default { deleteAccount, create, getAll, transfer };

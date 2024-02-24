@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import { Account, User } from '../../types';
 import './AccountPage.scss';
 import accountsService from '../../services/accounts';
+import usersService from '../../services/users';
+import { useNavigate } from 'react-router-dom';
 
 const AccountPage = (props: { user: User | null | undefined }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>();
   const [accounts, setAccounts] = useState<Array<Account>>([]);
 
@@ -19,6 +22,21 @@ const AccountPage = (props: { user: User | null | undefined }) => {
   const userAccounts = accounts.filter(
     (account) => account.owner === props.user?.id
   );
+
+  const handleDelete = (id: string | undefined) => {
+    if (
+      window.confirm(`Delete ${props.user?.firstName} ${props.user?.lastName}`)
+    ) {
+      const userAccount = accounts.find((account) => account.owner === id);
+      accountsService
+        .deleteAccount(userAccount?.id)
+        .then((response) => console.log(response));
+      usersService
+        .deleteUser(id as string)
+        .then((response) => console.log(response));
+    }
+    navigate('/dashboard-staff/search/users');
+  };
 
   return (
     <div className='account-page'>
@@ -47,7 +65,12 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           {!user?.isAdmin && <button>Debit Account</button>}
           {!user?.isAdmin && <button>Credit Account</button>}
           <button>Deactivate Account</button>
-          <button className='delete'>Delete Account</button>
+          <button
+            className='delete'
+            onClick={() => handleDelete(props.user?.id)}
+          >
+            Delete Account
+          </button>
         </div>
       </div>
     </div>

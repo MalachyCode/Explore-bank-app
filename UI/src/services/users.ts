@@ -12,4 +12,10 @@ const create = async (newUser: NewUser) => {
   return response.data;
 };
 
-export default { getAll, create };
+const deleteUser = async (id: string) => {
+  const response = await axios.delete(`${baseUrl}/${id}`);
+
+  return response.data;
+};
+
+export default { deleteUser, getAll, create };
