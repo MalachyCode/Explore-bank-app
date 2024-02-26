@@ -33,10 +33,12 @@
   .users {
     width: 90vw;
     // height: 70vh;
-    border: 1px solid #5f4945;
+    // border: 1px solid #5f4945;
+    background: white;
     border-radius: 5px;
     margin: auto;
     margin-top: 150px;
+    box-shadow: $shadow-1;
 
     table {
       font-family: arial, sans-serif;
@@ -48,6 +50,10 @@
         border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
+      }
+
+      th {
+        color: #32435f;
       }
 
       td {
