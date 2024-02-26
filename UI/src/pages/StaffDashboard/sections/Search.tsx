@@ -1,7 +1,8 @@
 import './Search.scss';
 import userService from '../../../services/users';
+import accountsService from '../../../services/accounts';
 import { useEffect, useState } from 'react';
-import { User } from '../../../types';
+import { Account, User } from '../../../types';
 import { Link } from 'react-router-dom';
 
 const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -10,10 +11,12 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
 const Search = () => {
   const [users, setUsers] = useState<Array<User>>([]);
+  const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [showAll, setShowAll] = useState(true);
   const [search, setSearch] = useState('');
   useEffect(() => {
     userService.getAll().then((users) => setUsers(users));
+    accountsService.getAll().then((accounts) => setAccounts(accounts));
   }, []);
 
   const usersToShow = showAll
@@ -64,7 +67,13 @@ const Search = () => {
                     ? ' / Cashier'
                     : ''}
                 </td>
-                <td className='account-number'>{user.number}</td>
+                <td className='account-number'>
+                  {accounts.map((account) =>
+                    account.owner === user.id
+                      ? `${account.accountNumber}, `
+                      : null
+                  )}
+                </td>
                 <td className='phone'>{user.number}</td>
               </tr>
             ))}
