@@ -41,28 +41,10 @@ const BarChartComponent = () => {
 
   const data = [
     {
-      name: monthsToUse[0],
-      difference: 2000,
-      income: 4400,
-      spent: 2400,
-    },
-    {
-      name: monthsToUse[1],
-      difference: 3000,
-      income: 1398,
-      spent: 2210,
-    },
-    {
-      name: monthsToUse[2],
+      name: monthsToUse[5],
       difference: 2000,
       income: 9800,
       spent: 2290,
-    },
-    {
-      name: monthsToUse[3],
-      difference: 4000,
-      income: 4400,
-      spent: 2400,
     },
     {
       name: monthsToUse[4],
@@ -71,10 +53,28 @@ const BarChartComponent = () => {
       spent: 2210,
     },
     {
-      name: monthsToUse[5],
+      name: monthsToUse[3],
+      difference: 4000,
+      income: 4400,
+      spent: 2400,
+    },
+    {
+      name: monthsToUse[2],
       difference: 2000,
       income: 9800,
       spent: 2290,
+    },
+    {
+      name: monthsToUse[1],
+      difference: 3000,
+      income: 1398,
+      spent: 2210,
+    },
+    {
+      name: monthsToUse[0],
+      difference: 2000,
+      income: 4400,
+      spent: 2400,
     },
   ];
 
