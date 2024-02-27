@@ -62,8 +62,8 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           </div>
         </div>
         <div className='buttons-container'>
-          {!user?.isAdmin && <button>Debit Account</button>}
-          {!user?.isAdmin && <button>Credit Account</button>}
+          {!user?.isAdmin && <button className='debit'>Debit Account</button>}
+          {!user?.isAdmin && <button className='credit'>Credit Account</button>}
           <button>Deactivate Account</button>
           <button
             className='delete'
