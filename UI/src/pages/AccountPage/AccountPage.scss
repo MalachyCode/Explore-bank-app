@@ -1,3 +1,5 @@
+@import '../../global.scss';
+
 .account-page {
   background: #e1dcd9;
   width: 100vw;
@@ -25,7 +27,8 @@
       .account-number-container,
       .number-container,
       .mail-container {
-        background: pink;
+        color: #fff;
+        background: #32435f;
         width: 45%;
         height: 30%;
         display: flex;
@@ -34,6 +37,7 @@
         justify-content: center;
         border-radius: 5px;
         font-size: 20px;
+        // color: white;
 
         span {
           font-size: small;
@@ -53,9 +57,32 @@
       button {
         width: 22%;
         height: 80px;
-        background: blue;
+        background: #555555;
+        // background: #e1dcd9;
+        border: none;
+        box-shadow: $shadow-3;
+        color: #e1dcd9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.5s ease;
+        border-radius: 3px;
+
         &.delete {
-          background: red;
+          background: #f44336;
+          color: #32435f;
+        }
+        &.debit {
+          background: #e1dcd9;
+          color: #32435f;
+        }
+        &.credit {
+          background: #04aa6d;
+          // background: #32435f;
+          color: #e1dcd9;
+        }
+        &:hover {
+          transform: scale(1.1);
         }
       }
     }
