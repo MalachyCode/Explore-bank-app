@@ -55,14 +55,14 @@
         border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
+
+        a {
+          cursor: pointer;
+        }
       }
 
       th {
         color: #32435f;
-      }
-
-      td {
-        cursor: pointer;
       }
 
       tr:nth-child(even) {
