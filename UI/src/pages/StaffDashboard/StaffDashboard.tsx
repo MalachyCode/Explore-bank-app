@@ -71,7 +71,12 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
                 {user?.isAdmin && <div className='box one'>All Staff</div>}
               </div>
               <div className='right'>
-                <div className='box two'>Open Client Account</div>
+                <div
+                  className='box two'
+                  onClick={() => navigate('/open-account')}
+                >
+                  Open Account
+                </div>
                 <div
                   className='box one'
                   onClick={() => navigate('/dashboard-staff/search/users')}
