@@ -5,6 +5,103 @@
   width: 100vw;
   height: 100vh;
 
+  .transaction-box {
+    width: 90%;
+    height: 90%;
+    // margin: auto;
+    background: #04aa6d;
+    position: fixed;
+    left: 5%;
+    top: 5%;
+    z-index: 2;
+    // max-width: $fixed-width;
+    transform: scale(0);
+    transition: all 0.5s ease;
+
+    .close {
+      color: white;
+      position: fixed;
+      right: 0;
+      cursor: pointer;
+    }
+
+    .form {
+      width: 90%;
+      margin: auto;
+
+      .form-label {
+        display: block;
+        font-size: $smallText;
+        margin-bottom: 0.5rem;
+        text-transform: capitalize;
+        letter-spacing: $letterSpacing;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 15px;
+        border-radius: 4px;
+        background: $backgroundColor;
+        border: 1px solid $grey-200;
+        margin: auto;
+        &::placeholder {
+          font-family: inherit;
+          color: $grey-400;
+        }
+      }
+
+      .form-select {
+        margin-top: 10px;
+        width: 100%;
+        padding: 15px;
+        border-radius: 4px;
+        background: $backgroundColor;
+        border-color: #d9dadb;
+        cursor: pointer;
+        &::placeholder {
+          font-family: inherit;
+          color: $grey-400;
+        }
+      }
+
+      .btn {
+        width: 100%;
+        margin-top: 50px;
+        margin-bottom: 35px;
+        cursor: pointer;
+        color: $white;
+        background: $primary-500;
+        border: transparent;
+        border-radius: 4px;
+        letter-spacing: $letterSpacing;
+        padding: 15px;
+        box-shadow: $shadow-1;
+        transition: $transition;
+        text-transform: capitalize;
+        display: inline-block;
+        overflow: hidden;
+
+        &:hover {
+          background: $primary-700;
+          box-shadow: $shadow-3;
+        }
+        // @media (min-width: 992px) {
+        //   width: 97%;
+        // }
+        // @media (min-width: 768px) {
+        //   width: 94%;
+        // }
+        // @media (max-width: 576px) {
+        //   width: 98%;
+        // }
+      }
+    }
+
+    &.open {
+      transform: scale(1);
+    }
+  }
+
   .container {
     width: 90%;
     margin: auto;
