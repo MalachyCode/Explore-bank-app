@@ -31,10 +31,10 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
-  console.log(accounts.map((account) => account.owner));
-  console.log(user?.id);
+  // console.log(accounts.map((account) => account.owner));
+  // console.log(user?.id);
 
-  console.log(accounts.map((account) => account.owner === user?.id));
+  // console.log(accounts.map((account) => account.owner === user?.id));
 
   const handleClick = () => {
     setProfileOpen(!profileOpen);

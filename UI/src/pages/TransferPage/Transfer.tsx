@@ -38,12 +38,12 @@ const Transfer = () => {
   const sendingAccount = accounts.find(
     (account) => account.accountNumber === accountForTransfer
   );
-  const destinationAccount = accounts.find(
+  const receivingAccount = accounts.find(
     (account) => account.accountNumber === Number(transferDetials.accountNumber)
   );
 
-  const destinationAccountOwner = users?.find(
-    (user) => user.id === destinationAccount?.owner
+  const receivingAccountOwner = users?.find(
+    (user) => user.id === receivingAccount?.owner
   );
 
   const formInputs = [
@@ -83,30 +83,32 @@ const Transfer = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const updatedOriginAccount = {
+    const updatedSendingAccount = {
       ...sendingAccount,
       balance:
         sendingAccount &&
         sendingAccount?.balance - Number(transferDetials.amount),
     };
-    const updatedDestinationAccount = {
-      ...destinationAccount,
+    const updatedRecievingAccount = {
+      ...receivingAccount,
       balance:
-        destinationAccount &&
-        destinationAccount?.balance + Number(transferDetials.amount),
+        receivingAccount &&
+        receivingAccount?.balance + Number(transferDetials.amount),
     };
 
     accountService
-      .transfer(
-        sendingAccount?.id as string,
-        updatedOriginAccount as Account,
-        destinationAccount?.id as string,
-        updatedDestinationAccount as Account
+      .debit(sendingAccount?.id as string, updatedSendingAccount as Account)
+      .then((response) => console.log(response));
+
+    accountService
+      .credit(
+        receivingAccount?.id as string,
+        updatedRecievingAccount as Account
       )
       .then((response) => console.log(response));
 
-    console.log(updatedOriginAccount);
-    console.log(updatedDestinationAccount);
+    console.log(updatedSendingAccount);
+    console.log(updatedRecievingAccount);
     console.log(Number(transferPin));
 
     navigate('/dashboard-client');
@@ -132,9 +134,9 @@ const Transfer = () => {
           <h3>Tranfer Confirmation</h3>
           <div className='seperator'></div>
           Transfer &#8358;{transferDetials.amount} to{' '}
-          {destinationAccountOwner?.firstName}{' '}
-          {destinationAccountOwner?.lastName} with account number{' '}
-          {destinationAccount?.accountNumber} of {transferDetials.bankName}
+          {receivingAccountOwner?.firstName} {receivingAccountOwner?.lastName}{' '}
+          with account number {receivingAccount?.accountNumber} of{' '}
+          {transferDetials.bankName}
           <div className='confirmation-form'>
             <form className='form' onSubmit={handleSubmit}>
               <label htmlFor='pin' className='form-label'>
