@@ -5,6 +5,7 @@ import accountsService from '../../services/accounts';
 import usersService from '../../services/users';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
+import Select from 'react-select';
 
 interface TransactionType {
   amount: string;
@@ -53,6 +54,74 @@ const AccountPage = (props: { user: User | null | undefined }) => {
     navigate('/dashboard-staff/search/users');
   };
 
+  const handleTransaction = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (transactionType === 'debit') {
+      console.log(transactionDetails, 'debit');
+      const accountToUpdateForDebit = userAccounts.find(
+        (account) => account.accountNumber === Number(accountNumber)
+      );
+
+      const debitedAccount = {
+        ...accountToUpdateForDebit,
+        balance:
+          accountToUpdateForDebit &&
+          accountToUpdateForDebit?.balance - Number(transactionDetails.amount),
+      };
+
+      console.log(accountToUpdateForDebit);
+      console.log(debitedAccount);
+
+      accountsService
+        .debit(accountToUpdateForDebit?.id as string, debitedAccount as Account)
+        .then((response) => console.log(response));
+    }
+    if (transactionType === 'credit') {
+      console.log(transactionDetails, 'credit');
+      const accountToUpdateForCredit = userAccounts.find(
+        (account) => account.accountNumber === Number(accountNumber)
+      );
+
+      const creditedAccount = {
+        ...accountToUpdateForCredit,
+        balance:
+          accountToUpdateForCredit &&
+          accountToUpdateForCredit?.balance + Number(transactionDetails.amount),
+      };
+
+      console.log(accountToUpdateForCredit);
+      console.log(creditedAccount);
+
+      accountsService
+        .credit(
+          accountToUpdateForCredit?.id as string,
+          creditedAccount as Account
+        )
+        .then((response) => console.log(response));
+    }
+
+    setOpenTransactionBox(false);
+
+    setAccountNumber('');
+    setTransactionDetails({
+      ...transactionDetails,
+      amount: '',
+      description: '',
+    });
+    navigate('/dashboard-staff/search/users/');
+  };
+
+  console.log(accountNumber);
+
+  console.log(typeof accountNumber);
+  // console.log(typeof Number(accountNumber));
+
+  const options = userAccounts.map((account) => ({
+    value: `${account.accountNumber}`,
+    label: `${account.accountNumber}`,
+  }));
+
   return (
     <div className='account-page'>
       <div className='container'>
@@ -61,20 +130,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
             className='close'
             onClick={() => setOpenTransactionBox(false)}
           />
-          <form className='form'>
-            <label htmlFor='accountNumber' className='form-label select'>
-              Account Number
-            </label>
-            <select
-              name='accountNumber'
-              id='accountNumber'
-              value={accountNumber}
-              className='form-select'
-              onChange={(e) => setAccountNumber(e.target.value)}
-            >
-              <option value='admin'>Admin</option>
-              <option value='cashier'>Cashier</option>
-            </select>
+          <form className='form' onSubmit={handleTransaction}>
             <label htmlFor='amount' className='form-label'>
               Amount
             </label>
@@ -83,6 +139,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
               name='amount'
               id='amount'
               className='form-input'
+              value={transactionDetails.amount}
               placeholder='Amount'
               onChange={(e) =>
                 setTransactionDetails({
@@ -100,6 +157,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
               name='description'
               id='description'
               className='form-input'
+              value={transactionDetails.description}
               placeholder='Description'
               onChange={(e) =>
                 setTransactionDetails({
@@ -108,6 +166,39 @@ const AccountPage = (props: { user: User | null | undefined }) => {
                 })
               }
               required
+            />
+            <label htmlFor='accountNumber' className='form-label select'>
+              Account Number
+            </label>
+            {/* <select
+              name='accountNumber'
+              id='accountNumber'
+              value={accountNumber}
+              className='form-select'
+              onChange={(e) => {
+                console.log(e.target.value);
+                setAccountNumber(e.target.value);
+              }}
+            >
+              {userAccounts.map((account) => (
+                <option key={account.id} value={`${account.accountNumber}`}>
+                  {account.accountNumber}
+                </option>
+              ))}
+            </select> */}
+            <Select
+              id='accountNumber'
+              className='basic-single'
+              classNamePrefix='select'
+              defaultValue={options[0]}
+              isDisabled={false}
+              isClearable={true}
+              isSearchable={true}
+              name='color'
+              onChange={(selectedOption) =>
+                setAccountNumber(selectedOption?.value as string)
+              }
+              options={options}
             />
             <button className='btn'>
               {transactionType === 'credit' ? 'Credit' : 'Debit'}
@@ -122,7 +213,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           <div className='account-number-container'>
             <span>Account Number(s)</span>
             {userAccounts.map((account) => (
-              <div>{account.accountNumber}</div>
+              <div key={account.id}>{account.accountNumber}</div>
             ))}
           </div>
           <div className='mail-container'>
@@ -148,7 +239,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           )}
           {!user?.isAdmin && (
             <button
-              className='debit'
+              className='credit'
               onClick={() => {
                 setOpenTransactionBox(true);
                 setTransactionType('credit');
