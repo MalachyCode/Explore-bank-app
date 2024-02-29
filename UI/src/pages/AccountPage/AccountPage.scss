@@ -8,7 +8,6 @@
   .transaction-box {
     width: 90%;
     height: 90%;
-    // margin: auto;
     background: #04aa6d;
     position: fixed;
     left: 5%;
@@ -21,7 +20,7 @@
     .close {
       color: white;
       position: fixed;
-      right: 0;
+      right: 5%;
       cursor: pointer;
     }
 
@@ -31,10 +30,15 @@
 
       .form-label {
         display: block;
-        font-size: $smallText;
+        font-size: 0.9em;
+        padding: 10px 0;
         margin-bottom: 0.5rem;
         text-transform: capitalize;
         letter-spacing: $letterSpacing;
+
+        &.select {
+          padding-bottom: 0;
+        }
       }
 
       .form-input {
@@ -85,20 +89,14 @@
           background: $primary-700;
           box-shadow: $shadow-3;
         }
-        // @media (min-width: 992px) {
-        //   width: 97%;
-        // }
-        // @media (min-width: 768px) {
-        //   width: 94%;
-        // }
-        // @media (max-width: 576px) {
-        //   width: 98%;
-        // }
       }
     }
 
     &.open {
       transform: scale(1);
+      .close {
+        right: 0;
+      }
     }
   }
 
