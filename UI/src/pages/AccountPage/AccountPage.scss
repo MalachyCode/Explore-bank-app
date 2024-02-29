@@ -43,6 +43,7 @@
 
       .form-input {
         width: 100%;
+        height: 8px;
         padding: 15px;
         border-radius: 4px;
         background: $backgroundColor;
@@ -54,13 +55,10 @@
         }
       }
 
-      .form-select {
+      .basic-single {
         margin-top: 10px;
-        width: 100%;
-        padding: 15px;
-        border-radius: 4px;
-        background: $backgroundColor;
-        border-color: #d9dadb;
+        // height: 80px;
+
         cursor: pointer;
         &::placeholder {
           font-family: inherit;
@@ -172,9 +170,9 @@
           color: #32435f;
         }
         &.credit {
-          background: #04aa6d;
           // background: #32435f;
           color: #e1dcd9;
+          background: #04aa6d;
         }
         &:hover {
           transform: scale(1.1);
