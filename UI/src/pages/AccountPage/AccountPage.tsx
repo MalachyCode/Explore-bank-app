@@ -115,7 +115,6 @@ const AccountPage = (props: { user: User | null | undefined }) => {
   console.log(accountNumber);
 
   console.log(typeof accountNumber);
-  // console.log(typeof Number(accountNumber));
 
   const options = userAccounts.map((account) => ({
     value: `${account.accountNumber}`,
