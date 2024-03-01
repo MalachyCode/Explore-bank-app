@@ -124,10 +124,11 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             {userAccounts.map((account) => (
               <RenderTotals
                 key={account.id}
-                label='Total balance'
+                status={account.status}
                 balance={account.balance}
                 accountNum={account.accountNumber}
                 className='total'
+                id={account.id}
               />
             ))}
           </div>

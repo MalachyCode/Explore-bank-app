@@ -14,20 +14,29 @@ import Search from './pages/StaffDashboard/sections/Search';
 import CreateStaffAccount from './pages/CreateStaffAccount/CreateStaffAccount';
 import { useEffect, useState } from 'react';
 import userService from './services/users';
-import { User } from './types';
+import accountsService from './services/accounts';
+import { Account, User } from './types';
 import AccountPage from './pages/AccountPage/AccountPage';
 import OpenAccount from './pages/OpenAccount/OpenAccount';
+import AccountInfo from './pages/AccountInfo/AccountInfo';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
+  const [accounts, setAccounts] = useState<Array<Account>>([]);
   const match = useMatch('/dashboard-staff/search/users/:id');
   const user = match
     ? users.find((user) => user.id === match.params.id)
     : // ? users.find((user) => user.id === Number(match.params.id))
       null;
 
+  const matchAccount = useMatch('/dashboard-client/account-info/:id');
+  const account = matchAccount
+    ? accounts.find((account) => account.id === matchAccount.params.id)
+    : null;
+
   useEffect(() => {
     userService.getAll().then((users) => setUsers(users));
+    accountsService.getAll().then((accounts) => setAccounts(accounts));
   }, []);
 
   const navigate = useNavigate();
@@ -61,6 +70,10 @@ function App() {
           <Route
             path='/dashboard-client'
             element={<ClientDashboard handleLogout={handleLogout} />}
+          />
+          <Route
+            path='/dashboard-client/account-info/:id'
+            element={<AccountInfo account={account} />}
           />
           <Route path='/password-reset' element={<ForgotPasswordPage />} />
           <Route path='/login' element={<LoginPage />} />
