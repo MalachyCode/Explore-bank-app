@@ -5,7 +5,7 @@ import accountsService from '../../services/accounts';
 import usersService from '../../services/users';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 interface TransactionType {
   amount: string;
@@ -116,11 +116,6 @@ const AccountPage = (props: { user: User | null | undefined }) => {
 
   console.log(typeof accountNumber);
 
-  const options = userAccounts.map((account) => ({
-    value: `${account.accountNumber}`,
-    label: `${account.accountNumber}`,
-  }));
-
   return (
     <div className='account-page'>
       <div className='container'>
@@ -169,7 +164,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
             <label htmlFor='accountNumber' className='form-label select'>
               Account Number
             </label>
-            {/* <select
+            <select
               name='accountNumber'
               id='accountNumber'
               value={accountNumber}
@@ -179,26 +174,13 @@ const AccountPage = (props: { user: User | null | undefined }) => {
                 setAccountNumber(e.target.value);
               }}
             >
+              <option value=''>Select Account Number</option>
               {userAccounts.map((account) => (
                 <option key={account.id} value={`${account.accountNumber}`}>
                   {account.accountNumber}
                 </option>
               ))}
-            </select> */}
-            <Select
-              id='accountNumber'
-              className='basic-single'
-              classNamePrefix='select'
-              defaultValue={options[0]}
-              isDisabled={false}
-              isClearable={true}
-              isSearchable={true}
-              name='color'
-              onChange={(selectedOption) =>
-                setAccountNumber(selectedOption?.value as string)
-              }
-              options={options}
-            />
+            </select>
             <button className='btn'>
               {transactionType === 'credit' ? 'Credit' : 'Debit'}
             </button>
