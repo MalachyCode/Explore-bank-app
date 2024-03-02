@@ -25,6 +25,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
   const [openTransactionBox, setOpenTransactionBox] = useState(false);
   const [transactionType, setTransactionType] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
+  const [activeDeactivateBox, setActiveDeactivateBox] = useState(false);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -112,6 +113,8 @@ const AccountPage = (props: { user: User | null | undefined }) => {
     navigate('/dashboard-staff/search/users/');
   };
 
+  const handleActivateDeactivate = () => {};
+
   console.log(accountNumber);
 
   console.log(typeof accountNumber);
@@ -186,6 +189,37 @@ const AccountPage = (props: { user: User | null | undefined }) => {
             </button>
           </form>
         </div>
+        <div
+          className={
+            'activate-deactivate-box ' + (activeDeactivateBox && 'open')
+          }
+        >
+          <CloseIcon
+            className='close'
+            onClick={() => setActiveDeactivateBox(false)}
+          />
+          <div className={'activate-deactivate'}>
+            <form onSubmit={handleActivateDeactivate}>
+              <select
+                name='accountNumber'
+                id='accountNumber'
+                value={accountNumber}
+                className='form-select'
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setAccountNumber(e.target.value);
+                }}
+              >
+                <option value=''>Select Account Number</option>
+                {userAccounts.map((account) => (
+                  <option key={account.id} value={`${account.accountNumber}`}>
+                    {account.accountNumber}
+                  </option>
+                ))}
+              </select>
+            </form>
+          </div>
+        </div>
         <div className='details-container'>
           <div className='name-container'>
             <span>Account Name</span>
@@ -229,7 +263,9 @@ const AccountPage = (props: { user: User | null | undefined }) => {
               Credit Account
             </button>
           )}
-          <button>Deactivate Account</button>
+          <button onClick={() => setActiveDeactivateBox(true)}>
+            Deactivate Account
+          </button>
           <button
             className='delete'
             onClick={() => handleDelete(props.user?.id)}
