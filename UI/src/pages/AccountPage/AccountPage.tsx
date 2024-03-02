@@ -113,7 +113,22 @@ const AccountPage = (props: { user: User | null | undefined }) => {
     navigate('/dashboard-staff/search/users/');
   };
 
-  const handleActivateDeactivate = () => {};
+  const handleActivateDeactivate = () => {
+    if (window.confirm(`Deactivate ${accountNumber}`)) {
+      const userAccount = accounts.find(
+        (account) => account.accountNumber === Number(accountNumber)
+      );
+      const deactivatedActivatedAccount = {
+        ...userAccount,
+        status: userAccount?.status === 'active' ? 'dormant' : 'active',
+      };
+      accountsService
+        .deactivateActivate(userAccount?.id, deactivatedActivatedAccount)
+        .then((response) => console.log(response));
+    }
+    setAccountNumber('');
+    navigate('/dashboard-staff/search/users');
+  };
 
   console.log(accountNumber);
 
@@ -199,6 +214,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
             onClick={() => setActiveDeactivateBox(false)}
           />
           <div className={'activate-deactivate'}>
+            <h3>Deactivate Account</h3>
             <form onSubmit={handleActivateDeactivate}>
               <select
                 name='accountNumber'
@@ -217,6 +233,9 @@ const AccountPage = (props: { user: User | null | undefined }) => {
                   </option>
                 ))}
               </select>
+              <button type='submit' className='btn'>
+                Deactivate
+              </button>
             </form>
           </div>
         </div>

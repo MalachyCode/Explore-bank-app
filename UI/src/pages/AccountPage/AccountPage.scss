@@ -1,4 +1,5 @@
 @import '../../global.scss';
+@import './account.scss';
 
 .account-page {
   background: #e1dcd9;
@@ -132,7 +133,7 @@
 
     .activate-deactivate {
       margin: auto;
-      width: 90%;
+      width: 85%;
       height: 50%;
       background: #04aa6d;
       position: relative;
@@ -140,6 +141,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+      padding: 0 15px;
 
       .form-select {
         background-color: white;
