@@ -38,4 +38,20 @@ const deleteAccount = async (id: string | undefined) => {
   return response.data;
 };
 
-export default { deleteAccount, debit, credit, create, getAll };
+const deactivateActivate = async (
+  id: string | undefined,
+  updatedAccount: Account | undefined
+) => {
+  const response = await axios.put(`${baseUrl}/${id}`, updatedAccount);
+
+  return response.data;
+};
+
+export default {
+  deactivateActivate,
+  deleteAccount,
+  debit,
+  credit,
+  create,
+  getAll,
+};
