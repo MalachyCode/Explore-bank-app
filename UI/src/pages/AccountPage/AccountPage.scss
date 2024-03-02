@@ -121,6 +121,75 @@
     }
   }
 
+  .activate-deactivate-box {
+    width: 90%;
+    height: 90%;
+    background: #fff;
+    position: fixed;
+    transform: scale(0);
+    z-index: 2;
+    transition: all 0.5s ease;
+
+    .activate-deactivate {
+      margin: auto;
+      width: 90%;
+      height: 50%;
+      background: #04aa6d;
+      position: relative;
+      top: 25%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .form-select {
+        background-color: white;
+        width: 100%;
+        border-radius: 4px;
+        display: inline-block;
+        font: inherit;
+        line-height: 1.5em;
+        padding: 0.7em 3.5em 0.7em 1em;
+
+        margin: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+          linear-gradient(135deg, gray 50%, transparent 50%),
+          linear-gradient(to right, #ccc, #ccc);
+        background-position: calc(100% - 20px) calc(1em + 2px),
+          calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+        background-size: 5px 5px, 5px 5px, 1px 1.5em;
+        background-repeat: no-repeat;
+        &:focus {
+          background-image: linear-gradient(45deg, green 50%, transparent 50%),
+            linear-gradient(135deg, transparent 50%, green 50%),
+            linear-gradient(to right, #ccc, #ccc);
+          background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
+            calc(100% - 2.5em) 0.5em;
+          background-size: 5px 5px, 5px 5px, 1px 1.5em;
+          background-repeat: no-repeat;
+          border-color: green;
+          outline: 0;
+        }
+      }
+    }
+    .close {
+      position: fixed;
+      right: 5%;
+      cursor: pointer;
+    }
+
+    &.open {
+      transform: scale(1);
+      .close {
+        right: 0;
+      }
+    }
+  }
+
   .container {
     width: 90%;
     margin: auto;
