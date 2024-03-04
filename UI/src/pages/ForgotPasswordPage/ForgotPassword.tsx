@@ -1,16 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './ForgotPasswordPage.scss';
 import FormInput from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { ForgotPasswordType } from '../../types';
+import { ForgotPasswordType, User } from '../../types';
+import usersService from '../../services/users';
 
 const ForgotPasswordPage = () => {
+  const [users, setUsers] = useState<Array<User>>([]);
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState<ForgotPasswordType>({
     email: '',
     password: '',
     confirmPassword: '',
   });
+
+  useEffect(() => {
+    usersService.getAll().then((users) => setUsers(users));
+  }, []);
 
   const formInputs = [
     {
@@ -47,14 +53,29 @@ const ForgotPasswordPage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/login');
-    console.log(`New password is ${credentials.password}`);
+
+    const userForPasswordReset = users.find(
+      (user) => user.email === credentials.email
+    );
+
+    const userPasswordReset = {
+      ...userForPasswordReset,
+      password: credentials.password,
+    };
+
+    if (userPasswordReset) {
+      usersService
+        .resetPassword(userForPasswordReset?.id, userPasswordReset as User)
+        .then((response) => console.log(response));
+    }
+
     setCredentials({
       ...credentials,
       email: '',
       password: '',
       confirmPassword: '',
     });
+    navigate('/login');
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
