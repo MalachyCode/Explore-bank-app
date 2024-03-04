@@ -40,6 +40,10 @@ const AccountPage = (props: { user: User | null | undefined }) => {
     (account) => account.owner === props.user?.id
   );
 
+  const accountToDeactivateOrActivate = userAccounts.find(
+    (account) => account.accountNumber === Number(accountNumber)
+  );
+
   const handleDelete = (id: string | undefined) => {
     if (
       window.confirm(`Delete ${props.user?.firstName} ${props.user?.lastName}`)
@@ -114,7 +118,11 @@ const AccountPage = (props: { user: User | null | undefined }) => {
   };
 
   const handleActivateDeactivate = () => {
-    if (window.confirm(`Deactivate ${accountNumber}`)) {
+    const messageVariable =
+      accountToDeactivateOrActivate?.status === 'active'
+        ? 'Deactivate'
+        : 'Activate';
+    if (window.confirm(`${messageVariable} ${accountNumber}`)) {
       const userAccount = accounts.find(
         (account) => account.accountNumber === Number(accountNumber)
       );
@@ -123,7 +131,10 @@ const AccountPage = (props: { user: User | null | undefined }) => {
         status: userAccount?.status === 'active' ? 'dormant' : 'active',
       };
       accountsService
-        .deactivateActivate(userAccount?.id, deactivatedActivatedAccount)
+        .deactivateActivate(
+          userAccount?.id,
+          deactivatedActivatedAccount as Account
+        )
         .then((response) => console.log(response));
     }
     setAccountNumber('');
@@ -131,7 +142,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
   };
 
   console.log(accountNumber);
-
+  console.log(accountToDeactivateOrActivate);
   console.log(typeof accountNumber);
 
   return (
@@ -234,7 +245,10 @@ const AccountPage = (props: { user: User | null | undefined }) => {
                 ))}
               </select>
               <button type='submit' className='btn'>
-                Deactivate
+                {accountToDeactivateOrActivate?.status === 'active' ||
+                !accountToDeactivateOrActivate
+                  ? 'Deactivate'
+                  : 'Activate'}
               </button>
             </form>
           </div>
