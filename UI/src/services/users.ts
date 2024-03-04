@@ -27,4 +27,13 @@ const resetPassword = async (
   return response.data;
 };
 
-export default { deleteUser, getAll, create, resetPassword };
+const setTransferPin = async (
+  id: string | undefined,
+  updatedAccount: User | undefined
+) => {
+  const response = await axios.put(`${baseUrl}/${id}`, updatedAccount);
+
+  return response.data;
+};
+
+export default { deleteUser, getAll, create, resetPassword, setTransferPin };
