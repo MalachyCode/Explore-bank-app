@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NewUser } from '../types';
+import { NewUser, User } from '../types';
 const baseUrl = 'http://localhost:3001/users';
 
 const getAll = async () => {
@@ -18,4 +18,13 @@ const deleteUser = async (id: string) => {
   return response.data;
 };
 
-export default { deleteUser, getAll, create };
+const resetPassword = async (
+  id: string | undefined,
+  updatedAccount: User | undefined
+) => {
+  const response = await axios.put(`${baseUrl}/${id}`, updatedAccount);
+
+  return response.data;
+};
+
+export default { deleteUser, getAll, create, resetPassword };
