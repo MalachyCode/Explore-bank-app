@@ -131,7 +131,9 @@ const CreateStaffAccount = () => {
       <form className='form' onSubmit={handleSubmit}>
         <strong className='form-header'>Create Staff Account</strong>
         <div className='form-header-seperator'></div>
-        <label htmlFor='isAdmin'>Account Type</label>
+        <label htmlFor='isAdmin' className='select-label'>
+          Account Type
+        </label>
         <select
           name='isAmin'
           id='isAmin'
