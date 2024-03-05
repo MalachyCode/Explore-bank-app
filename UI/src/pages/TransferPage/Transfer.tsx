@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import FormInput from '../../components/FormInput';
 import './Transfer.scss';
-import { Account, TransferType, User } from '../../types';
+import { Account, NewTransaction, TransferType, User } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import accountService from '../../services/accounts';
 import userService from '../../services/users';
+import transactionsService from '../../services/transactions';
 
 const Transfer = () => {
   const navigate = useNavigate();
@@ -16,6 +17,9 @@ const Transfer = () => {
   const [selected, setSelected] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [accountErrorMessage, setAccountErrorMessage] = useState<string | null>(
+    null
+  );
 
   const [transferDetials, setTransferDetials] = useState<TransferType>({
     bankName: '',
@@ -62,8 +66,13 @@ const Transfer = () => {
       name: 'accountNumber',
       type: 'text',
       placeholder: 'Account Number',
-      errorMessage: 'Enter a valid account number',
+      errorMessage: accountErrorMessage ? accountErrorMessage : '',
+      // errorMessage: `Can't find account with account number ${transferDetials.accountNumber}`,
       label: 'Account Number',
+      // pattern: accounts.some(
+      //   (account) =>
+      //     account.accountNumber === Number(transferDetials.accountNumber)
+      // ),
       required: true,
     },
     {
@@ -76,57 +85,90 @@ const Transfer = () => {
       required: true,
     },
   ];
-  console.log(accountForTransfer);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (sendingAccount?.status === 'active') {
-      if (user?.transferPin === transferPin) {
-        const updatedSendingAccount = {
-          ...sendingAccount,
-          balance:
-            sendingAccount &&
-            sendingAccount?.balance - Number(transferDetials.amount),
-        };
-        const updatedRecievingAccount = {
-          ...receivingAccount,
-          balance:
-            receivingAccount &&
-            receivingAccount?.balance + Number(transferDetials.amount),
-        };
+      if (receivingAccount) {
+        if (user?.transferPin === transferPin) {
+          const updatedSendingAccount = {
+            ...sendingAccount,
+            balance:
+              sendingAccount &&
+              sendingAccount?.balance - Number(transferDetials.amount),
+          };
 
-        accountService
-          .debit(sendingAccount?.id as string, updatedSendingAccount as Account)
-          .then((response) => console.log(response));
+          const updatedRecievingAccount = {
+            ...receivingAccount,
+            balance:
+              receivingAccount &&
+              receivingAccount?.balance + Number(transferDetials.amount),
+          };
 
-        accountService
-          .credit(
-            receivingAccount?.id as string,
-            updatedRecievingAccount as Account
-          )
-          .then((response) => console.log(response));
+          accountService
+            .debit(
+              sendingAccount?.id as string,
+              updatedSendingAccount as Account
+            )
+            .then((response) => console.log(response));
 
-        console.log(updatedSendingAccount);
-        console.log(updatedRecievingAccount);
-        console.log(Number(transferPin));
+          accountService
+            .credit(
+              receivingAccount?.id as string,
+              updatedRecievingAccount as Account
+            )
+            .then((response) => console.log(response));
 
-        navigate('/dashboard-client');
-        // console.log(
-        //   `You transfered ${transferDetials.amount} to ${transferDetials.accountNumber} of bank ${transferDetials.bankName}`
-        // );
-        setTransferDetials({
-          ...transferDetials,
-          bankName: '',
-          amount: '',
-          accountNumber: '',
-        });
+          const newCreditTransaction: NewTransaction = {
+            accountNumber: receivingAccount?.accountNumber,
+            createdOn: new Date(),
+            type: 'credit',
+            amount: Number(transferDetials.amount),
+            oldBalance: receivingAccount?.balance,
+            newBalance: updatedRecievingAccount.balance,
+          };
+
+          const newDebitTransaction: NewTransaction = {
+            accountNumber: sendingAccount?.accountNumber,
+            createdOn: new Date(),
+            type: 'debit',
+            amount: Number(transferDetials.amount),
+            oldBalance: sendingAccount?.balance,
+            newBalance: updatedSendingAccount.balance,
+          };
+
+          transactionsService
+            .newCreditTransaction(newCreditTransaction)
+            .then((response) => console.log(response));
+
+          transactionsService
+            .newDebitTransaction(newDebitTransaction)
+            .then((response) => console.log(response));
+
+          navigate('/dashboard-client');
+
+          setTransferDetials({
+            ...transferDetials,
+            bankName: '',
+            amount: '',
+            accountNumber: '',
+          });
+        } else {
+          setErrorMessage('Wrong transfer pin');
+          setOpenConfirm(false);
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 5000);
+        }
       } else {
-        setErrorMessage('Wrong transfer pin');
-        setOpenConfirm(false);
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 5000);
+        setAccountErrorMessage(
+          `Can't find account with account number ${transferDetials.accountNumber}`
+        );
+        // setOpenConfirm(false);
+        // setTimeout(() => {
+        //   setErrorMessage(null);
+        // }, 5000);
       }
     } else {
       setErrorMessage(
@@ -139,17 +181,28 @@ const Transfer = () => {
     }
   };
 
-  console.log(transferPin);
-  console.log(user?.transferPin);
-  console.log(user?.transferPin === transferPin);
+  console.log(receivingAccount);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTransferDetials({ ...transferDetials, [e.target.name]: e.target.value });
+    if (e.target.name === 'accountNumber') {
+      accounts.some(
+        (account) =>
+          account.accountNumber === Number(transferDetials.accountNumber)
+      )
+        ? setAccountErrorMessage(null)
+        : setAccountErrorMessage(
+            `Can't find account with account number ${transferDetials.accountNumber}!`
+          );
+    }
   };
 
   return (
     <div className='transfer'>
       {errorMessage && <div className='error'>{errorMessage}</div>}
+      {/* {accountErrorMessage && (
+        <div className='error'>{accountErrorMessage}</div>
+      )} */}
       <div className={'confirm-container ' + (openConfirm && 'active')}>
         <div className='confirm'>
           <h3>Tranfer Confirmation</h3>

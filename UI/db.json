@@ -106,7 +106,7 @@
   "accounts": [
     {
       "id": "9346",
-      "balance": 48365,
+      "balance": 100000,
       "createdOn": "2024-02-21T12:10:16.922Z",
       "owner": "9cac",
       "status": "dormant",
@@ -139,6 +139,26 @@
       "status": "active",
       "accountNumber": 5408399080,
       "type": "savings"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "8b9c",
+      "accountNumber": 1849520131,
+      "createdOn": "2024-03-05T19:48:01.484Z",
+      "type": "credit",
+      "amount": 1635,
+      "oldBalance": 98365,
+      "newBalance": 100000
+    },
+    {
+      "id": "7173",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-03-05T19:48:01.484Z",
+      "type": "debit",
+      "amount": 1635,
+      "oldBalance": 501635,
+      "newBalance": 500000
     }
   ]
 }
