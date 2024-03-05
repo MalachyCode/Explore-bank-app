@@ -106,7 +106,7 @@
   "accounts": [
     {
       "id": "9346",
-      "balance": 100000,
+      "balance": 150000,
       "createdOn": "2024-02-21T12:10:16.922Z",
       "owner": "9cac",
       "status": "dormant",
@@ -159,6 +159,39 @@
       "amount": 1635,
       "oldBalance": 501635,
       "newBalance": 500000
+    },
+    {
+      "id": "40de",
+      "accountNumber": 1849520131,
+      "createdOn": "2024-03-05T20:30:30.962Z",
+      "type": "credit",
+      "cashier": "64a6",
+      "amount": 50000,
+      "oldBalance": 100000,
+      "newBalance": 150000,
+      "description": "Credit Transaction"
+    },
+    {
+      "id": "0fb8",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-03-05T20:32:24.612Z",
+      "type": "debit",
+      "cashier": "9db1",
+      "amount": 50000,
+      "oldBalance": 500000,
+      "newBalance": 450000,
+      "description": "Debit transaction"
+    },
+    {
+      "id": "1157",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-03-05T20:33:07.002Z",
+      "type": "credit",
+      "cashier": "9db1",
+      "amount": 50000,
+      "oldBalance": 450000,
+      "newBalance": 500000,
+      "description": "Credit Transaction"
     }
   ]
 }

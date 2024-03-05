@@ -142,6 +142,7 @@ export interface Transaction {
   amount: number;
   oldBalance: number;
   newBalance: number;
+  description?: string;
 }
 
 export type NewTransaction = Omit<Transaction, 'id'>;
