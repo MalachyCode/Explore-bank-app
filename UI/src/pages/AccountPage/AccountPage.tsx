@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Account, User } from '../../types';
+import { Account, NewTransaction, User } from '../../types';
 import './AccountPage.scss';
 import accountsService from '../../services/accounts';
 import usersService from '../../services/users';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
+import transactionsService from '../../services/transactions';
 // import Select from 'react-select';
 
 interface TransactionType {
@@ -64,46 +65,88 @@ const AccountPage = (props: { user: User | null | undefined }) => {
 
     if (transactionType === 'debit') {
       console.log(transactionDetails, 'debit');
+
       const accountToUpdateForDebit = userAccounts.find(
         (account) => account.accountNumber === Number(accountNumber)
       );
 
-      const debitedAccount = {
-        ...accountToUpdateForDebit,
-        balance:
-          accountToUpdateForDebit &&
-          accountToUpdateForDebit?.balance - Number(transactionDetails.amount),
-      };
+      if (accountToUpdateForDebit) {
+        const debitedAccount = {
+          ...accountToUpdateForDebit,
+          balance:
+            accountToUpdateForDebit &&
+            accountToUpdateForDebit?.balance -
+              Number(transactionDetails.amount),
+        };
 
-      console.log(accountToUpdateForDebit);
-      console.log(debitedAccount);
+        const newDebitTransaction: NewTransaction = {
+          accountNumber: accountToUpdateForDebit?.accountNumber,
+          createdOn: new Date(),
+          type: 'debit',
+          cashier: user?.id,
+          amount: Number(transactionDetails.amount),
+          oldBalance: accountToUpdateForDebit?.balance,
+          newBalance: debitedAccount.balance,
+          description: transactionDetails.description,
+        };
 
-      accountsService
-        .debit(accountToUpdateForDebit?.id as string, debitedAccount as Account)
-        .then((response) => console.log(response));
+        console.log(accountToUpdateForDebit);
+        console.log(debitedAccount);
+
+        accountsService
+          .debit(
+            accountToUpdateForDebit?.id as string,
+            debitedAccount as Account
+          )
+          .then((response) => console.log(response));
+
+        transactionsService
+          .newDebitTransaction(newDebitTransaction)
+          .then((response) => console.log(response));
+      }
     }
+
     if (transactionType === 'credit') {
       console.log(transactionDetails, 'credit');
+
       const accountToUpdateForCredit = userAccounts.find(
         (account) => account.accountNumber === Number(accountNumber)
       );
 
-      const creditedAccount = {
-        ...accountToUpdateForCredit,
-        balance:
-          accountToUpdateForCredit &&
-          accountToUpdateForCredit?.balance + Number(transactionDetails.amount),
-      };
+      if (accountToUpdateForCredit) {
+        const creditedAccount = {
+          ...accountToUpdateForCredit,
+          balance:
+            accountToUpdateForCredit &&
+            accountToUpdateForCredit?.balance +
+              Number(transactionDetails.amount),
+        };
 
-      console.log(accountToUpdateForCredit);
-      console.log(creditedAccount);
+        const newCreditTransaction: NewTransaction = {
+          accountNumber: accountToUpdateForCredit?.accountNumber,
+          createdOn: new Date(),
+          type: 'credit',
+          cashier: user?.id,
+          amount: Number(transactionDetails.amount),
+          oldBalance: accountToUpdateForCredit?.balance,
+          newBalance: creditedAccount.balance,
+          description: transactionDetails.description,
+        };
 
-      accountsService
-        .credit(
-          accountToUpdateForCredit?.id as string,
-          creditedAccount as Account
-        )
-        .then((response) => console.log(response));
+        console.log(accountToUpdateForCredit);
+        console.log(creditedAccount);
+
+        accountsService
+          .credit(
+            accountToUpdateForCredit?.id as string,
+            creditedAccount as Account
+          )
+          .then((response) => console.log(response));
+
+        transactionsService
+          .newCreditTransaction(newCreditTransaction)
+          .then((response) => console.log(response));
+      }
     }
 
     setOpenTransactionBox(false);
