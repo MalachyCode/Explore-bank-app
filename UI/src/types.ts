@@ -132,3 +132,27 @@ export interface OpenAccountType {
   // type: string;
   // openingBalance : number,
 }
+
+export interface Transaction {
+  id: string;
+  createdOn: Date;
+  type: string; // credit or debit
+  accountNumber: number;
+  cashier?: string; // cashier who consummated the transaction
+  amount: number;
+  oldBalance: number;
+  newBalance: number;
+}
+
+export type NewTransaction = Omit<Transaction, 'id'>;
+
+// export interface Transaction {
+//   id: number;
+//   createdOn: Date;
+//   type: string; // credit or debit
+//   accountNumber: number;
+//   cashier: number; // cashier who consummated the transaction
+//   amount: number;
+//   oldBalance: number;
+//   newBalance: number;
+// }

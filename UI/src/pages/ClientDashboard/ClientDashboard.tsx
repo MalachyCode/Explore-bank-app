@@ -10,8 +10,9 @@ import {
   RenderIcons,
   RenderTotals,
 } from '../../components/RenderIconsandTotals';
-import { Account, User } from '../../types';
+import { Account, Transaction, User } from '../../types';
 import accountService from '../../services/accounts';
+import transactionsServices from '../../services/transactions';
 
 const ClientDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
   const [user, setUser] = useState<User>();
   const [profileOpen, setProfileOpen] = useState(false);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
+  const [transactions, setTransactions] = useState<Array<Transaction>>([]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -27,7 +29,13 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       setUser(user);
     }
     accountService.getAll().then((accounts) => setAccounts(accounts));
+    transactionsServices
+      .getAll()
+      .then((transactions) => setTransactions(transactions));
   }, []);
+
+  console.log(accounts);
+  console.log(transactions);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
