@@ -15,6 +15,7 @@ const Transfer = () => {
   const [transferPin, setTransferPin] = useState<string>('');
   const [selected, setSelected] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const [transferDetials, setTransferDetials] = useState<TransferType>({
     bankName: '',
@@ -77,51 +78,60 @@ const Transfer = () => {
   ];
   console.log(accountForTransfer);
 
-  // const date = new Date();
-  // console.log(date);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const updatedSendingAccount = {
-      ...sendingAccount,
-      balance:
-        sendingAccount &&
-        sendingAccount?.balance - Number(transferDetials.amount),
-    };
-    const updatedRecievingAccount = {
-      ...receivingAccount,
-      balance:
-        receivingAccount &&
-        receivingAccount?.balance + Number(transferDetials.amount),
-    };
+    if (user?.transferPin === transferPin) {
+      const updatedSendingAccount = {
+        ...sendingAccount,
+        balance:
+          sendingAccount &&
+          sendingAccount?.balance - Number(transferDetials.amount),
+      };
+      const updatedRecievingAccount = {
+        ...receivingAccount,
+        balance:
+          receivingAccount &&
+          receivingAccount?.balance + Number(transferDetials.amount),
+      };
 
-    accountService
-      .debit(sendingAccount?.id as string, updatedSendingAccount as Account)
-      .then((response) => console.log(response));
+      accountService
+        .debit(sendingAccount?.id as string, updatedSendingAccount as Account)
+        .then((response) => console.log(response));
 
-    accountService
-      .credit(
-        receivingAccount?.id as string,
-        updatedRecievingAccount as Account
-      )
-      .then((response) => console.log(response));
+      accountService
+        .credit(
+          receivingAccount?.id as string,
+          updatedRecievingAccount as Account
+        )
+        .then((response) => console.log(response));
 
-    console.log(updatedSendingAccount);
-    console.log(updatedRecievingAccount);
-    console.log(Number(transferPin));
+      console.log(updatedSendingAccount);
+      console.log(updatedRecievingAccount);
+      console.log(Number(transferPin));
 
-    navigate('/dashboard-client');
-    // console.log(
-    //   `You transfered ${transferDetials.amount} to ${transferDetials.accountNumber} of bank ${transferDetials.bankName}`
-    // );
-    setTransferDetials({
-      ...transferDetials,
-      bankName: '',
-      amount: '',
-      accountNumber: '',
-    });
+      navigate('/dashboard-client');
+      // console.log(
+      //   `You transfered ${transferDetials.amount} to ${transferDetials.accountNumber} of bank ${transferDetials.bankName}`
+      // );
+      setTransferDetials({
+        ...transferDetials,
+        bankName: '',
+        amount: '',
+        accountNumber: '',
+      });
+    } else {
+      setErrorMessage('Wrong transfer pin');
+      setOpenConfirm(false);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+    }
   };
+
+  console.log(transferPin);
+  console.log(user?.transferPin);
+  console.log(user?.transferPin === transferPin);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTransferDetials({ ...transferDetials, [e.target.name]: e.target.value });
@@ -129,6 +139,7 @@ const Transfer = () => {
 
   return (
     <div className='transfer'>
+      {errorMessage && <div className='error'>{errorMessage}</div>}
       <div className={'confirm-container ' + (openConfirm && 'active')}>
         <div className='confirm'>
           <h3>Tranfer Confirmation</h3>
@@ -206,6 +217,16 @@ const Transfer = () => {
           <button type='submit' className='btn'>
             Transfer
           </button>
+          {user?.transferPin === '' && (
+            <p
+              className='set-pin'
+              onClick={() =>
+                navigate(`/dashboard-client/${user.id}/set-transfer-pin`)
+              }
+            >
+              Set Transfer Pin
+            </p>
+          )}
         </form>
       </div>
     </div>

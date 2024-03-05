@@ -110,6 +110,7 @@ const SignupPage = () => {
       type: 'client',
       isAdmin: false,
       number: values.phoneNumber,
+      transferPin: '',
     };
 
     userService

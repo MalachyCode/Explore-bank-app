@@ -87,6 +87,7 @@ export interface User {
   type: string;
   isAdmin: boolean;
   number: string;
+  transferPin?: string;
 }
 // export interface User {
 //   id: number;
@@ -104,12 +105,12 @@ export type NewUser = Omit<User, 'id'>;
 
 export interface Account {
   id: string;
-  accountNumber: number;
+  balance: number;
   createdOn: Date;
   owner: string;
-  type: string;
   status: string;
-  balance: number;
+  accountNumber: number;
+  type: string;
 }
 // export interface Account {
 //   id: number;

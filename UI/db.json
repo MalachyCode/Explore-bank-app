@@ -9,7 +9,8 @@
       "password": "Juliet22@",
       "type": "client",
       "isAdmin": false,
-      "number": "08100000000"
+      "number": "08100000000",
+      "transferPin": "7785"
     },
     {
       "id": "6344",
@@ -20,7 +21,8 @@
       "password": "James22@",
       "type": "client",
       "isAdmin": false,
-      "number": "08111111111"
+      "number": "08111111111",
+      "transferPin": ""
     },
     {
       "id": "c59f",
@@ -31,7 +33,8 @@
       "password": "Ahmed22@",
       "type": "client",
       "isAdmin": false,
-      "number": "09022222222"
+      "number": "09022222222",
+      "transferPin": ""
     },
     {
       "id": "dc6a",
@@ -42,7 +45,8 @@
       "password": "Grace22@",
       "type": "client",
       "isAdmin": false,
-      "number": "09033333333"
+      "number": "09033333333",
+      "transferPin": ""
     },
     {
       "id": "64a6",
@@ -75,7 +79,8 @@
       "password": "Kennedy22@",
       "type": "client",
       "isAdmin": false,
-      "number": "09044877395"
+      "number": "09044877395",
+      "transferPin": ""
     },
     {
       "id": "9db1",

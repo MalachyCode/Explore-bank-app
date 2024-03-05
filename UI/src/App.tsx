@@ -19,6 +19,7 @@ import { Account, User } from './types';
 import AccountPage from './pages/AccountPage/AccountPage';
 import OpenAccount from './pages/OpenAccount/OpenAccount';
 import AccountInfo from './pages/AccountInfo/AccountInfo';
+import SetTransferPinPage from './pages/SetTransferPinPage/SetTransferPinPage';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -67,6 +68,10 @@ function App() {
             element={<StaffDashboard handleLogout={handleLogout} />}
           />
           <Route path='/open-account' element={<OpenAccount />} />
+          <Route
+            path='/dashboard-client/:id/set-transfer-pin'
+            element={<SetTransferPinPage />}
+          />
           <Route
             path='/dashboard-client'
             element={<ClientDashboard handleLogout={handleLogout} />}
