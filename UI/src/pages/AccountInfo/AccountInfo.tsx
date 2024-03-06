@@ -1,7 +1,43 @@
-import { Account } from '../../types';
+import { Account, Transaction, User } from '../../types';
 import './AccountInfo.scss';
+import transactionsService from '../../services/transactions';
+import { useEffect, useState } from 'react';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import HistoryIcon from '@mui/icons-material/History';
+import { RenderIcons } from '../../components/RenderIconsandTotals';
+import { useNavigate } from 'react-router-dom';
 
 const AccountInfo = (props: { account: Account | null | undefined }) => {
+  const navigate = useNavigate();
+  const [transactions, setTransactions] = useState<Array<Transaction>>([]);
+  const [user, setUser] = useState<User>();
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
+
+    transactionsService
+      .getAll()
+      .then((transactions) => setTransactions(transactions));
+  }, []);
+
+  // const userTransactions = transactions.filter(
+  //   (transaction) => transaction.accountNumber === props.account?.accountNumber
+  // );
+
+  const userTransactionsTwo = transactions
+    .filter(
+      (transaction) =>
+        transaction.accountNumber === props.account?.accountNumber
+    )
+    .slice(0, 3);
+
+  // console.log(userTransactions);
+  console.log(userTransactionsTwo);
+
   return (
     <div className='account-info'>
       <div className='container'>
@@ -19,8 +55,41 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
           </div>
         </div>
         <div className='body'>
-          Account Info Page for {props.account?.accountNumber}
-          <p>Status: {props.account?.status}</p>
+          <div className='buttons-container'>
+            {/* <div>
+              <RenderIcons
+                label='Transfer'
+                icon='./assets/icons8-money-transfer-48.png'
+                onClick={() =>
+                  navigate(`/dashboard-client/${user?.id}/transfer`)
+                }
+              />
+            </div> */}
+            <div>
+              {<TextSnippetIcon fontSize='large' />}
+              <div className='content'>Generate Statement</div>
+            </div>
+            <div>
+              {<HistoryIcon fontSize='large' />}
+              <div className='content'>Transactions</div>
+            </div>
+          </div>
+          <h3 className='header'>Transactions</h3>
+          {userTransactionsTwo.map((transaction) => (
+            <div className='transaction'>
+              <div className='left'>{<HistoryIcon fontSize='large' />}</div>
+              <div className='center'>
+                <div>{transaction.description}</div>
+              </div>
+              <div className='right'>
+                {transaction.type === 'credit' ? (
+                  <div className='credit'>{`+ ${transaction.amount}`}</div>
+                ) : (
+                  <div className='debit'>{`- ${transaction.amount}`}</div>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

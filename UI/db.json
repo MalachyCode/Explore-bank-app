@@ -106,7 +106,7 @@
   "accounts": [
     {
       "id": "9346",
-      "balance": 150000,
+      "balance": 200000,
       "createdOn": "2024-02-21T12:10:16.922Z",
       "owner": "9cac",
       "status": "dormant",
@@ -133,7 +133,7 @@
     },
     {
       "id": "ae7c",
-      "balance": 130000,
+      "balance": 180000,
       "createdOn": "2024-02-21T12:12:55.326Z",
       "owner": "6069",
       "status": "active",
@@ -143,55 +143,55 @@
   ],
   "transactions": [
     {
-      "id": "8b9c",
+      "id": "4291",
       "accountNumber": 1849520131,
-      "createdOn": "2024-03-05T19:48:01.484Z",
+      "createdOn": "2024-03-06T16:10:19.049Z",
       "type": "credit",
-      "amount": 1635,
-      "oldBalance": 98365,
-      "newBalance": 100000
-    },
-    {
-      "id": "7173",
-      "accountNumber": 7286559523,
-      "createdOn": "2024-03-05T19:48:01.484Z",
-      "type": "debit",
-      "amount": 1635,
-      "oldBalance": 501635,
-      "newBalance": 500000
-    },
-    {
-      "id": "40de",
-      "accountNumber": 1849520131,
-      "createdOn": "2024-03-05T20:30:30.962Z",
-      "type": "credit",
-      "cashier": "64a6",
       "amount": 50000,
-      "oldBalance": 100000,
-      "newBalance": 150000,
-      "description": "Credit Transaction"
+      "oldBalance": 150000,
+      "newBalance": 200000,
+      "description": "Frm:Juliet Oma, Explore BankMobile; Moving weekly savings to my savings account"
     },
     {
-      "id": "0fb8",
+      "id": "ee2f",
       "accountNumber": 7286559523,
-      "createdOn": "2024-03-05T20:32:24.612Z",
+      "createdOn": "2024-03-06T16:10:19.049Z",
       "type": "debit",
-      "cashier": "9db1",
       "amount": 50000,
       "oldBalance": 500000,
       "newBalance": 450000,
-      "description": "Debit transaction"
+      "description": "To:Juliet Oma, Explore BankMobile; Moving weekly savings to my savings account"
     },
     {
-      "id": "1157",
+      "id": "f80c",
       "accountNumber": 7286559523,
-      "createdOn": "2024-03-05T20:33:07.002Z",
+      "createdOn": "2024-03-06T16:19:49.003Z",
       "type": "credit",
-      "cashier": "9db1",
-      "amount": 50000,
+      "cashier": "64a6",
+      "amount": 100000,
       "oldBalance": 450000,
+      "newBalance": 550000,
+      "description": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Paid into client (Juliet Oma) account"
+    },
+    {
+      "id": "3e89",
+      "accountNumber": 5408399080,
+      "createdOn": "2024-03-06T16:22:30.520Z",
+      "type": "credit",
+      "amount": 50000,
+      "oldBalance": 130000,
+      "newBalance": 180000,
+      "description": "Frm:Juliet Oma, Explore BankMobile; Kennedy Jideofor Allowance"
+    },
+    {
+      "id": "bb61",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-03-06T16:22:30.520Z",
+      "type": "debit",
+      "amount": 50000,
+      "oldBalance": 550000,
       "newBalance": 500000,
-      "description": "Credit Transaction"
+      "description": "To:Kennedy Jideofor, Explore BankMobile; Kennedy Jideofor Allowance"
     }
   ]
 }
