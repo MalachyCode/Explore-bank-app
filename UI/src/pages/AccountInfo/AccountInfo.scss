@@ -39,10 +39,75 @@
 
     .body {
       width: 95%;
-      background: green;
+      // background: green;
       width: auto;
       padding: 5px;
       margin: 2.5%;
+
+      .buttons-container {
+        // background: pink;
+        width: 100%;
+        height: 15vh;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        overflow: hidden;
+
+        div {
+          width: 30%;
+          height: 100%;
+          background: #e1dcd9;
+          padding: 0.75em;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+
+          .content {
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
+
+      .header {
+        text-align: center;
+      }
+
+      .transaction {
+        display: flex;
+        flex-direction: row;
+        margin: 5px 0;
+        background: #e1dcd9;
+        width: 100%;
+        padding: 0.75em;
+
+        .left {
+          width: 20%;
+          display: flex;
+          align-items: center;
+        }
+
+        .center {
+          width: 60%;
+        }
+
+        .right {
+          width: 20%;
+          display: flex;
+          align-items: center;
+        }
+
+        .debit {
+          color: red;
+        }
+        .credit {
+          color: green;
+        }
+      }
     }
   }
 }
