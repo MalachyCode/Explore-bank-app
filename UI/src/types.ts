@@ -134,7 +134,7 @@ export interface OpenAccountType {
   // openingBalance : number,
 }
 
-export interface Transaction {
+export interface TransactionType {
   id: string;
   createdOn: Date;
   type: string; // credit or debit
@@ -146,7 +146,7 @@ export interface Transaction {
   description?: string;
 }
 
-export type NewTransaction = Omit<Transaction, 'id'>;
+export type NewTransaction = Omit<TransactionType, 'id'>;
 
 // export interface Transaction {
 //   id: number;
