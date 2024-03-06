@@ -26,6 +26,7 @@ const Transfer = () => {
     accountNumber: '',
     amount: '',
     from: '',
+    description: '',
   });
 
   useEffect(() => {
@@ -84,6 +85,15 @@ const Transfer = () => {
       label: 'Amount',
       required: true,
     },
+    {
+      id: 'description',
+      name: 'description',
+      type: 'text',
+      placeholder: 'Ddescription',
+      errorMessage: 'Enter transfer description',
+      label: 'Description',
+      required: true,
+    },
   ];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -127,6 +137,7 @@ const Transfer = () => {
             amount: Number(transferDetials.amount),
             oldBalance: receivingAccount?.balance,
             newBalance: updatedRecievingAccount.balance,
+            description: `Frm:${user.firstName} ${user.lastName}, ${transferDetials.bankName}Mobile; ${transferDetials.description}`,
           };
 
           const newDebitTransaction: NewTransaction = {
@@ -136,6 +147,7 @@ const Transfer = () => {
             amount: Number(transferDetials.amount),
             oldBalance: sendingAccount?.balance,
             newBalance: updatedSendingAccount.balance,
+            description: `To:${receivingAccountOwner?.firstName} ${receivingAccountOwner?.lastName}, ${transferDetials.bankName}Mobile; ${transferDetials.description}`,
           };
 
           transactionsService
