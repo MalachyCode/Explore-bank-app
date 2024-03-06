@@ -87,7 +87,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           amount: Number(transactionDetails.amount),
           oldBalance: accountToUpdateForDebit?.balance,
           newBalance: debitedAccount.balance,
-          description: transactionDetails.description,
+          description: `Over counter debit transaction at Explore Bank branch by cashier: ${user?.firstName} ${user?.lastName}; ${transactionDetails.description}`,
         };
 
         console.log(accountToUpdateForDebit);
@@ -130,7 +130,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           amount: Number(transactionDetails.amount),
           oldBalance: accountToUpdateForCredit?.balance,
           newBalance: creditedAccount.balance,
-          description: transactionDetails.description,
+          description: `Over counter credit transaction at Explore Bank branch by cashier: ${user?.firstName} ${user?.lastName}; ${transactionDetails.description}`,
         };
 
         console.log(accountToUpdateForCredit);
