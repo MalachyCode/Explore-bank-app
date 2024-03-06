@@ -20,6 +20,7 @@ const Transfer = () => {
   const [accountErrorMessage, setAccountErrorMessage] = useState<string | null>(
     null
   );
+  const dailyLimit = 1000000;
 
   const [transferDetials, setTransferDetials] = useState<TransferType>({
     bankName: '',
@@ -275,7 +276,8 @@ const Transfer = () => {
           </div>
           <div className='daily-limit-box'>
             <div className='total'>
-              <span>daily limit</span>1,000,000
+              <span>daily limit</span>
+              {dailyLimit}
             </div>
             <div className='remaining'>
               <span>remaining</span>950,000

@@ -1,4 +1,4 @@
-import { Account, Transaction, User } from '../../types';
+import { Account, TransactionType, User } from '../../types';
 import './AccountInfo.scss';
 import transactionsService from '../../services/transactions';
 import { useEffect, useState } from 'react';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AccountInfo = (props: { account: Account | null | undefined }) => {
   const navigate = useNavigate();
-  const [transactions, setTransactions] = useState<Array<Transaction>>([]);
+  const [transactions, setTransactions] = useState<Array<TransactionType>>([]);
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
     .slice(0, 3);
 
   // console.log(userTransactions);
-  console.log(userTransactionsTwo);
+  // console.log(userTransactionsTwo);
 
   return (
     <div className='account-info'>
@@ -69,7 +69,13 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
               {<TextSnippetIcon fontSize='large' />}
               <div className='content'>Generate Statement</div>
             </div>
-            <div>
+            <div
+              onClick={() =>
+                navigate(
+                  `/dashboard-client/account-info/:id/transactions/${props.account?.accountNumber}`
+                )
+              }
+            >
               {<HistoryIcon fontSize='large' />}
               <div className='content'>Transactions</div>
             </div>
