@@ -72,7 +72,7 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
             <div
               onClick={() =>
                 navigate(
-                  `/dashboard-client/account-info/:id/transactions/${props.account?.accountNumber}`
+                  `/dashboard-client/account-info/${props.account?.id}/transactions/${props.account?.accountNumber}`
                 )
               }
             >

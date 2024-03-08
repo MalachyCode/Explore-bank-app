@@ -22,6 +22,7 @@ import AccountInfo from './pages/AccountInfo/AccountInfo';
 import SetTransferPinPage from './pages/SetTransferPinPage/SetTransferPinPage';
 import Transaction from './pages/Transaction/Transaction';
 import transactionsService from './services/transactions';
+import TransactionInfo from './pages/Transaction/TransactionInfo/TransactionInfo';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -50,11 +51,26 @@ function App() {
     '/dashboard-client/account-info/:id/transactions/:accountNumber'
   );
 
+  const matchTransaction = useMatch(
+    '/dashboard-client/account-info/:id/transactions/:accountNumber/:transactionId'
+  );
+
   const userTransactions = transactions.filter(
     (transaction) =>
       transaction.accountNumber ===
       Number(matchAccountNumber?.params.accountNumber)
   );
+
+  const singleTransaction = matchTransaction
+    ? transactions.find(
+        (transaction) =>
+          transaction.id === matchTransaction?.params.transactionId
+      )
+    : null;
+
+  const accountForTransactions = matchAccountNumber
+    ? accounts.find((account) => account.id === matchAccountNumber.params.id)
+    : null;
 
   console.log(account);
 
@@ -99,8 +115,17 @@ function App() {
             element={<AccountInfo account={account} />}
           />
           <Route
+            path='/dashboard-client/account-info/:id/transactions/:accountNumber/:id'
+            element={<TransactionInfo transaction={singleTransaction} />}
+          />
+          <Route
             path='/dashboard-client/account-info/:id/transactions/:accountNumber'
-            element={<Transaction transactions={userTransactions} />}
+            element={
+              <Transaction
+                transactions={userTransactions}
+                account={accountForTransactions}
+              />
+            }
           />
           <Route path='/password-reset' element={<ForgotPasswordPage />} />
           <Route path='/login' element={<LoginPage />} />
