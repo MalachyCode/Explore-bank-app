@@ -6,7 +6,6 @@ import usersService from '../../services/users';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import transactionsService from '../../services/transactions';
-// import Select from 'react-select';
 
 interface TransactionType {
   amount: string;
