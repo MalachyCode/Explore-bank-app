@@ -4,7 +4,7 @@ import transactionsService from '../../services/transactions';
 import { useEffect, useState } from 'react';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import HistoryIcon from '@mui/icons-material/History';
-import { RenderIcons } from '../../components/RenderIconsandTotals';
+// import { RenderIcons } from '../../components/RenderIconsandTotals';
 import { useNavigate } from 'react-router-dom';
 
 const AccountInfo = (props: { account: Account | null | undefined }) => {
