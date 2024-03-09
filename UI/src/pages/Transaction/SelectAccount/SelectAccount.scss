@@ -1,0 +1,62 @@
+.select-account {
+  width: 100vw;
+  height: 100vh;
+  background: #e1dcd9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h3 {
+    position: relative;
+    top: 5%;
+  }
+
+  .container {
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    max-width: 600px;
+
+    .total {
+      height: 150px;
+      width: 90%;
+      background: #8f8681;
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: row;
+      transition: all 1s ease;
+      margin: 20px;
+      padding: 20px 0;
+      cursor: pointer;
+
+      .total-info {
+        display: flex;
+        flex-direction: column;
+        h3,
+        strong,
+        p {
+          padding-left: 30px;
+          margin-bottom: -8px;
+        }
+        .amount {
+          font-size: 35px;
+          margin: 10px 0;
+        }
+        .savings-percentage {
+          margin: -2px 0;
+        }
+      }
+      &.two {
+        background: #a67f78;
+      }
+      &:hover {
+        background: #32435f;
+      }
+      @media (min-width: 768px) {
+        width: 94%;
+      }
+    }
+  }
+}
