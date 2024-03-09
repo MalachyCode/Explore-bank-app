@@ -85,7 +85,14 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             label='Sport Wallet Funding'
             icon='./assets/icons8-volleyball-48.png'
           />
-          <div className='item'>
+          <div
+            className='item'
+            onClick={() =>
+              navigate(
+                `/dashboard-client/${user?.id}/transactions/select-account`
+              )
+            }
+          >
             <HistoryIcon className='icon' />
             <span>Transaction History</span>
           </div>
