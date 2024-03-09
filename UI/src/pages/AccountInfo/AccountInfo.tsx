@@ -82,7 +82,14 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
           </div>
           <h3 className='header'>Transactions</h3>
           {userTransactionsTwo.map((transaction) => (
-            <div className='transaction'>
+            <div
+              className='transaction'
+              onClick={() =>
+                navigate(
+                  `/dashboard-client/account-info/${props.account?.id}/transactions/${props.account?.accountNumber}/${transaction.id}`
+                )
+              }
+            >
               <div className='left'>{<HistoryIcon fontSize='large' />}</div>
               <div className='center'>
                 <div>{transaction.description}</div>
