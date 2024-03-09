@@ -20,9 +20,10 @@ import AccountPage from './pages/AccountPage/AccountPage';
 import OpenAccount from './pages/OpenAccount/OpenAccount';
 import AccountInfo from './pages/AccountInfo/AccountInfo';
 import SetTransferPinPage from './pages/SetTransferPinPage/SetTransferPinPage';
-import Transaction from './pages/Transaction/Transaction';
+import Transactions from './pages/Transaction/Transactions';
 import transactionsService from './services/transactions';
 import TransactionInfo from './pages/Transaction/TransactionInfo/TransactionInfo';
+import SelectAccount from './pages/Transaction/SelectAccount/SelectAccount';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -119,9 +120,13 @@ function App() {
             element={<TransactionInfo transaction={singleTransaction} />}
           />
           <Route
+            path='/dashboard-client/:id/transactions/select-account'
+            element={<SelectAccount />}
+          />
+          <Route
             path='/dashboard-client/account-info/:id/transactions/:accountNumber'
             element={
-              <Transaction
+              <Transactions
                 transactions={userTransactions}
                 account={accountForTransactions}
               />

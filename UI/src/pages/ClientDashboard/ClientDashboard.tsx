@@ -10,7 +10,7 @@ import {
   RenderIcons,
   RenderTotals,
 } from '../../components/RenderIconsandTotals';
-import { Account, Transaction, User } from '../../types';
+import { Account, TransactionType, User } from '../../types';
 import accountService from '../../services/accounts';
 import transactionsServices from '../../services/transactions';
 
@@ -20,7 +20,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
   const [user, setUser] = useState<User>();
   const [profileOpen, setProfileOpen] = useState(false);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
-  const [transactions, setTransactions] = useState<Array<Transaction>>([]);
+  const [transactions, setTransactions] = useState<Array<TransactionType>>([]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -174,7 +174,14 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
               label='Sport Wallet Funding'
               icon='./assets/icons8-volleyball-48.png'
             />
-            <div className='item'>
+            <div
+              className='item'
+              onClick={() =>
+                navigate(
+                  `/dashboard-client/${user?.id}/transactions/select-account`
+                )
+              }
+            >
               <HistoryIcon className='icon' />
               <span>Transaction History</span>
             </div>

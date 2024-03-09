@@ -35,6 +35,7 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
     )
     .slice(0, 3);
 
+  console.log(user);
   // console.log(userTransactions);
   // console.log(userTransactionsTwo);
 
