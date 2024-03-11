@@ -14,12 +14,20 @@ export const RenderTotals = (props: {
   balance: number;
   accountNum: number;
   id: string;
+  onClick: string;
 }) => {
   const navigate = useNavigate();
   return (
     <div
       className={props.className}
-      onClick={() => navigate(`/dashboard-client/account-info/${props.id}`)}
+      onClick={
+        props.onClick === 'toAccountInfo'
+          ? () => navigate(`/dashboard-client/account-info/${props.id}`)
+          : () =>
+              navigate(
+                `/dashboard-client/account-info/${props?.id}/transactions/${props?.accountNum}`
+              )
+      }
     >
       <div className='total-info'>
         <h3>{`Account: ${props.accountNum}`}</h3>

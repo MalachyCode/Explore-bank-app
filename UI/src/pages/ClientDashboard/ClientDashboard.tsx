@@ -144,6 +144,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
                 accountNum={account.accountNumber}
                 className='total'
                 id={account.id}
+                onClick='toAccountInfo'
               />
             ))}
           </div>

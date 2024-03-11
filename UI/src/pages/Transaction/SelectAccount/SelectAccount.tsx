@@ -31,6 +31,7 @@ const SelectAccount = () => {
             accountNum={account.accountNumber}
             className='total'
             id={account.id}
+            onClick='toAccountAllTransactions'
           />
         ))}
       </div>
