@@ -7,6 +7,7 @@ const TransactionInfo = (props: {
   transaction: TransactionType | null | undefined;
 }) => (
   <div className='transaction-info'>
+    <div className='report-container'></div>
     <div className='container'>
       <div className='top'>
         <PaymentsIcon className='payment-icon' />

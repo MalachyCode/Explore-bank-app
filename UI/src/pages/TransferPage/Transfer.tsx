@@ -220,27 +220,27 @@ const Transfer = () => {
         <div className='confirm'>
           <h3>Tranfer Confirmation</h3>
           <div className='seperator'></div>
-          Transfer &#8358;{transferDetials.amount} to{' '}
-          {receivingAccountOwner?.firstName} {receivingAccountOwner?.lastName}{' '}
-          with account number {receivingAccount?.accountNumber} of{' '}
-          {transferDetials.bankName}
-          <div className='confirmation-form'>
-            <form className='form' onSubmit={handleSubmit}>
-              <label htmlFor='pin' className='form-label'>
-                <p>Enter Pin</p>
-              </label>
-              <input
-                value={transferPin}
-                className='form-input'
-                id='pin'
-                onChange={(e) => setTransferPin(e.target.value)}
-                required
-              />
-              <button type='submit' className='btn'>
-                Transfer
-              </button>
-            </form>
-          </div>
+          <p>
+            Transfer &#8358;{transferDetials.amount} to{' '}
+            {receivingAccountOwner?.firstName} {receivingAccountOwner?.lastName}{' '}
+            with account number {receivingAccount?.accountNumber} of{' '}
+            {transferDetials.bankName}
+          </p>
+          <form className='form' onSubmit={handleSubmit}>
+            <label htmlFor='pin' className='form-label'>
+              <p>Enter Pin</p>
+            </label>
+            <input
+              value={transferPin}
+              className='form-input'
+              id='pin'
+              onChange={(e) => setTransferPin(e.target.value)}
+              required
+            />
+            <button type='submit' className='btn'>
+              Transfer
+            </button>
+          </form>
           <div className='cancel' onClick={() => setOpenConfirm(false)}>
             Cancel
           </div>
