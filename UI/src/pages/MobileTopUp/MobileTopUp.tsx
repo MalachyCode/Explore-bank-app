@@ -29,13 +29,6 @@ const MobileTopUp = () => {
       required: true,
     },
   ];
-  // useEffect(() => {
-  //   const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
-  //   if (loggedUserJSON) {
-  //     const user = JSON.parse(loggedUserJSON);
-  //     setUser(user);
-  //   }
-  // }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
