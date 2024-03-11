@@ -13,111 +13,15 @@
   // position: fixed;
   align-items: center;
   padding: 50px 0;
-  .form {
-    width: 90%;
-    max-width: $fixed-width;
-    background: $white;
-    border-radius: $borderRadius;
-    box-shadow: $shadow-2;
-    padding: 2rem 0.3rem 2rem 3rem;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    .form-header {
-      color: $primary-700;
-      text-align: center;
-      margin: 7px;
-      font-size: larger;
-    }
-    .form-header-seperator {
-      width: 97%;
-      height: 2px;
-      background: $primary-700;
-      margin: 5px;
-      @media (min-width: 992px) {
-        width: 97%;
-      }
-      @media (min-width: 768px) {
-        width: 93%;
-      }
-      @media (max-width: 576px) {
-        width: 97%;
-      }
-    }
-    .form-label {
-      display: block;
-      font-size: $smallText;
-      margin-bottom: 0.5rem;
-      text-transform: capitalize;
-      letter-spacing: $letterSpacing;
-    }
-    .form-input,
-    .form-textarea {
-      width: 90%;
-      padding: 15px;
-      border-radius: 4px;
-      background: $backgroundColor;
-      margin: auto;
-      &::placeholder {
-        font-family: inherit;
-        color: $grey-400;
-      }
-    }
-    .form-row {
-      margin-bottom: 1rem;
-    }
-    .form-textarea {
-      height: 7rem;
-    }
-    .btn {
-      width: 95%;
-      margin-top: 50px;
-      margin-bottom: 35px;
+
+  .for-login {
+    margin-top: 0;
+    text-align: center;
+    .to-login {
+      color: #8f8681;
       cursor: pointer;
-      color: $white;
-      background: $primary-500;
-      border: transparent;
-      border-radius: 4px;
-      letter-spacing: $letterSpacing;
-      padding: 15px;
-      box-shadow: $shadow-1;
-      transition: $transition;
-      text-transform: capitalize;
-      display: inline-block;
       &:hover {
-        background: $primary-700;
-        box-shadow: $shadow-3;
-      }
-      @media (min-width: 992px) {
-        width: 97%;
-      }
-      @media (min-width: 768px) {
-        width: 94%;
-      }
-      @media (max-width: 576px) {
-        width: 98%;
-      }
-    }
-    @media (min-width: 992px) {
-      width: 90%;
-    }
-    @media (min-width: 576px) {
-      width: 80%;
-      padding: 2rem 1rem 2rem 3rem;
-    }
-    @media (max-width: 576px) {
-      width: 70%;
-      padding: 2rem 2.5rem 2rem 3rem;
-    }
-    .for-login {
-      margin-top: 0;
-      text-align: center;
-      .to-login {
-        color: #8f8681;
-        cursor: pointer;
-        &:hover {
-          color: #32435f;
-        }
+        color: #32435f;
       }
     }
   }

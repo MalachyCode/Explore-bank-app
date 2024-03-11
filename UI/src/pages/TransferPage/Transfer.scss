@@ -36,7 +36,7 @@
 
     .confirm {
       width: 70%;
-      height: 70%;
+      height: 80%;
       background: #e1dcd9;
       display: flex;
       flex-direction: column;
@@ -45,6 +45,7 @@
       padding: 10px;
       max-width: $fixed-width;
       overflow: hidden;
+      position: relative;
 
       .seperator {
         width: 90%;
@@ -61,76 +62,32 @@
         margin-bottom: 8px;
       }
 
-      .confirmation-form {
-        border: 1px solid #32435f;
-        border-radius: 5px;
-        padding: 10px 10px 10px 40px;
-        margin-top: 40px;
-        .form {
-          width: 90%;
+      p {
+        margin-bottom: 30px;
+      }
 
-          .form-label {
-            display: block;
-            font-size: $smallText;
-            margin-bottom: 0.5rem;
-            text-transform: capitalize;
-            letter-spacing: $letterSpacing;
+      .form {
+        padding-right: 40px;
+        .btn {
+          @media (max-width: 576px) {
+            width: 102%;
           }
-
-          .form-input {
-            width: 85%;
-            padding: 15px;
-            border-radius: 4px;
-            background: $backgroundColor;
-            border: 1px solid $grey-200;
-            margin: auto;
-            &::placeholder {
-              font-family: inherit;
-              color: $grey-400;
-            }
-          }
-
-          .btn {
-            width: 95%;
-            margin-top: 50px;
-            margin-bottom: 35px;
-            cursor: pointer;
-            color: $white;
-            background: $primary-500;
-            border: transparent;
-            border-radius: 4px;
-            letter-spacing: $letterSpacing;
-            padding: 15px;
-            box-shadow: $shadow-1;
-            transition: $transition;
-            text-transform: capitalize;
-            display: inline-block;
-            overflow: hidden;
-
-            &:hover {
-              background: $primary-700;
-              box-shadow: $shadow-3;
-            }
-            @media (min-width: 992px) {
-              width: 97%;
-            }
-            @media (min-width: 768px) {
-              width: 94%;
-            }
-            @media (max-width: 576px) {
-              width: 98%;
-            }
+          @media (min-width: 576px) {
+            position: relative;
+            left: 10px;
+            width: 96%;
           }
         }
       }
+
       .cancel {
         // border: 1px solid #32435f;
         padding: 6px;
-        margin-bottom: -20px;
         margin-top: 10px;
         border-radius: 3px;
         position: relative;
-        left: 135px;
+        // top: 50px;
+        right: -40%;
         color: #32435f;
         cursor: pointer;
       }
@@ -145,21 +102,10 @@
     position: relative;
     padding-top: 25px;
     .form {
-      width: 90%;
-      // height: 100%;
-      max-width: $fixed-width;
-      background: $white;
-      border-radius: $borderRadius;
-      box-shadow: $shadow-2;
-      padding: 2rem 0.3rem 2rem 3rem;
       margin: auto;
       margin-top: 10px;
       margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
       background: #e1dcd9;
-      position: relative;
 
       .account-balance-container {
         width: 98%;
@@ -236,38 +182,6 @@
         overflow: hidden;
       }
 
-      .btn {
-        width: 95%;
-        margin-top: 50px;
-        margin-bottom: 35px;
-        cursor: pointer;
-        color: $white;
-        background: $primary-500;
-        border: transparent;
-        border-radius: 4px;
-        letter-spacing: $letterSpacing;
-        padding: 15px;
-        box-shadow: $shadow-1;
-        transition: $transition;
-        text-transform: capitalize;
-        display: inline-block;
-        overflow: hidden;
-
-        &:hover {
-          background: $primary-700;
-          box-shadow: $shadow-3;
-        }
-        @media (min-width: 992px) {
-          width: 97%;
-        }
-        @media (min-width: 768px) {
-          width: 94%;
-        }
-        @media (max-width: 576px) {
-          width: 98%;
-        }
-      }
-
       .set-pin {
         margin: -10px 0;
         padding: 0;
@@ -280,18 +194,6 @@
         &:hover {
           color: $primary-500;
         }
-      }
-
-      @media (min-width: 992px) {
-        width: 90%;
-      }
-      @media (min-width: 576px) {
-        width: 80%;
-        padding: 2rem 1rem 2rem 3rem;
-      }
-      @media (max-width: 576px) {
-        width: 70%;
-        padding: 2rem 2.5rem 2rem 3rem;
       }
     }
   }

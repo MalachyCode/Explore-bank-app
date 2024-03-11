@@ -5,6 +5,16 @@
   height: 100vh;
   background: #e1dcd9;
 
+  .report-container {
+    width: 90%;
+    height: 90%;
+    position: fixed;
+    background: white;
+    top: 5%;
+    left: 5%;
+    z-index: 1;
+  }
+
   .container {
     width: 90%;
     position: relative;
