@@ -1,0 +1,12 @@
+@import '../../global.scss';
+
+.mobile-topup {
+  width: 100vw;
+  height: 100vh;
+  background: #e1dcd9;
+
+  .form {
+    position: relative;
+    top: 5%;
+  }
+}

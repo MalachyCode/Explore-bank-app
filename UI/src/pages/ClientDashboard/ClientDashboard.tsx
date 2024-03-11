@@ -65,6 +65,9 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
           <RenderIcons
             label='Mobile Topup'
             icon='./assets/icons8-topup-payment-48.png'
+            onClick={() =>
+              navigate(`/dashboard-client/${user?.id}/mobile-topup`)
+            }
           />
           <RenderIcons
             label='Transfer'
@@ -180,6 +183,9 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             <RenderIcons
               label='Mobile Topup'
               icon='./assets/icons8-topup-payment-48.png'
+              onClick={() =>
+                navigate(`/dashboard-client/${user?.id}/mobile-topup`)
+              }
             />
             <RenderIcons
               label='Transfer'

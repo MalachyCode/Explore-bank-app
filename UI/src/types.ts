@@ -62,6 +62,11 @@ export interface LoginType {
   password: string;
 }
 
+export interface MobileTopUpType {
+  phoneNumber: string;
+  amount: string;
+}
+
 export interface TransferType {
   bankName: string;
   accountNumber: string;
