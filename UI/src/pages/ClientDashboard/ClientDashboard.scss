@@ -96,6 +96,7 @@
       overflow: hidden;
       background: #fff;
       margin: 0 40px 10px 10px;
+      z-index: 2;
 
       .menu-hamburger {
         margin: 10px;
@@ -124,16 +125,26 @@
         .notification-icon-container {
           display: flex;
           flex-direction: row;
+          align-items: center;
+          justify-content: center;
           cursor: pointer;
           border-radius: 50%;
           transition: all 1s ease;
-          padding: 10px 0 10px 10px;
+          padding: 10px;
           margin-right: 13px;
+          // background: blue;
+          // width: 50px;
+          // height: 50px;
+          overflow: hidden;
 
           .notification-icon {
             position: relative;
             z-index: 1;
             transition: all 1s ease;
+
+            &:hover {
+              color: #5f4945;
+            }
           }
           .notification-alert {
             position: relative;
@@ -142,13 +153,16 @@
             height: 10px;
             border-radius: 50%;
             background: red;
-            margin-top: 4px;
             right: 17px;
-            top: 2px;
+            top: -5px;
+
+            &.remove {
+              display: none;
+            }
           }
-          &:hover {
-            background: #e1dcd9;
-          }
+          // &:hover {
+          //   background: #e1dcd9;
+          // }
         }
       }
     }
@@ -202,6 +216,24 @@
           text-align: center;
           background: #5f4945;
           color: #e1dcd9;
+        }
+      }
+
+      .notifications-container {
+        width: 50%;
+        height: 60%;
+        position: fixed;
+        right: 2%;
+        top: -60%;
+        z-index: 1;
+        background: whitesmoke;
+        transition: all 1.5s ease;
+        max-width: 300px;
+        border-radius: 5px;
+
+        &.active {
+          // transform: ;
+          top: 75px;
         }
       }
 
