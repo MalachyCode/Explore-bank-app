@@ -21,6 +21,8 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [transactions, setTransactions] = useState<Array<TransactionType>>([]);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [removeNotification, setRemoveNotification] = useState(false);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -34,13 +36,12 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       .then((transactions) => setTransactions(transactions));
   }, []);
 
-  console.log(accounts);
-  console.log(transactions);
+  // console.log(accounts);
+  // console.log(transactions);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
   // console.log(accounts.map((account) => account.owner));
-  // console.log(user?.id);
 
   // console.log(accounts.map((account) => account.owner === user?.id));
 
@@ -109,16 +110,29 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             onClick={() => setMenuOpen(!menuOpen ? true : false)}
           />
           <h3>
-            Welcome back{' '}
+            Welcome back
             <strong className='account-name'>{user?.firstName}</strong>
           </h3>
           <div className='right'>
-            <div className='notification-icon-container'>
+            <div
+              className='notification-icon-container'
+              onClick={() => {
+                setNotificationOpen(!notificationOpen ? true : false);
+
+                setTimeout(() => {
+                  setRemoveNotification(true);
+                }, 5000);
+              }}
+            >
               <NotificationsNoneIcon
                 fontSize='large'
                 className='notification-icon'
               />
-              <div className='notification-alert'></div>
+              <div
+                className={
+                  'notification-alert ' + (removeNotification && 'remove')
+                }
+              ></div>
             </div>
             <AccountCircleIcon
               fontSize='large'
@@ -135,6 +149,11 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
               Logout
             </div>
           </div>
+          <div
+            className={
+              'notifications-container ' + (notificationOpen && 'active')
+            }
+          ></div>
           <div className='totals-container'>
             {userAccounts.map((account) => (
               <RenderTotals
