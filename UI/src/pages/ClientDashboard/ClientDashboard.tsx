@@ -10,9 +10,8 @@ import {
   RenderIcons,
   RenderTotals,
 } from '../../components/RenderIconsandTotals';
-import { Account, TransactionType, User } from '../../types';
+import { Account, User } from '../../types';
 import accountService from '../../services/accounts';
-import transactionsServices from '../../services/transactions';
 
 const ClientDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
@@ -20,7 +19,6 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
   const [user, setUser] = useState<User>();
   const [profileOpen, setProfileOpen] = useState(false);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
-  const [transactions, setTransactions] = useState<Array<TransactionType>>([]);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [removeNotification, setRemoveNotification] = useState(false);
 
@@ -31,9 +29,6 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       setUser(user);
     }
     accountService.getAll().then((accounts) => setAccounts(accounts));
-    transactionsServices
-      .getAll()
-      .then((transactions) => setTransactions(transactions));
   }, []);
 
   // console.log(accounts);
@@ -45,6 +40,63 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
 
   // console.log(accounts.map((account) => account.owner === user?.id));
 
+  const iconInputs = [
+    {
+      id: 'openAccount',
+      name: 'openAccount',
+      icon: './assets/icons8-bank-account-48.png',
+      label: 'Open Account',
+      onClick: () => navigate(`/open-account`),
+    },
+    {
+      id: 'billPayment',
+      name: 'billPayment',
+      icon: './assets/icons8-bill-48.png',
+      label: 'Bill Payment',
+    },
+    {
+      id: 'mobileTopup',
+      name: 'mobileTopup',
+      icon: './assets/icons8-topup-payment-48.png',
+      label: 'Mobile Topup',
+      onClick: () => navigate(`/dashboard-client/${user?.id}/mobile-topup`),
+    },
+    {
+      id: 'transfer',
+      name: 'transfer',
+      icon: './assets/icons8-money-transfer-48.png',
+      label: 'Transfer',
+      onClick: () => navigate(`/dashboard-client/${user?.id}/transfer`),
+    },
+    {
+      id: 'loans',
+      name: 'loans',
+      icon: './assets/loan2.png',
+      label: 'Loans',
+      iconClassName: 'loan-icon',
+      spanClassName: 'loan-tag',
+    },
+    {
+      id: 'referalReward',
+      name: 'referalReward',
+      icon: './assets/icons8-reward-48.png',
+      label: 'Referal & Rewards',
+      iconClassName: 'rewards-icon',
+    },
+    {
+      id: 'sportWalletFunding',
+      name: 'sportWalletFunding',
+      icon: './assets/icons8-volleyball-48.png',
+      label: 'Sport Wallet Funding',
+    },
+    {
+      id: 'mtnLogo',
+      name: 'mtnLogo',
+      icon: './assets/mtn.256x256.png',
+      label: 'MTN Logo',
+    },
+  ];
+
   const handleClick = () => {
     setProfileOpen(!profileOpen);
   };
@@ -53,42 +105,16 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
     <div className='client-dashboard'>
       <div className={'sidebar ' + (menuOpen && 'active')}>
         <div className='sidebar-container'>
-          <RenderIcons
-            label='Open Account'
-            icon='./assets/icons8-bank-account-48.png'
-            onClick={() => navigate(`/open-account`)}
-          />
-          <RenderIcons
-            label='Bill Payment'
-            icon='./assets/icons8-bill-48.png'
-          />
-          <RenderIcons
-            label='Mobile Topup'
-            icon='./assets/icons8-topup-payment-48.png'
-            onClick={() =>
-              navigate(`/dashboard-client/${user?.id}/mobile-topup`)
-            }
-          />
-          <RenderIcons
-            label='Transfer'
-            icon='./assets/icons8-money-transfer-48.png'
-            onClick={() => navigate(`/dashboard-client/${user?.id}/transfer`)}
-          />
-          <RenderIcons
-            iconClassName='loan-icon'
-            label='Loans'
-            icon='./assets/loan2.png'
-            spanClassName='loan-tag'
-          />
-          <RenderIcons
-            iconClassName='rewards-icon'
-            label='Referal & Rewards'
-            icon='./assets/icons8-reward-48.png'
-          />
-          <RenderIcons
-            label='Sport Wallet Funding'
-            icon='./assets/icons8-volleyball-48.png'
-          />
+          {iconInputs.map((iconInput) => (
+            <RenderIcons
+              icon={iconInput.icon}
+              label={iconInput.label}
+              onClick={iconInput.onClick}
+              key={iconInput.id}
+              iconClassName={iconInput.iconClassName}
+              spanClassName={iconInput.spanClassName}
+            />
+          ))}
           <div
             className='item'
             onClick={() =>
@@ -171,42 +197,16 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             ))}
           </div>
           <div className='menu-icons-container'>
-            <RenderIcons
-              label='Open Account'
-              icon='./assets/icons8-bank-account-48.png'
-              onClick={() => navigate(`/open-account`)}
-            />
-            <RenderIcons
-              label='Bill Payment'
-              icon='./assets/icons8-bill-48.png'
-            />
-            <RenderIcons
-              label='Mobile Topup'
-              icon='./assets/icons8-topup-payment-48.png'
-              onClick={() =>
-                navigate(`/dashboard-client/${user?.id}/mobile-topup`)
-              }
-            />
-            <RenderIcons
-              label='Transfer'
-              icon='./assets/icons8-money-transfer-48.png'
-              onClick={() => navigate(`/dashboard-client/${user?.id}/transfer`)}
-            />
-            <RenderIcons
-              iconClassName='loan-icon'
-              label='Loans'
-              icon='./assets/loan2.png'
-              spanClassName='loan-tag'
-            />
-            <RenderIcons
-              iconClassName='rewards-icon'
-              label='Referal & Rewards'
-              icon='./assets/icons8-reward-48.png'
-            />
-            <RenderIcons
-              label='Sport Wallet Funding'
-              icon='./assets/icons8-volleyball-48.png'
-            />
+            {iconInputs.map((iconInput) => (
+              <RenderIcons
+                icon={iconInput.icon}
+                label={iconInput.label}
+                onClick={iconInput.onClick}
+                key={iconInput.id}
+                iconClassName={iconInput.iconClassName}
+                spanClassName={iconInput.spanClassName}
+              />
+            ))}
             <div
               className='item'
               onClick={() =>

@@ -8,5 +8,26 @@
   .form {
     position: relative;
     top: 5%;
+
+    .amount-option-box {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      div {
+        width: 48%;
+        padding: 6px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: whitesmoke;
+        margin: 5px 2.5px;
+        box-shadow: $shadow-1;
+        cursor: pointer;
+      }
+    }
   }
 }
