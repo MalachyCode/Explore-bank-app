@@ -89,6 +89,12 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       icon: './assets/icons8-volleyball-48.png',
       label: 'Sport Wallet Funding',
     },
+    {
+      id: 'mtnLogo',
+      name: 'mtnLogo',
+      icon: './assets/mtn.256x256.png',
+      label: 'MTN Logo',
+    },
   ];
 
   const handleClick = () => {
