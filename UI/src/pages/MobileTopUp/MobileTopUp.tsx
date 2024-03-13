@@ -1,19 +1,43 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './MobileTopUp.scss';
-import { MobileTopUpType } from '../../types';
+import { Account, MobileTopUpType, User } from '../../types';
 import FormInput from '../../components/FormInput';
 import { RenderIcons } from '../../components/RenderIconsandTotals';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import accountsService from '../../services/accounts';
 
 const MobileTopUp = () => {
+  const [user, setUser] = useState<User>();
+  const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [topupDetails, setTopupDetails] = useState<MobileTopUpType>({
     phoneNumber: '',
     amount: '',
   });
   const [networkProvider, setNetworkProvider] = useState('');
   const [selected, setSelected] = useState(false);
+  const [openAccountSelectBox, setOpenAccountSelectBox] = useState(false);
+  const [accountToShow, setAccountToShow] = useState<Account>();
 
-  console.log(topupDetails.amount.split('.')[0]);
-  console.log(networkProvider);
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
+    accountsService.getAll().then((accounts) => {
+      setAccounts(accounts);
+      setAccountToShow(accounts[0])
+    });
+  }, []);
+
+  const userAccounts = accounts.filter((account) => account.owner === user?.id);
+
+  // console.log(userAccounts);
+
+  // console.log(topupDetails.amount.split('.')[0]);
+  // console.log(networkProvider);
+
+  console.log(accountToShow);
 
   const formInputs = [
     {
@@ -77,9 +101,44 @@ const MobileTopUp = () => {
 
   return (
     <div className='mobile-topup'>
+      <div
+        className={'account-select-box ' + (openAccountSelectBox && 'active')}
+      >
+        <div>Account</div>
+        {userAccounts.map((account) => (
+          <div className='account-to-select' onClick={() => {
+            setAccountToShow(account);
+            setOpenAccountSelectBox(false);
+            }}>
+            <div>
+              {user?.firstName} {user?.lastName}
+            </div>
+            <div>
+              {account.accountNumber} . &#8358; {account.balance} . REGULAR
+            </div>
+          </div>
+        ))}
+      </div>
+
       <form className='form' onSubmit={handleSubmit}>
         {/* <strong className='form-header'>Mobile Top-Up</strong>
         <div className='form-header-seperator'></div> */}
+
+        <div
+          className='total'
+          onClick={() =>
+            setOpenAccountSelectBox(!openAccountSelectBox ? true : false)
+          }
+        >
+          <div className='total-info'>
+            <h3>{`Account: ${accountToShow?.accountNumber}`}</h3>
+            <strong>
+              <h2 className='amount'>&#8358; {accountToShow?.balance}</h2>
+            </strong>
+            <p className='savings-percentage'>{`Status: ${accountToShow?.status}`}</p>
+          </div>
+          <ArrowDropDownIcon fontSize='large' className='dropdown-icon' />
+        </div>
         <div className='logos-container'>
           {logoInputs.map((logoInput) => (
             <RenderIcons

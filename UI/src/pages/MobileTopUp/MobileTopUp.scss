@@ -4,11 +4,112 @@
   width: 100vw;
   height: 100vh;
   background: #e1dcd9;
+  display: flex;
+  // flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .account-select-box {
+    width: 90%;
+    height: 50%;
+    background: white;
+    position: absolute;
+    margin: auto;
+    z-index: 2;
+    left: auto;
+    right: auto;
+    top: 100vh;
+    background: olive;
+    border-radius: 10px 10px 0 0;
+    max-width: calc($fixed-width + 50px);
+    transition: all 1s ease;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    div {
+      padding: 10px 20px;
+      overflow: hidden;
+    }
+
+    .account-to-select {
+      background: whitesmoke;
+      margin: 5px 0;
+      padding: 0;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    &.active {
+      top: 48%;
+    }
+  }
 
   .form {
     position: relative;
     top: 5%;
     background: orange;
+
+    .total {
+      height: 150px;
+      width: 96%;
+      background: #8f8681;
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      // justify-content: center;
+      transition: all 1s ease;
+      cursor: pointer;
+
+      .total-info {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        overflow: hidden;
+
+        h3,
+        strong,
+        p {
+          padding-left: 30px;
+          margin: -4px 0;
+        }
+        .amount {
+          font-size: 25px;
+          margin: 5px 0;
+        }
+        .savings-percentage {
+          margin: -2px 0;
+        }
+      }
+
+      .dropdown-icon {
+        color: #32435f;
+        transition: all 1s ease;
+      }
+
+      &:hover {
+        background: #32435f;
+
+        .dropdown-icon {
+          color: #fff;
+        }
+      }
+      @media (min-width: 768px) {
+        width: 94%;
+      }
+      @media (max-width: 576px) {
+        width: 100%;
+      }
+    }
 
     .form-input {
       @media (max-width: 576px) {
