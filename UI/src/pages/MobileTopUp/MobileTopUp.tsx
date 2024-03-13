@@ -9,8 +9,11 @@ const MobileTopUp = () => {
     phoneNumber: '',
     amount: '',
   });
+  const [networkProvider, setNetworkProvider] = useState('');
+  const [selected, setSelected] = useState(false);
 
-  // console.log(topupDetails.amount.split('.')[0]);
+  console.log(topupDetails.amount.split('.')[0]);
+  console.log(networkProvider);
 
   const formInputs = [
     {
@@ -45,27 +48,23 @@ const MobileTopUp = () => {
   const logoInputs = [
     {
       id: 'mtnLogo',
-      name: 'mtnLogo',
-      icon: './assets/mtn.256x256.png',
-      label: 'MTN Logo',
+      name: 'mtn',
+      icon: '../../assets/mtn.256x256.png',
     },
     {
       id: 'gloLogo',
-      name: 'gloLogo',
-      icon: './assets/globacom-limited.256x256.png',
-      label: 'GLO Logo',
+      name: 'glo',
+      icon: '../../assets/globacom-limited.256x256.png',
     },
     {
       id: 'airtelLogo',
-      name: 'airtelLogo',
-      icon: './assets/airtel-nigeria.220x256.png',
-      label: 'Airtel Logo',
+      name: 'airtel',
+      icon: '../../assets/airtel-nigeria.220x256.png',
     },
     {
       id: 'nineMobileLogo',
-      name: 'nineMobileLogo',
-      icon: './assets/9mobile.147x256.png',
-      label: '9mobile Logo',
+      name: 'nineMobile',
+      icon: '../../assets/9mobile.147x256.png',
     },
   ];
 
@@ -78,19 +77,26 @@ const MobileTopUp = () => {
 
   return (
     <div className='mobile-topup'>
-      <div>
-        <img src='./assets/9mobile.147x256.png' alt='9mobile-logo' />
-      </div>
       <form className='form' onSubmit={handleSubmit}>
-        <strong className='form-header'>Mobile Top-Up</strong>
-        <div className='form-header-seperator'></div>
-        {logoInputs.map((logoInput) => (
-          <RenderIcons
-            icon={logoInput.icon}
-            label={logoInput.label}
-            key={logoInput.id}
-          />
-        ))}
+        {/* <strong className='form-header'>Mobile Top-Up</strong>
+        <div className='form-header-seperator'></div> */}
+        <div className='logos-container'>
+          {logoInputs.map((logoInput) => (
+            <RenderIcons
+              icon={logoInput.icon}
+              // label={logoInput.label}
+              key={logoInput.id}
+              onClick={() => {
+                setSelected(true);
+                setNetworkProvider(logoInput.name);
+              }}
+              className={
+                'item ' +
+                (selected && logoInput.name === networkProvider ? 'active' : '')
+              }
+            />
+          ))}
+        </div>
         {formInputs.map((input) => (
           <FormInput
             key={input.id}

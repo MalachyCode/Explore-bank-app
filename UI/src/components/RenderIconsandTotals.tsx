@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Icons } from '../types';
 
 export const RenderIcons = (props: Icons) => (
-  <div className='item' onClick={props.onClick}>
+  <div className={props.className} onClick={props.onClick}>
     <img src={props.icon} alt='' className={props.iconClassName} />
     <span className={props.spanClassName}>{props.label}</span>
   </div>

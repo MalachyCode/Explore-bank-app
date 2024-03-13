@@ -8,6 +8,13 @@
   .form {
     position: relative;
     top: 5%;
+    background: orange;
+
+    .form-input {
+      @media (max-width: 576px) {
+        width: 89%;
+      }
+    }
 
     .amount-option-box {
       margin-top: 10px;
@@ -15,7 +22,7 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
+      width: 96%;
 
       div {
         width: 48%;
@@ -27,6 +34,40 @@
         margin: 5px 2.5px;
         box-shadow: $shadow-1;
         cursor: pointer;
+      }
+
+      @media (max-width: 576px) {
+        width: 100%;
+      }
+    }
+    .logos-container {
+      display: flex;
+      height: 11vh;
+      margin: 10px 0;
+      width: 96%;
+      overflow: hidden;
+
+      .item {
+        width: 25%;
+        margin: 10px;
+        height: 65%;
+        // background: green;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        box-shadow: $shadow-3;
+        padding: 5px 0;
+
+        &.active {
+          border: 1px solid #32435f;
+        }
+      }
+
+      @media (max-width: 576px) {
+        width: 100%;
       }
     }
   }
