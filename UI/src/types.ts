@@ -14,8 +14,9 @@ export interface Service {
 }
 
 export interface Icons {
-  label: string;
+  label?: string;
   icon: string;
+  className: string;
   iconClassName?: string;
   spanClassName?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
