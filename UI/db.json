@@ -115,7 +115,7 @@
     },
     {
       "id": "5fa5",
-      "balance": 500000,
+      "balance": 498000,
       "createdOn": "2024-02-21T12:10:48.988Z",
       "owner": "9cac",
       "status": "active",
@@ -192,6 +192,26 @@
       "oldBalance": 550000,
       "newBalance": 500000,
       "description": "To:Kennedy Jideofor, Explore BankMobile; Kennedy Jideofor Allowance"
+    },
+    {
+      "id": "cf5b",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-03-13T21:21:53.473Z",
+      "type": "debit",
+      "amount": 1000,
+      "oldBalance": 500000,
+      "newBalance": 499000,
+      "description": "Mobile TopUp of 1000.00 For 09035473258"
+    },
+    {
+      "id": "d8c6",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-03-13T21:54:25.967Z",
+      "type": "debit",
+      "amount": 1000,
+      "oldBalance": 499000,
+      "newBalance": 498000,
+      "description": "Mobile TopUp of 1000.00 For 09035473258"
     }
   ]
 }

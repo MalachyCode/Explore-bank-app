@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import './MobileTopUp.scss';
-import { Account, MobileTopUpType, User } from '../../types';
+import { Account, MobileTopUpType, NewTransaction, User } from '../../types';
 import FormInput from '../../components/FormInput';
 import { RenderIcons } from '../../components/RenderIconsandTotals';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import accountsService from '../../services/accounts';
+import transactionsService from '../../services/transactions';
+import { useNavigate } from 'react-router-dom';
 
 const MobileTopUp = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User>();
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [topupDetails, setTopupDetails] = useState<MobileTopUpType>({
@@ -17,6 +20,9 @@ const MobileTopUp = () => {
   const [selected, setSelected] = useState(false);
   const [openAccountSelectBox, setOpenAccountSelectBox] = useState(false);
   const [accountToShow, setAccountToShow] = useState<Account>();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [transferPin, setTransferPin] = useState<string>('');
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -26,7 +32,7 @@ const MobileTopUp = () => {
     }
     accountsService.getAll().then((accounts) => {
       setAccounts(accounts);
-      setAccountToShow(accounts[0])
+      setAccountToShow(accounts[0]);
     });
   }, []);
 
@@ -37,7 +43,7 @@ const MobileTopUp = () => {
   // console.log(topupDetails.amount.split('.')[0]);
   // console.log(networkProvider);
 
-  console.log(accountToShow);
+  console.log(selected);
 
   const formInputs = [
     {
@@ -63,6 +69,69 @@ const MobileTopUp = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (selected) {
+      if (accountToShow?.status === 'active') {
+        if (user?.transferPin === transferPin) {
+          const updatedSendingAccount = {
+            ...accountToShow,
+            balance:
+              accountToShow &&
+              accountToShow?.balance - Number(topupDetails.amount),
+          };
+          accountsService
+            .debit(
+              accountToShow?.id as string,
+              updatedSendingAccount as Account
+            )
+            .then((response) => console.log(response));
+
+          const newDebitTransaction: NewTransaction = {
+            accountNumber: accountToShow?.accountNumber,
+            createdOn: new Date(),
+            type: 'debit',
+            amount: Number(topupDetails.amount),
+            oldBalance: accountToShow?.balance,
+            newBalance: updatedSendingAccount.balance,
+            description: `Mobile TopUp of ${topupDetails.amount} For ${topupDetails.phoneNumber}`,
+          };
+          transactionsService
+            .newDebitTransaction(newDebitTransaction)
+            .then((response) => console.log(response));
+
+          navigate('/dashboard-client');
+
+          setTopupDetails({
+            ...topupDetails,
+            amount: '',
+            phoneNumber: '',
+          });
+        } else {
+          setErrorMessage('Wrong transfer pin');
+          setOpenConfirm(false);
+          setTransferPin('');
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 5000);
+        }
+      } else {
+        setErrorMessage(
+          'Your account is not active. Please visit our branch near you to reactivate'
+        );
+        setOpenConfirm(false);
+        setTransferPin('');
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
+      }
+    } else {
+      setErrorMessage('Select a network provider');
+      setOpenConfirm(false);
+      setTransferPin('');
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+    }
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,15 +170,47 @@ const MobileTopUp = () => {
 
   return (
     <div className='mobile-topup'>
+      {errorMessage && <div className='error'>{errorMessage}</div>}
+      <div className={'confirm-container ' + (openConfirm && 'active')}>
+        <div className='confirm'>
+          <h3>Top Up Confirmation</h3>
+          <div className='seperator'></div>
+          <p>
+            Recharge &#8358;{topupDetails.amount} for {topupDetails.phoneNumber}
+          </p>
+          <form className='form' onSubmit={handleSubmit}>
+            <label htmlFor='pin' className='form-label'>
+              <p>Enter Pin</p>
+            </label>
+            <input
+              value={transferPin}
+              className='form-input'
+              id='pin'
+              onChange={(e) => setTransferPin(e.target.value)}
+              required
+            />
+            <button type='submit' className='btn'>
+              Top-Up
+            </button>
+          </form>
+          <div className='cancel' onClick={() => setOpenConfirm(false)}>
+            Cancel
+          </div>
+        </div>
+      </div>
       <div
         className={'account-select-box ' + (openAccountSelectBox && 'active')}
       >
         <div>Account</div>
         {userAccounts.map((account) => (
-          <div className='account-to-select' onClick={() => {
-            setAccountToShow(account);
-            setOpenAccountSelectBox(false);
-            }}>
+          <div
+            className='account-to-select'
+            onClick={() => {
+              setAccountToShow(account);
+              setOpenAccountSelectBox(false);
+            }}
+            key={account.id}
+          >
             <div>
               {user?.firstName} {user?.lastName}
             </div>
@@ -120,7 +221,13 @@ const MobileTopUp = () => {
         ))}
       </div>
 
-      <form className='form' onSubmit={handleSubmit}>
+      <form
+        className='form'
+        onSubmit={(e) => {
+          e.preventDefault();
+          setOpenConfirm(true);
+        }}
+      >
         {/* <strong className='form-header'>Mobile Top-Up</strong>
         <div className='form-header-seperator'></div> */}
 
@@ -180,7 +287,7 @@ const MobileTopUp = () => {
           ))}
         </div>
         <button type='submit' className='btn'>
-          Top-Up
+          Proceed
         </button>
       </form>
     </div>
