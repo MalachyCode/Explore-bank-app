@@ -212,6 +212,7 @@ const MobileTopUp = () => {
         </div>
       </div>
 
+      {/* box (shows all accounts) to select account */}
       <div
         className={
           'account-select-box-container ' + (openAccountSelectBox && 'active')
@@ -247,6 +248,7 @@ const MobileTopUp = () => {
           setOpenConfirm(true);
         }}
       >
+        {/* box to show selected account */}
         <div
           className='total'
           onClick={() =>
