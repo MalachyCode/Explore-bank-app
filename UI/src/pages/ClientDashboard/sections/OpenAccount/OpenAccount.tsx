@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import './OpenAccount.scss';
-import FormInput from '../../components/FormInput';
+import FormInput from '../../../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { Account, NewAccount, OpenAccountType, User } from '../../types';
-import accountService from '../../services/accounts';
-import userService from '../../services/users';
+import { Account, NewAccount, OpenAccountType, User } from '../../../../types';
+import accountService from '../../../../services/accounts';
+import userService from '../../../../services/users';
 
 const OpenAccount = () => {
   const navigate = useNavigate();

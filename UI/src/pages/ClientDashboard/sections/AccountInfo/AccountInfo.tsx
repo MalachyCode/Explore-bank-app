@@ -1,6 +1,6 @@
-import { Account, TransactionType, User } from '../../types';
+import { Account, TransactionType, User } from '../../../../types';
 import './AccountInfo.scss';
-import transactionsService from '../../services/transactions';
+import transactionsService from '../../../../services/transactions';
 import { useEffect, useState } from 'react';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import HistoryIcon from '@mui/icons-material/History';

@@ -8,7 +8,7 @@ import HomePage from './pages/HomePage/HomePage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPassword';
 import ClientDashboard from './pages/ClientDashboard/ClientDashboard';
-import Transfer from './pages/TransferPage/Transfer';
+import Transfer from './pages/ClientDashboard/sections/TransferPage/Transfer';
 import StaffDashboard from './pages/StaffDashboard/StaffDashboard';
 import Search from './pages/StaffDashboard/sections/Search';
 import CreateStaffAccount from './pages/CreateStaffAccount/CreateStaffAccount';
@@ -17,14 +17,14 @@ import userService from './services/users';
 import accountsService from './services/accounts';
 import { Account, TransactionType, User } from './types';
 import AccountPage from './pages/AccountPage/AccountPage';
-import OpenAccount from './pages/OpenAccount/OpenAccount';
-import AccountInfo from './pages/AccountInfo/AccountInfo';
-import SetTransferPinPage from './pages/SetTransferPinPage/SetTransferPinPage';
+import OpenAccount from './pages/ClientDashboard/sections/OpenAccount/OpenAccount';
+import AccountInfo from './pages/ClientDashboard/sections/AccountInfo/AccountInfo';
+import SetTransferPinPage from './pages/ClientDashboard/sections/SetTransferPinPage/SetTransferPinPage';
 import Transactions from './pages/Transaction/Transactions';
 import transactionsService from './services/transactions';
 import TransactionInfo from './pages/Transaction/TransactionInfo/TransactionInfo';
 import SelectAccount from './pages/Transaction/SelectAccount/SelectAccount';
-import MobileTopUp from './pages/MobileTopUp/MobileTopUp';
+import MobileTopUp from './pages/ClientDashboard/sections/MobileTopUp/MobileTopUp';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);

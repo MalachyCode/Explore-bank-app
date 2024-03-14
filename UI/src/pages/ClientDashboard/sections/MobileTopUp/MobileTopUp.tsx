@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 import './MobileTopUp.scss';
-import { Account, MobileTopUpType, NewTransaction, User } from '../../types';
-import FormInput from '../../components/FormInput';
-import { RenderIcons } from '../../components/RenderIconsandTotals';
+import {
+  Account,
+  MobileTopUpType,
+  NewTransaction,
+  User,
+} from '../../../../types';
+import FormInput from '../../../../components/FormInput';
+import { RenderIcons } from '../../../../components/RenderIconsandTotals';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import accountsService from '../../services/accounts';
-import transactionsService from '../../services/transactions';
+import accountsService from '../../../../services/accounts';
+import transactionsService from '../../../../services/transactions';
 import { useNavigate } from 'react-router-dom';
 
 const MobileTopUp = () => {
