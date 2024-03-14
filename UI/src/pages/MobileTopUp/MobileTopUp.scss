@@ -8,6 +8,11 @@
   // flex-direction: column;
   align-items: center;
   justify-content: center;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  padding: 10px 0;
 
   .account-select-box {
     width: 90%;
@@ -16,9 +21,11 @@
     position: absolute;
     margin: auto;
     z-index: 2;
-    left: auto;
-    right: auto;
-    top: 100vh;
+    // left: auto;
+    // right: auto;
+    // top: 100vh;
+    top: 48vh;
+    left: 100vw;
     background: olive;
     border-radius: 10px 10px 0 0;
     max-width: calc($fixed-width + 50px);
@@ -49,12 +56,25 @@
 
     &.active {
       top: 48%;
+      left: 10vw;
+      right: 10vw;
+      // left: auto;
+      // right: auto;
+      @media (max-width: 576px) {
+        left: 5vw;
+        right: 10vw;
+      }
+      @media (min-width: 576px) and (max-width: 768px) {
+        background: #32435f;
+        left: 5vw;
+        right: 5vw;
+      }
     }
   }
 
   .form {
     position: relative;
-    top: 5%;
+    // top: 2%;
     background: orange;
 
     .total {
