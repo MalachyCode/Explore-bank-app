@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import FormInput from '../../components/FormInput';
+import FormInput from '../../../../components/FormInput';
 import './Transfer.scss';
-import { Account, NewTransaction, TransferType, User } from '../../types';
+import { Account, NewTransaction, TransferType, User } from '../../../../types';
 import { useNavigate } from 'react-router-dom';
-import accountService from '../../services/accounts';
-import userService from '../../services/users';
-import transactionsService from '../../services/transactions';
+import accountService from '../../../../services/accounts';
+import userService from '../../../../services/users';
+import transactionsService from '../../../../services/transactions';
 
 const Transfer = () => {
   const navigate = useNavigate();

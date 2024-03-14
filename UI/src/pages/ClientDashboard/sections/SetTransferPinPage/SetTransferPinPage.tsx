@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import FormInput from '../../components/FormInput';
+import FormInput from '../../../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { User } from '../../types';
-import userService from '../../services/users';
+import { User } from '../../../../types';
+import userService from '../../../../services/users';
 
 interface SetPin {
   pin: string;
