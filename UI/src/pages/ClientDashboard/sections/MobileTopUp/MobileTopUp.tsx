@@ -211,27 +211,33 @@ const MobileTopUp = () => {
           </div>
         </div>
       </div>
+
       <div
-        className={'account-select-box ' + (openAccountSelectBox && 'active')}
+        className={
+          'account-select-box-container ' + (openAccountSelectBox && 'active')
+        }
+        onClick={() => setOpenAccountSelectBox(false)}
       >
-        <div>Account</div>
-        {userAccounts.map((account) => (
-          <div
-            className='account-to-select'
-            onClick={() => {
-              setAccountToShow(account);
-              setOpenAccountSelectBox(false);
-            }}
-            key={account.id}
-          >
-            <div>
-              {user?.firstName} {user?.lastName}
+        <div className='account-select-box'>
+          <div>Account</div>
+          {userAccounts.map((account) => (
+            <div
+              className='account-to-select'
+              onClick={() => {
+                setAccountToShow(account);
+                setOpenAccountSelectBox(false);
+              }}
+              key={account.id}
+            >
+              <div>
+                {user?.firstName} {user?.lastName}
+              </div>
+              <div>
+                {account.accountNumber} . &#8358; {account.balance} . REGULAR
+              </div>
             </div>
-            <div>
-              {account.accountNumber} . &#8358; {account.balance} . REGULAR
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <form
