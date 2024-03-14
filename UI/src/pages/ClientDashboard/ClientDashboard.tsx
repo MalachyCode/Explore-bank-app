@@ -53,6 +53,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       name: 'billPayment',
       icon: '../../assets/icons8-bill-48.png',
       label: 'Bill Payment',
+      onClick: () => navigate(`/dashboard-client/${user?.id}/bill-payments`),
     },
     {
       id: 'mobileTopup',
