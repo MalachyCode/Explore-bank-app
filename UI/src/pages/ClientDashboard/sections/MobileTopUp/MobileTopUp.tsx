@@ -12,6 +12,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import accountsService from '../../../../services/accounts';
 import transactionsService from '../../../../services/transactions';
 import { useNavigate } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const MobileTopUp = () => {
   const navigate = useNavigate();
@@ -175,6 +176,13 @@ const MobileTopUp = () => {
 
   return (
     <div className='mobile-topup'>
+      <div className='top'>
+        <ArrowBackIcon
+          className='back-icon'
+          onClick={() => navigate('/dashboard-client')}
+        />
+        <h2>Mobile Top-Up</h2>
+      </div>
       {errorMessage && <div className='error'>{errorMessage}</div>}
       <div className={'confirm-container ' + (openConfirm && 'active')}>
         <div className='confirm'>
@@ -233,9 +241,6 @@ const MobileTopUp = () => {
           setOpenConfirm(true);
         }}
       >
-        {/* <strong className='form-header'>Mobile Top-Up</strong>
-        <div className='form-header-seperator'></div> */}
-
         <div
           className='total'
           onClick={() =>

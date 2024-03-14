@@ -1,18 +1,33 @@
 @import '../../../../global.scss';
 
 .mobile-topup {
+  background: #fff;
   width: 100vw;
-  height: 100vh;
-  background: #e1dcd9;
+  // height: 100vh;
   display: flex;
-  // flex-direction: column;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
   }
-  padding: 10px 0;
+
+  .top {
+    width: 100%;
+    background: #e1dcd9;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 10px;
+
+    .back-icon {
+      margin-right: 25px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+  }
 
   .account-select-box {
     width: 90%;
@@ -23,8 +38,7 @@
     z-index: 2;
     // left: auto;
     // right: auto;
-    // top: 100vh;
-    top: 48vh;
+    top: 48%;
     left: 100vw;
     background: olive;
     border-radius: 10px 10px 0 0;
@@ -55,11 +69,8 @@
     }
 
     &.active {
-      top: 48%;
       left: 10vw;
       right: 10vw;
-      // left: auto;
-      // right: auto;
       @media (max-width: 576px) {
         left: 5vw;
         right: 10vw;
@@ -76,6 +87,7 @@
     position: relative;
     // top: 2%;
     background: orange;
+    margin-bottom: 10px;
 
     .total {
       height: 150px;
