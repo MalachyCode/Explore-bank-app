@@ -25,6 +25,7 @@ import transactionsService from './services/transactions';
 import TransactionInfo from './pages/Transaction/TransactionInfo/TransactionInfo';
 import SelectAccount from './pages/Transaction/SelectAccount/SelectAccount';
 import MobileTopUp from './pages/ClientDashboard/sections/MobileTopUp/MobileTopUp';
+import BillPayments from './pages/ClientDashboard/sections/BillPayments/BillPayments';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -99,6 +100,10 @@ function App() {
           />
           <Route path='/dashboard-staff/search/users' element={<Search />} />
           <Route path='/dashboard-client/:id/transfer' element={<Transfer />} />
+          <Route
+            path='/dashboard-client/:id/bill-payments'
+            element={<BillPayments />}
+          />
           <Route
             path='/dashboard-client/:id/mobile-topup'
             element={<MobileTopUp />}
