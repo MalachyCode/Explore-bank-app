@@ -11,6 +11,7 @@ import {
   billerOptionsCableTV,
   billerOptionsDataPurchase,
   billerProductsCableTVDSTV,
+  billerProductsCableTVGOTV,
   billerProductsDataPurchaseMTN,
   billerProductsTest,
 } from './comoponents/CategoriesAndOptions';
@@ -104,7 +105,7 @@ const BillPayments = () => {
         <div
           className='select'
           onClick={() => {
-            setServicesToShow('category');
+            setServicesToShow('Category');
             setOpenSelectBox(true);
           }}
         >
@@ -123,7 +124,7 @@ const BillPayments = () => {
           <div
             className='select'
             onClick={() => {
-              setServicesToShow('biller');
+              setServicesToShow('Biller');
               setOpenSelectBox(true);
             }}
           >
@@ -142,7 +143,7 @@ const BillPayments = () => {
             <div
               className='select'
               onClick={() => {
-                setServicesToShow('product');
+                setServicesToShow('Product');
                 setOpenSelectBox(true);
               }}
             >
@@ -167,27 +168,30 @@ const BillPayments = () => {
         )}
         <SelectBox
           services={
-            servicesToShow === 'category'
+            servicesToShow === 'Category'
               ? billPayCategories
-              : servicesToShow === 'biller' && category === 'CABLE TV'
+              : servicesToShow === 'Biller' && category === 'CABLE TV'
               ? billerOptionsCableTV
-              : servicesToShow === 'biller' && category === 'DATA PURCHASE'
+              : servicesToShow === 'Biller' && category === 'DATA PURCHASE'
               ? billerOptionsDataPurchase
               : biller === 'DSTV'
               ? billerProductsCableTVDSTV
+              : biller === 'GOTV'
+              ? billerProductsCableTVGOTV
               : biller === 'MTN DATA'
               ? billerProductsDataPurchaseMTN
               : billerProductsTest
           }
           openSelectBox={openSelectBox}
           setOptions={
-            servicesToShow === 'category'
+            servicesToShow === 'Category'
               ? setCategory
-              : servicesToShow === 'biller'
+              : servicesToShow === 'Biller'
               ? setBiller
               : setProduct
           }
           setOpenSelectBox={setOpenSelectBox}
+          header={servicesToShow}
         />
       </div>
     </div>

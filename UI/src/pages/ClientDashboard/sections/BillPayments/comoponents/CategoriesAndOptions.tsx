@@ -67,6 +67,33 @@ export const billerProductsCableTVDSTV = [
   },
 ];
 
+export const billerProductsCableTVGOTV = [
+  {
+    id: 1,
+    name: 'GOtv RENEW',
+  },
+  {
+    id: 2,
+    name: 'GOtv SUPA',
+  },
+  {
+    id: 3,
+    name: 'GOtv SUPA PLUS',
+  },
+  {
+    id: 4,
+    name: 'GOtv MAX',
+  },
+  {
+    id: 5,
+    name: 'JOLLI',
+  },
+  {
+    id: 6,
+    name: 'JINJA',
+  },
+];
+
 export const billerOptionsDataPurchase = [
   {
     id: 1,

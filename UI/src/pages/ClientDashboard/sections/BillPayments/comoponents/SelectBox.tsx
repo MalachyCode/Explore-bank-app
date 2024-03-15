@@ -2,6 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { BillPaymentSelectResourceToShow } from '../../../../../types';
 
 const SelectBox = (props: {
+  header: string;
   openSelectBox: boolean;
   services: Array<BillPaymentSelectResourceToShow> | undefined;
   setOptions: React.Dispatch<React.SetStateAction<string>>;
@@ -14,7 +15,7 @@ const SelectBox = (props: {
         className='close-icon'
         onClick={() => props.setOpenSelectBox(false)}
       />
-      <h3>Category</h3>
+      <h3>{props.header}</h3>
     </div>
     {props.services?.map((service) => (
       <div
