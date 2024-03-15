@@ -94,6 +94,33 @@ export const billerProductsCableTVGOTV = [
   },
 ];
 
+export const billerProductsCableTVTSTV = [
+  {
+    id: 1,
+    name: 'TSTV 10 Days',
+  },
+  {
+    id: 2,
+    name: 'TSTV 15 Days',
+  },
+  {
+    id: 3,
+    name: 'TSTV Anytime',
+  },
+  {
+    id: 4,
+    name: 'TSTV Monthly',
+  },
+  {
+    id: 5,
+    name: 'TSTV Pay as you go',
+  },
+  {
+    id: 6,
+    name: 'TSTV Weekly',
+  },
+];
+
 export const billerOptionsDataPurchase = [
   {
     id: 1,

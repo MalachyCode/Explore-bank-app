@@ -12,6 +12,7 @@ import {
   billerOptionsDataPurchase,
   billerProductsCableTVDSTV,
   billerProductsCableTVGOTV,
+  billerProductsCableTVTSTV,
   billerProductsDataPurchaseMTN,
   billerProductsTest,
 } from './comoponents/CategoriesAndOptions';
@@ -178,6 +179,8 @@ const BillPayments = () => {
               ? billerProductsCableTVDSTV
               : biller === 'GOTV'
               ? billerProductsCableTVGOTV
+              : biller === 'TSTV'
+              ? billerProductsCableTVTSTV
               : biller === 'MTN DATA'
               ? billerProductsDataPurchaseMTN
               : billerProductsTest
