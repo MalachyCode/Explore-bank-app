@@ -164,3 +164,8 @@ export type NewTransaction = Omit<TransactionType, 'id'>;
 //   oldBalance: number;
 //   newBalance: number;
 // }
+
+export interface BillPaymentSelectResourceToShow {
+  id: number;
+  name: string;
+}

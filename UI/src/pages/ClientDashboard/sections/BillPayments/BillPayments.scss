@@ -1,0 +1,250 @@
+@import '../../../../global.scss';
+
+.bill-pay {
+  width: 100vw;
+  height: 100vh;
+
+  .top {
+    background: #e1dcd9;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    .back-icon {
+      margin-right: 25px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+  }
+
+  .account-select-box-container {
+    width: 100%;
+    height: 100%;
+    top: 100vh;
+    background: rgb(0, 0, 0, 0.5);
+    transition: all 1s ease;
+    position: fixed;
+    z-index: 2;
+
+    .account-select-box {
+      width: 90%;
+      height: 50%;
+      background: white;
+      position: absolute;
+      margin: auto;
+      top: 50%;
+      left: 5%;
+      right: 5%;
+      background: olive;
+      border-radius: 10px 10px 0 0;
+      max-width: calc($fixed-width + 50px);
+      display: flex;
+      flex-direction: column;
+      // align-items: center;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      div {
+        padding: 10px 20px;
+        overflow: hidden;
+      }
+
+      .account-to-select {
+        background: whitesmoke;
+        margin: 5px 0;
+        padding: 0;
+        cursor: pointer;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+    }
+    &.active {
+      top: 0;
+    }
+  }
+
+  .total {
+    height: 100px;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+    background: #8f8681;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    // justify-content: center;
+    transition: all 1s ease;
+    cursor: pointer;
+    max-width: $fixed-width;
+
+    .total-info {
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      overflow: hidden;
+
+      h3,
+      strong,
+      p {
+        padding-left: 30px;
+        margin: -4px 0;
+      }
+      .amount {
+        font-size: 25px;
+        margin: 5px 0;
+      }
+      .savings-percentage {
+        margin: -2px 0;
+      }
+    }
+
+    .dropdown-icon {
+      color: #32435f;
+      transition: all 1s ease;
+    }
+
+    &:hover {
+      background: #32435f;
+
+      .dropdown-icon {
+        color: #fff;
+      }
+    }
+  }
+
+  .body {
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+
+    .select {
+      width: 90%;
+      height: 9%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid gray;
+      margin-top: 15px;
+      padding: 0 0 0 5px;
+      // z-index: -2;
+      cursor: pointer;
+      overflow: hidden;
+      max-width: $fixed-width;
+
+      .text {
+        padding: 10px;
+        width: 70%;
+        height: 100%;
+        overflow: hidden;
+
+        .text-head {
+          opacity: 0.7;
+
+          &.reduce-category,
+          &.reduce-biller,
+          &.reduce-product {
+            font-size: 12px;
+            margin: 2px 0;
+          }
+        }
+      }
+    }
+
+    .select-box {
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 2;
+      position: fixed;
+      top: 100vh;
+      transition: all 1s ease;
+
+      .select-box-top {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background: orange;
+
+        h3 {
+          margin-left: 30%;
+          @media (min-width: 576px) {
+            margin-left: 45%;
+          }
+        }
+      }
+
+      .close-icon {
+        cursor: pointer;
+        display: inline;
+      }
+
+      .bill-pay-service {
+        width: 100%;
+        height: 5%;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        background: #e1dcd9;
+        margin: 10px 0;
+        cursor: pointer;
+      }
+
+      &.active {
+        top: 10%;
+      }
+    }
+
+    .product-and-form-container {
+      width: 100%;
+
+      form {
+        width: 100vw;
+        height: 40%;
+        margin: auto;
+        margin-top: 15px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        input {
+          width: 90%;
+          height: 7vh;
+          max-width: $fixed-width;
+          margin-bottom: 15px;
+          // padding-left: 12px;
+
+          &::placeholder {
+            font-size: 17px;
+            padding-left: 10px;
+          }
+        }
+
+        button {
+          width: 90%;
+          height: 7vh;
+          max-width: $fixed-width;
+          margin-bottom: 15px;
+          background: $primary-500;
+          border: transparent;
+          transition: all 1s ease;
+          color: #fff;
+          &:hover {
+            background: $primary-700;
+            box-shadow: $shadow-3;
+          }
+        }
+      }
+    }
+  }
+}
