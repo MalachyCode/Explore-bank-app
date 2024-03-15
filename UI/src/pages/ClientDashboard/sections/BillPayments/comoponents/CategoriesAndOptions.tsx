@@ -44,7 +44,7 @@ export const billerOptionsCableTV = [
   },
 ];
 
-export const billerProductsDSTV = [
+export const billerProductsCableTVDSTV = [
   {
     id: 1,
     name: 'COMPACT',
@@ -64,6 +64,76 @@ export const billerProductsDSTV = [
   {
     id: 5,
     name: 'YANGA',
+  },
+];
+
+export const billerOptionsDataPurchase = [
+  {
+    id: 1,
+    name: 'MTN DATA',
+  },
+  {
+    id: 2,
+    name: 'AIRTEL DATA',
+  },
+  {
+    id: 3,
+    name: 'GLO DATA',
+  },
+  {
+    id: 4,
+    name: '9MOBILE DATA',
+  },
+  {
+    id: 5,
+    name: 'SPECTRANET DATA',
+  },
+];
+
+export const billerProductsDataPurchaseMTN = [
+  {
+    id: 1,
+    name: '1.2GB + YouTube Monthly Data',
+  },
+  {
+    id: 2,
+    name: '6GB Always On Monthly Data',
+  },
+  {
+    id: 3,
+    name: '1.5TB Yearly Broadband Plan (4G Router)',
+  },
+  {
+    id: 4,
+    name: '100GB 2-Month Plan',
+  },
+  {
+    id: 5,
+    name: '2GB Monthly Plan',
+  },
+  {
+    id: 6,
+    name: '11GB Monthly Data',
+  },
+  {
+    id: 7,
+    name: '20GB Monthly Data',
+  },
+  {
+    id: 8,
+    name: '160GB 2-Month Plan',
+  },
+  {
+    id: 9,
+    name: '2.5GB Mnthly Plan',
+  },
+  {
+    id: 10,
+    name: '2.5TB Yearly Plan',
+  },
+  {
+    id: 11,
+    name: '',
   },
 ];
 

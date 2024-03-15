@@ -228,6 +228,10 @@
             font-size: 17px;
             padding-left: 10px;
           }
+
+          &:focus {
+            outline: none;
+          }
         }
 
         button {
