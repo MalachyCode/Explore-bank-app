@@ -26,6 +26,7 @@
     background: rgb(0, 0, 0, 0.5);
     transition: all 1s ease;
     position: fixed;
+    z-index: 2;
 
     .account-select-box {
       width: 90%;
@@ -33,7 +34,6 @@
       background: white;
       position: absolute;
       margin: auto;
-      z-index: 2;
       top: 50%;
       left: 5%;
       right: 5%;
@@ -70,7 +70,7 @@
   }
 
   .total {
-    height: 120px;
+    height: 100px;
     width: 90%;
     margin: auto;
     margin-top: 10px;
@@ -150,7 +150,8 @@
           opacity: 0.7;
 
           &.reduce-category,
-          .reduce-biller {
+          &.reduce-biller,
+          &.reduce-product {
             font-size: 12px;
             margin: 2px 0;
           }
@@ -199,6 +200,50 @@
 
       &.active {
         top: 10%;
+      }
+    }
+
+    .product-and-form-container {
+      width: 100%;
+
+      form {
+        width: 100vw;
+        height: 40%;
+        margin: auto;
+        margin-top: 15px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        input {
+          width: 90%;
+          height: 7vh;
+          max-width: $fixed-width;
+          margin-bottom: 15px;
+          // padding-left: 12px;
+
+          &::placeholder {
+            font-size: 17px;
+            padding-left: 10px;
+          }
+        }
+
+        button {
+          width: 90%;
+          height: 7vh;
+          max-width: $fixed-width;
+          margin-bottom: 15px;
+          background: $primary-500;
+          border: transparent;
+          transition: all 1s ease;
+          color: #fff;
+          &:hover {
+            background: $primary-700;
+            box-shadow: $shadow-3;
+          }
+        }
       }
     }
   }
