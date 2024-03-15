@@ -9,7 +9,9 @@ import SelectBox from './comoponents/SelectBox';
 import {
   billPayCategories,
   billerOptionsCableTV,
-  billerProductsDSTV,
+  billerOptionsDataPurchase,
+  billerProductsCableTVDSTV,
+  billerProductsDataPurchaseMTN,
   billerProductsTest,
 } from './comoponents/CategoriesAndOptions';
 
@@ -169,8 +171,12 @@ const BillPayments = () => {
               ? billPayCategories
               : servicesToShow === 'biller' && category === 'CABLE TV'
               ? billerOptionsCableTV
+              : servicesToShow === 'biller' && category === 'DATA PURCHASE'
+              ? billerOptionsDataPurchase
               : biller === 'DSTV'
-              ? billerProductsDSTV
+              ? billerProductsCableTVDSTV
+              : biller === 'MTN DATA'
+              ? billerProductsDataPurchaseMTN
               : billerProductsTest
           }
           openSelectBox={openSelectBox}
