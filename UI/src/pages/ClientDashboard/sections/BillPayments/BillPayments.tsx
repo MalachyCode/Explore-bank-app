@@ -12,7 +12,10 @@ import {
   billerOptionsDataPurchase,
   billerProductsCableTVDSTV,
   billerProductsCableTVGOTV,
+  billerProductsCableTVSHOWMAX,
+  billerProductsCableTVSTARTIMES,
   billerProductsCableTVTSTV,
+  billerProductsDataPurchaseAIRTEL,
   billerProductsDataPurchaseMTN,
   billerProductsTest,
 } from './comoponents/CategoriesAndOptions';
@@ -181,8 +184,14 @@ const BillPayments = () => {
               ? billerProductsCableTVGOTV
               : biller === 'TSTV'
               ? billerProductsCableTVTSTV
+              : biller === 'STARTIMES'
+              ? billerProductsCableTVSTARTIMES
+              : biller === 'SHOWMAX'
+              ? billerProductsCableTVSHOWMAX
               : biller === 'MTN DATA'
               ? billerProductsDataPurchaseMTN
+              : biller === 'AIRTEL DATA'
+              ? billerProductsDataPurchaseAIRTEL
               : billerProductsTest
           }
           openSelectBox={openSelectBox}
