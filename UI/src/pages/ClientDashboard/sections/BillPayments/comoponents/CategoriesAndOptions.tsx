@@ -192,9 +192,32 @@ export const billerOptionsDataPurchase = [
     id: 4,
     name: '9MOBILE DATA',
   },
+];
+
+export const billerOptionsEducation = [
+  {
+    id: 1,
+    name: 'Federal Polytechnic, Oko',
+  },
+  {
+    id: 2,
+    name: 'Federal University of Technology, Owerri',
+  },
+  {
+    id: 3,
+    name: 'Federal University of Technology, Minna',
+  },
+  {
+    id: 4,
+    name: 'University of Illorin',
+  },
   {
     id: 5,
-    name: 'SPECTRANET DATA',
+    name: 'University of Port Harcourt',
+  },
+  {
+    id: 6,
+    name: 'University of Nigeria, Nsukka',
   },
 ];
 
@@ -383,6 +406,33 @@ export const billerProductsDataPurchase9mobile = [
   {
     id: 11,
     name: '',
+  },
+];
+
+export const billerProductsEducation = [
+  {
+    id: 1,
+    name: 'Post UTME Registration',
+  },
+  {
+    id: 2,
+    name: 'First Year School Fees',
+  },
+  {
+    id: 3,
+    name: 'Second Year School Fees',
+  },
+  {
+    id: 4,
+    name: 'Third Year School Fees',
+  },
+  {
+    id: 5,
+    name: 'Fourth Year School Fees',
+  },
+  {
+    id: 6,
+    name: 'Fifth Year School Fees',
   },
 ];
 

@@ -10,6 +10,7 @@ import {
   billPayCategories,
   billerOptionsCableTV,
   billerOptionsDataPurchase,
+  billerOptionsEducation,
   billerProductsCableTVDSTV,
   billerProductsCableTVGOTV,
   billerProductsCableTVSHOWMAX,
@@ -19,6 +20,7 @@ import {
   billerProductsDataPurchaseAIRTEL,
   billerProductsDataPurchaseGLO,
   billerProductsDataPurchaseMTN,
+  billerProductsEducation,
   billerProductsTest,
 } from './comoponents/CategoriesAndOptions';
 
@@ -180,6 +182,8 @@ const BillPayments = () => {
               ? billerOptionsCableTV
               : servicesToShow === 'Biller' && category === 'DATA PURCHASE'
               ? billerOptionsDataPurchase
+              : servicesToShow === 'Biller' && category === 'EDUCATION'
+              ? billerOptionsEducation
               : biller === 'DSTV'
               ? billerProductsCableTVDSTV
               : biller === 'GOTV'
@@ -198,6 +202,8 @@ const BillPayments = () => {
               ? billerProductsDataPurchaseGLO
               : biller === '9MOBILE DATA'
               ? billerProductsDataPurchase9mobile
+              : servicesToShow === 'Product' && category === 'EDUCATION'
+              ? billerProductsEducation
               : billerProductsTest
           }
           openSelectBox={openSelectBox}
