@@ -121,6 +121,60 @@ export const billerProductsCableTVTSTV = [
   },
 ];
 
+export const billerProductsCableTVSTARTIMES = [
+  {
+    id: 1,
+    name: 'Startimes Basic-S Monthly',
+  },
+  {
+    id: 2,
+    name: 'Startimes Basic-S Weekly',
+  },
+  {
+    id: 3,
+    name: 'Startimes Basic-T Monthly',
+  },
+  {
+    id: 4,
+    name: 'Startimes Basic-T Weekly',
+  },
+  {
+    id: 5,
+    name: 'Startimes Super-S Montly',
+  },
+  {
+    id: 6,
+    name: 'Startimes Super-S Weekly',
+  },
+  {
+    id: 7,
+    name: 'Startimes Super-T Montly',
+  },
+  {
+    id: 8,
+    name: 'Startimes Super-T Weekly',
+  },
+  {
+    id: 9,
+    name: '',
+  },
+];
+
+export const billerProductsCableTVSHOWMAX = [
+  {
+    id: 1,
+    name: 'Showmax Entertainment',
+  },
+  {
+    id: 2,
+    name: 'Showmax Entertainment Mobile',
+  },
+  {
+    id: 3,
+    name: 'Showmax Premier League',
+  },
+];
+
 export const billerOptionsDataPurchase = [
   {
     id: 1,
@@ -184,6 +238,53 @@ export const billerProductsDataPurchaseMTN = [
   {
     id: 10,
     name: '2.5TB Yearly Plan',
+  },
+  {
+    id: 11,
+    name: '',
+  },
+];
+
+export const billerProductsDataPurchaseAIRTEL = [
+  {
+    id: 1,
+    name: '1TB Mobile Data (1 Year)',
+  },
+  {
+    id: 2,
+    name: '240GB Data (30 Days)',
+  },
+  {
+    id: 3,
+    name: '280GB Data (30 Days)',
+  },
+  {
+    id: 4,
+    name: '2GB Data + 400MB YouTube and Spotify (1 Day)',
+  },
+  {
+    id: 5,
+    name: '400GB Data (90 Days)',
+  },
+  {
+    id: 6,
+    name: '500GB Data (120 Days)',
+  },
+  {
+    id: 7,
+    name: '5GB Data (7 Days)',
+  },
+  {
+    id: 8,
+    name: 'Data 40MB (1 Day)',
+  },
+  {
+    id: 9,
+    name: 'Data 1.2GB (30 Days)',
+  },
+  {
+    id: 10,
+    name: 'Data 18GB (30 Days)',
   },
   {
     id: 11,

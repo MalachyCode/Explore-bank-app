@@ -67,6 +67,10 @@ $transition: 0.3s ease-in-out all;
       font-family: inherit;
       color: $grey-400;
     }
+
+    &:focus {
+      outline: none;
+    }
   }
   .form-row {
     margin-bottom: 1rem;
