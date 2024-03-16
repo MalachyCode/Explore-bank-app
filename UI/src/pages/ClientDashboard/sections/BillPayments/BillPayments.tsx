@@ -15,7 +15,9 @@ import {
   billerProductsCableTVSHOWMAX,
   billerProductsCableTVSTARTIMES,
   billerProductsCableTVTSTV,
+  billerProductsDataPurchase9mobile,
   billerProductsDataPurchaseAIRTEL,
+  billerProductsDataPurchaseGLO,
   billerProductsDataPurchaseMTN,
   billerProductsTest,
 } from './comoponents/CategoriesAndOptions';
@@ -192,6 +194,10 @@ const BillPayments = () => {
               ? billerProductsDataPurchaseMTN
               : biller === 'AIRTEL DATA'
               ? billerProductsDataPurchaseAIRTEL
+              : biller === 'GLO DATA'
+              ? billerProductsDataPurchaseGLO
+              : biller === '9MOBILE DATA'
+              ? billerProductsDataPurchase9mobile
               : billerProductsTest
           }
           openSelectBox={openSelectBox}
