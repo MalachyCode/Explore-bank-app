@@ -292,6 +292,100 @@ export const billerProductsDataPurchaseAIRTEL = [
   },
 ];
 
+export const billerProductsDataPurchaseGLO = [
+  {
+    id: 1,
+    name: 'Data 1.25GB (Sunday 1 Day)',
+  },
+  {
+    id: 2,
+    name: 'Data 1.35GB (14 Days)',
+  },
+  {
+    id: 3,
+    name: 'Data 10GB (30 Days)',
+  },
+  {
+    id: 4,
+    name: 'Data 119GB (30 Days)',
+  },
+  {
+    id: 5,
+    name: 'Data 13.25GB (30 Days)',
+  },
+  {
+    id: 6,
+    name: 'Data 138GB (30 Days)',
+  },
+  {
+    id: 7,
+    name: 'Data 150MB (1 Day)',
+  },
+  {
+    id: 8,
+    name: 'Data 1GB Night (5 Days)',
+  },
+  {
+    id: 9,
+    name: 'Data 4.1GB (30 Days)',
+  },
+  {
+    id: 10,
+    name: 'Data 350MB (2 Days)',
+  },
+  {
+    id: 11,
+    name: '',
+  },
+];
+
+export const billerProductsDataPurchase9mobile = [
+  {
+    id: 1,
+    name: '15GB (10GB + 5GB Night)',
+  },
+  {
+    id: 2,
+    name: '200MB (100MB + 100MB socials)',
+  },
+  {
+    id: 3,
+    name: '22GB Data (30 Days)',
+  },
+  {
+    id: 4,
+    name: 'Data 1GB + 100MB (1 Day)',
+  },
+  {
+    id: 5,
+    name: '2GB + 100MB (3 Days)',
+  },
+  {
+    id: 6,
+    name: '35GB Data',
+  },
+  {
+    id: 7,
+    name: '4GB (2GB + 2GB Night)',
+  },
+  {
+    id: 8,
+    name: '50MB (24 hours)',
+  },
+  {
+    id: 9,
+    name: '6.2GB (2.2GB+4GB Night)',
+  },
+  {
+    id: 10,
+    name: '80GB Data (30 Days)',
+  },
+  {
+    id: 11,
+    name: '',
+  },
+];
+
 export const billerProductsTest = [
   {
     id: 1,
