@@ -11,6 +11,7 @@ import {
   billerOptionsCableTV,
   billerOptionsDataPurchase,
   billerOptionsEducation,
+  billerOptionsFinancial,
   billerProductsCableTVDSTV,
   billerProductsCableTVGOTV,
   billerProductsCableTVSHOWMAX,
@@ -184,6 +185,8 @@ const BillPayments = () => {
               ? billerOptionsDataPurchase
               : servicesToShow === 'Biller' && category === 'EDUCATION'
               ? billerOptionsEducation
+              : servicesToShow === 'Biller' && category === 'FINANCIAL SERVICES'
+              ? billerOptionsFinancial
               : biller === 'DSTV'
               ? billerProductsCableTVDSTV
               : biller === 'GOTV'

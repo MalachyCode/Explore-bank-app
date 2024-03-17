@@ -221,6 +221,37 @@ export const billerOptionsEducation = [
   },
 ];
 
+export const billerOptionsFinancial = [
+  {
+    id: 1,
+    name: '4Sure Payments',
+  },
+  {
+    id: 2,
+    name: 'AIICO Insurance Plc',
+  },
+  {
+    id: 3,
+    name: 'ARM Investments',
+  },
+  {
+    id: 4,
+    name: 'ARM Life Plc',
+  },
+  {
+    id: 5,
+    name: 'Afrinvest',
+  },
+  {
+    id: 6,
+    name: 'Leadway Assurance',
+  },
+  {
+    id: 7,
+    name: 'Stanbic IBTC Asset Management Limited',
+  },
+];
+
 export const billerProductsDataPurchaseMTN = [
   {
     id: 1,
