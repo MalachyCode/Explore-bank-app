@@ -12,6 +12,7 @@ import {
   billerOptionsDataPurchase,
   billerOptionsEducation,
   billerOptionsFinancial,
+  billerOptionsJamb,
   billerProductsCableTVDSTV,
   billerProductsCableTVGOTV,
   billerProductsCableTVSHOWMAX,
@@ -22,6 +23,7 @@ import {
   billerProductsDataPurchaseGLO,
   billerProductsDataPurchaseMTN,
   billerProductsEducation,
+  billerProductsJamb,
   billerProductsTest,
 } from './comoponents/CategoriesAndOptions';
 
@@ -187,6 +189,10 @@ const BillPayments = () => {
               ? billerOptionsEducation
               : servicesToShow === 'Biller' && category === 'FINANCIAL SERVICES'
               ? billerOptionsFinancial
+              : servicesToShow === 'Biller' && category === 'JAMB COLLECTIONS'
+              ? billerOptionsJamb
+              : biller === 'JAMB'
+              ? billerProductsJamb
               : biller === 'DSTV'
               ? billerProductsCableTVDSTV
               : biller === 'GOTV'

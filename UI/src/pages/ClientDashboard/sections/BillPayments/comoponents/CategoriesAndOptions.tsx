@@ -19,6 +19,10 @@ export const billPayCategories = [
     id: 5,
     name: 'INSURANCE',
   },
+  {
+    id: 6,
+    name: 'JAMB COLLECTIONS',
+  },
 ];
 
 export const billerOptionsCableTV = [
@@ -41,6 +45,20 @@ export const billerOptionsCableTV = [
   {
     id: 5,
     name: 'TSTV',
+  },
+];
+
+export const billerOptionsJamb = [
+  {
+    id: 1,
+    name: 'JAMB',
+  },
+];
+
+export const billerProductsJamb = [
+  {
+    id: 1,
+    name: 'Direct Entry Pin',
   },
 ];
 
