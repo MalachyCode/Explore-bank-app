@@ -63,9 +63,32 @@ const BillPayments = () => {
     });
   }, []);
 
-  console.log(category);
+  // console.log(category);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log({
+      category: category,
+      biller: biller,
+      product: product,
+      amount: paymentDetails.amount,
+      description: paymentDetails.description,
+      phoneNumber: paymentDetails.phoneNumber,
+      pin: paymentDetails.pin,
+    });
+    setCategory('');
+    setBiller('');
+    setProduct('');
+    setPaymentDetails({
+      ...paymentDetails,
+      amount: '',
+      pin: '',
+      description: '',
+      phoneNumber: '',
+    });
+  };
 
   return (
     <div className='bill-pay'>
@@ -181,7 +204,7 @@ const BillPayments = () => {
               </div>
               <ArrowDropDownIcon fontSize='large' className='dropdown-icon' />
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className='input-box'>
                 &#8358;
                 <input
@@ -201,14 +224,45 @@ const BillPayments = () => {
                   Amount
                 </span>
               </div>
-              <div className='input-box'>
-                <input type='text' />
-                <span className='placeholder'>
-                  {category === 'DATA PURCHASE'
-                    ? 'Phone Number'
-                    : 'Description'}
-                </span>
-              </div>
+              {category === 'DATA PURCHASE' ? (
+                <div className='input-box'>
+                  <input
+                    type='text'
+                    onChange={(e) =>
+                      setPaymentDetails({
+                        ...paymentDetails,
+                        phoneNumber: e.target.value,
+                      })
+                    }
+                  />
+                  <span
+                    className={
+                      'placeholder ' + (paymentDetails.phoneNumber && 'active')
+                    }
+                  >
+                    Phone Number
+                  </span>
+                </div>
+              ) : (
+                <div className='input-box'>
+                  <input
+                    type='text'
+                    onChange={(e) =>
+                      setPaymentDetails({
+                        ...paymentDetails,
+                        description: e.target.value,
+                      })
+                    }
+                  />
+                  <span
+                    className={
+                      'placeholder ' + (paymentDetails.description && 'active')
+                    }
+                  >
+                    Description
+                  </span>
+                </div>
+              )}
               <div className='input-box'>
                 <input
                   type='text'
