@@ -254,19 +254,19 @@ export const billerOptionsFinancial = [
   },
   {
     id: 4,
-    name: 'ARM Life Plc',
+    name: 'Afriinvest',
   },
   {
     id: 5,
-    name: 'Afrinvest',
-  },
-  {
-    id: 6,
     name: 'Leadway Assurance',
   },
   {
-    id: 7,
+    id: 6,
     name: 'Stanbic IBTC Asset Management Limited',
+  },
+  {
+    id: 7,
+    name: '',
   },
 ];
 
@@ -482,6 +482,92 @@ export const billerProductsEducation = [
   {
     id: 6,
     name: 'Fifth Year School Fees',
+  },
+];
+
+export const billerProductsAIICO = [
+  {
+    id: 1,
+    name: 'Premium Payment',
+  },
+];
+
+export const billerProductsARMInvest = [
+  {
+    id: 1,
+    name: 'ARM Aggressive Growth Fund - Existing client',
+  },
+  {
+    id: 2,
+    name: 'ARM Aggressive Growth Fund - New client',
+  },
+  {
+    id: 3,
+    name: 'ARM Discovery Fund - Existing client',
+  },
+  {
+    id: 4,
+    name: 'ARM Discovery Fund - New client',
+  },
+];
+
+export const billerProducts4Sure = [
+  {
+    id: 1,
+    name: 'Montly Contribution',
+  },
+  {
+    id: 2,
+    name: '4Sure Registration',
+  },
+];
+
+export const billerProductsAfriinvest = [
+  {
+    id: 1,
+    name: 'Nigeria International Debt Fund',
+  },
+  {
+    id: 2,
+    name: 'Afriinvest Equity Fund',
+  },
+  {
+    id: 3,
+    name: 'Guaranteed Income Fund',
+  },
+  {
+    id: 4,
+    name: 'Afriinvest Research',
+  },
+];
+
+export const billerProductsStanbic = [
+  {
+    id: 1,
+    name: 'STANBIC IBTC BALANCED FUND',
+  },
+  {
+    id: 2,
+    name: 'STANBIC IBTC BOND FUND',
+  },
+  {
+    id: 3,
+    name: 'STANBIC IBTC ETHICAL FUND',
+  },
+  {
+    id: 4,
+    name: 'STANBIC IBTC IMAAN FUND',
+  },
+];
+
+export const billerProductsLeadway = [
+  {
+    id: 1,
+    name: 'Life Insurance',
+  },
+  {
+    id: 2,
+    name: 'Non-life Insurance',
   },
 ];
 

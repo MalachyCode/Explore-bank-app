@@ -13,6 +13,10 @@ import {
   billerOptionsEducation,
   billerOptionsFinancial,
   billerOptionsJamb,
+  billerProducts4Sure,
+  billerProductsAIICO,
+  billerProductsARMInvest,
+  billerProductsAfriinvest,
   billerProductsCableTVDSTV,
   billerProductsCableTVGOTV,
   billerProductsCableTVSHOWMAX,
@@ -24,6 +28,8 @@ import {
   billerProductsDataPurchaseMTN,
   billerProductsEducation,
   billerProductsJamb,
+  billerProductsLeadway,
+  billerProductsStanbic,
   billerProductsTest,
 } from './comoponents/CategoriesAndOptions';
 
@@ -170,10 +176,12 @@ const BillPayments = () => {
               <ArrowDropDownIcon fontSize='large' className='dropdown-icon' />
             </div>
             <form>
-              <input type='text' placeholder='Amount' />
+              <div className='input-box'>
+                <input type='text' placeholder='Amount' />
+              </div>
               <input type='text' placeholder='Description' />
               <input type='text' placeholder='Pin' />
-              <button>Pay</button>
+              <button type='submit'>Pay</button>
             </form>
           </div>
         )}
@@ -211,6 +219,18 @@ const BillPayments = () => {
               ? billerProductsDataPurchaseGLO
               : biller === '9MOBILE DATA'
               ? billerProductsDataPurchase9mobile
+              : biller === '4Sure Payments'
+              ? billerProducts4Sure
+              : biller === 'AIICO Insurance Plc'
+              ? billerProductsAIICO
+              : biller === 'ARM Investments'
+              ? billerProductsARMInvest
+              : biller === 'Afriinvest'
+              ? billerProductsAfriinvest
+              : biller === 'Leadway Assurance'
+              ? billerProductsLeadway
+              : biller === 'Stanbic IBTC Asset Management Limited'
+              ? billerProductsStanbic
               : servicesToShow === 'Product' && category === 'EDUCATION'
               ? billerProductsEducation
               : billerProductsTest
