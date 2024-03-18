@@ -270,6 +270,21 @@ export const billerOptionsFinancial = [
   },
 ];
 
+export const billerOptionsInsurance = [
+  {
+    id: 1,
+    name: 'AIICO Insurance',
+  },
+  {
+    id: 2,
+    name: 'NEM Insurance',
+  },
+  {
+    id: 3,
+    name: 'Consolidated Hallmark Insurance',
+  },
+];
+
 export const billerProductsDataPurchaseMTN = [
   {
     id: 1,
@@ -489,6 +504,25 @@ export const billerProductsAIICO = [
   {
     id: 1,
     name: 'Premium Payment',
+  },
+];
+
+export const billerProductsInsurance = [
+  {
+    id: 1,
+    name: 'Premium Insurance',
+  },
+  {
+    id: 2,
+    name: 'Life Insurance',
+  },
+  {
+    id: 3,
+    name: 'Health Insurance',
+  },
+  {
+    id: 4,
+    name: 'Car Insurance',
   },
 ];
 

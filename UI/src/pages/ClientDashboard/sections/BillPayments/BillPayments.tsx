@@ -12,6 +12,7 @@ import {
   billerOptionsDataPurchase,
   billerOptionsEducation,
   billerOptionsFinancial,
+  billerOptionsInsurance,
   billerOptionsJamb,
   billerProducts4Sure,
   billerProductsAIICO,
@@ -27,6 +28,7 @@ import {
   billerProductsDataPurchaseGLO,
   billerProductsDataPurchaseMTN,
   billerProductsEducation,
+  billerProductsInsurance,
   billerProductsJamb,
   billerProductsLeadway,
   billerProductsStanbic,
@@ -297,6 +299,8 @@ const BillPayments = () => {
               ? billerOptionsFinancial
               : servicesToShow === 'Biller' && category === 'JAMB COLLECTIONS'
               ? billerOptionsJamb
+              : servicesToShow === 'Biller' && category === 'INSURANCE'
+              ? billerOptionsInsurance
               : biller === 'JAMB'
               ? billerProductsJamb
               : biller === 'DSTV'
@@ -331,6 +335,8 @@ const BillPayments = () => {
               ? billerProductsStanbic
               : servicesToShow === 'Product' && category === 'EDUCATION'
               ? billerProductsEducation
+              : servicesToShow === 'Product' && category === 'INSURANCE'
+              ? billerProductsInsurance
               : billerProductsTest
           }
           openSelectBox={openSelectBox}
