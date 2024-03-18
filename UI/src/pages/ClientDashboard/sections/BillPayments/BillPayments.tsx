@@ -34,6 +34,7 @@ import {
   billerProductsStanbic,
   billerProductsTest,
 } from './comoponents/CategoriesAndOptions';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const BillPayments = () => {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ const BillPayments = () => {
     description: '',
     phoneNumber: '',
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -267,7 +269,7 @@ const BillPayments = () => {
               )}
               <div className='input-box'>
                 <input
-                  type='text'
+                  type={showPassword ? 'text' : 'password'}
                   onChange={(e) =>
                     setPaymentDetails({
                       ...paymentDetails,
@@ -280,6 +282,10 @@ const BillPayments = () => {
                 >
                   Pin
                 </span>
+                <VisibilityIcon
+                  className='show-password-icon'
+                  onClick={() => setShowPassword(!showPassword)}
+                />
               </div>
               <button type='submit'>Pay</button>
             </form>
