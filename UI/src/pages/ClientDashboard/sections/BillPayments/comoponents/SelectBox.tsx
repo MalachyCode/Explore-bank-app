@@ -27,6 +27,7 @@ const SelectBox = (props: {
         }}
       >
         {service.name}
+        {service.name === 'Direct Entry Pin' && <div>{'-'} &#8358; 6200</div>}
       </div>
     ))}
   </div>
