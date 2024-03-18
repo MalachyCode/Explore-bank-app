@@ -68,6 +68,13 @@ export interface MobileTopUpType {
   amount: string;
 }
 
+export interface BillPaymentType {
+  amount: string;
+  pin: string;
+  phoneNumber?: string;
+  description?: string;
+}
+
 export interface TransferType {
   bankName: string;
   accountNumber: string;

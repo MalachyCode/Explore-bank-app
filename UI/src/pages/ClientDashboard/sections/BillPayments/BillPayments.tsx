@@ -3,7 +3,7 @@ import './BillPayments.scss';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useEffect, useState } from 'react';
-import { Account, User } from '../../../../types';
+import { Account, BillPaymentType, User } from '../../../../types';
 import accountsService from '../../../../services/accounts';
 import SelectBox from './comoponents/SelectBox';
 import {
@@ -44,6 +44,12 @@ const BillPayments = () => {
   const [biller, setBiller] = useState('');
   const [product, setProduct] = useState('');
   const [servicesToShow, setServicesToShow] = useState('');
+  const [paymentDetails, setPaymentDetails] = useState<BillPaymentType>({
+    amount: '',
+    pin: '',
+    description: '',
+    phoneNumber: '',
+  });
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -57,7 +63,7 @@ const BillPayments = () => {
     });
   }, []);
 
-  console.log(biller);
+  console.log(category);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
@@ -155,7 +161,7 @@ const BillPayments = () => {
           </div>
         )}
 
-        {category && biller && (
+        {biller && (
           <div className='product-and-form-container'>
             <div
               className='select'
@@ -177,10 +183,48 @@ const BillPayments = () => {
             </div>
             <form>
               <div className='input-box'>
-                <input type='text' placeholder='Amount' />
+                &#8358;
+                <input
+                  type='text'
+                  onChange={(e) =>
+                    setPaymentDetails({
+                      ...paymentDetails,
+                      amount: e.target.value,
+                    })
+                  }
+                />
+                <span
+                  className={
+                    'placeholder amount ' + (paymentDetails.amount && 'active')
+                  }
+                >
+                  Amount
+                </span>
               </div>
-              <input type='text' placeholder='Description' />
-              <input type='text' placeholder='Pin' />
+              <div className='input-box'>
+                <input type='text' />
+                <span className='placeholder'>
+                  {category === 'DATA PURCHASE'
+                    ? 'Phone Number'
+                    : 'Description'}
+                </span>
+              </div>
+              <div className='input-box'>
+                <input
+                  type='text'
+                  onChange={(e) =>
+                    setPaymentDetails({
+                      ...paymentDetails,
+                      pin: e.target.value,
+                    })
+                  }
+                />
+                <span
+                  className={'placeholder ' + (paymentDetails.pin && 'active')}
+                >
+                  Pin
+                </span>
+              </div>
               <button type='submit'>Pay</button>
             </form>
           </div>
