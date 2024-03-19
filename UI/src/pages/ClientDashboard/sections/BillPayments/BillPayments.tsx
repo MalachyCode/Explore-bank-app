@@ -3,7 +3,12 @@ import './BillPayments.scss';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useEffect, useState } from 'react';
-import { Account, BillPaymentType, User } from '../../../../types';
+import {
+  Account,
+  BillPaymentType,
+  NewTransaction,
+  User,
+} from '../../../../types';
 import accountsService from '../../../../services/accounts';
 import SelectBox from './comoponents/SelectBox';
 import {
@@ -35,6 +40,7 @@ import {
   billerProductsTest,
 } from './comoponents/CategoriesAndOptions';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import transactionsService from '../../../../services/transactions';
 
 const BillPayments = () => {
   const navigate = useNavigate();
@@ -54,6 +60,7 @@ const BillPayments = () => {
     phoneNumber: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -73,25 +80,58 @@ const BillPayments = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({
-      category: category,
-      biller: biller,
-      product: product,
-      amount: paymentDetails.amount,
-      description: paymentDetails.description,
-      phoneNumber: paymentDetails.phoneNumber,
-      pin: paymentDetails.pin,
-    });
-    setCategory('');
-    setBiller('');
-    setProduct('');
-    setPaymentDetails({
-      ...paymentDetails,
-      amount: '',
-      pin: '',
-      description: '',
-      phoneNumber: '',
-    });
+
+    if (accountToShow?.status === 'active') {
+      if (user?.transferPin === paymentDetails.pin) {
+        const updatedSendingAccount = {
+          ...accountToShow,
+          balance:
+            accountToShow &&
+            accountToShow?.balance - Number(paymentDetails.amount),
+        };
+        accountsService
+          .debit(accountToShow?.id as string, updatedSendingAccount as Account)
+          .then((response) => console.log(response));
+
+        const newDebitTransaction: NewTransaction = {
+          accountNumber: accountToShow?.accountNumber,
+          createdOn: new Date(),
+          type: 'debit',
+          amount: Number(paymentDetails.amount),
+          oldBalance: accountToShow?.balance,
+          newBalance: updatedSendingAccount.balance,
+          description: `Bill Payment: Paid ${paymentDetails.amount} To ${biller} For service ${product}: ${paymentDetails.phoneNumber}`,
+        };
+        transactionsService
+          .newDebitTransaction(newDebitTransaction)
+          .then((response) => console.log(response));
+
+        navigate('/dashboard-client');
+
+        setCategory('');
+        setBiller('');
+        setProduct('');
+        setPaymentDetails({
+          ...paymentDetails,
+          amount: '',
+          pin: '',
+          description: '',
+          phoneNumber: '',
+        });
+      } else {
+        setErrorMessage('Wrong transfer pin');
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
+      }
+    } else {
+      setErrorMessage(
+        'Your account is not active. Please visit our branch near you to reactivate'
+      );
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+    }
   };
 
   return (
@@ -103,6 +143,7 @@ const BillPayments = () => {
         />
         <h2>Payments</h2>
       </div>
+      {errorMessage && <div className='error'>{errorMessage}</div>}
       <div className='body'>
         {/* box to show selected account */}
         <div

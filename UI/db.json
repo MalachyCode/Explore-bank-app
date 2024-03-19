@@ -115,7 +115,7 @@
     },
     {
       "id": "5fa5",
-      "balance": 498000,
+      "balance": 497000,
       "createdOn": "2024-02-21T12:10:48.988Z",
       "owner": "9cac",
       "status": "active",
@@ -212,6 +212,16 @@
       "oldBalance": 499000,
       "newBalance": 498000,
       "description": "Mobile TopUp of 1000.00 For 09035473258"
+    },
+    {
+      "id": "777c",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-03-19T17:17:18.971Z",
+      "type": "debit",
+      "amount": 1000,
+      "oldBalance": 498000,
+      "newBalance": 497000,
+      "description": "Bill Payment: Paid 1000 To MTN DATA For service 1.2GB + YouTube Monthly Data: 09035568872"
     }
   ]
 }
