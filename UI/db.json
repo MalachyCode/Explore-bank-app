@@ -115,7 +115,7 @@
     },
     {
       "id": "5fa5",
-      "balance": 497000,
+      "balance": 495000,
       "createdOn": "2024-02-21T12:10:48.988Z",
       "owner": "9cac",
       "status": "active",
@@ -222,6 +222,16 @@
       "oldBalance": 498000,
       "newBalance": 497000,
       "description": "Bill Payment: Paid 1000 To MTN DATA For service 1.2GB + YouTube Monthly Data: 09035568872"
+    },
+    {
+      "id": "5ca8",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-03-19T20:40:16.608Z",
+      "type": "debit",
+      "amount": 2000,
+      "oldBalance": 497000,
+      "newBalance": 495000,
+      "description": "Top up 2000 for user 09035678895 To SportyBet account. For service Wallet Top up: Top up sportybet account"
     }
   ]
 }

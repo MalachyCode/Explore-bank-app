@@ -1,5 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { BillPaymentSelectResourceToShow } from '../../../../../types';
+import { BillPaymentSelectResourceToShow } from '../../../../../../types';
+import './SelectBox.scss';
 
 const SelectBox = (props: {
   header: string;
