@@ -26,6 +26,7 @@ import TransactionInfo from './pages/Transaction/TransactionInfo/TransactionInfo
 import SelectAccount from './pages/Transaction/SelectAccount/SelectAccount';
 import MobileTopUp from './pages/ClientDashboard/sections/MobileTopUp/MobileTopUp';
 import BillPayments from './pages/ClientDashboard/sections/BillPayments/BillPayments';
+import SportWalletFunding from './pages/ClientDashboard/sections/SportWalletFunding/SportWalletFunding';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -100,6 +101,10 @@ function App() {
           />
           <Route path='/dashboard-staff/search/users' element={<Search />} />
           <Route path='/dashboard-client/:id/transfer' element={<Transfer />} />
+          <Route
+            path='/dashboard-client/:id/sport-wallet-funding'
+            element={<SportWalletFunding />}
+          />
           <Route
             path='/dashboard-client/:id/bill-payments'
             element={<BillPayments />}

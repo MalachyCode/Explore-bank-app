@@ -89,6 +89,8 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       name: 'sportWalletFunding',
       icon: '../../assets/icons8-volleyball-48.png',
       label: 'Sport Wallet Funding',
+      onClick: () =>
+        navigate(`/dashboard-client/${user?.id}/sport-wallet-funding`),
     },
   ];
 
