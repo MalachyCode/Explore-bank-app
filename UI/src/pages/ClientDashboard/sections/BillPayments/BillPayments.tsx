@@ -10,7 +10,7 @@ import {
   User,
 } from '../../../../types';
 import accountsService from '../../../../services/accounts';
-import SelectBox from './comoponents/SelectBox';
+import SelectBox from './comoponents/SelectBox/SelectBox';
 import {
   billPayCategories,
   billerOptionsCableTV,
@@ -38,7 +38,7 @@ import {
   billerProductsLeadway,
   billerProductsStanbic,
   billerProductsTest,
-} from './comoponents/CategoriesAndOptions';
+} from './comoponents/BillPayCategoriesAndOptions';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import transactionsService from '../../../../services/transactions';
 
@@ -251,7 +251,7 @@ const BillPayments = () => {
             </div>
             <form onSubmit={handleSubmit}>
               <div className='input-box'>
-                &#8358;
+                <span className='naira-symbol'>&#8358;</span>
                 <input
                   type='text'
                   onChange={(e) =>

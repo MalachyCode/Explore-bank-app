@@ -327,3 +327,130 @@ $transition: 0.3s ease-in-out all;
     top: 0;
   }
 }
+
+.select {
+  width: 90vw;
+  height: 8vh;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid gray;
+  margin-top: 15px;
+  padding: 0 0 0 5px;
+  // z-index: -2;
+  cursor: pointer;
+  overflow: hidden;
+  max-width: $fixed-width;
+
+  .text {
+    padding: 10px;
+    width: 70%;
+    height: 100%;
+    overflow: hidden;
+    margin-top: 2px;
+    .text-head {
+      opacity: 0.7;
+
+      &.reduce-category,
+      &.reduce-biller,
+      &.reduce-product {
+        font-size: 12px;
+        margin: 2px 0;
+      }
+    }
+  }
+}
+
+.product-and-form-container {
+  width: 100%;
+
+  form {
+    width: 100vw;
+    height: 40%;
+    margin: auto;
+    margin-top: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .input-box {
+      width: 90%;
+      height: 9%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid gray;
+      padding: 0 0 0 5px;
+      // z-index: -2;
+      cursor: pointer;
+      overflow: hidden;
+      max-width: $fixed-width;
+      margin-bottom: 15px;
+      position: relative;
+
+      .naira-symbol {
+        padding-top: 8px;
+      }
+
+      input {
+        width: 98%;
+        height: 6vh;
+        padding-top: 10px;
+        // max-width: $fixed-width;
+        margin-left: 5px;
+        border: none;
+        font-size: 16px;
+
+        &:focus {
+          outline: none;
+        }
+        &:focus ~ .placeholder {
+          top: 1px;
+          font-size: 11px;
+        }
+      }
+      .placeholder {
+        position: absolute;
+        font-size: 16px;
+        pointer-events: none;
+        color: rgb(42, 42, 42);
+        left: 1px;
+        // top: 1px;
+        margin-left: 15px;
+        transition: 0.1s ease all;
+        &.amount {
+          margin-left: 20px;
+        }
+
+        &.active {
+          top: 1px;
+          font-size: 11px;
+        }
+      }
+
+      .show-password-icon {
+        cursor: pointer;
+        margin-right: 15px;
+      }
+    }
+
+    button {
+      width: 90%;
+      height: 7vh;
+      max-width: $fixed-width;
+      margin-bottom: 15px;
+      background: $primary-500;
+      border: transparent;
+      transition: all 1s ease;
+      color: #fff;
+      &:hover {
+        background: $primary-700;
+        box-shadow: $shadow-3;
+      }
+    }
+  }
+}
