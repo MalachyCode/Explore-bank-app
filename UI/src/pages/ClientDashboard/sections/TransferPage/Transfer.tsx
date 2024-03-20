@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import accountService from '../../../../services/accounts';
 import userService from '../../../../services/users';
 import transactionsService from '../../../../services/transactions';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Transfer = () => {
   const navigate = useNavigate();
@@ -16,7 +18,6 @@ const Transfer = () => {
   const [transferPin, setTransferPin] = useState<string>('');
   const [selected, setSelected] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [accountErrorMessage, setAccountErrorMessage] = useState<string | null>(
     null
   );
@@ -168,11 +169,10 @@ const Transfer = () => {
             accountNumber: '',
           });
         } else {
-          setErrorMessage('Wrong transfer pin');
+          toast.error('Wrong transfer pin', {
+            position: 'top-center',
+          });
           setOpenConfirm(false);
-          setTimeout(() => {
-            setErrorMessage(null);
-          }, 5000);
         }
       } else {
         setAccountErrorMessage(
@@ -184,13 +184,13 @@ const Transfer = () => {
         // }, 5000);
       }
     } else {
-      setErrorMessage(
-        'Your account is not active for transfers. Please visit our branch near you'
+      toast.error(
+        'Your account is not active for transfers. Please visit our branch near you',
+        {
+          position: 'top-center',
+        }
       );
       setOpenConfirm(false);
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
     }
   };
 
@@ -212,10 +212,6 @@ const Transfer = () => {
 
   return (
     <div className='transfer'>
-      {errorMessage && <div className='error'>{errorMessage}</div>}
-      {/* {accountErrorMessage && (
-        <div className='error'>{accountErrorMessage}</div>
-      )} */}
       <div className={'confirm-container ' + (openConfirm && 'active')}>
         <div className='confirm'>
           <h3>Tranfer Confirmation</h3>
@@ -275,7 +271,7 @@ const Transfer = () => {
             ))}
           </div>
           <div className='daily-limit-box'>
-            <div className='total'>
+            <div className='daily-limit-box-total'>
               <span>daily limit</span>
               {dailyLimit}
             </div>
@@ -306,6 +302,7 @@ const Transfer = () => {
           )}
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -18,13 +18,16 @@ import {
   billerProductsTest,
   sportsBetBillerOptions,
 } from './components/BillerAndProducts';
+// import CloseIcon from '@mui/icons-material/Close';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SportWalletFunding = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User>();
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [accountToShow, setAccountToShow] = useState<Account>();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  // const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [openAccountSelectBox, setOpenAccountSelectBox] = useState(false);
   const [openSelectBox, setOpenSelectBox] = useState(false);
   const [servicesToShow, setServicesToShow] = useState('');
@@ -92,18 +95,17 @@ const SportWalletFunding = () => {
           phoneNumber: '',
         });
       } else {
-        setErrorMessage('Wrong transfer pin');
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 5000);
+        toast.error('Wrong transfer pin', {
+          position: 'top-center',
+        });
       }
     } else {
-      setErrorMessage(
-        'Your account is not active. Please visit our branch near you to reactivate'
+      toast.error(
+        'Your account is not active. Please visit our branch near you to reactivate',
+        {
+          position: 'top-center',
+        }
       );
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
     }
   };
 
@@ -116,7 +118,6 @@ const SportWalletFunding = () => {
         />
         <h2>Sport Wallet Funding</h2>
       </div>
-      {errorMessage && <div className='error'>{errorMessage}</div>}
       <div className='body'>
         {/* box to show selected account */}
         <div
@@ -293,6 +294,7 @@ const SportWalletFunding = () => {
           header={servicesToShow}
         />
       </div>
+      <ToastContainer />
     </div>
   );
 };

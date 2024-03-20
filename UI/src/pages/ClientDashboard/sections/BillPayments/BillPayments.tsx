@@ -41,6 +41,8 @@ import {
 } from './comoponents/BillPayCategoriesAndOptions';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import transactionsService from '../../../../services/transactions';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BillPayments = () => {
   const navigate = useNavigate();
@@ -60,7 +62,6 @@ const BillPayments = () => {
     phoneNumber: '',
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -119,18 +120,17 @@ const BillPayments = () => {
           phoneNumber: '',
         });
       } else {
-        setErrorMessage('Wrong transfer pin');
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 5000);
+        toast.error('Wrong transfer pin', {
+          position: 'top-center',
+        });
       }
     } else {
-      setErrorMessage(
-        'Your account is not active. Please visit our branch near you to reactivate'
+      toast.error(
+        'Your account is not active. Please visit our branch near you to reactivate',
+        {
+          position: 'top-center',
+        }
       );
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
     }
   };
 
@@ -143,7 +143,6 @@ const BillPayments = () => {
         />
         <h2>Payments</h2>
       </div>
-      {errorMessage && <div className='error'>{errorMessage}</div>}
       <div className='body'>
         {/* box to show selected account */}
         <div
@@ -398,6 +397,7 @@ const BillPayments = () => {
           header={servicesToShow}
         />
       </div>
+      <ToastContainer />
     </div>
   );
 };

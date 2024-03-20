@@ -120,22 +120,6 @@ $transition: 0.3s ease-in-out all;
   }
 }
 
-.error {
-  margin-top: 2px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  justify-content: center;
-  background: white;
-  border: 1px solid rgb(125, 1, 1);
-  color: red;
-  padding: 3px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .confirm-container {
   width: 100vw;
   height: 100vh;
@@ -452,5 +436,15 @@ $transition: 0.3s ease-in-out all;
         box-shadow: $shadow-3;
       }
     }
+  }
+}
+
+.Toastify__toast--error {
+  @media (max-width: 576px) {
+    width: 95vw;
+    // height: 20vh;
+    position: relative;
+    margin-top: 20px;
+    left: 10px;
   }
 }

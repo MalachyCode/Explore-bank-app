@@ -13,6 +13,8 @@ import accountsService from '../../../../services/accounts';
 import transactionsService from '../../../../services/transactions';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MobileTopUp = () => {
   const navigate = useNavigate();
@@ -26,7 +28,6 @@ const MobileTopUp = () => {
   const [selected, setSelected] = useState(false);
   const [openAccountSelectBox, setOpenAccountSelectBox] = useState(false);
   const [accountToShow, setAccountToShow] = useState<Account>();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [openConfirm, setOpenConfirm] = useState(false);
   const [transferPin, setTransferPin] = useState<string>('');
 
@@ -113,30 +114,28 @@ const MobileTopUp = () => {
             phoneNumber: '',
           });
         } else {
-          setErrorMessage('Wrong transfer pin');
+          toast.error('Wrong transfer pin', {
+            position: 'top-center',
+          });
           setOpenConfirm(false);
           setTransferPin('');
-          setTimeout(() => {
-            setErrorMessage(null);
-          }, 5000);
         }
       } else {
-        setErrorMessage(
-          'Your account is not active. Please visit our branch near you to reactivate'
+        toast.error(
+          'Your account is not active. Please visit our branch near you to reactivate',
+          {
+            position: 'top-center',
+          }
         );
         setOpenConfirm(false);
         setTransferPin('');
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 5000);
       }
     } else {
-      setErrorMessage('Select a network provider');
+      toast.error('Select a network provider', {
+        position: 'top-center',
+      });
       setOpenConfirm(false);
       setTransferPin('');
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
     }
   };
 
@@ -183,7 +182,6 @@ const MobileTopUp = () => {
         />
         <h2>Mobile Top-Up</h2>
       </div>
-      {errorMessage && <div className='error'>{errorMessage}</div>}
       <div className={'confirm-container ' + (openConfirm && 'active')}>
         <div className='confirm'>
           <h3>Top Up Confirmation</h3>
@@ -308,6 +306,7 @@ const MobileTopUp = () => {
           Proceed
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
