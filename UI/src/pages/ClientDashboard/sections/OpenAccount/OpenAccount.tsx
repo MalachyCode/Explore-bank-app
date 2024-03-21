@@ -5,11 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { Account, NewAccount, OpenAccountType, User } from '../../../../types';
 import accountService from '../../../../services/accounts';
 import userService from '../../../../services/users';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const OpenAccount = () => {
   const navigate = useNavigate();
   const [accountType, setAccountType] = useState('savings');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [users, setUsers] = useState<Array<User>>([]);
   const [user, setUser] = useState<User>();
@@ -93,11 +94,9 @@ const OpenAccount = () => {
         navigate('/dashboard-client');
       }
     } else {
-      setErrorMessage('User not found');
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
-      console.log('User not found');
+      toast.error('User not found. Please check your email', {
+        position: 'top-center',
+      });
     }
   };
 
@@ -107,7 +106,6 @@ const OpenAccount = () => {
 
   return (
     <div className='open-account'>
-      <div style={{ color: 'red' }}>{errorMessage}</div>
       <form className='form' onSubmit={handleSubmit}>
         <strong className='form-header'>Open An Account</strong>
         <div className='form-header-seperator'></div>
@@ -134,6 +132,7 @@ const OpenAccount = () => {
           Open Account
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };

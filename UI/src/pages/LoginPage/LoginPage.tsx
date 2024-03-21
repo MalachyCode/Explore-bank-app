@@ -4,6 +4,8 @@ import FormInput from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
 import { LoginType, User } from '../../types';
 import userService from '../../services/users';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -11,7 +13,6 @@ const LoginPage = () => {
     email: '',
     password: '',
   });
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [users, setUsers] = useState<Array<User>>([]);
   useEffect(() => {
     userService.getAll().then((users) => setUsers(users));
@@ -56,18 +57,14 @@ const LoginPage = () => {
         );
         setCredentials({ ...credentials, email: '', password: '' });
       } else {
-        setErrorMessage('Wrong username or password');
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 5000);
-        console.log('wrong username or password');
+        toast.error('Wrong username or password', {
+          position: 'top-center',
+        });
       }
     } else {
-      setErrorMessage('User not found');
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
-      console.log('User not found');
+      toast.error('User email not found. Please check your email', {
+        position: 'top-center',
+      });
     }
   };
 
@@ -77,7 +74,6 @@ const LoginPage = () => {
 
   return (
     <div className='login'>
-      <div style={{ color: 'red' }}>{errorMessage}</div>
       <form className='form' onSubmit={handleSubmit}>
         <strong className='form-header'>Welcome Back</strong>
         <div className='form-header-seperator'></div>
@@ -104,6 +100,7 @@ const LoginPage = () => {
           </p>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };
