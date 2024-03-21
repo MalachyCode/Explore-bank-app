@@ -102,6 +102,7 @@ export interface User {
   isAdmin: boolean;
   number: string;
   transferPin?: string;
+  dob?: string;
 }
 // export interface User {
 //   id: number;
@@ -113,6 +114,8 @@ export interface User {
 //   type: string;
 //   isAdmin: boolean;
 //   number: string;
+//   transferPin?: string;
+//   dob?: string;
 // }
 
 export type NewUser = Omit<User, 'id'>;
