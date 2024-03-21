@@ -1,0 +1,15 @@
+@import '../../global.scss';
+
+.reset-pin {
+  width: 100vw;
+  height: 100%;
+  background: url('../../assets/pexels-henry-&-co-2059736.jpg');
+  background-color: #e1dcd9;
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  position: fixed;
+}
