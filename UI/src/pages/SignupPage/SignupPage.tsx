@@ -4,6 +4,8 @@ import FormInput from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
 import { NewUser, SignUpType } from '../../types';
 import userService from '../../services/users';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -110,16 +112,25 @@ const SignupPage = () => {
       type: 'client',
       isAdmin: false,
       number: values.phoneNumber,
+      dob: values.dateOfBirth,
       transferPin: '',
     };
 
     userService
       .create(newClient)
       .then((clientCreated) => console.log(clientCreated));
-    navigate('/login');
-    console.log(
-      `user with firstname: ${values.firstName}, middlename: ${values.middleName}, lastname: ${values.lastName}, dob: ${values.dateOfBirth} and password ${values.password} created an account`
+    toast.success(
+      `User with firstname: ${values.firstName}, middlename: ${values.middleName}, lastname: ${values.lastName}, dob: ${values.dateOfBirth} and password ${values.password} created an account`,
+      {
+        position: 'top-center',
+      }
     );
+
+    navigate('/login');
+    // setTimeout(() => {
+    //   navigate('/login');
+    // }, 5000);
+
     setValues({
       ...values,
       email: '',
@@ -160,6 +171,7 @@ const SignupPage = () => {
           </span>
         </p>
       </form>
+      <ToastContainer />
     </div>
   );
 };
