@@ -17,7 +17,7 @@
 
     .top {
       width: 100%;
-      background: green;
+      background: #04aa6d;
       height: 40%;
       position: fixed;
       top: 0;
@@ -25,7 +25,7 @@
       flex-direction: column;
       border-radius: 0 0 5px 5px;
       max-width: 800px;
-      z-index: 2;
+      z-index: 3;
 
       .profile-photo {
         background: url('../../assets/pexels-aog-pixels-12698491.jpg');
@@ -71,6 +71,57 @@
       position: relative;
       top: 40%;
 
+      .profile-options {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 20px;
+
+        .option {
+          width: 90%;
+          margin: auto;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          height: 70px;
+          border-bottom: 1px solid rgb(94, 157, 94);
+          cursor: pointer;
+          transition: all 1s ease;
+          margin-bottom: 5px;
+          padding: 0 5px;
+
+          &:hover {
+            background: lightgreen;
+
+            .left {
+              background: white;
+            }
+          }
+
+          .left {
+            background: lightgreen;
+            transition: all 1s ease;
+            border-radius: 3px;
+            padding: 5px;
+
+            .logout-icon {
+              transform: rotateZ(180deg);
+            }
+          }
+          .middle {
+          }
+          .right {
+            padding: 5px;
+
+            .arrow-icon {
+              color: rgb(94, 157, 94);
+              transform: rotate(-90deg);
+            }
+          }
+        }
+      }
+
       .user-info {
         position: fixed;
         right: auto;
@@ -90,6 +141,7 @@
         border-radius: 5px 5px 0 0;
         max-width: 500px;
         transition: all 1s ease;
+        z-index: 2;
 
         .close-icon {
           position: relative;
