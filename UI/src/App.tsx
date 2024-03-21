@@ -104,7 +104,7 @@ function App() {
           <Route path='/dashboard-client/:id/transfer' element={<Transfer />} />
           <Route
             path='/dashboard-client/:id/profile'
-            element={<UserProfile />}
+            element={<UserProfile handleLogout={handleLogout} />}
           />
           <Route
             path='/dashboard-client/:id/sport-wallet-funding'
