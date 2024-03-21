@@ -7,6 +7,7 @@ import usersService from '../../services/users';
 
 const ForgotPasswordPage = () => {
   const [users, setUsers] = useState<Array<User>>([]);
+  const [user, setUser] = useState<User>();
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState<ForgotPasswordType>({
     email: '',
@@ -15,6 +16,11 @@ const ForgotPasswordPage = () => {
   });
 
   useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
     usersService.getAll().then((users) => setUsers(users));
   }, []);
 
@@ -75,7 +81,7 @@ const ForgotPasswordPage = () => {
       password: '',
       confirmPassword: '',
     });
-    navigate('/login');
+    user ? navigate('/dashboard-client') : navigate('/login');
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
