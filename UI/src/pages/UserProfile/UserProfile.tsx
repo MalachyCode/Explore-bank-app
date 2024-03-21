@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Account, User } from '../../types';
 import accountsService from '../../services/accounts';
+import CloseIcon from '@mui/icons-material/Close';
 import './UserProfile.scss';
 
 const UserProfile = () => {
   const [user, setUser] = useState<User>();
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [enlargeProfilePicture, setEnlargeProfilePicture] = useState(false);
+  const [showUserInfo, setShowUserInfo] = useState(false);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -33,10 +35,20 @@ const UserProfile = () => {
           <div className='user-name'>
             {user?.firstName.toUpperCase()} {user?.lastName.toUpperCase()}
           </div>
-          <div className='show-details'>Show Details</div>
+          <div
+            className='show-details'
+            onClick={() => setShowUserInfo(!showUserInfo)}
+          >
+            {showUserInfo ? 'Hide Details' : 'Show Details'}
+          </div>
         </div>
         <div className='body'>
-          <div className='user-info'>
+          <div className={'user-info ' + (showUserInfo && 'active')}>
+            <CloseIcon
+              fontSize='small'
+              className='close-icon'
+              onClick={() => setShowUserInfo(!showUserInfo)}
+            />
             <div className='name'>
               <div className='headings'>Full Name</div>
               {user?.firstName} {user?.lastName}
