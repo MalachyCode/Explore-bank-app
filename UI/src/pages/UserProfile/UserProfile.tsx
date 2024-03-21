@@ -58,7 +58,7 @@ const UserProfile = (props: { handleLogout: () => void }) => {
     {
       id: 1,
       optionName: 'Change/Reset PIN',
-      onClick: () => navigate(''),
+      onClick: () => navigate(`/dashboard-client/${user?.id}/reset-pin`),
     },
     {
       id: 2,
