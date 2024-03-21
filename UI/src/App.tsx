@@ -28,6 +28,7 @@ import MobileTopUp from './pages/ClientDashboard/sections/MobileTopUp/MobileTopU
 import BillPayments from './pages/ClientDashboard/sections/BillPayments/BillPayments';
 import SportWalletFunding from './pages/ClientDashboard/sections/SportWalletFunding/SportWalletFunding';
 import UserProfile from './pages/UserProfile/UserProfile';
+import ResetPin from './pages/ResetPin/ResetPin';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -105,6 +106,10 @@ function App() {
           <Route
             path='/dashboard-client/:id/profile'
             element={<UserProfile handleLogout={handleLogout} />}
+          />
+          <Route
+            path='/dashboard-client/:id/reset-pin'
+            element={<ResetPin />}
           />
           <Route
             path='/dashboard-client/:id/sport-wallet-funding'
