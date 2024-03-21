@@ -179,3 +179,9 @@ export interface BillPaymentSelectResourceToShow {
   id: number;
   name: string;
 }
+
+export interface ResetPinType {
+  oldPin: string;
+  newPin: string;
+  confirmPin: string;
+}
