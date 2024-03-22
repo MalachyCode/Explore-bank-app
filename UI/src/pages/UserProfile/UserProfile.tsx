@@ -68,7 +68,8 @@ const UserProfile = (props: { handleLogout: () => void }) => {
     {
       id: 3,
       optionName: 'Change Personal Data',
-      onClick: () => navigate(''),
+      onClick: () =>
+        navigate(`/dashboard-client/${user?.id}/change-personal-data`),
     },
     {
       id: 4,
