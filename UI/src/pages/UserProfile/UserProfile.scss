@@ -27,6 +27,17 @@
       max-width: 800px;
       z-index: 3;
 
+      .back-icon {
+        position: fixed;
+        left: 5px;
+        top: 15px;
+        cursor: pointer;
+
+        // @media (min-width: 768px) {
+        //   left: 50%;
+        // }
+      }
+
       .profile-photo {
         background: url('../../assets/pexels-aog-pixels-12698491.jpg');
         background-repeat: no-repeat;

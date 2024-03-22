@@ -9,6 +9,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import LogoutIcon from '@mui/icons-material/Logout';
 import './UserProfile.scss';
 import { useNavigate } from 'react-router';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const RenderOptions = (props: { onClick: () => void; optionName: string }) => (
   <div className='option' onClick={props.onClick}>
@@ -82,6 +83,10 @@ const UserProfile = (props: { handleLogout: () => void }) => {
     <div className='user-profile'>
       <div className='container'>
         <div className='top'>
+          <ArrowBackIcon
+            className='back-icon'
+            onClick={() => navigate('/dashboard-client')}
+          />
           <h3>User Profile</h3>
           <div
             className={'profile-photo ' + (enlargeProfilePicture && 'active')}
