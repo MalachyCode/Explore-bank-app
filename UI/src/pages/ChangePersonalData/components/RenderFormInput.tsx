@@ -9,6 +9,7 @@ const RenderFormInput = (props: {
   placeholder: string;
   value: string | undefined;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputType: string;
 }) => (
   <div className='input-box'>
     {props.placeholder === 'Email' ? (
@@ -38,7 +39,7 @@ const RenderFormInput = (props: {
       />
     )}
     <input
-      type='text'
+      type={props.inputType}
       value={props.value}
       onChange={props.onChange}
       disabled={props.disabled}
