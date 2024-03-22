@@ -120,6 +120,14 @@ export interface User {
 
 export type NewUser = Omit<User, 'id'>;
 
+export interface UpdateUser {
+  email: string | undefined;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  number: string | undefined;
+  dob?: string | undefined;
+}
+
 export interface Account {
   id: string;
   balance: number;

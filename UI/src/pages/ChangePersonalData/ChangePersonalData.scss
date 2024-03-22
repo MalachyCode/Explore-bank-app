@@ -1,5 +1,54 @@
+@import '../../global.scss';
+
 .change-personal-data {
   width: 100vw;
   height: 100vh;
-  background: #e1dcd9;
+  background: url('../../assets/pexels-henry-&-co-2059736.jpg');
+  background-color: #e1dcd9;
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+
+  .form-container {
+    background: white;
+    width: 90%;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow: $shadow-3;
+    padding: 10px 0 15px 0;
+
+    .header {
+      text-align: center;
+    }
+
+    form {
+      width: 95%;
+      .input-box {
+        background: white;
+        padding-right: 5px;
+
+        input {
+          margin-right: 1px;
+        }
+
+        .icon {
+          &.active {
+            margin-top: 10px;
+          }
+        }
+        .placeholder {
+          margin-left: 30px;
+        }
+        .enable-disable-btn {
+          margin-right: 1px;
+          padding-right: 5px;
+          width: 10%;
+          text-align: left;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }

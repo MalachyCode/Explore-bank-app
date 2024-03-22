@@ -10,6 +10,7 @@
       "type": "client",
       "isAdmin": false,
       "number": "08100000000",
+      "dob": "1996-03-22",
       "transferPin": "7785"
     },
     {
@@ -22,6 +23,7 @@
       "type": "client",
       "isAdmin": false,
       "number": "08111111111",
+      "dob": "1999-07-11",
       "transferPin": ""
     },
     {
@@ -34,6 +36,7 @@
       "type": "client",
       "isAdmin": false,
       "number": "09022222222",
+      "dob": "2000-10-25",
       "transferPin": ""
     },
     {
@@ -46,6 +49,7 @@
       "type": "client",
       "isAdmin": false,
       "number": "09033333333",
+      "dob": "1995-06-27",
       "transferPin": ""
     },
     {
@@ -57,7 +61,8 @@
       "password": "Martins22@",
       "type": "staff",
       "isAdmin": false,
-      "number": "09047863821"
+      "number": "09047863821",
+      "dob": "1998-06-11"
     },
     {
       "id": "f0b1",
@@ -68,7 +73,8 @@
       "password": "Malachy22@",
       "type": "staff",
       "isAdmin": true,
-      "number": "09046788945"
+      "number": "09046788945",
+      "dob": "2001-05-19"
     },
     {
       "id": "6069",
@@ -80,6 +86,7 @@
       "type": "client",
       "isAdmin": false,
       "number": "09044877395",
+      "dob": "1999-11-30",
       "transferPin": ""
     },
     {
@@ -90,7 +97,8 @@
       "password": "Gboyega22@",
       "type": "staff",
       "isAdmin": false,
-      "number": "09033334452"
+      "number": "09033334452",
+      "dob": "1999-02-11"
     },
     {
       "id": "92f6",
@@ -100,7 +108,8 @@
       "password": "Charity22@",
       "type": "staff",
       "isAdmin": true,
-      "number": "09066557788"
+      "number": "09066557788",
+      "dob": "1989-07-22"
     }
   ],
   "accounts": [
