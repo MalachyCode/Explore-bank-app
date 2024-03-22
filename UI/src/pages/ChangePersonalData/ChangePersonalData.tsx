@@ -32,7 +32,14 @@ const ChangePersonalData = () => {
       number: user?.number,
       dob: user?.dob,
     });
-  }, []);
+  }, [
+    user?.dob,
+    user?.email,
+    user?.firstName,
+    user?.lastName,
+    user?.number,
+    userDetails,
+  ]);
 
   const formInputs = [
     {
@@ -46,6 +53,7 @@ const ChangePersonalData = () => {
           ...userDetails,
           email: e.target.value,
         }),
+      inputType: 'email',
     },
     {
       id: 2,
@@ -58,6 +66,7 @@ const ChangePersonalData = () => {
           ...userDetails,
           firstName: e.target.value,
         }),
+      inputType: 'text',
     },
     {
       id: 3,
@@ -70,6 +79,7 @@ const ChangePersonalData = () => {
           ...userDetails,
           lastName: e.target.value,
         }),
+      inputType: 'text',
     },
     {
       id: 4,
@@ -82,6 +92,7 @@ const ChangePersonalData = () => {
           ...userDetails,
           number: e.target.value,
         }),
+      inputType: 'text',
     },
     {
       id: 5,
@@ -94,6 +105,7 @@ const ChangePersonalData = () => {
           ...userDetails,
           dob: e.target.value,
         }),
+      inputType: 'date',
     },
   ];
 
@@ -115,6 +127,7 @@ const ChangePersonalData = () => {
               setDisabled={input.setDisabled}
               value={input.value}
               onChange={input.onChange}
+              inputType={input.inputType}
             />
           ))}
           <button type='submit'>Update</button>
