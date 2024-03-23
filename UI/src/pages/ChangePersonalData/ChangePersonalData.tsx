@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import './ChangePersonalData.scss';
 import { UpdateUser, User } from '../../types';
 import RenderFormInput from './components/RenderFormInput';
+import usersService from '../../services/users';
+import { useNavigate } from 'react-router-dom';
 
 const ChangePersonalData = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User>();
   const [emailDisabled, setEmailDisabled] = useState(true);
   const [firstNameDisabled, setFirstNameDisabled] = useState(true);
@@ -21,25 +24,18 @@ const ChangePersonalData = () => {
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      setUser(retrievedUser);
+      setUserDetails({
+        ...userDetails,
+        email: retrievedUser.email,
+        firstName: retrievedUser.firstName,
+        lastName: retrievedUser.lastName,
+        number: retrievedUser.number,
+        dob: retrievedUser.dob,
+      });
     }
-    setUserDetails({
-      ...userDetails,
-      email: user?.email,
-      firstName: user?.firstName,
-      lastName: user?.lastName,
-      number: user?.number,
-      dob: user?.dob,
-    });
-  }, [
-    user?.dob,
-    user?.email,
-    user?.firstName,
-    user?.lastName,
-    user?.number,
-    userDetails,
-  ]);
+  }, []);
 
   const formInputs = [
     {
@@ -112,7 +108,20 @@ const ChangePersonalData = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(userDetails);
+    const updatedUser = {
+      ...user,
+      email: userDetails.email,
+      firstName: userDetails.firstName,
+      lastName: userDetails.lastName,
+      number: userDetails.number,
+      dob: userDetails.dob,
+    };
+
+    usersService
+      .updateUser(user?.id, updatedUser as User)
+      .then((response) => console.log(response));
+
+    navigate(`/dashboard-client/${user?.id}/profile`);
   };
 
   return (
