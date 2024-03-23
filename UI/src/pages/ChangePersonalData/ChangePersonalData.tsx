@@ -121,6 +121,17 @@ const ChangePersonalData = () => {
       .updateUser(user?.id, updatedUser as User)
       .then((response) => console.log(response));
 
+    // // Retrieves the string and converts it to a JavaScript object
+    // const userFromLocalStorage = window.localStorage.getItem('loggedAppUser');
+    // const parsedObject = JSON.parse(us);
+
+    // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
+    // parsedObject.name = 'newName';
+    const modifiedObjectForStorage = JSON.stringify(updatedUser);
+    localStorage.setItem('loggedAppUser', modifiedObjectForStorage);
+
+    console.log(user);
+
     navigate(`/dashboard-client/${user?.id}/profile`);
   };
 
