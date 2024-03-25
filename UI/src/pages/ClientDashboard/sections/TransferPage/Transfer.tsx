@@ -8,6 +8,7 @@ import userService from '../../../../services/users';
 import transactionsService from '../../../../services/transactions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Transfer = () => {
   const navigate = useNavigate();
@@ -212,6 +213,13 @@ const Transfer = () => {
 
   return (
     <div className='transfer'>
+      <div className='top'>
+        <ArrowBackIcon
+          className='back-icon'
+          onClick={() => navigate('/dashboard-client')}
+        />
+        <h2>Transfer</h2>
+      </div>
       <div className={'confirm-container ' + (openConfirm && 'active')}>
         <div className='confirm'>
           <h3>Tranfer Confirmation</h3>
@@ -243,7 +251,7 @@ const Transfer = () => {
         </div>
       </div>
 
-      <div className='form-container'>
+      <div className='transfer-form-container'>
         <form
           className='form'
           onSubmit={(e) => {

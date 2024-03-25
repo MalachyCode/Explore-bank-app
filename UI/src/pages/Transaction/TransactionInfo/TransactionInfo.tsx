@@ -1,15 +1,27 @@
-import { useState } from 'react';
-import { TransactionType } from '../../../types';
+import { useEffect, useState } from 'react';
+import { Account, TransactionType } from '../../../types';
 import './TransactionInfo.scss';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import CloseIcon from '@mui/icons-material/Close';
+import { useMatch, useNavigate } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import accountsService from '../../../services/accounts';
 
 const TransactionInfo = (props: {
   transaction: TransactionType | null | undefined;
 }) => {
+  const navigate = useNavigate();
   const [reportBoxOpen, setReportBoxOpen] = useState(false);
   const [complaint, setComplaint] = useState('');
+  const [accounts, setAccounts] = useState<Array<Account>>();
+
+  const matchAccount = useMatch(
+    '/dashboard-client/account-info/:id/transactions/:accountNumber/:transactionId'
+  );
+  const accountToUse = matchAccount
+    ? accounts?.find((account) => account.id === matchAccount.params.id)
+    : null;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,8 +29,25 @@ const TransactionInfo = (props: {
     setComplaint('');
   };
 
+  console.log(accountToUse);
+
+  useEffect(() => {
+    accountsService.getAll().then((accounts) => setAccounts(accounts));
+  }, []);
+
   return (
     <div className='transaction-info'>
+      <div className='top'>
+        <ArrowBackIcon
+          className='back-icon'
+          onClick={() =>
+            navigate(
+              `/dashboard-client/account-info/${accountToUse?.id}/transactions/${accountToUse?.accountNumber}`
+            )
+          }
+        />
+        <h2>Transaction Information</h2>
+      </div>
       <div className={'report-container ' + (reportBoxOpen && 'open')}>
         <CloseIcon
           className='close'
@@ -40,7 +69,7 @@ const TransactionInfo = (props: {
         </form>
       </div>
       <div className='container'>
-        <div className='top'>
+        <div className='info-box-top'>
           <PaymentsIcon className='payment-icon' />
           <div>&#8358;{props.transaction?.amount}</div>
         </div>
