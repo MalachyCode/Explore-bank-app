@@ -55,21 +55,7 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
               </div>
             </div>
             <div className='container'>
-              <div className='left'>
-                <div
-                  className='box one'
-                  onClick={() => navigate('/dashboard-staff/search/users')}
-                >
-                  All Accounts
-                </div>
-                <div
-                  className='box two'
-                  onClick={() => navigate('/dashboard-staff/search/users')}
-                >
-                  Debit Cards
-                </div>
-                {user?.isAdmin && <div className='box one'>All Staff</div>}
-              </div>
+              <div className='left'></div>
               <div className='right'>
                 <div
                   className='box two'
@@ -79,7 +65,7 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
                 </div>
                 <div
                   className='box one'
-                  onClick={() => navigate('/dashboard-staff/search/users')}
+                  onClick={() => navigate('/dashboard-staff/search/users/all')}
                 >
                   Manage Accounts
                 </div>
