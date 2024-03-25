@@ -1,0 +1,60 @@
+@import '../../global.scss';
+
+.transactions {
+  background: #fff;
+
+  .container {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    position: relative;
+    top: 5%;
+    // background: green;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .body {
+      width: 95%;
+      width: auto;
+      padding: 5px;
+      margin: 2.5%;
+
+      .header {
+        text-align: center;
+      }
+
+      .transaction {
+        display: flex;
+        flex-direction: row;
+        margin: 5px 0;
+        background: #e1dcd9;
+        width: 100%;
+        padding: 0.75em;
+        cursor: pointer;
+
+        .left {
+          width: 15%;
+          display: flex;
+          align-items: center;
+        }
+
+        .center {
+          width: 63%;
+        }
+
+        .right {
+          width: 22%;
+          display: flex;
+          align-items: center;
+        }
+
+        .debit {
+          color: red;
+        }
+        .credit {
+          color: green;
+        }
+      }
+    }
+  }
+}

@@ -2,12 +2,12 @@
 
 .transaction-info {
   width: 100vw;
-  height: 100vh;
-  background: #e1dcd9;
+  // height: 100vh;
+  background: #fff;
 
   .report-container {
     width: 90%;
-    height: 90%;
+    height: 90vh;
     position: fixed;
     background: white;
     top: 5%;
@@ -43,16 +43,17 @@
     width: 90%;
     position: relative;
     left: 5%;
-    height: 90%;
+    height: 80vh;
     top: 5%;
     display: flex;
     flex-direction: column;
     box-shadow: $shadow-3;
+    margin-top: 25px;
 
-    .top {
+    .info-box-top {
       width: 100%;
       padding: 10px;
-      height: 30%;
+      height: 30vh;
       background: #8f8681;
       display: flex;
       flex-direction: column;
@@ -66,7 +67,7 @@
     .middle {
       width: 100%;
       padding: 10px;
-      height: 30%;
+      height: 30vh;
       background: #e1dcd9;
       display: flex;
       flex-direction: row;
@@ -87,7 +88,7 @@
     .bottom {
       width: 100%;
       padding: 10px;
-      height: 10%;
+      height: 10vh;
       background: #8f8681;
       margin-top: 2%;
       display: flex;

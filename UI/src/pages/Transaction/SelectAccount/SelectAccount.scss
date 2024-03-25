@@ -1,15 +1,10 @@
 .select-account {
   width: 100vw;
   height: 100vh;
-  background: #e1dcd9;
+  background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  h3 {
-    position: relative;
-    top: 5%;
-  }
 
   .container {
     width: 90%;
@@ -17,6 +12,11 @@
     overflow: hidden;
     position: relative;
     max-width: 600px;
+    background: #e1dcd9;
+
+    .header {
+      text-align: center;
+    }
 
     .total {
       height: 150px;
