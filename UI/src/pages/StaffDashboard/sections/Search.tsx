@@ -10,14 +10,32 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 };
 
 const Search = () => {
+  const [user, setUser] = useState<User>();
   const [users, setUsers] = useState<Array<User>>([]);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [showAll, setShowAll] = useState(true);
   const [search, setSearch] = useState('');
+
   useEffect(() => {
-    userService.getAll().then((users) => setUsers(users));
     accountsService.getAll().then((accounts) => setAccounts(accounts));
+
+    const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
+    if (loggedUserJSON) {
+      const retrivedUser = JSON.parse(loggedUserJSON);
+      setUser(retrivedUser);
+      userService
+        .getAll()
+        .then((users) =>
+          setUsers(
+            retrivedUser.isAdmin
+              ? users
+              : users.filter((user: User) => user.type !== 'staff')
+          )
+        );
+    }
   }, []);
+
+  console.log(user);
 
   const usersToShow = showAll
     ? users
