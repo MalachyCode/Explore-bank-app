@@ -1,17 +1,30 @@
 import { useNavigate } from 'react-router-dom';
 import { Account, TransactionType } from '../../types';
 import HistoryIcon from '@mui/icons-material/History';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import './Transactions.scss';
 
-const Transaction = (props: {
+const Transactions = (props: {
   transactions: TransactionType[] | null | undefined;
   account: Account | null | undefined;
 }) => {
   const navigate = useNavigate();
   return (
-    <div className='account-info'>
+    <div className='transactions'>
+      <div className='top'>
+        <ArrowBackIcon
+          className='back-icon'
+          onClick={() =>
+            navigate(
+              `/dashboard-client/${props.account?.id}/transactions/select-account`
+            )
+          }
+        />
+        <h2>Transactions</h2>
+      </div>
       <div className='container'>
         <div className='body'>
-          <h3 className='header'>Transactions</h3>
+          {/* <h3 className='header'>Transactions</h3> */}
           {props.transactions?.map((transaction) => (
             <div
               className='transaction'
@@ -41,4 +54,4 @@ const Transaction = (props: {
   );
 };
 
-export default Transaction;
+export default Transactions;
