@@ -38,10 +38,10 @@ const ForgotPasswordPage = () => {
       id: 'password',
       name: 'password',
       type: 'password',
-      placeholder: 'Password',
+      placeholder: 'New Password',
       errorMessage:
         'Password should be between 8 - 20 characters and include 1 letter, 1 number and 1 special character',
-      label: 'Password',
+      label: 'New Password',
       pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       required: true,
     },
@@ -49,9 +49,9 @@ const ForgotPasswordPage = () => {
       id: 'confirm-password',
       name: 'confirmPassword',
       type: 'password',
-      placeholder: 'Confirm Password',
+      placeholder: 'Confirm New Password',
       errorMessage: `Passwords don't match`,
-      label: 'Confirm Password',
+      label: 'Confirm New Password',
       pattern: credentials.password,
       required: true,
     },
@@ -73,6 +73,10 @@ const ForgotPasswordPage = () => {
       usersService
         .resetPassword(userForPasswordReset?.id, userPasswordReset as User)
         .then((response) => console.log(response));
+
+      // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
+      const modifiedObjectForStorage = JSON.stringify(userPasswordReset);
+      localStorage.setItem('loggedAppUser', modifiedObjectForStorage);
     }
 
     setCredentials({
