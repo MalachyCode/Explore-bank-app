@@ -110,7 +110,11 @@ const OpenAccount = () => {
       <div className='top'>
         <ArrowBackIcon
           className='back-icon'
-          onClick={() => navigate('/dashboard-client')}
+          onClick={() =>
+            navigate(
+              user?.type === 'client' ? '/dashboard-client' : '/dashboard-staff'
+            )
+          }
         />
         <h2>Open Account</h2>
       </div>
