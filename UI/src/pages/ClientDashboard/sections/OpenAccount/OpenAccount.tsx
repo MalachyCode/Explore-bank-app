@@ -7,6 +7,7 @@ import accountService from '../../../../services/accounts';
 import userService from '../../../../services/users';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const OpenAccount = () => {
   const navigate = useNavigate();
@@ -106,6 +107,13 @@ const OpenAccount = () => {
 
   return (
     <div className='open-account'>
+      <div className='top'>
+        <ArrowBackIcon
+          className='back-icon'
+          onClick={() => navigate('/dashboard-client')}
+        />
+        <h2>Open Account</h2>
+      </div>
       <form className='form' onSubmit={handleSubmit}>
         <strong className='form-header'>Open An Account</strong>
         <div className='form-header-seperator'></div>

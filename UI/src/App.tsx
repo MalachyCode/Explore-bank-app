@@ -79,8 +79,6 @@ function App() {
     ? accounts.find((account) => account.id === matchAccountNumber.params.id)
     : null;
 
-  console.log(account);
-
   const navigate = useNavigate();
 
   const handleLogout = () => {
