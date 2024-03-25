@@ -25,91 +25,65 @@
       cursor: pointer;
     }
 
-    .form {
+    .form-container {
+      background: white;
       width: 90%;
       margin: auto;
+      border-radius: 5px;
+      box-shadow: $shadow-3;
+      padding: 10px 0 15px 0;
+      max-width: $fixed-width;
+      position: relative;
+      top: 100px;
 
-      .form-label {
-        display: block;
-        font-size: 0.9em;
-        padding: 10px 0;
-        margin-bottom: 0.5rem;
-        text-transform: capitalize;
-        letter-spacing: $letterSpacing;
+      form {
+        width: 90%;
+        .form-select {
+          background-color: white;
+          width: 93%;
+          border-radius: 4px;
+          display: inline-block;
+          font: inherit;
+          line-height: 1.5em;
+          padding: 0.7em 3.5em 0.7em 1em;
+          outline: none;
 
-        &.select {
-          padding-bottom: 0;
-        }
-      }
-
-      .form-input {
-        width: 100%;
-        padding: 15px;
-        border-radius: 4px;
-        background: $backgroundColor;
-        border: 1px solid $grey-200;
-        margin: auto;
-        &::placeholder {
-          font-family: inherit;
-          color: $grey-400;
-        }
-      }
-
-      .form-select {
-        background-color: white;
-        width: 100%;
-        border-radius: 4px;
-        display: inline-block;
-        font: inherit;
-        line-height: 1.5em;
-        padding: 0.7em 3.5em 0.7em 1em;
-
-        margin: 0;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-image: linear-gradient(45deg, transparent 50%, gray 50%),
-          linear-gradient(135deg, gray 50%, transparent 50%),
-          linear-gradient(to right, #ccc, #ccc);
-        background-position: calc(100% - 20px) calc(1em + 2px),
-          calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
-        background-size: 5px 5px, 5px 5px, 1px 1.5em;
-        background-repeat: no-repeat;
-        &:focus {
-          background-image: linear-gradient(45deg, green 50%, transparent 50%),
-            linear-gradient(135deg, transparent 50%, green 50%),
+          margin: 0;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+            linear-gradient(135deg, gray 50%, transparent 50%),
             linear-gradient(to right, #ccc, #ccc);
-          background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
-            calc(100% - 2.5em) 0.5em;
+          background-position: calc(100% - 20px) calc(1em + 2px),
+            calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
           background-size: 5px 5px, 5px 5px, 1px 1.5em;
           background-repeat: no-repeat;
-          border-color: green;
-          outline: 0;
+          &:focus {
+            background-image: linear-gradient(45deg, green 50%, transparent 50%),
+              linear-gradient(135deg, transparent 50%, green 50%),
+              linear-gradient(to right, #ccc, #ccc);
+            background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
+              calc(100% - 2.5em) 0.5em;
+            background-size: 5px 5px, 5px 5px, 1px 1.5em;
+            background-repeat: no-repeat;
+            // border-color: green;
+            outline: 0;
+          }
+
+          @media (min-width: 576px) {
+            width: 92%;
+          }
         }
-      }
 
-      .btn {
-        width: 100%;
-        margin-top: 50px;
-        margin-bottom: 35px;
-        cursor: pointer;
-        color: $white;
-        background: $primary-500;
-        border: transparent;
-        border-radius: 4px;
-        letter-spacing: $letterSpacing;
-        padding: 15px;
-        box-shadow: $shadow-1;
-        transition: $transition;
-        text-transform: capitalize;
-        display: inline-block;
-        overflow: hidden;
-
-        &:hover {
-          background: $primary-700;
-          box-shadow: $shadow-3;
+        .btn {
+          width: 93%;
+          margin-top: 25px;
+          @media (min-width: 576px) {
+            width: 92%;
+          }
         }
       }
     }

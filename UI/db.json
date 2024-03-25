@@ -241,6 +241,39 @@
       "oldBalance": 497000,
       "newBalance": 495000,
       "description": "Top up 2000 for user 09035678895 To SportyBet account. For service Wallet Top up: Top up sportybet account"
+    },
+    {
+      "id": "d526",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-03-25T20:50:05.139Z",
+      "type": "credit",
+      "cashier": "64a6",
+      "amount": 5000,
+      "oldBalance": 495000,
+      "newBalance": 500000,
+      "description": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Credit Transaction"
+    },
+    {
+      "id": "0266",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-03-25T20:51:20.484Z",
+      "type": "credit",
+      "cashier": "64a6",
+      "amount": 10000,
+      "oldBalance": 500000,
+      "newBalance": 510000,
+      "description": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Credit Transaction"
+    },
+    {
+      "id": "72c3",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-03-25T20:51:58.664Z",
+      "type": "debit",
+      "cashier": "64a6",
+      "amount": 15000,
+      "oldBalance": 510000,
+      "newBalance": 495000,
+      "description": "Over counter debit transaction at Explore Bank branch by cashier: Martins Fowler; Debit Transaction"
     }
   ]
 }

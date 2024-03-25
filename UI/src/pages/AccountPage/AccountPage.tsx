@@ -12,6 +12,26 @@ interface TransactionType {
   description: string;
 }
 
+const RenderFormInput = (props: {
+  label: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  detail: string | undefined;
+}) => (
+  <div className='input-box'>
+    {props.label === 'Amount' && <span className='naira-symbol'>&#8358;</span>}
+    <input type='text' onChange={props.onChange} />
+    <span
+      className={
+        'placeholder ' +
+        (props.detail && 'active ') +
+        (props.label === 'Amount' && 'amount')
+      }
+    >
+      {props.label}
+    </span>
+  </div>
+);
+
 const AccountPage = (props: { user: User | null | undefined }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>();
@@ -183,6 +203,29 @@ const AccountPage = (props: { user: User | null | undefined }) => {
     navigate('/dashboard-staff/search/users');
   };
 
+  const formInputs = [
+    {
+      id: 1,
+      label: 'Amount',
+      detail: transactionDetails.amount,
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+        setTransactionDetails({
+          ...transactionDetails,
+          amount: e.target.value,
+        }),
+    },
+    {
+      id: 2,
+      label: 'Description',
+      detail: transactionDetails.description,
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+        setTransactionDetails({
+          ...transactionDetails,
+          description: e.target.value,
+        }),
+    },
+  ];
+
   console.log(accountNumber);
   console.log(accountToDeactivateOrActivate);
   console.log(typeof accountNumber);
@@ -193,69 +236,47 @@ const AccountPage = (props: { user: User | null | undefined }) => {
         <div className={'transaction-box ' + (openTransactionBox && 'open')}>
           <CloseIcon
             className='close'
-            onClick={() => setOpenTransactionBox(false)}
+            onClick={() => {
+              setTransactionDetails({
+                ...transactionDetails,
+                amount: '',
+                description: '',
+              });
+              setOpenTransactionBox(false);
+            }}
           />
-          <form className='form' onSubmit={handleTransaction}>
-            <label htmlFor='amount' className='form-label'>
-              Amount
-            </label>
-            <input
-              type='text'
-              name='amount'
-              id='amount'
-              className='form-input'
-              value={transactionDetails.amount}
-              placeholder='Amount'
-              onChange={(e) =>
-                setTransactionDetails({
-                  ...transactionDetails,
-                  amount: e.target.value,
-                })
-              }
-              required
-            />
-            <label htmlFor='description' className='form-label'>
-              Description
-            </label>
-            <input
-              type='text'
-              name='description'
-              id='description'
-              className='form-input'
-              value={transactionDetails.description}
-              placeholder='Description'
-              onChange={(e) =>
-                setTransactionDetails({
-                  ...transactionDetails,
-                  description: e.target.value,
-                })
-              }
-              required
-            />
-            <label htmlFor='accountNumber' className='form-label select'>
-              Account Number
-            </label>
-            <select
-              name='accountNumber'
-              id='accountNumber'
-              value={accountNumber}
-              className='form-select'
-              onChange={(e) => {
-                console.log(e.target.value);
-                setAccountNumber(e.target.value);
-              }}
-            >
-              <option value=''>Select Account Number</option>
-              {userAccounts.map((account) => (
-                <option key={account.id} value={`${account.accountNumber}`}>
-                  {account.accountNumber}
-                </option>
+          <div className='form-container'>
+            <form onSubmit={handleTransaction}>
+              {formInputs.map((input) => (
+                <RenderFormInput
+                  label={input.label}
+                  onChange={input.onChange}
+                  detail={input.detail}
+                  key={input.id}
+                />
               ))}
-            </select>
-            <button className='btn'>
-              {transactionType === 'credit' ? 'Credit' : 'Debit'}
-            </button>
-          </form>
+              <select
+                name='accountNumber'
+                id='accountNumber'
+                value={accountNumber}
+                className='form-select'
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setAccountNumber(e.target.value);
+                }}
+              >
+                <option value=''>Select Account Number</option>
+                {userAccounts.map((account) => (
+                  <option key={account.id} value={`${account.accountNumber}`}>
+                    {account.accountNumber}
+                  </option>
+                ))}
+              </select>
+              <button className='btn'>
+                {transactionType === 'credit' ? 'Credit' : 'Debit'}
+              </button>
+            </form>
+          </div>
         </div>
         <div
           className={
