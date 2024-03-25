@@ -54,30 +54,25 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
                 Logout
               </div>
             </div>
-            <div className='container'>
-              <div className='left'></div>
-              <div className='right'>
-                <div
-                  className='box two'
-                  onClick={() => navigate('/open-account')}
-                >
-                  Open Account
-                </div>
-                <div
-                  className='box one'
-                  onClick={() => navigate('/dashboard-staff/search/users/all')}
-                >
-                  Manage Accounts
-                </div>
-                {user?.isAdmin && (
-                  <div
-                    className='box two'
-                    onClick={() => navigate('/dashboard-staff/create-staff')}
-                  >
-                    Create Staff Account
-                  </div>
-                )}
+            <div className={'container ' + (!user.isAdmin && 'cashier')}>
+              <div className='box' onClick={() => navigate('/open-account')}>
+                Open Account
               </div>
+              <div
+                className='box'
+                onClick={() => navigate('/dashboard-staff/search/users')}
+              >
+                Manage Accounts
+              </div>
+              {user?.isAdmin && (
+                <div
+                  className='box'
+                  onClick={() => navigate('/dashboard-staff/create-staff')}
+                >
+                  Create Staff Account
+                </div>
+              )}
+              {user?.isAdmin && <div className='box last'></div>}
             </div>
           </div>
         </div>
