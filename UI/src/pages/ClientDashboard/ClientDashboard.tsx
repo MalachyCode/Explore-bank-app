@@ -84,6 +84,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       icon: '../../assets/icons8-reward-48.png',
       label: 'Referal & Rewards',
       iconClassName: 'rewards-icon',
+      onClick: () => navigate(`/dashboard-client/${user?.id}/referal-rewards`),
     },
     {
       id: 'sportWalletFunding',
