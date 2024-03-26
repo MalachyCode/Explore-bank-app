@@ -85,7 +85,8 @@ const UserProfile = (props: { handleLogout: () => void }) => {
         <div className='top'>
           <ArrowBackIcon
             className='back-icon'
-            onClick={() => navigate('/dashboard-client')}
+            // goes back to previous page
+            onClick={() => navigate(-1)}
           />
           <h3>User Profile</h3>
           <div
