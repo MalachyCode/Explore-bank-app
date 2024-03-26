@@ -1,0 +1,15 @@
+@import '../../../../global.scss';
+
+.referal-rewards {
+  width: 100vw;
+  height: 100vh;
+
+  .body {
+    width: 100%;
+    form {
+      width: 90%;
+      max-width: $fixed-width;
+      margin: auto;
+    }
+  }
+}
