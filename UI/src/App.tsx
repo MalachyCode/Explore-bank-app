@@ -30,6 +30,7 @@ import SportWalletFunding from './pages/ClientDashboard/sections/SportWalletFund
 import UserProfile from './pages/UserProfile/UserProfile';
 import ResetPin from './pages/ResetPin/ResetPin';
 import ChangePersonalData from './pages/ChangePersonalData/ChangePersonalData';
+import Loans from './pages/ClientDashboard/sections/Loans/Loans';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -106,6 +107,7 @@ function App() {
             path='/dashboard-client/:id/profile'
             element={<UserProfile handleLogout={handleLogout} />}
           />
+          <Route path='/dashboard-client/:id/loans' element={<Loans />} />
           <Route
             path='/dashboard-client/:id/change-personal-data'
             element={<ChangePersonalData />}

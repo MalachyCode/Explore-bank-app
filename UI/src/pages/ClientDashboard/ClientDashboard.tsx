@@ -76,6 +76,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       label: 'Loans',
       iconClassName: 'loan-icon',
       spanClassName: 'loan-tag',
+      onClick: () => navigate(`/dashboard-client/${user?.id}/loans`),
     },
     {
       id: 'referalReward',
