@@ -102,6 +102,10 @@ function App() {
             path='/dashboard-staff/search/users/:id'
             element={<AccountPage user={user} />}
           />
+          <Route
+            path='/dashboard-staff/:id/profile'
+            element={<UserProfile handleLogout={handleLogout} />}
+          />
           <Route path='/dashboard-staff/search/users' element={<Search />} />
           <Route path='/dashboard-client/:id/transfer' element={<Transfer />} />
           <Route
