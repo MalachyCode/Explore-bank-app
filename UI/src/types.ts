@@ -193,3 +193,12 @@ export interface ResetPinType {
   newPin: string;
   confirmPin: string;
 }
+
+export interface Notification {
+  id: string;
+  owner: string;
+  new: Array<string | undefined>;
+  old: Array<string>;
+}
+
+export type NewNotification = Omit<Notification, 'id'>;
