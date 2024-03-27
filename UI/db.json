@@ -74,7 +74,7 @@
       "type": "staff",
       "isAdmin": true,
       "number": "09046788945",
-      "dob": "2001-05-19"
+      "dob": "2001-06-19"
     },
     {
       "id": "6069",
@@ -274,6 +274,21 @@
       "oldBalance": 510000,
       "newBalance": 495000,
       "description": "Over counter debit transaction at Explore Bank branch by cashier: Martins Fowler; Debit Transaction"
+    }
+  ],
+
+  "notifications": [
+    {
+      "id": "123r",
+      "owner": "9cac",
+      "new": ["hi", "hey"],
+      "old": ["hello", "howdy"]
+    },
+    {
+      "id": "782b",
+      "owner": "c59f",
+      "new": ["waddup", "wassup"],
+      "old": ["how do you do", "how far"]
     }
   ]
 }
