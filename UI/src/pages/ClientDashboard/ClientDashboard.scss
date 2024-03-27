@@ -235,20 +235,22 @@
           display: none;
         }
 
+        .read-all {
+          cursor: pointer;
+        }
+
         .notifications {
-          background: red;
           .new-notifications-container {
-            background: green;
             .single-new-notification {
-              background: pink;
+              background: green;
+              cursor: pointer;
               margin: 5px 0;
               padding: 0 15px;
             }
           }
           .old-notifications-container {
-            background: blue;
             .single-old-notification {
-              background: pink;
+              cursor: pointer;
               margin: 5px 0;
               padding: 0 15px;
             }

@@ -192,11 +192,21 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
               'notifications-container ' + (notificationOpen && 'active')
             }
           >
+            <span className='read-all'>Mark all as read</span>
             {userNotifications.map((notification) => (
               <div className='notifications' key={notification.id}>
                 <div className='new-notifications-container'>
                   {notification.new.map((newNotification) => (
-                    <div className='single-new-notification'>
+                    <div
+                      className='single-new-notification'
+                      onClick={() =>
+                        console.log(
+                          notification.new.filter(
+                            (notification) => notification === newNotification
+                          )
+                        )
+                      }
+                    >
                       {newNotification}
                     </div>
                   ))}
