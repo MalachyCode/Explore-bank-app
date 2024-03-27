@@ -10,8 +10,9 @@ import {
   RenderIcons,
   RenderTotals,
 } from '../../components/RenderIconsandTotals';
-import { Account, User } from '../../types';
+import { Account, Notification, User } from '../../types';
 import accountService from '../../services/accounts';
+import notificationsService from '../../services/notifications';
 
 const ClientDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
   const [user, setUser] = useState<User>();
   const [profileOpen, setProfileOpen] = useState(false);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
+  const [notifications, setNotifications] = useState<Array<Notification>>([]);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [removeNotification, setRemoveNotification] = useState(false);
 
@@ -29,16 +31,18 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       setUser(user);
     }
     accountService.getAll().then((accounts) => setAccounts(accounts));
+    notificationsService
+      .getAll()
+      .then((notifications) => setNotifications(notifications));
   }, []);
-
-  // console.log(accounts);
-  // console.log(transactions);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
-  // console.log(accounts.map((account) => account.owner));
+  const userNotifications = notifications.filter(
+    (notification) => notification.owner === user?.id
+  );
 
-  // console.log(accounts.map((account) => account.owner === user?.id));
+  console.log(userNotifications);
 
   const iconInputs = [
     {
@@ -182,11 +186,32 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
               Logout
             </div>
           </div>
+          {/* Notifcation dropdown box */}
           <div
             className={
               'notifications-container ' + (notificationOpen && 'active')
             }
-          ></div>
+          >
+            {userNotifications.map((notification) => (
+              <div className='notifications' key={notification.id}>
+                <div className='new-notifications-container'>
+                  {notification.new.map((newNotification) => (
+                    <div className='single-new-notification'>
+                      {newNotification}
+                    </div>
+                  ))}
+                </div>
+                <p>Older</p>
+                <div className='old-notifications-container'>
+                  {notification.old.map((oldNotification) => (
+                    <div className='single-old-notification'>
+                      {oldNotification}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
           <div className='totals-container'>
             {userAccounts.map((account) => (
               <RenderTotals

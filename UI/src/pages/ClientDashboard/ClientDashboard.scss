@@ -230,6 +230,30 @@
         transition: all 1.5s ease;
         max-width: 300px;
         border-radius: 5px;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .notifications {
+          background: red;
+          .new-notifications-container {
+            background: green;
+            .single-new-notification {
+              background: pink;
+              margin: 5px 0;
+              padding: 0 15px;
+            }
+          }
+          .old-notifications-container {
+            background: blue;
+            .single-old-notification {
+              background: pink;
+              margin: 5px 0;
+              padding: 0 15px;
+            }
+          }
+        }
 
         &.active {
           // transform: ;
