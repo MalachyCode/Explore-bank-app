@@ -12,16 +12,16 @@ const create = async (newUser: NewNotification) => {
   return response.data;
 };
 
-const updateUser = async (
+const updateNotification = async (
   id: string | undefined,
-  updatedUser: Notification | undefined
+  updatedNotification: Notification | undefined
 ) => {
-  const response = await axios.put(`${baseUrl}/${id}`, updatedUser);
+  const response = await axios.put(`${baseUrl}/${id}`, updatedNotification);
 
   return response.data;
 };
 export default {
   getAll,
   create,
-  updateUser,
+  updateNotification,
 };
