@@ -22,18 +22,26 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
   const [notificationOpen, setNotificationOpen] = useState(false);
-  const [removeNotification, setRemoveNotification] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
+      notificationsService.getAll().then((allNotifications) => {
+        console.log(allNotifications);
+        console.log(user);
+
+        setNotificationCount(
+          allNotifications.find(
+            (notification: Notification) => notification.owner === user.id
+          )?.newNotifications.length
+        );
+        setNotifications(allNotifications);
+      });
       setUser(user);
     }
     accountService.getAll().then((accounts) => setAccounts(accounts));
-    notificationsService
-      .getAll()
-      .then((notifications) => setNotifications(notifications));
   }, []);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
@@ -42,7 +50,8 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
     (notification) => notification.owner === user?.id
   );
 
-  console.log(userNotifications);
+  // console.log(userNotifications);
+  // console.log(userNotifications[0].new.length);
 
   const iconInputs = [
     {
@@ -104,6 +113,13 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
     setProfileOpen(!profileOpen);
   };
 
+  const handleNotification = () => {
+    notificationsService.updateNotification(
+      userNotifications[0].id,
+      userNotifications[0]
+    );
+  };
+
   return (
     <div className='client-dashboard'>
       <div className={'sidebar ' + (menuOpen && 'active')}>
@@ -150,14 +166,14 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             <div
               className={
                 'notification-icon-container ' +
-                (!removeNotification && 'active')
+                (notificationCount !== 0 && 'active')
               }
               onClick={() => {
                 setNotificationOpen(!notificationOpen ? true : false);
 
-                setTimeout(() => {
-                  setRemoveNotification(true);
-                }, 5000);
+                // setTimeout(() => {
+                //   setRemoveNotification(true);
+                // }, 5000);
               }}
             >
               <div className='notification-icon-background'>
@@ -168,10 +184,10 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
               </div>
               <div
                 className={
-                  'notification-alert ' + (removeNotification && 'remove')
+                  'notification-alert ' + (notificationCount === 0 && 'remove')
                 }
               >
-                2
+                {notificationCount}
               </div>
             </div>
             <AccountCircleIcon
@@ -199,20 +215,45 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
               'notifications-container ' + (notificationOpen && 'active')
             }
           >
-            <span className='read-all'>Mark all as read</span>
+            <span
+              className='read-all'
+              onClick={() => {
+                userNotifications[0].oldNotifications =
+                  userNotifications[0].oldNotifications.concat(
+                    userNotifications[0].newNotifications as Array<string>
+                  );
+                userNotifications[0].newNotifications.length = 0;
+                console.log(userNotifications);
+                setNotificationCount(
+                  userNotifications[0].newNotifications.length
+                );
+                handleNotification();
+              }}
+            >
+              Mark all as read
+            </span>
             {userNotifications.map((notification) => (
               <div className='notifications' key={notification.id}>
                 <div className='new-notifications-container'>
-                  {notification.new.map((newNotification) => (
+                  {notification.newNotifications.map((newNotification) => (
                     <div
                       className='single-new-notification'
-                      onClick={() =>
-                        console.log(
-                          notification.new.filter(
-                            (notification) => notification === newNotification
-                          )
-                        )
-                      }
+                      onClick={() => {
+                        notification.newNotifications.splice(
+                          notification.newNotifications.indexOf(
+                            newNotification
+                          ),
+                          1
+                        );
+                        notification.oldNotifications.push(
+                          newNotification ? newNotification : ''
+                        );
+                        console.log(userNotifications);
+                        setNotificationCount(
+                          userNotifications[0].newNotifications.length
+                        );
+                        handleNotification();
+                      }}
                     >
                       {newNotification}
                     </div>
@@ -220,7 +261,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
                 </div>
                 <p>Older</p>
                 <div className='old-notifications-container'>
-                  {notification.old.map((oldNotification) => (
+                  {notification.oldNotifications.map((oldNotification) => (
                     <div className='single-old-notification'>
                       {oldNotification}
                     </div>
