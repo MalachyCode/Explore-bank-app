@@ -197,8 +197,8 @@ export interface ResetPinType {
 export interface Notification {
   id: string;
   owner: string;
-  new: Array<string | undefined>;
-  old: Array<string>;
+  newNotifications: Array<string | undefined>;
+  oldNotifications: Array<string>;
 }
 
 export type NewNotification = Omit<Notification, 'id'>;
