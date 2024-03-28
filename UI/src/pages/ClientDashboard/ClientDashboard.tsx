@@ -148,7 +148,10 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
           </h3>
           <div className='right'>
             <div
-              className='notification-icon-container'
+              className={
+                'notification-icon-container ' +
+                (!removeNotification && 'active')
+              }
               onClick={() => {
                 setNotificationOpen(!notificationOpen ? true : false);
 
@@ -157,15 +160,19 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
                 }, 5000);
               }}
             >
-              <NotificationsNoneIcon
-                fontSize='large'
-                className='notification-icon'
-              />
+              <div className='notification-icon-background'>
+                <NotificationsNoneIcon
+                  fontSize='large'
+                  className='notification-icon'
+                />
+              </div>
               <div
                 className={
                   'notification-alert ' + (removeNotification && 'remove')
                 }
-              ></div>
+              >
+                2
+              </div>
             </div>
             <AccountCircleIcon
               fontSize='large'
