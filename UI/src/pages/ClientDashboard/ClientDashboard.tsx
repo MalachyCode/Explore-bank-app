@@ -10,7 +10,7 @@ import {
   RenderIcons,
   RenderTotals,
 } from '../../components/RenderIconsandTotals';
-import { Account, Notification, User } from '../../types';
+import { Account, Notification, NotificationBody, User } from '../../types';
 import accountService from '../../services/accounts';
 import notificationsService from '../../services/notifications';
 
@@ -215,12 +215,14 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
               'notifications-container ' + (notificationOpen && 'active')
             }
           >
+            {/* Read all notification by clicking the span below */}
             <span
               className='read-all'
               onClick={() => {
                 userNotifications[0].oldNotifications =
                   userNotifications[0].oldNotifications.concat(
-                    userNotifications[0].newNotifications as Array<string>
+                    userNotifications[0]
+                      .newNotifications as Array<NotificationBody>
                   );
                 userNotifications[0].newNotifications.length = 0;
                 console.log(userNotifications);
@@ -235,6 +237,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             {userNotifications.map((notification) => (
               <div className='notifications' key={notification.id}>
                 <div className='new-notifications-container'>
+                  {/* Clickable New notifications */}
                   {notification.newNotifications.map((newNotification) => (
                     <div
                       className='single-new-notification'
@@ -246,24 +249,28 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
                           1
                         );
                         notification.oldNotifications.push(
-                          newNotification ? newNotification : ''
+                          newNotification && newNotification
                         );
                         console.log(userNotifications);
                         setNotificationCount(
                           userNotifications[0].newNotifications.length
                         );
                         handleNotification();
+                        navigate(
+                          `/dashboard-client/account-info/${newNotification?.accountId}/transactions/${newNotification?.accountNumber}/${newNotification?.transactionId}`
+                        );
                       }}
                     >
-                      {newNotification}
+                      {newNotification?.message}
                     </div>
                   ))}
                 </div>
+                {/* Older notifications */}
                 <p>Older</p>
                 <div className='old-notifications-container'>
                   {notification.oldNotifications.map((oldNotification) => (
                     <div className='single-old-notification'>
-                      {oldNotification}
+                      {oldNotification?.message}
                     </div>
                   ))}
                 </div>
