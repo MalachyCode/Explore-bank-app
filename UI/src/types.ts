@@ -194,11 +194,19 @@ export interface ResetPinType {
   confirmPin: string;
 }
 
+export interface NotificationBody {
+  id: string;
+  message: string;
+  accountId?: string;
+  accountNumber?: number;
+  transactionId?: string;
+}
+
 export interface Notification {
   id: string;
   owner: string;
-  newNotifications: Array<string | undefined>;
-  oldNotifications: Array<string>;
+  newNotifications: Array<NotificationBody | undefined>;
+  oldNotifications: Array<NotificationBody | undefined>;
 }
 
 export type NewNotification = Omit<Notification, 'id'>;
