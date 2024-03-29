@@ -281,14 +281,52 @@
     {
       "id": "123r",
       "owner": "9cac",
-      "new": ["hi", "hey"],
-      "old": ["hello", "howdy"]
+      "newNotifications": [
+        {
+          "id": "47bc",
+          "message": "Over counter debit transaction at Explore Bank branch by cashier: Martins Fowler; Debit Transaction",
+          "accountId": "5fa5",
+          "accountNumber": 7286559523,
+          "transactionId": "72c3"
+        },
+        {
+          "id": "ab7c",
+          "message": "Transfer Frm:Juliet Oma, Explore BankMobile; Moving weekly savings to my savings account",
+          "accountId": "9346",
+          "accountNumber": 1849520131,
+          "transactionId": "4291"
+        },
+        {
+          "id": "c10e",
+          "message": "Bill Payment: Paid 1000 To MTN DATA For service 1.2GB + YouTube Monthly Data: 09035568872",
+          "accountId": "5fa5",
+          "accountNumber": 7286559523,
+          "transactionId": "777c"
+        },
+        {
+          "id": "993c",
+          "message": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Credit Transaction",
+          "accountId": "5fa5",
+          "accountNumber": 7286559523,
+          "transactionId": "0266"
+        }
+      ],
+      "oldNotifications": [
+        {
+          "id": "c10e",
+          "message": "Updated personal data"
+        },
+        {
+          "id": "993c",
+          "message": "Updated transfer pin"
+        }
+      ]
     },
     {
       "id": "782b",
       "owner": "c59f",
-      "new": ["waddup", "wassup"],
-      "old": ["how do you do", "how far"]
+      "newNotifications": ["waddup", "wassup"],
+      "oldNotifications": ["how do you do", "how far"]
     }
   ]
 }
