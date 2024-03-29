@@ -41,9 +41,10 @@ const TransactionInfo = (props: {
         <ArrowBackIcon
           className='back-icon'
           onClick={() =>
-            navigate(
-              `/dashboard-client/account-info/${accountToUse?.id}/transactions/${accountToUse?.accountNumber}`
-            )
+            // navigate(
+            //   `/dashboard-client/account-info/${accountToUse?.id}/transactions/${accountToUse?.accountNumber}`
+            // )
+            navigate(-1)
           }
         />
         <h2>Transaction Information</h2>
