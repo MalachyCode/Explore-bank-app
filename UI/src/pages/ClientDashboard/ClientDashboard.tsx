@@ -125,7 +125,9 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       ? navigate(
           `/dashboard-client/account-info/${oldNotification?.accountId}/transactions/${oldNotification?.accountNumber}/${oldNotification?.transactionId}`
         )
-      : navigate(`/dashboard-client/${user?.id}/change-personal-data`);
+      : oldNotification.message.includes('personal data')
+      ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
+      : console.log('happiness');
   };
 
   const handleNewNotificationClick = (
@@ -144,7 +146,9 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       ? navigate(
           `/dashboard-client/account-info/${newNotification?.accountId}/transactions/${newNotification?.accountNumber}/${newNotification?.transactionId}`
         )
-      : navigate(`/dashboard-client/${user?.id}/change-personal-data`);
+      : newNotification.message.includes('personal data')
+      ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
+      : console.log('happiness');
   };
 
   const handleReadAllNotificationClick = () => {
