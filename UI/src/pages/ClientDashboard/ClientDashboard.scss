@@ -281,7 +281,7 @@
       }
 
       .totals-container {
-        width: 100%;
+        width: 100vw;
         overflow: hidden;
         position: relative;
 
@@ -297,6 +297,7 @@
           margin: 20px;
           padding: 20px 0;
           cursor: pointer;
+          max-width: 90vw;
 
           .total-info {
             display: flex;
@@ -321,9 +322,14 @@
           &:hover {
             background: #32435f;
           }
+          // @media (max-width: 768px) {
+          //   width: 90%;
+          //   height: 150px;
+          // }
           @media (max-width: 768px) {
-            width: 90%;
+            width: 90vw;
             height: 150px;
+            margin-left: 3%;
           }
         }
       }
