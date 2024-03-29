@@ -113,11 +113,53 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
     setProfileOpen(!profileOpen);
   };
 
-  const handleNotification = () => {
+  const handleNotificationService = () => {
     notificationsService.updateNotification(
       userNotifications[0].id,
       userNotifications[0]
     );
+  };
+
+  const handleOldNotificationClick = (oldNotification: NotificationBody) => {
+    oldNotification?.accountNumber
+      ? navigate(
+          `/dashboard-client/account-info/${oldNotification?.accountId}/transactions/${oldNotification?.accountNumber}/${oldNotification?.transactionId}`
+        )
+      : oldNotification.message.includes('personal data')
+      ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
+      : console.log('happiness');
+  };
+
+  const handleNewNotificationClick = (
+    notification: Notification,
+    newNotification: NotificationBody
+  ) => {
+    notification.newNotifications.splice(
+      notification.newNotifications.indexOf(newNotification),
+      1
+    );
+    notification.oldNotifications.push(newNotification && newNotification);
+    console.log(userNotifications);
+    setNotificationCount(userNotifications[0].newNotifications.length);
+    handleNotificationService();
+    newNotification?.accountNumber
+      ? navigate(
+          `/dashboard-client/account-info/${newNotification?.accountId}/transactions/${newNotification?.accountNumber}/${newNotification?.transactionId}`
+        )
+      : newNotification.message.includes('personal data')
+      ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
+      : console.log('happiness');
+  };
+
+  const handleReadAllNotificationClick = () => {
+    userNotifications[0].oldNotifications =
+      userNotifications[0].oldNotifications.concat(
+        userNotifications[0].newNotifications as Array<NotificationBody>
+      );
+    userNotifications[0].newNotifications.length = 0;
+    console.log(userNotifications);
+    setNotificationCount(userNotifications[0].newNotifications.length);
+    handleNotificationService();
   };
 
   return (
@@ -216,22 +258,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             }
           >
             {/* Read all notification by clicking the span below */}
-            <span
-              className='read-all'
-              onClick={() => {
-                userNotifications[0].oldNotifications =
-                  userNotifications[0].oldNotifications.concat(
-                    userNotifications[0]
-                      .newNotifications as Array<NotificationBody>
-                  );
-                userNotifications[0].newNotifications.length = 0;
-                console.log(userNotifications);
-                setNotificationCount(
-                  userNotifications[0].newNotifications.length
-                );
-                handleNotification();
-              }}
-            >
+            <span className='read-all' onClick={handleReadAllNotificationClick}>
               Mark all as read
             </span>
             {userNotifications.map((notification) => (
@@ -241,25 +268,12 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
                   {notification.newNotifications.map((newNotification) => (
                     <div
                       className='single-new-notification'
-                      onClick={() => {
-                        notification.newNotifications.splice(
-                          notification.newNotifications.indexOf(
-                            newNotification
-                          ),
-                          1
-                        );
-                        notification.oldNotifications.push(
-                          newNotification && newNotification
-                        );
-                        console.log(userNotifications);
-                        setNotificationCount(
-                          userNotifications[0].newNotifications.length
-                        );
-                        handleNotification();
-                        navigate(
-                          `/dashboard-client/account-info/${newNotification?.accountId}/transactions/${newNotification?.accountNumber}/${newNotification?.transactionId}`
-                        );
-                      }}
+                      onClick={() =>
+                        handleNewNotificationClick(
+                          notification as Notification,
+                          newNotification as NotificationBody
+                        )
+                      }
                     >
                       {newNotification?.message}
                     </div>
@@ -269,7 +283,14 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
                 <p>Older</p>
                 <div className='old-notifications-container'>
                   {notification.oldNotifications.map((oldNotification) => (
-                    <div className='single-old-notification'>
+                    <div
+                      className='single-old-notification'
+                      onClick={() =>
+                        handleOldNotificationClick(
+                          oldNotification as NotificationBody
+                        )
+                      }
+                    >
                       {oldNotification?.message}
                     </div>
                   ))}
