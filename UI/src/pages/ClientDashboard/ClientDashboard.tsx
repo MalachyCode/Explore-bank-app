@@ -210,18 +210,14 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
                 'notification-icon-container ' +
                 (notificationCount !== 0 && 'active')
               }
-              onClick={() => {
-                setNotificationOpen(!notificationOpen ? true : false);
-
-                // setTimeout(() => {
-                //   setRemoveNotification(true);
-                // }, 5000);
-              }}
             >
               <div className='notification-icon-background'>
                 <NotificationsNoneIcon
                   fontSize='large'
                   className='notification-icon'
+                  onClick={() => {
+                    setNotificationOpen(!notificationOpen ? true : false);
+                  }}
                 />
               </div>
               <div

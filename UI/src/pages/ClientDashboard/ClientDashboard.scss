@@ -124,6 +124,7 @@
 
         .notification-icon-container {
           // background: pink;
+          padding-top: 3px;
           .notification-icon-background {
             display: flex;
             flex-direction: row;
@@ -174,7 +175,7 @@
             }
           }
           &.active {
-            padding-top: 16px;
+            padding-top: 23px;
           }
         }
       }
@@ -247,6 +248,7 @@
         &::-webkit-scrollbar {
           display: none;
         }
+        padding: 0 10px;
 
         .read-all {
           cursor: pointer;
@@ -261,16 +263,30 @@
             .single-new-notification {
               background: #8f8681;
               cursor: pointer;
-              margin: 5px 0;
               padding: 0 15px;
+              border-radius: 5px;
+              transition: all 0.5s ease;
+              width: 80%;
+              margin: auto;
+              margin-top: 5px;
+              &:hover {
+                transform: scale(1.02);
+              }
             }
           }
           .old-notifications-container {
             .single-old-notification {
               cursor: pointer;
-              margin: 5px 0;
               padding: 0 15px;
               background: #e1dcd9;
+              border-radius: 5px;
+              transition: all 0.5s ease;
+              width: 85%;
+              margin: auto;
+              margin-top: 5px;
+              &:hover {
+                transform: scale(1.02);
+              }
             }
           }
         }
