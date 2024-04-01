@@ -254,9 +254,14 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             }
           >
             {/* Read all notification by clicking the span below */}
-            <span className='read-all' onClick={handleReadAllNotificationClick}>
-              Mark all as read
-            </span>
+            {notificationCount !== 0 && (
+              <span
+                className='read-all'
+                onClick={handleReadAllNotificationClick}
+              >
+                Mark all as read
+              </span>
+            )}
             {userNotifications.map((notification) => (
               <div className='notifications' key={notification.id}>
                 <div className='new-notifications-container'>
