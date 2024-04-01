@@ -29,13 +29,13 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       notificationsService.getAll().then((allNotifications) => {
-        console.log(allNotifications);
-        console.log(user);
+        // console.log(allNotifications);
+        // console.log(user);
 
         setNotificationCount(
           allNotifications.find(
             (notification: Notification) => notification.owner === user.id
-          )?.newNotifications.length
+          )?.newNotifications.length || 0
         );
         setNotifications(allNotifications);
       });
@@ -254,9 +254,14 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             }
           >
             {/* Read all notification by clicking the span below */}
-            <span className='read-all' onClick={handleReadAllNotificationClick}>
-              Mark all as read
-            </span>
+            {notificationCount !== 0 && (
+              <span
+                className='read-all'
+                onClick={handleReadAllNotificationClick}
+              >
+                Mark all as read
+              </span>
+            )}
             {userNotifications.map((notification) => (
               <div className='notifications' key={notification.id}>
                 <div className='new-notifications-container'>

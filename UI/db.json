@@ -110,6 +110,19 @@
       "isAdmin": true,
       "number": "09066557788",
       "dob": "1989-07-22"
+    },
+    {
+      "id": "710d",
+      "email": "adam@gmail.com",
+      "firstName": "Adam",
+      "lastName": "Warlock",
+      "middleName": "",
+      "password": "Adam23@@",
+      "type": "client",
+      "isAdmin": false,
+      "number": "09035473258",
+      "dob": "1999-04-10",
+      "transferPin": ""
     }
   ],
   "accounts": [
@@ -276,7 +289,6 @@
       "description": "Over counter debit transaction at Explore Bank branch by cashier: Martins Fowler; Debit Transaction"
     }
   ],
-
   "notifications": [
     {
       "id": "123r",
@@ -284,28 +296,28 @@
       "newNotifications": [
         {
           "id": "47bc",
-          "message": "Over counter debit transaction at Explore Bank branch by cashier: Martins Fowler; Debit Transaction",
+          "message": "Over counter debit transaction",
           "accountId": "5fa5",
           "accountNumber": 7286559523,
           "transactionId": "72c3"
         },
         {
           "id": "ab7c",
-          "message": "Transfer Frm:Juliet Oma, Explore BankMobile; Moving weekly savings to my savings account",
+          "message": "Transfer From Juliet Oma, Explore BankMobile",
           "accountId": "9346",
           "accountNumber": 1849520131,
           "transactionId": "4291"
         },
         {
           "id": "c10e",
-          "message": "Bill Payment: Paid 1000 To MTN DATA For service 1.2GB + YouTube Monthly Data: 09035568872",
+          "message": "1000 Naira data purchase for MTN DATA for 09035568872",
           "accountId": "5fa5",
           "accountNumber": 7286559523,
           "transactionId": "777c"
         },
         {
           "id": "993c",
-          "message": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Credit Transaction",
+          "message": "Over counter credit transaction",
           "accountId": "5fa5",
           "accountNumber": 7286559523,
           "transactionId": "0266"
@@ -323,10 +335,76 @@
       ]
     },
     {
+      "id": "9651",
+      "owner": "6344",
+      "newNotifications": [],
+      "oldNotifications": []
+    },
+    {
       "id": "782b",
       "owner": "c59f",
-      "newNotifications": ["waddup", "wassup"],
-      "oldNotifications": ["how do you do", "how far"]
+      "newNotifications": [
+        {
+          "id": "wxey",
+          "message": "waddup"
+        },
+        {
+          "id": "gz15",
+          "message": "wassup"
+        }
+      ],
+      "oldNotifications": [
+        {
+          "id": "79b7",
+          "message": "how do you do"
+        },
+        {
+          "id": "ac3e",
+          "message": "how do you do"
+        }
+      ]
+    },
+    {
+      "id": "37ba",
+      "owner": "dc6a",
+      "newNotifications": [],
+      "oldNotifications": []
+    },
+    {
+      "id": "zxsa",
+      "owner": "64a6",
+      "newNotifications": [],
+      "oldNotifications": []
+    },
+    {
+      "id": "bcmn",
+      "owner": "f0b1",
+      "newNotifications": [],
+      "oldNotifications": []
+    },
+    {
+      "id": "bb39",
+      "owner": "6069",
+      "newNotifications": [],
+      "oldNotifications": []
+    },
+    {
+      "id": "xv38",
+      "owner": "9db1",
+      "newNotifications": [],
+      "oldNotifications": []
+    },
+    {
+      "id": "lmkv",
+      "owner": "92f6",
+      "newNotifications": [],
+      "oldNotifications": []
+    },
+    {
+      "id": "97cd",
+      "owner": "710d",
+      "newNotifications": [],
+      "oldNotifications": []
     }
   ]
 }
