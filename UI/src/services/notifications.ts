@@ -7,8 +7,8 @@ const getAll = async () => {
   return response.data;
 };
 
-const create = async (newUser: NewNotification) => {
-  const response = await axios.post(baseUrl, newUser);
+const create = async (NewNotification: NewNotification) => {
+  const response = await axios.post(baseUrl, NewNotification);
   return response.data;
 };
 
