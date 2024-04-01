@@ -2,10 +2,11 @@ import { useState } from 'react';
 import './Signup.scss';
 import FormInput from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { NewUser, SignUpType } from '../../types';
+import { NewNotification, NewUser, SignUpType } from '../../types';
 import userService from '../../services/users';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import notificationsService from '../../services/notifications';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -116,9 +117,18 @@ const SignupPage = () => {
       transferPin: '',
     };
 
-    userService
-      .create(newClient)
-      .then((clientCreated) => console.log(clientCreated));
+    userService.create(newClient).then((clientCreated) => {
+      const newNotificationBox: NewNotification = {
+        owner: clientCreated.id,
+        newNotifications: [],
+        oldNotifications: [],
+      };
+
+      notificationsService
+        .create(newNotificationBox)
+        .then((createdNotification) => console.log(createdNotification));
+      console.log(clientCreated);
+    });
     toast.success(
       `User with firstname: ${values.firstName}, middlename: ${values.middleName}, lastname: ${values.lastName}, dob: ${values.dateOfBirth} and password ${values.password} created an account`,
       {
