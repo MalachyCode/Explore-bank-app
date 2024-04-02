@@ -202,10 +202,12 @@ export interface NotificationBody {
   transactionId?: string;
 }
 
+export type NewNotificationBody = Omit<NotificationBody, 'id'>;
+
 export interface Notification {
   id: string;
   owner: string;
-  newNotifications: Array<NotificationBody | undefined>;
+  newNotifications: Array<NotificationBody | NewNotificationBody | undefined>;
   oldNotifications: Array<NotificationBody | undefined>;
 }
 

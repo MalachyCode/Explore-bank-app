@@ -128,7 +128,7 @@
   "accounts": [
     {
       "id": "9346",
-      "balance": 200000,
+      "balance": 210000,
       "createdOn": "2024-02-21T12:10:16.922Z",
       "owner": "9cac",
       "status": "dormant",
@@ -287,50 +287,39 @@
       "oldBalance": 510000,
       "newBalance": 495000,
       "description": "Over counter debit transaction at Explore Bank branch by cashier: Martins Fowler; Debit Transaction"
+    },
+    {
+      "id": "60e1",
+      "accountNumber": 1849520131,
+      "createdOn": "2024-04-02T20:21:18.867Z",
+      "type": "credit",
+      "amount": 10000,
+      "oldBalance": 200000,
+      "newBalance": 210000,
+      "description": "Frm:Juliet Oma, Explore BankMobile; Debit transaction"
+    },
+    {
+      "id": "fb8b",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-04-02T20:21:18.867Z",
+      "type": "debit",
+      "amount": 10000,
+      "oldBalance": 505000,
+      "newBalance": 495000,
+      "description": "To:Juliet Oma, Explore BankMobile; Debit transaction"
     }
   ],
   "notifications": [
     {
       "id": "123r",
       "owner": "9cac",
-      "newNotifications": [
-        {
-          "id": "47bc",
-          "message": "Over counter debit transaction",
-          "accountId": "5fa5",
-          "accountNumber": 7286559523,
-          "transactionId": "72c3"
-        },
-        {
-          "id": "ab7c",
-          "message": "Transfer From Juliet Oma, Explore BankMobile",
-          "accountId": "9346",
-          "accountNumber": 1849520131,
-          "transactionId": "4291"
-        },
-        {
-          "id": "c10e",
-          "message": "1000 Naira data purchase for MTN DATA for 09035568872",
-          "accountId": "5fa5",
-          "accountNumber": 7286559523,
-          "transactionId": "777c"
-        },
-        {
-          "id": "993c",
-          "message": "Over counter credit transaction",
-          "accountId": "5fa5",
-          "accountNumber": 7286559523,
-          "transactionId": "0266"
-        }
-      ],
+      "newNotifications": [],
       "oldNotifications": [
         {
-          "id": "c10e",
-          "message": "Updated personal data"
-        },
-        {
-          "id": "993c",
-          "message": "Updated transfer pin"
+          "message": "To:Juliet Oma, Explore BankMobile; Debit transaction",
+          "accountId": "5fa5",
+          "accountNumber": 7286559523,
+          "transactionId": "fb8b"
         }
       ]
     },
@@ -343,26 +332,8 @@
     {
       "id": "782b",
       "owner": "c59f",
-      "newNotifications": [
-        {
-          "id": "wxey",
-          "message": "waddup"
-        },
-        {
-          "id": "gz15",
-          "message": "wassup"
-        }
-      ],
-      "oldNotifications": [
-        {
-          "id": "79b7",
-          "message": "how do you do"
-        },
-        {
-          "id": "ac3e",
-          "message": "how do you do"
-        }
-      ]
+      "newNotifications": [],
+      "oldNotifications": []
     },
     {
       "id": "37ba",
