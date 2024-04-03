@@ -42,6 +42,8 @@ div {
       margin: auto;
       overflow: hidden;
       background: #fff;
+      z-index: 5;
+      position: fixed;
       // margin: 0 40px 10px 10px;
 
       h3 {
@@ -62,32 +64,59 @@ div {
           cursor: pointer;
         }
         .notification-icon-container {
-          display: flex;
-          flex-direction: row;
-          cursor: pointer;
-          border-radius: 50%;
-          transition: all 1s ease;
-          padding: 10px 0 10px 10px;
-          margin-right: 13px;
-
-          .notification-icon {
-            position: relative;
-            z-index: 1;
+          // background: pink;
+          padding-top: 3px;
+          .notification-icon-background {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 50%;
             transition: all 1s ease;
+            padding: 3px;
+            margin-right: 13px;
+            // background: blue;
+            // width: 50px;
+            // height: 50px;
+            overflow: hidden;
+
+            .notification-icon {
+              position: relative;
+              z-index: 1;
+              transition: all 1s ease;
+
+              &:hover {
+                color: #5f4945;
+              }
+            }
+
+            &:hover {
+              background: #e1dcd9;
+            }
           }
           .notification-alert {
             position: relative;
+            padding: 2px;
             z-index: 2;
-            width: 10px;
-            height: 10px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
             background: red;
-            margin-top: 4px;
-            right: 17px;
-            top: 2px;
+            left: 22px;
+            top: -35px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+
+            &.remove {
+              display: none;
+            }
           }
-          &:hover {
-            background: #e1dcd9;
+          &.active {
+            padding-top: 23px;
           }
         }
       }
@@ -97,6 +126,9 @@ div {
       height: calc(100vh - 70px);
       display: flex;
       flex-direction: row;
+      z-index: 2;
+      position: relative;
+      top: 70px;
 
       .account-menu {
         width: 120px;
@@ -137,6 +169,70 @@ div {
           background: #5f4945;
           color: #e1dcd9;
           cursor: pointer;
+        }
+      }
+
+      .notifications-container {
+        width: 50%;
+        height: 60%;
+        position: fixed;
+        right: 2%;
+        top: -60%;
+        z-index: 2;
+        background: whitesmoke;
+        transition: all 1.5s ease;
+        max-width: 300px;
+        border-radius: 5px;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        padding: 0 10px;
+
+        .read-all {
+          cursor: pointer;
+          transition: all 0.5s ease;
+          &:hover {
+            color: blue;
+          }
+        }
+
+        .notifications {
+          .new-notifications-container {
+            .single-new-notification {
+              background: #8f8681;
+              cursor: pointer;
+              padding: 0 15px;
+              border-radius: 5px;
+              transition: all 0.5s ease;
+              width: 80%;
+              margin: auto;
+              margin-top: 5px;
+              &:hover {
+                transform: scale(1.02);
+              }
+            }
+          }
+          .old-notifications-container {
+            .single-old-notification {
+              cursor: pointer;
+              padding: 0 15px;
+              background: #e1dcd9;
+              border-radius: 5px;
+              transition: all 0.5s ease;
+              width: 85%;
+              margin: auto;
+              margin-top: 5px;
+              &:hover {
+                transform: scale(1.02);
+              }
+            }
+          }
+        }
+
+        &.active {
+          // transform: ;
+          top: 75px;
         }
       }
 
