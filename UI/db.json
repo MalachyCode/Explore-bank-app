@@ -128,7 +128,7 @@
   "accounts": [
     {
       "id": "9346",
-      "balance": 210000,
+      "balance": 215000,
       "createdOn": "2024-02-21T12:10:16.922Z",
       "owner": "9cac",
       "status": "dormant",
@@ -137,7 +137,7 @@
     },
     {
       "id": "5fa5",
-      "balance": 495000,
+      "balance": 480000,
       "createdOn": "2024-02-21T12:10:48.988Z",
       "owner": "9cac",
       "status": "active",
@@ -155,7 +155,7 @@
     },
     {
       "id": "ae7c",
-      "balance": 180000,
+      "balance": 190000,
       "createdOn": "2024-02-21T12:12:55.326Z",
       "owner": "6069",
       "status": "active",
@@ -307,6 +307,46 @@
       "oldBalance": 505000,
       "newBalance": 495000,
       "description": "To:Juliet Oma, Explore BankMobile; Debit transaction"
+    },
+    {
+      "id": "e156",
+      "accountNumber": 1849520131,
+      "createdOn": "2024-04-03T19:34:33.522Z",
+      "type": "credit",
+      "amount": 5000,
+      "oldBalance": 210000,
+      "newBalance": 215000,
+      "description": "Frm:Juliet Oma, Explore BankMobile; Debit transaction"
+    },
+    {
+      "id": "b45e",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-04-03T19:34:33.523Z",
+      "type": "debit",
+      "amount": 5000,
+      "oldBalance": 495000,
+      "newBalance": 490000,
+      "description": "To:Juliet Oma, Explore BankMobile; Debit transaction"
+    },
+    {
+      "id": "e7ec",
+      "accountNumber": 5408399080,
+      "createdOn": "2024-04-03T19:39:09.152Z",
+      "type": "credit",
+      "amount": 10000,
+      "oldBalance": 180000,
+      "newBalance": 190000,
+      "description": "Frm:Juliet Oma, Explore BankMobile; Kennedy Jideofor Allowance"
+    },
+    {
+      "id": "0ab3",
+      "accountNumber": 7286559523,
+      "createdOn": "2024-04-03T19:39:09.152Z",
+      "type": "debit",
+      "amount": 10000,
+      "oldBalance": 490000,
+      "newBalance": 480000,
+      "description": "To:Kennedy Jideofor, Explore BankMobile; Kennedy Jideofor Allowance"
     }
   ],
   "notifications": [
@@ -320,6 +360,24 @@
           "accountId": "5fa5",
           "accountNumber": 7286559523,
           "transactionId": "fb8b"
+        },
+        {
+          "message": "Frm:Juliet Oma, Explore BankMobile; Debit transaction",
+          "accountId": "9346",
+          "accountNumber": 1849520131,
+          "transactionId": "e156"
+        },
+        {
+          "message": "To:Juliet Oma, Explore BankMobile; Debit transaction",
+          "accountId": "5fa5",
+          "accountNumber": 7286559523,
+          "transactionId": "b45e"
+        },
+        {
+          "message": "To:Kennedy Jideofor, Explore BankMobile; Kennedy Jideofor Allowance",
+          "accountId": "5fa5",
+          "accountNumber": 7286559523,
+          "transactionId": "0ab3"
         }
       ]
     },
@@ -357,7 +415,14 @@
       "id": "bb39",
       "owner": "6069",
       "newNotifications": [],
-      "oldNotifications": []
+      "oldNotifications": [
+        {
+          "message": "Frm:Juliet Oma, Explore BankMobile; Kennedy Jideofor Allowance",
+          "accountId": "ae7c",
+          "accountNumber": 5408399080,
+          "transactionId": "e7ec"
+        }
+      ]
     },
     {
       "id": "xv38",
