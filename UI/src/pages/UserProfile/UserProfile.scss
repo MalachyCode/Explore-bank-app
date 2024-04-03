@@ -17,7 +17,8 @@
 
     .top {
       width: 100%;
-      background: #04aa6d;
+      background: #32435f;
+      color: white;
       height: 40%;
       position: fixed;
       top: 0;
@@ -45,7 +46,7 @@
         background-position: center;
         width: 100px;
         height: 100px;
-        border: 1px solid red;
+        border: 1px solid #d6ba73;
         border-radius: 50%;
         cursor: pointer;
         transition: all 0.5s ease;
@@ -95,14 +96,14 @@
           align-items: center;
           justify-content: space-between;
           height: 70px;
-          border-bottom: 1px solid rgb(94, 157, 94);
+          border-bottom: 1px solid #32435f;
           cursor: pointer;
           transition: all 1s ease;
           margin-bottom: 5px;
           padding: 0 5px;
 
           &:hover {
-            background: lightgreen;
+            background: #7c8ca7;
 
             .left {
               background: white;
@@ -110,21 +111,21 @@
           }
 
           .left {
-            background: lightgreen;
+            background: #7c8ca7;
             transition: all 1s ease;
             border-radius: 3px;
             padding: 5px;
 
             .logout-icon {
               transform: rotateZ(180deg);
-              color: red;
+              color: rgb(178, 2, 2);
             }
           }
           .right {
             padding: 5px;
 
             .arrow-icon {
-              color: rgb(94, 157, 94);
+              color: #32435f;
               transform: rotate(-90deg);
             }
           }
