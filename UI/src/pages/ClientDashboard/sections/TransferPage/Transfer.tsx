@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 import FormInput from '../../../../components/FormInput';
 import './Transfer.scss';
-import { Account, NewTransaction, TransferType, User } from '../../../../types';
+import {
+  Account,
+  NewTransaction,
+  Notification,
+  TransferType,
+  User,
+} from '../../../../types';
 import { useNavigate } from 'react-router-dom';
 import accountService from '../../../../services/accounts';
 import userService from '../../../../services/users';
@@ -9,11 +15,13 @@ import transactionsService from '../../../../services/transactions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import notificationsService from '../../../../services/notifications';
 
 const Transfer = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User>();
   const [users, setUsers] = useState<Array<User>>();
+  const [notifications, setNotifications] = useState<Array<Notification>>([]);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [accountForTransfer, setAccountForTransfer] = useState<number>();
   const [transferPin, setTransferPin] = useState<string>('');
@@ -40,6 +48,11 @@ const Transfer = () => {
     }
     userService.getAll().then((users) => setUsers(users));
     accountService.getAll().then((accounts) => setAccounts(accounts));
+    notificationsService
+      .getAll()
+      .then((retrievedNotifications) =>
+        setNotifications(retrievedNotifications)
+      );
   }, []);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
@@ -54,6 +67,18 @@ const Transfer = () => {
   const receivingAccountOwner = users?.find(
     (user) => user.id === receivingAccount?.owner
   );
+
+  const receivingAccountNotificationBox = notifications.find(
+    (notification) => notification.owner === receivingAccount?.owner
+  );
+
+  const sendingAccountNotificationBox = notifications.find(
+    (notification) => notification.owner === sendingAccount?.owner
+  );
+
+  // console.log(receivingAccountNotificationBox);
+  // console.log(sendingAccountNotificationBox);
+  // console.log(notifications);
 
   const formInputs = [
     {
@@ -101,6 +126,9 @@ const Transfer = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    let creditMessage: string;
+    let creditId: string;
 
     if (sendingAccount?.status === 'active') {
       if (receivingAccount) {
@@ -155,11 +183,89 @@ const Transfer = () => {
 
           transactionsService
             .newCreditTransaction(newCreditTransaction)
-            .then((response) => console.log(response));
+            .then((creditTransaction) => {
+              console.log(creditTransaction);
+              if (
+                receivingAccountNotificationBox ===
+                sendingAccountNotificationBox
+              ) {
+                creditMessage = creditTransaction.description;
+                creditId = creditTransaction.id;
+              } else {
+                const creditNotification: Notification = {
+                  ...receivingAccountNotificationBox,
+                  newNotifications:
+                    receivingAccountNotificationBox?.newNotifications.concat({
+                      message: creditTransaction.description,
+                      accountId: receivingAccount.id,
+                      accountNumber: receivingAccount.accountNumber,
+                      transactionId: creditTransaction.id,
+                    }),
+                };
+
+                notificationsService
+                  .updateNotification(
+                    receivingAccountNotificationBox?.id,
+                    creditNotification
+                  )
+                  .then((response) => console.log(response));
+              }
+            });
 
           transactionsService
             .newDebitTransaction(newDebitTransaction)
-            .then((response) => console.log(response));
+            .then((debitTransaction) => {
+              console.log(debitTransaction);
+              if (
+                receivingAccountNotificationBox ===
+                sendingAccountNotificationBox
+              ) {
+                const debitNotification: Notification = {
+                  ...sendingAccountNotificationBox,
+                  newNotifications:
+                    sendingAccountNotificationBox?.newNotifications.concat({
+                      message: debitTransaction.description,
+                      accountId: sendingAccount.id,
+                      accountNumber: sendingAccount.accountNumber,
+                      transactionId: debitTransaction.id,
+                    }),
+                };
+                const creditNotification: Notification = {
+                  ...debitNotification,
+                  newNotifications: debitNotification.newNotifications.concat({
+                    message: creditMessage,
+                    accountId: receivingAccount.id,
+                    accountNumber: receivingAccount.accountNumber,
+                    transactionId: creditId,
+                  }),
+                };
+
+                notificationsService
+                  .updateNotification(
+                    receivingAccountNotificationBox?.id,
+                    creditNotification
+                  )
+                  .then((response) => console.log(response));
+              } else {
+                const debitNotification: Notification = {
+                  ...sendingAccountNotificationBox,
+                  newNotifications:
+                    sendingAccountNotificationBox?.newNotifications.concat({
+                      message: debitTransaction.description,
+                      accountId: sendingAccount.id,
+                      accountNumber: sendingAccount.accountNumber,
+                      transactionId: debitTransaction.id,
+                    }),
+                };
+
+                notificationsService
+                  .updateNotification(
+                    sendingAccountNotificationBox?.id,
+                    debitNotification
+                  )
+                  .then((response) => console.log(response));
+              }
+            });
 
           navigate('/dashboard-client');
 
@@ -195,7 +301,7 @@ const Transfer = () => {
     }
   };
 
-  console.log(receivingAccount);
+  // console.log(receivingAccount);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTransferDetials({ ...transferDetials, [e.target.name]: e.target.value });
