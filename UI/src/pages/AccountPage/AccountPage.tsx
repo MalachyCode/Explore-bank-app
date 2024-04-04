@@ -39,6 +39,7 @@ const RenderFormInput = (props: {
 const AccountPage = (props: { user: User | null | undefined }) => {
   const navigate = useNavigate();
   const [loggedInUser, setLoggedInUser] = useState<User | null>();
+  const [users, setUsers] = useState<Array<User>>([]);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [transactionDetails, setTransactionDetails] = useState<TransactionType>(
     {
@@ -58,6 +59,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
       const retrievedUser = JSON.parse(loggedUserJSON);
       setLoggedInUser(retrievedUser);
     }
+    usersService.getAll().then((users) => setUsers(users));
     accountsService.getAll().then((accounts) => setAccounts(accounts));
     notificationsService
       .getAll()
@@ -136,6 +138,8 @@ const AccountPage = (props: { user: User | null | undefined }) => {
                 Number(transactionDetails.amount),
           };
 
+          // create transaction for client after their account is debited
+
           const newDebitTransaction: NewTransaction = {
             accountNumber: accountToUpdateForDebit?.accountNumber,
             createdOn: new Date(),
@@ -157,6 +161,8 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           transactionsService
             .newDebitTransaction(newDebitTransaction)
             .then((debitTransaction) => {
+              // create notification for staff after debiting client account
+
               if (loggedInStaffNotificationBox) {
                 const debitNotification: Notification = {
                   ...loggedInStaffNotificationBox,
@@ -176,6 +182,9 @@ const AccountPage = (props: { user: User | null | undefined }) => {
                   )
                   .then((response) => console.log(response));
               }
+
+              // create notification for client after their account is debited
+
               if (userNotificationBox) {
                 const userDebitNotification: Notification = {
                   ...userNotificationBox,
@@ -236,6 +245,8 @@ const AccountPage = (props: { user: User | null | undefined }) => {
               Number(transactionDetails.amount),
         };
 
+        // create transaction for client after their account is credited
+
         const newCreditTransaction: NewTransaction = {
           accountNumber: accountToUpdateForCredit?.accountNumber,
           createdOn: new Date(),
@@ -247,9 +258,6 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           description: `Over counter credit transaction at Explore Bank branch by cashier: ${loggedInUser?.firstName} ${loggedInUser?.lastName}; ${transactionDetails.description}`,
         };
 
-        console.log(accountToUpdateForCredit);
-        console.log(creditedAccount);
-
         accountsService
           .credit(
             accountToUpdateForCredit?.id as string,
@@ -260,6 +268,8 @@ const AccountPage = (props: { user: User | null | undefined }) => {
         transactionsService
           .newCreditTransaction(newCreditTransaction)
           .then((creditTransaction) => {
+            // create notification for staff after credting client account
+
             if (loggedInStaffNotificationBox) {
               const creditNotification: Notification = {
                 ...loggedInStaffNotificationBox,
@@ -279,6 +289,9 @@ const AccountPage = (props: { user: User | null | undefined }) => {
                 )
                 .then((response) => console.log(response));
             }
+
+            // create notification for client after their account is credited
+
             if (userNotificationBox) {
               const userCreditNotification: Notification = {
                 ...userNotificationBox,
@@ -340,7 +353,58 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           userAccount?.id,
           deactivatedActivatedAccount as Account
         )
-        .then((response) => console.log(response));
+        .then((updatedAccount) => {
+          // create notification for staff after activating or deactivating client account
+          if (loggedInStaffNotificationBox) {
+            const accountOwner = users.find(
+              (user) => user.id === updatedAccount.owner
+            );
+            const newStaffActivateDeactivateNotification: Notification = {
+              ...loggedInStaffNotificationBox,
+              newNotifications:
+                loggedInStaffNotificationBox?.newNotifications.concat({
+                  message: `You ${
+                    updatedAccount.status === 'active'
+                      ? 'Activated'
+                      : 'Deactivated'
+                  } an account, ${updatedAccount.accountNumber}, owned by ${
+                    accountOwner?.firstName
+                  } ${accountOwner?.lastName}`,
+                }),
+            };
+
+            notificationsService
+              .updateNotification(
+                loggedInStaffNotificationBox?.id,
+                newStaffActivateDeactivateNotification
+              )
+              .then((response) => console.log(response));
+          }
+
+          // create notification for client after their account is activated or deactivated
+
+          if (userNotificationBox) {
+            const newUserActivateDeactivateNotification: Notification = {
+              ...userNotificationBox,
+              newNotifications: userNotificationBox.newNotifications.concat({
+                message: `Your account ${updatedAccount.accountNumber} was ${
+                  updatedAccount.status === 'active'
+                    ? 'Activated'
+                    : 'Deactivated'
+                } by cashier ${loggedInUser?.firstName} ${
+                  loggedInUser?.lastName
+                }`,
+              }),
+            };
+
+            notificationsService
+              .updateNotification(
+                userNotificationBox.id,
+                newUserActivateDeactivateNotification
+              )
+              .then((response) => console.log(response));
+          }
+        });
     }
     setAccountNumber('');
     navigate('/dashboard-staff/search/users');
@@ -506,7 +570,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
             </button>
           )}
           <button onClick={() => setActiveDeactivateBox(true)}>
-            Deactivate Account
+            Activate/Deactivate Account
           </button>
           <button
             className='delete'
