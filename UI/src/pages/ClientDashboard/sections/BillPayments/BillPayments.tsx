@@ -7,6 +7,7 @@ import {
   Account,
   BillPaymentType,
   NewTransaction,
+  Notification,
   User,
 } from '../../../../types';
 import accountsService from '../../../../services/accounts';
@@ -43,6 +44,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import transactionsService from '../../../../services/transactions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import notificationsService from '../../../../services/notifications';
 
 const BillPayments = () => {
   const navigate = useNavigate();
@@ -62,65 +64,107 @@ const BillPayments = () => {
     phoneNumber: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [notifications, setNotifications] = useState<Array<Notification>>([]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      setUser(retrievedUser);
+
+      accountsService.getAll().then((accounts) => {
+        setAccounts(accounts);
+        setAccountToShow(
+          accounts.filter(
+            (account: Account) => account.owner === retrievedUser.id
+          )[0]
+        );
+      });
     }
-    accountsService.getAll().then((accounts) => {
-      setAccounts(accounts);
-      setAccountToShow(accounts[0]);
-    });
+
+    notificationsService
+      .getAll()
+      .then((retrievedNotifications) =>
+        setNotifications(retrievedNotifications)
+      );
   }, []);
 
   // console.log(category);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
+  const userAccountNotificationBox = notifications.find(
+    (notification) => notification.owner === user?.id
+  );
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (accountToShow?.status === 'active') {
-      if (user?.transferPin === paymentDetails.pin) {
-        const updatedSendingAccount = {
-          ...accountToShow,
-          balance:
-            accountToShow &&
-            accountToShow?.balance - Number(paymentDetails.amount),
-        };
-        accountsService
-          .debit(accountToShow?.id, updatedSendingAccount)
-          .then((response) => console.log(response));
+      if (accountToShow.balance >= Number(paymentDetails.amount)) {
+        if (user?.transferPin === paymentDetails.pin) {
+          const updatedSendingAccount = {
+            ...accountToShow,
+            balance:
+              accountToShow &&
+              accountToShow?.balance - Number(paymentDetails.amount),
+          };
+          accountsService
+            .debit(accountToShow?.id, updatedSendingAccount)
+            .then((response) => console.log(response));
 
-        const newDebitTransaction: NewTransaction = {
-          accountNumber: accountToShow?.accountNumber,
-          createdOn: new Date(),
-          type: 'debit',
-          amount: Number(paymentDetails.amount),
-          oldBalance: accountToShow?.balance,
-          newBalance: updatedSendingAccount.balance,
-          description: `Bill Payment: Paid ${paymentDetails.amount} To ${biller} For service ${product}: ${paymentDetails.phoneNumber}`,
-        };
-        transactionsService
-          .newDebitTransaction(newDebitTransaction)
-          .then((response) => console.log(response));
+          const newDebitTransaction: NewTransaction = {
+            accountNumber: accountToShow?.accountNumber,
+            createdOn: new Date(),
+            type: 'debit',
+            amount: Number(paymentDetails.amount),
+            oldBalance: accountToShow?.balance,
+            newBalance: updatedSendingAccount.balance,
+            description: `Bill Payment: Paid ${paymentDetails.amount} To ${biller} For service ${product}: ${paymentDetails.phoneNumber}`,
+          };
+          transactionsService
+            .newDebitTransaction(newDebitTransaction)
+            .then((billPaymentTransaction) => {
+              if (userAccountNotificationBox) {
+                const debitNotification: Notification = {
+                  ...userAccountNotificationBox,
+                  newNotifications:
+                    userAccountNotificationBox?.newNotifications.concat({
+                      message: billPaymentTransaction.description,
+                      accountId: accountToShow.id,
+                      accountNumber: accountToShow.accountNumber,
+                      transactionId: billPaymentTransaction.id,
+                    }),
+                };
 
-        navigate('/dashboard-client');
+                notificationsService
+                  .updateNotification(
+                    userAccountNotificationBox?.id,
+                    debitNotification
+                  )
+                  .then((response) => console.log(response));
+              }
+            });
 
-        setCategory('');
-        setBiller('');
-        setProduct('');
-        setPaymentDetails({
-          ...paymentDetails,
-          amount: '',
-          pin: '',
-          description: '',
-          phoneNumber: '',
-        });
+          navigate('/dashboard-client');
+
+          setCategory('');
+          setBiller('');
+          setProduct('');
+          setPaymentDetails({
+            ...paymentDetails,
+            amount: '',
+            pin: '',
+            description: '',
+            phoneNumber: '',
+          });
+        } else {
+          toast.error('Wrong transfer pin', {
+            position: 'top-center',
+          });
+        }
       } else {
-        toast.error('Wrong transfer pin', {
+        toast.error('Insufficient balance', {
           position: 'top-center',
         });
       }
