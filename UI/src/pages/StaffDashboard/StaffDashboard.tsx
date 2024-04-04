@@ -9,7 +9,7 @@ import notificationsService from '../../services/notifications';
 const StaffDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
   const [notificationOpen, setNotificationOpen] = useState(false);
@@ -30,8 +30,14 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
     }
   }, []);
 
-  const handleClick = () => {
-    setMenuOpen(!menuOpen);
+  const handleProfileClick = () => {
+    setProfileMenuOpen(!profileMenuOpen);
+    setNotificationOpen(notificationOpen && false);
+  };
+
+  const handleNotificationClick = () => {
+    setNotificationOpen(!notificationOpen ? true : false);
+    setProfileMenuOpen(profileMenuOpen && false);
   };
 
   const userNotifications = notifications.filter(
@@ -107,9 +113,7 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
                   <NotificationsNoneIcon
                     fontSize='large'
                     className='notification-icon'
-                    onClick={() => {
-                      setNotificationOpen(!notificationOpen ? true : false);
-                    }}
+                    onClick={handleNotificationClick}
                   />
                 </div>
                 <div
@@ -124,12 +128,12 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
               <AccountCircleIcon
                 fontSize='large'
                 className='account-icon'
-                onClick={handleClick}
+                onClick={handleProfileClick}
               />
             </div>
           </div>
           <div className='body'>
-            <div className={'account-menu ' + (menuOpen && 'active')}>
+            <div className={'account-menu ' + (profileMenuOpen && 'active')}>
               <div
                 onClick={() => navigate(`/dashboard-staff/${user?.id}/profile`)}
               >

@@ -109,8 +109,14 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
     },
   ];
 
-  const handleClick = () => {
+  const handleProfileClick = () => {
     setProfileOpen(!profileOpen);
+    setNotificationOpen(notificationOpen && false);
+  };
+
+  const handleNotificationClick = () => {
+    setNotificationOpen(!notificationOpen ? true : false);
+    setProfileOpen(profileOpen && false);
   };
 
   const handleNotificationService = () => {
@@ -215,9 +221,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
                 <NotificationsNoneIcon
                   fontSize='large'
                   className='notification-icon'
-                  onClick={() => {
-                    setNotificationOpen(!notificationOpen ? true : false);
-                  }}
+                  onClick={handleNotificationClick}
                 />
               </div>
               <div
@@ -231,7 +235,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             <AccountCircleIcon
               fontSize='large'
               className='account-icon'
-              onClick={handleClick}
+              onClick={handleProfileClick}
             />
           </div>
         </div>
