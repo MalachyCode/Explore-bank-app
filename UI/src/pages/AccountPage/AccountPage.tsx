@@ -34,7 +34,7 @@ const RenderFormInput = (props: {
 
 const AccountPage = (props: { user: User | null | undefined }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>();
+  const [loggedInUser, setLoggedInUser] = useState<User | null>();
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [transactionDetails, setTransactionDetails] = useState<TransactionType>(
     {
@@ -50,8 +50,8 @@ const AccountPage = (props: { user: User | null | undefined }) => {
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      setLoggedInUser(retrievedUser);
     }
     accountsService.getAll().then((accounts) => setAccounts(accounts));
   }, []);
@@ -68,10 +68,12 @@ const AccountPage = (props: { user: User | null | undefined }) => {
     if (
       window.confirm(`Delete ${props.user?.firstName} ${props.user?.lastName}`)
     ) {
-      const userAccount = accounts.find((account) => account.owner === id);
-      accountsService
-        .deleteAccount(userAccount?.id)
-        .then((response) => console.log(response));
+      userAccounts.forEach((account) =>
+        accountsService
+          .deleteAccount(account?.id)
+          .then((response) => console.log(response))
+      );
+
       usersService
         .deleteUser(id as string)
         .then((response) => console.log(response));
@@ -102,11 +104,11 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           accountNumber: accountToUpdateForDebit?.accountNumber,
           createdOn: new Date(),
           type: 'debit',
-          cashier: user?.id,
+          cashier: loggedInUser?.id,
           amount: Number(transactionDetails.amount),
           oldBalance: accountToUpdateForDebit?.balance,
           newBalance: debitedAccount.balance,
-          description: `Over counter debit transaction at Explore Bank branch by cashier: ${user?.firstName} ${user?.lastName}; ${transactionDetails.description}`,
+          description: `Over counter debit transaction at Explore Bank branch by cashier: ${loggedInUser?.firstName} ${loggedInUser?.lastName}; ${transactionDetails.description}`,
         };
 
         console.log(accountToUpdateForDebit);
@@ -145,11 +147,11 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           accountNumber: accountToUpdateForCredit?.accountNumber,
           createdOn: new Date(),
           type: 'credit',
-          cashier: user?.id,
+          cashier: loggedInUser?.id,
           amount: Number(transactionDetails.amount),
           oldBalance: accountToUpdateForCredit?.balance,
           newBalance: creditedAccount.balance,
-          description: `Over counter credit transaction at Explore Bank branch by cashier: ${user?.firstName} ${user?.lastName}; ${transactionDetails.description}`,
+          description: `Over counter credit transaction at Explore Bank branch by cashier: ${loggedInUser?.firstName} ${loggedInUser?.lastName}; ${transactionDetails.description}`,
         };
 
         console.log(accountToUpdateForCredit);
@@ -337,7 +339,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           </div>
         </div>
         <div className='buttons-container'>
-          {!user?.isAdmin && (
+          {!loggedInUser?.isAdmin && (
             <button
               className='debit'
               onClick={() => {
@@ -348,7 +350,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
               Debit Account
             </button>
           )}
-          {!user?.isAdmin && (
+          {!loggedInUser?.isAdmin && (
             <button
               className='credit'
               onClick={() => {
