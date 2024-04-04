@@ -87,10 +87,7 @@ const MobileTopUp = () => {
               accountToShow?.balance - Number(topupDetails.amount),
           };
           accountsService
-            .debit(
-              accountToShow?.id as string,
-              updatedSendingAccount as Account
-            )
+            .debit(accountToShow?.id, updatedSendingAccount)
             .then((response) => console.log(response));
 
           const newDebitTransaction: NewTransaction = {

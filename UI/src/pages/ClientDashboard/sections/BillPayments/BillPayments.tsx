@@ -91,7 +91,7 @@ const BillPayments = () => {
             accountToShow?.balance - Number(paymentDetails.amount),
         };
         accountsService
-          .debit(accountToShow?.id as string, updatedSendingAccount as Account)
+          .debit(accountToShow?.id, updatedSendingAccount)
           .then((response) => console.log(response));
 
         const newDebitTransaction: NewTransaction = {
