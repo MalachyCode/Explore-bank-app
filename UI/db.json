@@ -161,6 +161,24 @@
       "status": "active",
       "accountNumber": 5408399080,
       "type": "savings"
+    },
+    {
+      "id": "b308",
+      "balance": 0,
+      "createdOn": "2024-04-04T14:50:16.658Z",
+      "owner": "710d",
+      "status": "active",
+      "accountNumber": 7788834566,
+      "type": "savings"
+    },
+    {
+      "id": "0b41",
+      "balance": 15000,
+      "createdOn": "2024-04-04T14:50:31.269Z",
+      "owner": "710d",
+      "status": "active",
+      "accountNumber": 6989716720,
+      "type": "savings"
     }
   ],
   "transactions": [
@@ -347,6 +365,17 @@
       "oldBalance": 490000,
       "newBalance": 480000,
       "description": "To:Kennedy Jideofor, Explore BankMobile; Kennedy Jideofor Allowance"
+    },
+    {
+      "id": "8a89",
+      "accountNumber": 6989716720,
+      "createdOn": "2024-04-04T17:11:50.410Z",
+      "type": "credit",
+      "cashier": "64a6",
+      "amount": 15000,
+      "oldBalance": 0,
+      "newBalance": 15000,
+      "description": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Credit Transaction"
     }
   ],
   "notifications": [
@@ -402,7 +431,13 @@
     {
       "id": "zxsa",
       "owner": "64a6",
-      "newNotifications": [],
+      "newNotifications": [
+        {
+          "message": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Credit Transaction",
+          "accountNumber": 6989716720,
+          "transactionId": "8a89"
+        }
+      ],
       "oldNotifications": []
     },
     {
@@ -440,7 +475,14 @@
       "id": "97cd",
       "owner": "710d",
       "newNotifications": [],
-      "oldNotifications": []
+      "oldNotifications": [
+        {
+          "message": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Credit Transaction",
+          "accountId": "0b41",
+          "accountNumber": 6989716720,
+          "transactionId": "8a89"
+        }
+      ]
     }
   ]
 }
