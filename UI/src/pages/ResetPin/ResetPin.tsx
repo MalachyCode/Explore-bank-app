@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import './ResetPin.scss';
 import FormInput from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { ResetPinType, User } from '../../types';
+import { Notification, ResetPinType, User } from '../../types';
 import usersService from '../../services/users';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import notificationsService from '../../services/notifications';
 
 const ResetPin = () => {
   const [user, setUser] = useState<User>();
@@ -15,13 +16,20 @@ const ResetPin = () => {
     newPin: '',
     confirmPin: '',
   });
+  const [notifications, setNotifications] = useState<Array<Notification>>([]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      setUser(retrievedUser);
     }
+
+    notificationsService
+      .getAll()
+      .then((retrievedNotifications) =>
+        setNotifications(retrievedNotifications)
+      );
   }, []);
 
   const formInputs = [
@@ -57,6 +65,10 @@ const ResetPin = () => {
     },
   ];
 
+  const userAccountNotificationBox = notifications.find(
+    (notification) => notification.owner === user?.id
+  );
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -66,9 +78,25 @@ const ResetPin = () => {
         transferPin: details.newPin,
       };
 
-      usersService
-        .resetPin(user?.id, userPinReset)
-        .then((response) => console.log(response));
+      usersService.resetPin(user?.id, userPinReset).then((response) => {
+        console.log(response);
+        if (userAccountNotificationBox) {
+          const pinResetNotification: Notification = {
+            ...userAccountNotificationBox,
+            newNotifications:
+              userAccountNotificationBox?.newNotifications.concat({
+                message: `You reset your transfer pin`,
+              }),
+          };
+
+          notificationsService
+            .updateNotification(
+              userAccountNotificationBox?.id,
+              pinResetNotification
+            )
+            .then((response) => console.log(response));
+        }
+      });
 
       // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
       const modifiedObjectForStorage = JSON.stringify(userPinReset);
@@ -107,6 +135,16 @@ const ResetPin = () => {
         <button type='submit' className='btn'>
           Reset
         </button>
+        {user?.transferPin === '' && (
+          <p
+            className='set-pin'
+            onClick={() =>
+              navigate(`/dashboard-client/${user?.id}/set-transfer-pin`)
+            }
+          >
+            Set New Transfer Pin
+          </p>
+        )}
       </form>
       <ToastContainer />
     </div>
