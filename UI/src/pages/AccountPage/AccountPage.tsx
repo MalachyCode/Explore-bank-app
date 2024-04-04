@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Account, NewTransaction, User } from '../../types';
+import { Account, NewTransaction, Notification, User } from '../../types';
 import './AccountPage.scss';
 import accountsService from '../../services/accounts';
 import usersService from '../../services/users';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import transactionsService from '../../services/transactions';
+import notificationsService from '../../services/notifications';
 
 interface TransactionType {
   amount: string;
@@ -46,6 +47,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
   const [transactionType, setTransactionType] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
   const [activeDeactivateBox, setActiveDeactivateBox] = useState(false);
+  const [notifications, setNotifications] = useState<Array<Notification>>([]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -54,6 +56,11 @@ const AccountPage = (props: { user: User | null | undefined }) => {
       setLoggedInUser(retrievedUser);
     }
     accountsService.getAll().then((accounts) => setAccounts(accounts));
+    notificationsService
+      .getAll()
+      .then((retrievedNotifications) =>
+        setNotifications(retrievedNotifications)
+      );
   }, []);
 
   const userAccounts = accounts.filter(
@@ -62,6 +69,10 @@ const AccountPage = (props: { user: User | null | undefined }) => {
 
   const accountToDeactivateOrActivate = userAccounts.find(
     (account) => account.accountNumber === Number(accountNumber)
+  );
+
+  const loggedInStaffNotificationBox = notifications.find(
+    (notification) => notification.owner === loggedInUser?.id
   );
 
   const handleDelete = (id: string | undefined) => {
@@ -74,9 +85,22 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           .then((response) => console.log(response))
       );
 
-      usersService
-        .deleteUser(id as string)
-        .then((response) => console.log(response));
+      usersService.deleteUser(id as string).then((response) => {
+        const creditNotification: Notification = {
+          ...loggedInStaffNotificationBox,
+          newNotifications:
+            loggedInStaffNotificationBox?.newNotifications.concat({
+              message: `You deleted an account owned by ${response.firstName} ${response.lastName}`,
+            }),
+        };
+
+        notificationsService
+          .updateNotification(
+            loggedInStaffNotificationBox?.id,
+            creditNotification
+          )
+          .then((response) => console.log(response));
+      });
     }
     navigate('/dashboard-staff/search/users');
   };
