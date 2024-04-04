@@ -18,37 +18,25 @@ const deleteUser = async (id: string) => {
   return response.data;
 };
 
-const resetPassword = async (
-  id: string | undefined,
-  updatedAccount: User | undefined
-) => {
+const resetPassword = async (id: string, updatedAccount: User) => {
   const response = await axios.put(`${baseUrl}/${id}`, updatedAccount);
 
   return response.data;
 };
 
-const resetPin = async (
-  id: string | undefined,
-  updatedAccount: User | undefined
-) => {
+const resetPin = async (id: string, updatedAccount: User) => {
   const response = await axios.put(`${baseUrl}/${id}`, updatedAccount);
 
   return response.data;
 };
 
-const setTransferPin = async (
-  id: string | undefined,
-  updatedAccount: User | undefined
-) => {
+const setTransferPin = async (id: string, updatedAccount: User) => {
   const response = await axios.put(`${baseUrl}/${id}`, updatedAccount);
 
   return response.data;
 };
 
-const updateUser = async (
-  id: string | undefined,
-  updatedUser: User | undefined
-) => {
+const updateUser = async (id: string, updatedUser: User) => {
   const response = await axios.put(`${baseUrl}/${id}`, updatedUser);
 
   return response.data;

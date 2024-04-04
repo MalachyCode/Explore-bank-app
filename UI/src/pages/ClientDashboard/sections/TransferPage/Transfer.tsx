@@ -148,17 +148,11 @@ const Transfer = () => {
           };
 
           accountService
-            .debit(
-              sendingAccount?.id as string,
-              updatedSendingAccount as Account
-            )
+            .debit(sendingAccount?.id, updatedSendingAccount)
             .then((response) => console.log(response));
 
           accountService
-            .credit(
-              receivingAccount?.id as string,
-              updatedRecievingAccount as Account
-            )
+            .credit(receivingAccount?.id, updatedRecievingAccount)
             .then((response) => console.log(response));
 
           const newCreditTransaction: NewTransaction = {

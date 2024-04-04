@@ -67,7 +67,7 @@ const ResetPin = () => {
       };
 
       usersService
-        .resetPin(user?.id, userPinReset as User)
+        .resetPin(user?.id, userPinReset)
         .then((response) => console.log(response));
 
       // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
