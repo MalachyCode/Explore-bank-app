@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Account, NewTransaction, User } from '../../types';
+import { Account, NewTransaction, Notification, User } from '../../types';
 import './AccountPage.scss';
 import accountsService from '../../services/accounts';
 import usersService from '../../services/users';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import transactionsService from '../../services/transactions';
+import notificationsService from '../../services/notifications';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface TransactionType {
   amount: string;
@@ -16,10 +19,11 @@ const RenderFormInput = (props: {
   label: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   detail: string | undefined;
+  value: string;
 }) => (
   <div className='input-box'>
     {props.label === 'Amount' && <span className='naira-symbol'>&#8358;</span>}
-    <input type='text' onChange={props.onChange} />
+    <input type='text' onChange={props.onChange} value={props.value} />
     <span
       className={
         'placeholder ' +
@@ -46,6 +50,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
   const [transactionType, setTransactionType] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
   const [activeDeactivateBox, setActiveDeactivateBox] = useState(false);
+  const [notifications, setNotifications] = useState<Array<Notification>>([]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -54,6 +59,11 @@ const AccountPage = (props: { user: User | null | undefined }) => {
       setLoggedInUser(retrievedUser);
     }
     accountsService.getAll().then((accounts) => setAccounts(accounts));
+    notificationsService
+      .getAll()
+      .then((retrievedNotifications) =>
+        setNotifications(retrievedNotifications)
+      );
   }, []);
 
   const userAccounts = accounts.filter(
@@ -62,6 +72,14 @@ const AccountPage = (props: { user: User | null | undefined }) => {
 
   const accountToDeactivateOrActivate = userAccounts.find(
     (account) => account.accountNumber === Number(accountNumber)
+  );
+
+  const loggedInStaffNotificationBox = notifications.find(
+    (notification) => notification.owner === loggedInUser?.id
+  );
+
+  const userNotificationBox = notifications.find(
+    (notification) => notification.owner === props.user?.id
   );
 
   const handleDelete = (id: string | undefined) => {
@@ -74,9 +92,24 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           .then((response) => console.log(response))
       );
 
-      usersService
-        .deleteUser(id as string)
-        .then((response) => console.log(response));
+      usersService.deleteUser(id as string).then((response) => {
+        if (loggedInStaffNotificationBox) {
+          const newDeleteNotification: Notification = {
+            ...loggedInStaffNotificationBox,
+            newNotifications:
+              loggedInStaffNotificationBox?.newNotifications.concat({
+                message: `You deleted an account owned by ${response.firstName} ${response.lastName}`,
+              }),
+          };
+
+          notificationsService
+            .updateNotification(
+              loggedInStaffNotificationBox?.id,
+              newDeleteNotification
+            )
+            .then((response) => console.log(response));
+        }
+      });
     }
     navigate('/dashboard-staff/search/users');
   };
@@ -92,38 +125,98 @@ const AccountPage = (props: { user: User | null | undefined }) => {
       );
 
       if (accountToUpdateForDebit) {
-        const debitedAccount = {
-          ...accountToUpdateForDebit,
-          balance:
-            accountToUpdateForDebit &&
-            accountToUpdateForDebit?.balance -
-              Number(transactionDetails.amount),
-        };
+        if (
+          accountToUpdateForDebit.balance >= Number(transactionDetails.amount)
+        ) {
+          const debitedAccount = {
+            ...accountToUpdateForDebit,
+            balance:
+              accountToUpdateForDebit &&
+              accountToUpdateForDebit?.balance -
+                Number(transactionDetails.amount),
+          };
 
-        const newDebitTransaction: NewTransaction = {
-          accountNumber: accountToUpdateForDebit?.accountNumber,
-          createdOn: new Date(),
-          type: 'debit',
-          cashier: loggedInUser?.id,
-          amount: Number(transactionDetails.amount),
-          oldBalance: accountToUpdateForDebit?.balance,
-          newBalance: debitedAccount.balance,
-          description: `Over counter debit transaction at Explore Bank branch by cashier: ${loggedInUser?.firstName} ${loggedInUser?.lastName}; ${transactionDetails.description}`,
-        };
+          const newDebitTransaction: NewTransaction = {
+            accountNumber: accountToUpdateForDebit?.accountNumber,
+            createdOn: new Date(),
+            type: 'debit',
+            cashier: loggedInUser?.id,
+            amount: Number(transactionDetails.amount),
+            oldBalance: accountToUpdateForDebit?.balance,
+            newBalance: debitedAccount.balance,
+            description: `Over counter debit transaction at Explore Bank branch by cashier: ${loggedInUser?.firstName} ${loggedInUser?.lastName}; ${transactionDetails.description}`,
+          };
 
-        console.log(accountToUpdateForDebit);
-        console.log(debitedAccount);
+          accountsService
+            .debit(
+              accountToUpdateForDebit?.id as string,
+              debitedAccount as Account
+            )
+            .then((response) => console.log(response));
 
-        accountsService
-          .debit(
-            accountToUpdateForDebit?.id as string,
-            debitedAccount as Account
-          )
-          .then((response) => console.log(response));
+          transactionsService
+            .newDebitTransaction(newDebitTransaction)
+            .then((debitTransaction) => {
+              if (loggedInStaffNotificationBox) {
+                const debitNotification: Notification = {
+                  ...loggedInStaffNotificationBox,
+                  newNotifications:
+                    loggedInStaffNotificationBox.newNotifications.concat({
+                      message: debitTransaction.description,
+                      // accountId: sendingAccount.id,
+                      accountNumber: debitTransaction.accountNumber,
+                      transactionId: debitTransaction.id,
+                    }),
+                };
 
-        transactionsService
-          .newDebitTransaction(newDebitTransaction)
-          .then((response) => console.log(response));
+                notificationsService
+                  .updateNotification(
+                    loggedInStaffNotificationBox.id,
+                    debitNotification
+                  )
+                  .then((response) => console.log(response));
+              }
+              if (userNotificationBox) {
+                const userDebitNotification: Notification = {
+                  ...userNotificationBox,
+                  newNotifications: userNotificationBox.newNotifications.concat(
+                    {
+                      message: debitTransaction.description,
+                      accountId: accountToUpdateForDebit.id,
+                      accountNumber: debitTransaction.accountNumber,
+                      transactionId: debitTransaction.id,
+                    }
+                  ),
+                };
+
+                notificationsService
+                  .updateNotification(
+                    userNotificationBox.id,
+                    userDebitNotification
+                  )
+                  .then((response) => console.log(response));
+              }
+            });
+          navigate('/dashboard-staff/search/users/');
+        } else {
+          toast.error('Insufficient balance', {
+            position: 'top-center',
+          });
+          setTransactionDetails({
+            ...transactionDetails,
+            amount: '',
+            description: '',
+          });
+        }
+      } else {
+        toast.error('Account not found', {
+          position: 'top-center',
+        });
+        setTransactionDetails({
+          ...transactionDetails,
+          amount: '',
+          description: '',
+        });
       }
     }
 
@@ -166,7 +259,56 @@ const AccountPage = (props: { user: User | null | undefined }) => {
 
         transactionsService
           .newCreditTransaction(newCreditTransaction)
-          .then((response) => console.log(response));
+          .then((creditTransaction) => {
+            if (loggedInStaffNotificationBox) {
+              const creditNotification: Notification = {
+                ...loggedInStaffNotificationBox,
+                newNotifications:
+                  loggedInStaffNotificationBox.newNotifications.concat({
+                    message: creditTransaction.description,
+                    // accountId: sendingAccount.id,
+                    accountNumber: creditTransaction.accountNumber,
+                    transactionId: creditTransaction.id,
+                  }),
+              };
+
+              notificationsService
+                .updateNotification(
+                  loggedInStaffNotificationBox.id,
+                  creditNotification
+                )
+                .then((response) => console.log(response));
+            }
+            if (userNotificationBox) {
+              const userCreditNotification: Notification = {
+                ...userNotificationBox,
+                newNotifications: userNotificationBox.newNotifications.concat({
+                  message: creditTransaction.description,
+                  accountId: accountToUpdateForCredit.id,
+                  accountNumber: creditTransaction.accountNumber,
+                  transactionId: creditTransaction.id,
+                }),
+              };
+
+              notificationsService
+                .updateNotification(
+                  userNotificationBox.id,
+                  userCreditNotification
+                )
+                .then((response) => console.log(response));
+            }
+          });
+
+        navigate('/dashboard-staff/search/users/');
+      } else {
+        toast.error('Account not found', {
+          position: 'top-center',
+        });
+        setTransactionDetails({
+          ...transactionDetails,
+          amount: '',
+          description: '',
+        });
       }
     }
 
@@ -178,7 +320,6 @@ const AccountPage = (props: { user: User | null | undefined }) => {
       amount: '',
       description: '',
     });
-    navigate('/dashboard-staff/search/users/');
   };
 
   const handleActivateDeactivate = () => {
@@ -215,6 +356,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           ...transactionDetails,
           amount: e.target.value,
         }),
+      value: transactionDetails.amount,
     },
     {
       id: 2,
@@ -225,12 +367,13 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           ...transactionDetails,
           description: e.target.value,
         }),
+      value: transactionDetails.description,
     },
   ];
 
-  console.log(accountNumber);
-  console.log(accountToDeactivateOrActivate);
-  console.log(typeof accountNumber);
+  // console.log(accountNumber);
+  // console.log(accountToDeactivateOrActivate);
+  // console.log(typeof accountNumber);
 
   return (
     <div className='account-page'>
@@ -255,6 +398,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
                   onChange={input.onChange}
                   detail={input.detail}
                   key={input.id}
+                  value={input.value}
                 />
               ))}
               <select
@@ -372,6 +516,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

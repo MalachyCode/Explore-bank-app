@@ -207,8 +207,8 @@ export type NewNotificationBody = Omit<NotificationBody, 'id'>;
 export interface Notification {
   id: string;
   owner: string;
-  newNotifications: Array<NotificationBody | NewNotificationBody | undefined>;
-  oldNotifications: Array<NotificationBody | undefined>;
+  newNotifications: Array<NotificationBody | NewNotificationBody>;
+  oldNotifications: Array<NotificationBody>;
 }
 
 export type NewNotification = Omit<Notification, 'id'>;
