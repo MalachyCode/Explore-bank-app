@@ -12,4 +12,20 @@
   display: flex;
   align-items: center;
   position: fixed;
+
+  form {
+    .set-pin {
+      margin: -10px 0;
+      padding: 0;
+      color: #32435f;
+      transition: all 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      &:hover {
+        color: $primary-500;
+      }
+    }
+  }
 }
