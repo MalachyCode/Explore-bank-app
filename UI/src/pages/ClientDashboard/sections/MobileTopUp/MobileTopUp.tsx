@@ -93,72 +93,78 @@ const MobileTopUp = () => {
     e.preventDefault();
 
     if (selected) {
-      if (accountToShow?.status === 'active') {
-        if (user?.transferPin === transferPin) {
-          const updatedSendingAccount = {
-            ...accountToShow,
-            balance:
-              accountToShow &&
-              accountToShow?.balance - Number(topupDetails.amount),
-          };
-          accountsService
-            .debit(accountToShow?.id, updatedSendingAccount)
-            .then((response) => console.log(response));
+      if (user?.transferPin === transferPin) {
+        if (accountToShow?.status === 'active') {
+          if (accountToShow.balance >= Number(topupDetails.amount)) {
+            const updatedSendingAccount = {
+              ...accountToShow,
+              balance:
+                accountToShow &&
+                accountToShow?.balance - Number(topupDetails.amount),
+            };
+            accountsService
+              .debit(accountToShow?.id, updatedSendingAccount)
+              .then((response) => console.log(response));
 
-          const newDebitTransaction: NewTransaction = {
-            accountNumber: accountToShow?.accountNumber,
-            createdOn: new Date(),
-            type: 'debit',
-            amount: Number(topupDetails.amount),
-            oldBalance: accountToShow?.balance,
-            newBalance: updatedSendingAccount.balance,
-            description: `Mobile TopUp of ${topupDetails.amount} For ${topupDetails.phoneNumber}`,
-          };
-          transactionsService
-            .newDebitTransaction(newDebitTransaction)
-            .then((mobileTopUpTransaction) => {
-              if (userAccountNotificationBox) {
-                const mobileTopupNotification: Notification = {
-                  ...userAccountNotificationBox,
-                  newNotifications:
-                    userAccountNotificationBox?.newNotifications.concat({
-                      message: mobileTopUpTransaction.description,
-                      accountId: accountToShow.id,
-                      accountNumber: accountToShow.accountNumber,
-                      transactionId: mobileTopUpTransaction.id,
-                    }),
-                };
+            const newDebitTransaction: NewTransaction = {
+              accountNumber: accountToShow?.accountNumber,
+              createdOn: new Date(),
+              type: 'debit',
+              amount: Number(topupDetails.amount),
+              oldBalance: accountToShow?.balance,
+              newBalance: updatedSendingAccount.balance,
+              description: `Mobile TopUp of ${topupDetails.amount} For ${topupDetails.phoneNumber}`,
+            };
+            transactionsService
+              .newDebitTransaction(newDebitTransaction)
+              .then((mobileTopUpTransaction) => {
+                if (userAccountNotificationBox) {
+                  const mobileTopupNotification: Notification = {
+                    ...userAccountNotificationBox,
+                    newNotifications:
+                      userAccountNotificationBox?.newNotifications.concat({
+                        message: mobileTopUpTransaction.description,
+                        accountId: accountToShow.id,
+                        accountNumber: accountToShow.accountNumber,
+                        transactionId: mobileTopUpTransaction.id,
+                      }),
+                  };
 
-                notificationsService
-                  .updateNotification(
-                    userAccountNotificationBox?.id,
-                    mobileTopupNotification
-                  )
-                  .then((response) => console.log(response));
-              }
+                  notificationsService
+                    .updateNotification(
+                      userAccountNotificationBox?.id,
+                      mobileTopupNotification
+                    )
+                    .then((response) => console.log(response));
+                }
+              });
+
+            navigate('/dashboard-client');
+
+            setTopupDetails({
+              ...topupDetails,
+              amount: '',
+              phoneNumber: '',
             });
-
-          navigate('/dashboard-client');
-
-          setTopupDetails({
-            ...topupDetails,
-            amount: '',
-            phoneNumber: '',
-          });
+          } else {
+            toast.error('Insufficient balance', {
+              position: 'top-center',
+            });
+          }
         } else {
-          toast.error('Wrong transfer pin', {
-            position: 'top-center',
-          });
+          toast.error(
+            'Your account is not active. Please visit our branch near you to reactivate',
+            {
+              position: 'top-center',
+            }
+          );
           setOpenConfirm(false);
           setTransferPin('');
         }
       } else {
-        toast.error(
-          'Your account is not active. Please visit our branch near you to reactivate',
-          {
-            position: 'top-center',
-          }
-        );
+        toast.error('Wrong transfer pin', {
+          position: 'top-center',
+        });
         setOpenConfirm(false);
         setTransferPin('');
       }
