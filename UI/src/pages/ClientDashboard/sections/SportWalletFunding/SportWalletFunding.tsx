@@ -7,6 +7,7 @@ import {
   Account,
   BillPaymentType,
   NewTransaction,
+  Notification,
   User,
 } from '../../../../types';
 import { useEffect, useState } from 'react';
@@ -21,6 +22,7 @@ import {
 // import CloseIcon from '@mui/icons-material/Close';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import notificationsService from '../../../../services/notifications';
 
 // import sgMail from '@sendgrid/mail';
 // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -50,20 +52,36 @@ const SportWalletFunding = () => {
     phoneNumber: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [notifications, setNotifications] = useState<Array<Notification>>([]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      setUser(retrievedUser);
+
+      accountsService.getAll().then((accounts) => {
+        setAccounts(accounts);
+        setAccountToShow(
+          accounts.filter(
+            (account: Account) => account.owner === retrievedUser.id
+          )[0]
+        );
+      });
     }
-    accountsService.getAll().then((accounts) => {
-      setAccounts(accounts);
-      setAccountToShow(accounts[0]);
-    });
+
+    notificationsService
+      .getAll()
+      .then((retrievedNotifications) =>
+        setNotifications(retrievedNotifications)
+      );
   }, []);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
+
+  const userAccountNotificationBox = notifications.find(
+    (notification) => notification.owner === user?.id
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -91,7 +109,27 @@ const SportWalletFunding = () => {
         };
         transactionsService
           .newDebitTransaction(newDebitTransaction)
-          .then((response) => console.log(response));
+          .then((sportWalletFundingTransaction) => {
+            if (userAccountNotificationBox) {
+              const sportWalletFundingNotification: Notification = {
+                ...userAccountNotificationBox,
+                newNotifications:
+                  userAccountNotificationBox?.newNotifications.concat({
+                    message: sportWalletFundingTransaction.description,
+                    accountId: accountToShow.id,
+                    accountNumber: accountToShow.accountNumber,
+                    transactionId: sportWalletFundingTransaction.id,
+                  }),
+              };
+
+              notificationsService
+                .updateNotification(
+                  userAccountNotificationBox?.id,
+                  sportWalletFundingNotification
+                )
+                .then((response) => console.log(response));
+            }
+          });
 
         navigate('/dashboard-client');
 
