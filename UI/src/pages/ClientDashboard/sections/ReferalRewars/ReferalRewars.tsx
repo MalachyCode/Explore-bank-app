@@ -18,13 +18,18 @@ const ReferalRewards = () => {
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      setUser(retrievedUser);
+
+      accountsService.getAll().then((accounts) => {
+        setAccounts(accounts);
+        setAccountToShow(
+          accounts.filter(
+            (account: Account) => account.owner === retrievedUser.id
+          )[0]
+        );
+      });
     }
-    accountsService.getAll().then((accounts) => {
-      setAccounts(accounts);
-      setAccountToShow(accounts[0]);
-    });
   }, []);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
