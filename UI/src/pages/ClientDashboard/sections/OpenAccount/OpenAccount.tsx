@@ -2,12 +2,19 @@ import { useEffect, useState } from 'react';
 import './OpenAccount.scss';
 import FormInput from '../../../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { Account, NewAccount, OpenAccountType, User } from '../../../../types';
+import {
+  Account,
+  NewAccount,
+  Notification,
+  OpenAccountType,
+  User,
+} from '../../../../types';
 import accountService from '../../../../services/accounts';
 import userService from '../../../../services/users';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import notificationsService from '../../../../services/notifications';
 
 const OpenAccount = () => {
   const navigate = useNavigate();
@@ -15,15 +22,22 @@ const OpenAccount = () => {
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [users, setUsers] = useState<Array<User>>([]);
   const [user, setUser] = useState<User>();
+  const [notifications, setNotifications] = useState<Array<Notification>>([]);
 
   useEffect(() => {
     userService.getAll().then((users) => setUsers(users));
     accountService.getAll().then((accounts) => setAccounts(accounts));
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      setUser(retrievedUser);
     }
+
+    notificationsService
+      .getAll()
+      .then((retrievedNotifications) =>
+        setNotifications(retrievedNotifications)
+      );
   }, []);
 
   const [details, setDetails] = useState<OpenAccountType>({
@@ -64,30 +78,48 @@ const OpenAccount = () => {
     },
   ];
 
+  const userAccountNotificationBox = notifications.find(
+    (notification) => notification.owner === user?.id
+  );
+
   console.log(accounts);
-  console.log(users);
-  console.log(user);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (users.find((user) => user.email === details.email)) {
-      const accountOwner = users.find((user) => user.email === details.email);
+    const accountOwner = users.find((user) => user.email === details.email);
 
+    if (accountOwner) {
       const newAccount: NewAccount = {
         // id: accounts.length + 1,
         balance: 0,
         createdOn: new Date(),
-        owner: accountOwner?.id as string,
+        owner: accountOwner.id,
         // owner: accountOwner?.id as number,
         status: 'active',
         accountNumber: Math.floor(Math.random() * 10000000000 + 1),
         type: accountType === 'current' ? 'current' : 'savings',
       };
 
-      accountService
-        .create(newAccount)
-        .then((createdAccount) => console.log(createdAccount));
+      accountService.create(newAccount).then((createdAccount) => {
+        if (userAccountNotificationBox) {
+          const creatAccountNotification: Notification = {
+            ...userAccountNotificationBox,
+            newNotifications:
+              userAccountNotificationBox?.newNotifications.concat({
+                message: `You created a new account with account number ${createdAccount.accountNumber}`,
+                accountId: createdAccount.id,
+              }),
+          };
+
+          notificationsService
+            .updateNotification(
+              userAccountNotificationBox?.id,
+              creatAccountNotification
+            )
+            .then((response) => console.log(response));
+        }
+      });
 
       if (user?.type === 'staff') {
         navigate('/dashboard-staff');

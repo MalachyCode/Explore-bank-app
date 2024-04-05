@@ -133,6 +133,8 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
         )
       : oldNotification.message.includes('personal data')
       ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
+      : oldNotification.message.includes('a new account')
+      ? navigate(`/dashboard-client/account-info/${oldNotification?.accountId}`)
       : console.log('happiness');
   };
 
@@ -154,6 +156,8 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
         )
       : newNotification.message.includes('personal data')
       ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
+      : newNotification.message.includes('a new account')
+      ? navigate(`/dashboard-client/account-info/${newNotification?.accountId}`)
       : console.log('happiness');
   };
 

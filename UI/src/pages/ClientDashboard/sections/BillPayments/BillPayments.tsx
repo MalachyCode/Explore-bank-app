@@ -100,9 +100,9 @@ const BillPayments = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (accountToShow?.status === 'active') {
-      if (accountToShow.balance >= Number(paymentDetails.amount)) {
-        if (user?.transferPin === paymentDetails.pin) {
+    if (user?.transferPin === paymentDetails.pin) {
+      if (accountToShow?.status === 'active') {
+        if (accountToShow.balance >= Number(paymentDetails.amount)) {
           const updatedSendingAccount = {
             ...accountToShow,
             balance:
@@ -159,22 +159,22 @@ const BillPayments = () => {
             phoneNumber: '',
           });
         } else {
-          toast.error('Wrong transfer pin', {
+          toast.error('Insufficient balance', {
             position: 'top-center',
           });
         }
       } else {
-        toast.error('Insufficient balance', {
-          position: 'top-center',
-        });
+        toast.error(
+          'Your account is not active. Please visit our branch near you to reactivate',
+          {
+            position: 'top-center',
+          }
+        );
       }
     } else {
-      toast.error(
-        'Your account is not active. Please visit our branch near you to reactivate',
-        {
-          position: 'top-center',
-        }
-      );
+      toast.error('Wrong transfer pin', {
+        position: 'top-center',
+      });
     }
   };
 
