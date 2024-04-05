@@ -199,6 +199,7 @@ $transition: 0.3s ease-in-out all;
 
 .top {
   background: #e1dcd9;
+  color: #32435f;
   width: 100vw;
   height: 10vh;
   display: flex;
@@ -217,7 +218,8 @@ $transition: 0.3s ease-in-out all;
   width: 92%;
   margin: auto;
   margin-top: 10px;
-  background: #8f8681;
+  // background: #8f8681;
+  background: #7c8ca7;
   color: white;
   border-radius: 10px;
   display: flex;
@@ -281,7 +283,8 @@ $transition: 0.3s ease-in-out all;
     top: 50%;
     left: 5%;
     right: 5%;
-    background: olive;
+    // background: olive;
+    background: #7c8ca7;
     border-radius: 10px 10px 0 0;
     max-width: calc($fixed-width + 50px);
     display: flex;

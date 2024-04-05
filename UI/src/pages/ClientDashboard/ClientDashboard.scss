@@ -241,7 +241,7 @@
         height: 60%;
         position: fixed;
         right: 2%;
-        top: -60%;
+        top: -62%;
         z-index: 1;
         background: whitesmoke;
         transition: all 1.5s ease;
@@ -251,7 +251,7 @@
         &::-webkit-scrollbar {
           display: none;
         }
-        padding: 0 10px;
+        padding: 0 10px 10px 10px;
 
         .read-all {
           cursor: pointer;
@@ -264,7 +264,9 @@
         .notifications {
           .new-notifications-container {
             .single-new-notification {
-              background: #8f8681;
+              // background: #8f8681;
+              background: #32435f;
+              color: white;
               cursor: pointer;
               padding: 0 15px;
               border-radius: 5px;
@@ -281,7 +283,9 @@
             .single-old-notification {
               cursor: pointer;
               padding: 0 15px;
-              background: #e1dcd9;
+              // background: #e1dcd9;
+              background: #7c8ca7;
+              color: white;
               border-radius: 5px;
               transition: all 0.5s ease;
               width: 85%;
