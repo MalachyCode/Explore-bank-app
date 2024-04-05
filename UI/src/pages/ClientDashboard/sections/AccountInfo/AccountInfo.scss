@@ -55,7 +55,7 @@
         overflow: hidden;
 
         div {
-          width: 30%;
+          width: 25%;
           height: 100%;
           background: #e1dcd9;
           padding: 0.75em;
@@ -69,6 +69,12 @@
           .content {
             width: 100%;
             text-align: center;
+          }
+
+          .item {
+            margin-bottom: -5px;
+            cursor: pointer;
+            transform: scale(1.5);
           }
         }
       }

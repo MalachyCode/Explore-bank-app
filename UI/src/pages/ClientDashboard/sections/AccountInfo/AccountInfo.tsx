@@ -6,6 +6,7 @@ import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import HistoryIcon from '@mui/icons-material/History';
 // import { RenderIcons } from '../../components/RenderIconsandTotals';
 import { useNavigate } from 'react-router-dom';
+import { RenderIcons } from '../../../../components/RenderIconsandTotals';
 
 const AccountInfo = (props: { account: Account | null | undefined }) => {
   const navigate = useNavigate();
@@ -57,15 +58,17 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
         </div>
         <div className='body'>
           <div className='buttons-container'>
-            {/* <div>
+            <div>
               <RenderIcons
-                label='Transfer'
-                icon='./assets/icons8-money-transfer-48.png'
+                label=''
+                icon='../../assets/icons8-money-transfer-48.png'
                 onClick={() =>
                   navigate(`/dashboard-client/${user?.id}/transfer`)
                 }
+                className='item'
               />
-            </div> */}
+              <div className='content'>Transfer</div>
+            </div>
             <div>
               {<TextSnippetIcon fontSize='large' />}
               <div className='content'>Generate Statement</div>

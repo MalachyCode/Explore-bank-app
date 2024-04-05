@@ -337,10 +337,7 @@ const Transfer = () => {
   return (
     <div className='transfer'>
       <div className='top'>
-        <ArrowBackIcon
-          className='back-icon'
-          onClick={() => navigate('/dashboard-client')}
-        />
+        <ArrowBackIcon className='back-icon' onClick={() => navigate(-1)} />
         <h2>Transfer</h2>
       </div>
       <div className={'confirm-container ' + (openConfirm && 'active')}>
