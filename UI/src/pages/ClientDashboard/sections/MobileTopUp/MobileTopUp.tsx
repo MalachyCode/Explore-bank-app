@@ -4,6 +4,7 @@ import {
   Account,
   MobileTopUpType,
   NewTransaction,
+  Notification,
   User,
 } from '../../../../types';
 import FormInput from '../../../../components/FormInput';
@@ -15,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import notificationsService from '../../../../services/notifications';
 
 const MobileTopUp = () => {
   const navigate = useNavigate();
@@ -30,25 +32,32 @@ const MobileTopUp = () => {
   const [accountToShow, setAccountToShow] = useState<Account>();
   const [openConfirm, setOpenConfirm] = useState(false);
   const [transferPin, setTransferPin] = useState<string>('');
+  const [notifications, setNotifications] = useState<Array<Notification>>([]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      setUser(retrievedUser);
+
+      accountsService.getAll().then((accounts) => {
+        setAccounts(accounts);
+        setAccountToShow(
+          accounts.filter(
+            (account: Account) => account.owner === retrievedUser.id
+          )[0]
+        );
+      });
     }
-    accountsService.getAll().then((accounts) => {
-      setAccounts(accounts);
-      setAccountToShow(accounts[0]);
-    });
+
+    notificationsService
+      .getAll()
+      .then((retrievedNotifications) =>
+        setNotifications(retrievedNotifications)
+      );
   }, []);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
-
-  // console.log(userAccounts);
-
-  // console.log(topupDetails.amount.split('.')[0]);
-  // console.log(networkProvider);
 
   console.log(selected);
 
@@ -73,6 +82,12 @@ const MobileTopUp = () => {
       required: true,
     },
   ];
+
+  const userAccountNotificationBox = notifications.find(
+    (notification) => notification.owner === user?.id
+  );
+
+  console.log(userAccountNotificationBox);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -101,7 +116,27 @@ const MobileTopUp = () => {
           };
           transactionsService
             .newDebitTransaction(newDebitTransaction)
-            .then((response) => console.log(response));
+            .then((mobileTopUpTransaction) => {
+              if (userAccountNotificationBox) {
+                const mobileTopupNotification: Notification = {
+                  ...userAccountNotificationBox,
+                  newNotifications:
+                    userAccountNotificationBox?.newNotifications.concat({
+                      message: mobileTopUpTransaction.description,
+                      accountId: accountToShow.id,
+                      accountNumber: accountToShow.accountNumber,
+                      transactionId: mobileTopUpTransaction.id,
+                    }),
+                };
+
+                notificationsService
+                  .updateNotification(
+                    userAccountNotificationBox?.id,
+                    mobileTopupNotification
+                  )
+                  .then((response) => console.log(response));
+              }
+            });
 
           navigate('/dashboard-client');
 
