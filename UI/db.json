@@ -122,7 +122,7 @@
       "isAdmin": false,
       "number": "09035473258",
       "dob": "1999-04-10",
-      "transferPin": ""
+      "transferPin": "3205"
     }
   ],
   "accounts": [
@@ -167,13 +167,13 @@
       "balance": 0,
       "createdOn": "2024-04-04T14:50:16.658Z",
       "owner": "710d",
-      "status": "active",
+      "status": "dormant",
       "accountNumber": 7788834566,
       "type": "savings"
     },
     {
       "id": "0b41",
-      "balance": 15000,
+      "balance": 10000,
       "createdOn": "2024-04-04T14:50:31.269Z",
       "owner": "710d",
       "status": "active",
@@ -376,6 +376,36 @@
       "oldBalance": 0,
       "newBalance": 15000,
       "description": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Credit Transaction"
+    },
+    {
+      "id": "ac4f",
+      "accountNumber": 6989716720,
+      "createdOn": "2024-04-04T21:25:14.228Z",
+      "type": "debit",
+      "amount": 2000,
+      "oldBalance": 15000,
+      "newBalance": 13000,
+      "description": "Bill Payment: Paid 2000 To MTN DATA For service 2GB Monthly Plan: 09087763245"
+    },
+    {
+      "id": "2e5a",
+      "accountNumber": 6989716720,
+      "createdOn": "2024-04-05T16:59:37.428Z",
+      "type": "debit",
+      "amount": 2000,
+      "oldBalance": 13000,
+      "newBalance": 11000,
+      "description": "Mobile TopUp of 2000.00 For 09035473258"
+    },
+    {
+      "id": "c161",
+      "accountNumber": 6989716720,
+      "createdOn": "2024-04-05T17:38:00.766Z",
+      "type": "debit",
+      "amount": 1000,
+      "oldBalance": 11000,
+      "newBalance": 10000,
+      "description": "Top up 1000 for user 09034977736 To SportyBet account. For service Wallet Top up: Sporty wallet top up"
     }
   ],
   "notifications": [
@@ -436,6 +466,9 @@
           "message": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Credit Transaction",
           "accountNumber": 6989716720,
           "transactionId": "8a89"
+        },
+        {
+          "message": "You Deactivated an account, 7788834566, owned by Adam Warlock"
         }
       ],
       "oldNotifications": []
@@ -481,6 +514,33 @@
           "accountId": "0b41",
           "accountNumber": 6989716720,
           "transactionId": "8a89"
+        },
+        {
+          "message": "Bill Payment: Paid 2000 To MTN DATA For service 2GB Monthly Plan: 09087763245",
+          "accountId": "0b41",
+          "accountNumber": 6989716720,
+          "transactionId": "ac4f"
+        },
+        {
+          "message": "Mobile TopUp of 2000.00 For 09035473258",
+          "accountId": "0b41",
+          "accountNumber": 6989716720,
+          "transactionId": "2e5a"
+        },
+        {
+          "message": "Top up 1000 for user 09034977736 To SportyBet account. For service Wallet Top up: Sporty wallet top up",
+          "accountId": "0b41",
+          "accountNumber": 6989716720,
+          "transactionId": "c161"
+        },
+        {
+          "message": "Your account 7788834566 was Deactivated by cashier Martins Fowler"
+        },
+        {
+          "message": "New transfer pin set"
+        },
+        {
+          "message": "You reset your transfer pin"
         }
       ]
     }
