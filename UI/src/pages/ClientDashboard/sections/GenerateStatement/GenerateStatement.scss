@@ -1,0 +1,119 @@
+@import '../../../../global.scss';
+
+.generate-statement {
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+
+  .email-container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: rgb(124, 140, 167, 0.4);
+    display: flex;
+    top: -100vh;
+    transition: all 0.5s ease;
+
+    .close-icon {
+      color: #32435f;
+      transform: scale(1.5);
+      cursor: pointer;
+      position: fixed;
+      right: 0;
+    }
+
+    .email-box {
+      width: 70%;
+      height: 50%;
+      background: #fff;
+      margin: auto;
+      box-shadow: $shadow-3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h3 {
+        margin-bottom: -70px;
+      }
+
+      .form-container {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        align-items: center;
+
+        form {
+          width: 90%;
+          height: 90%;
+
+          .input-box {
+            height: 50px;
+            margin-top: -10px;
+          }
+          .set-saved-mail-btn {
+            cursor: pointer;
+            transition: all 0.5s ease;
+            color: #7c8ca7;
+
+            &:hover {
+              color: #32435f;
+            }
+          }
+        }
+      }
+    }
+
+    &.active {
+      top: 0;
+    }
+  }
+
+  h3 {
+    text-align: center;
+    color: #32435f;
+    // margin: 30px 0 -60px 0;
+  }
+
+  .transactions {
+    width: 90%;
+    margin: auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: $shadow-3;
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      th {
+        color: #32435f;
+        background: #dddddd;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      @media (max-width: 768px) {
+        .old-balance {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .btn {
+    width: 90%;
+    margin: auto;
+    max-width: 500px;
+  }
+}
