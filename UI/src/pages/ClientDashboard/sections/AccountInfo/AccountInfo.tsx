@@ -15,8 +15,8 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      setUser(retrievedUser);
     }
 
     transactionsService
@@ -65,7 +65,13 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
               </div>
               <div className='content'>Transfer</div>
             </div>
-            <div>
+            <div
+              onClick={() =>
+                navigate(
+                  `/dashboard-client/account-info/${props.account?.id}/generate-statement/${props.account?.accountNumber}`
+                )
+              }
+            >
               {<TextSnippetIcon fontSize='large' />}
               <div className='content'>Generate Statement</div>
             </div>

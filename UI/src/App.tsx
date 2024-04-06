@@ -32,6 +32,7 @@ import ResetPin from './pages/ResetPin/ResetPin';
 import ChangePersonalData from './pages/ChangePersonalData/ChangePersonalData';
 import Loans from './pages/ClientDashboard/sections/Loans/Loans';
 import ReferalRewards from './pages/ClientDashboard/sections/ReferalRewars/ReferalRewars';
+import GenerateStatement from './pages/ClientDashboard/sections/GenerateStatement/GenerateStatement';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -136,6 +137,10 @@ function App() {
           <Route
             path='/dashboard-client/:id/mobile-topup'
             element={<MobileTopUp />}
+          />
+          <Route
+            path='/dashboard-client/account-info/:id/generate-statement/:accountNumber'
+            element={<GenerateStatement />}
           />
           <Route
             path='/dashboard-staff'
