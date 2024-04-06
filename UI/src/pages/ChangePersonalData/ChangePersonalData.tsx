@@ -108,26 +108,28 @@ const ChangePersonalData = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const updatedUser = {
-      ...user,
-      email: userDetails.email,
-      firstName: userDetails.firstName,
-      lastName: userDetails.lastName,
-      number: userDetails.number,
-      dob: userDetails.dob,
-    };
+    if (user) {
+      const updatedUser = {
+        ...user,
+        email: userDetails.email,
+        firstName: userDetails.firstName,
+        lastName: userDetails.lastName,
+        number: userDetails.number,
+        dob: userDetails.dob,
+      };
 
-    usersService
-      .updateUser(user?.id, updatedUser as User)
-      .then((response) => console.log(response));
+      usersService
+        .updateUser(user.id, updatedUser as User)
+        .then((response) => console.log(response));
 
-    // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
-    const modifiedObjectForStorage = JSON.stringify(updatedUser);
-    localStorage.setItem('loggedAppUser', modifiedObjectForStorage);
+      // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
+      const modifiedObjectForStorage = JSON.stringify(updatedUser);
+      localStorage.setItem('loggedAppUser', modifiedObjectForStorage);
 
-    console.log(user);
+      console.log(user);
 
-    navigate(`/dashboard-client/${user?.id}/profile`);
+      navigate(`/dashboard-client/${user?.id}/profile`);
+    }
   };
 
   return (
