@@ -246,6 +246,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
         <div className='container'>
           <div className={'profile-menu ' + (profileOpen && 'active')}>
             <div
+              className='profile'
               onClick={() => navigate(`/dashboard-client/${user?.id}/profile`)}
             >
               Profile
