@@ -98,7 +98,7 @@ const BarChartComponent = () => {
         <Legend />
         <Bar dataKey='income' stackId='a' fill='#82ca9d' />
         <Bar dataKey='spent' stackId='a' fill='#ff0000' />
-        <Bar dataKey='difference' fill='#ffc658' />
+        <Bar dataKey='difference' fill='#E3B23C' />
       </BarChart>
     </ResponsiveContainer>
   );
