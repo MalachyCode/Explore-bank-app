@@ -167,13 +167,13 @@
       "balance": 0,
       "createdOn": "2024-04-04T14:50:16.658Z",
       "owner": "710d",
-      "status": "dormant",
+      "status": "active",
       "accountNumber": 7788834566,
       "type": "savings"
     },
     {
       "id": "0b41",
-      "balance": 10000,
+      "balance": 100000,
       "createdOn": "2024-04-04T14:50:31.269Z",
       "owner": "710d",
       "status": "active",
@@ -406,6 +406,28 @@
       "oldBalance": 11000,
       "newBalance": 10000,
       "description": "Top up 1000 for user 09034977736 To SportyBet account. For service Wallet Top up: Sporty wallet top up"
+    },
+    {
+      "id": "6536",
+      "accountNumber": 6989716720,
+      "createdOn": "2024-04-09T19:11:58.003Z",
+      "type": "credit",
+      "cashier": "64a6",
+      "amount": 100000,
+      "oldBalance": 10000,
+      "newBalance": 110000,
+      "description": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Counter deposit "
+    },
+    {
+      "id": "04da",
+      "accountNumber": 6989716720,
+      "createdOn": "2024-04-09T19:13:10.647Z",
+      "type": "debit",
+      "cashier": "64a6",
+      "amount": 10000,
+      "oldBalance": 110000,
+      "newBalance": 100000,
+      "description": "Over counter debit transaction at Explore Bank branch by cashier: Martins Fowler; Counter withdrawal"
     }
   ],
   "notifications": [
@@ -463,15 +485,29 @@
       "owner": "64a6",
       "newNotifications": [
         {
+          "message": "You Activated an account, 7788834566, owned by Adam Warlock"
+        },
+        {
+          "message": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Counter deposit ",
+          "accountNumber": 6989716720,
+          "transactionId": "6536"
+        },
+        {
+          "message": "Over counter debit transaction at Explore Bank branch by cashier: Martins Fowler; Counter withdrawal",
+          "accountNumber": 6989716720,
+          "transactionId": "04da"
+        }
+      ],
+      "oldNotifications": [
+        {
+          "message": "You Deactivated an account, 7788834566, owned by Adam Warlock"
+        },
+        {
           "message": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Credit Transaction",
           "accountNumber": 6989716720,
           "transactionId": "8a89"
-        },
-        {
-          "message": "You Deactivated an account, 7788834566, owned by Adam Warlock"
         }
-      ],
-      "oldNotifications": []
+      ]
     },
     {
       "id": "bcmn",
@@ -507,7 +543,11 @@
     {
       "id": "97cd",
       "owner": "710d",
-      "newNotifications": [],
+      "newNotifications": [
+        {
+          "message": "You reset your password"
+        }
+      ],
       "oldNotifications": [
         {
           "message": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Credit Transaction",
@@ -538,6 +578,27 @@
         },
         {
           "message": "New transfer pin set"
+        },
+        {
+          "message": "You reset your transfer pin"
+        },
+        {
+          "message": "Over counter debit transaction at Explore Bank branch by cashier: Martins Fowler; Counter withdrawal",
+          "accountId": "0b41",
+          "accountNumber": 6989716720,
+          "transactionId": "04da"
+        },
+        {
+          "message": "Your account 7788834566 was Activated by cashier Martins Fowler"
+        },
+        {
+          "message": "Over counter credit transaction at Explore Bank branch by cashier: Martins Fowler; Counter deposit ",
+          "accountId": "0b41",
+          "accountNumber": 6989716720,
+          "transactionId": "6536"
+        },
+        {
+          "message": "You reset your transfer pin"
         },
         {
           "message": "You reset your transfer pin"
