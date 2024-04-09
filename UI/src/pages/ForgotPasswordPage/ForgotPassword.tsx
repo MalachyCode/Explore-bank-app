@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import './ForgotPasswordPage.scss';
 import FormInput from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { ForgotPasswordType, User } from '../../types';
+import { ForgotPasswordType, Notification, User } from '../../types';
 import usersService from '../../services/users';
+import notificationsService from '../../services/notifications';
 
 const ForgotPasswordPage = () => {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -14,14 +15,20 @@ const ForgotPasswordPage = () => {
     password: '',
     confirmPassword: '',
   });
+  const [notifications, setNotifications] = useState<Array<Notification>>([]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      setUser(retrievedUser);
     }
     usersService.getAll().then((users) => setUsers(users));
+    notificationsService
+      .getAll()
+      .then((retrievedNotifications) =>
+        setNotifications(retrievedNotifications)
+      );
   }, []);
 
   const formInputs = [
@@ -57,6 +64,10 @@ const ForgotPasswordPage = () => {
     },
   ];
 
+  const userAccountNotificationBox = notifications.find(
+    (notification) => notification.owner === user?.id
+  );
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -72,7 +83,25 @@ const ForgotPasswordPage = () => {
     if (userForPasswordReset) {
       usersService
         .updateUser(userForPasswordReset?.id, userPasswordReset as User)
-        .then((response) => console.log(response));
+        .then((response) => {
+          console.log(response);
+          if (userAccountNotificationBox) {
+            const pinResetNotification: Notification = {
+              ...userAccountNotificationBox,
+              newNotifications:
+                userAccountNotificationBox?.newNotifications.concat({
+                  message: `You reset your password`,
+                }),
+            };
+
+            notificationsService
+              .updateNotification(
+                userAccountNotificationBox?.id,
+                pinResetNotification
+              )
+              .then((response) => console.log(response));
+          }
+        });
 
       // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
       const modifiedObjectForStorage = JSON.stringify(userPasswordReset);
