@@ -12,22 +12,12 @@ const create = async (newAccount: NewAccount) => {
   return response.data;
 };
 
-const debit = async (
+const updateAccount = async (
   id: string,
   // idDebit: number,
-  updatedDebitedAccount: Account
+  updatedAccount: Account
 ) => {
-  const response = await axios.put(`${baseUrl}/${id}`, updatedDebitedAccount);
-
-  return response.data;
-};
-
-const credit = async (
-  id: string,
-  // idCredit: number,
-  updatedCreditedAccount: Account
-) => {
-  const response = await axios.put(`${baseUrl}/${id}`, updatedCreditedAccount);
+  const response = await axios.put(`${baseUrl}/${id}`, updatedAccount);
 
   return response.data;
 };
@@ -38,20 +28,9 @@ const deleteAccount = async (id: string | undefined) => {
   return response.data;
 };
 
-const deactivateActivate = async (
-  id: string | undefined,
-  updatedAccount: Account | undefined
-) => {
-  const response = await axios.put(`${baseUrl}/${id}`, updatedAccount);
-
-  return response.data;
-};
-
 export default {
-  deactivateActivate,
-  deleteAccount,
-  debit,
-  credit,
   create,
+  deleteAccount,
   getAll,
+  updateAccount,
 };
