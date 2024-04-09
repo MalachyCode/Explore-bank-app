@@ -78,7 +78,7 @@ const ResetPin = () => {
         transferPin: details.newPin,
       };
 
-      usersService.resetPin(user?.id, userPinReset).then((response) => {
+      usersService.updateUser(user?.id, userPinReset).then((response) => {
         console.log(response);
         if (userAccountNotificationBox) {
           const pinResetNotification: Notification = {
