@@ -135,6 +135,7 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
           <div className='body'>
             <div className={'account-menu ' + (profileMenuOpen && 'active')}>
               <div
+                className='profile'
                 onClick={() => navigate(`/dashboard-staff/${user?.id}/profile`)}
               >
                 Profile

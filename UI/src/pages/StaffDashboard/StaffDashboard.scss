@@ -131,8 +131,7 @@ div {
       top: 70px;
 
       .account-menu {
-        width: 120px;
-        height: 100px;
+        width: 100px;
         background: white;
         color: #32435f;
         position: fixed;
@@ -145,30 +144,48 @@ div {
         align-items: center;
         z-index: 2;
         transition: all 2s ease;
-        padding: 10px 0;
+        margin-top: 3px;
+
         &.active {
-          right: 0;
+          right: 15px;
         }
         span {
-          width: 80%;
+          width: 100%;
           height: 1px;
           background: #32435f;
         }
         div {
-          width: 90%;
+          width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-        }
-        .logout {
-          height: 30px;
-          border-radius: 5px;
-          padding: 2.5px;
-          text-align: center;
-          background: #5f4945;
-          color: #e1dcd9;
-          cursor: pointer;
+
+          &.profile {
+            height: 30px;
+            border-radius: 5px;
+            padding: 2.5px;
+            text-align: center;
+            transition: all 0.5s ease;
+
+            &:hover {
+              background: #7c8ca7;
+              color: #e1dcd9;
+            }
+          }
+
+          &.logout {
+            height: 30px;
+            border-radius: 5px;
+            padding: 2.5px;
+            text-align: center;
+            transition: all 0.5s ease;
+
+            &:hover {
+              background: #860202;
+              color: #e1dcd9;
+            }
+          }
         }
       }
 
