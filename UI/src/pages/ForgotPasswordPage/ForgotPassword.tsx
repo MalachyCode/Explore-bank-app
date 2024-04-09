@@ -69,9 +69,9 @@ const ForgotPasswordPage = () => {
       password: credentials.password,
     };
 
-    if (userPasswordReset) {
+    if (userForPasswordReset) {
       usersService
-        .resetPassword(userForPasswordReset?.id, userPasswordReset as User)
+        .updateUser(userForPasswordReset?.id, userPasswordReset as User)
         .then((response) => console.log(response));
 
       // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage

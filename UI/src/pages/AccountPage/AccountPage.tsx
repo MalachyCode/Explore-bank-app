@@ -152,10 +152,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           };
 
           accountsService
-            .debit(
-              accountToUpdateForDebit?.id as string,
-              debitedAccount as Account
-            )
+            .updateAccount(accountToUpdateForDebit?.id, debitedAccount)
             .then((response) => console.log(response));
 
           transactionsService
@@ -259,10 +256,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
         };
 
         accountsService
-          .credit(
-            accountToUpdateForCredit?.id as string,
-            creditedAccount as Account
-          )
+          .updateAccount(accountToUpdateForCredit?.id, creditedAccount)
           .then((response) => console.log(response));
 
         transactionsService
@@ -344,70 +338,74 @@ const AccountPage = (props: { user: User | null | undefined }) => {
       const userAccount = accounts.find(
         (account) => account.accountNumber === Number(accountNumber)
       );
-      const deactivatedActivatedAccount = {
-        ...userAccount,
-        status: userAccount?.status === 'active' ? 'dormant' : 'active',
-      };
-      accountsService
-        .deactivateActivate(
-          userAccount?.id,
-          deactivatedActivatedAccount as Account
-        )
-        .then((updatedAccount) => {
-          // create notification for staff after activating or deactivating client account
-          if (loggedInStaffNotificationBox) {
-            const accountOwner = users.find(
-              (user) => user.id === updatedAccount.owner
-            );
-            const newStaffActivateDeactivateNotification: Notification = {
-              ...loggedInStaffNotificationBox,
-              newNotifications:
-                loggedInStaffNotificationBox?.newNotifications.concat({
-                  message: `You ${
+
+      if (userAccount) {
+        const deactivatedActivatedAccount = {
+          ...userAccount,
+          status: userAccount?.status === 'active' ? 'dormant' : 'active',
+        };
+        accountsService
+          .updateAccount(userAccount.id, deactivatedActivatedAccount)
+          .then((updatedAccount) => {
+            // create notification for staff after activating or deactivating client account
+            if (loggedInStaffNotificationBox) {
+              const accountOwner = users.find(
+                (user) => user.id === updatedAccount.owner
+              );
+              const newStaffActivateDeactivateNotification: Notification = {
+                ...loggedInStaffNotificationBox,
+                newNotifications:
+                  loggedInStaffNotificationBox?.newNotifications.concat({
+                    message: `You ${
+                      updatedAccount.status === 'active'
+                        ? 'Activated'
+                        : 'Deactivated'
+                    } an account, ${updatedAccount.accountNumber}, owned by ${
+                      accountOwner?.firstName
+                    } ${accountOwner?.lastName}`,
+                  }),
+              };
+
+              notificationsService
+                .updateNotification(
+                  loggedInStaffNotificationBox?.id,
+                  newStaffActivateDeactivateNotification
+                )
+                .then((response) => console.log(response));
+            }
+
+            // create notification for client after their account is activated or deactivated
+
+            if (userNotificationBox) {
+              const newUserActivateDeactivateNotification: Notification = {
+                ...userNotificationBox,
+                newNotifications: userNotificationBox.newNotifications.concat({
+                  message: `Your account ${updatedAccount.accountNumber} was ${
                     updatedAccount.status === 'active'
                       ? 'Activated'
                       : 'Deactivated'
-                  } an account, ${updatedAccount.accountNumber}, owned by ${
-                    accountOwner?.firstName
-                  } ${accountOwner?.lastName}`,
+                  } by cashier ${loggedInUser?.firstName} ${
+                    loggedInUser?.lastName
+                  }`,
                 }),
-            };
+              };
 
-            notificationsService
-              .updateNotification(
-                loggedInStaffNotificationBox?.id,
-                newStaffActivateDeactivateNotification
-              )
-              .then((response) => console.log(response));
-          }
-
-          // create notification for client after their account is activated or deactivated
-
-          if (userNotificationBox) {
-            const newUserActivateDeactivateNotification: Notification = {
-              ...userNotificationBox,
-              newNotifications: userNotificationBox.newNotifications.concat({
-                message: `Your account ${updatedAccount.accountNumber} was ${
-                  updatedAccount.status === 'active'
-                    ? 'Activated'
-                    : 'Deactivated'
-                } by cashier ${loggedInUser?.firstName} ${
-                  loggedInUser?.lastName
-                }`,
-              }),
-            };
-
-            notificationsService
-              .updateNotification(
-                userNotificationBox.id,
-                newUserActivateDeactivateNotification
-              )
-              .then((response) => console.log(response));
-          }
+              notificationsService
+                .updateNotification(
+                  userNotificationBox.id,
+                  newUserActivateDeactivateNotification
+                )
+                .then((response) => console.log(response));
+            }
+          });
+        setAccountNumber('');
+        navigate('/dashboard-staff/search/users');
+      } else {
+        toast.error('Account not found', {
+          position: 'top-center',
         });
+      }
     }
-    setAccountNumber('');
-    navigate('/dashboard-staff/search/users');
   };
 
   const formInputs = [
