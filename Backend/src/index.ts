@@ -18,14 +18,8 @@ app.get('/api/users', (_req, res) => {
   });
 });
 
-app.post('/api/users', (req, res) => {
+app.post('/api/users', (req, res, next) => {
   const body = req.body;
-
-  if (!body.firstName || !body.email) {
-    return res.status(400).json({
-      error: 'Some fields missing',
-    });
-  }
 
   const user = new User({
     email: body.email,
@@ -40,9 +34,12 @@ app.post('/api/users', (req, res) => {
     transferPin: body.transferPin || '',
   });
 
-  user.save().then((savedUser) => {
-    res.json(savedUser);
-  });
+  user
+    .save()
+    .then((savedUser) => {
+      res.json(savedUser);
+    })
+    .catch((error) => next(error));
 });
 
 app.get('/api/users/:id', (req, res, next) => {
@@ -74,7 +71,11 @@ app.put('/api/users/:id', (req, res, next) => {
     transferPin: body.transferPin,
   };
 
-  User.findByIdAndUpdate(req.params.id, user, { new: true })
+  User.findByIdAndUpdate(req.params.id, user, {
+    new: true,
+    runValidators: true,
+    context: 'query',
+  })
     .then((updatedUser) => {
       res.json(updatedUser);
     })
@@ -93,6 +94,8 @@ const errorHandler: ErrorRequestHandler = (error, _request, response, next) => {
   console.error(error.message);
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' });
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message });
   }
 
   next(error);
