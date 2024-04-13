@@ -19,14 +19,34 @@ if (url) {
 }
 
 const userSchema = new mongoose.Schema({
-  email: String,
-  firstName: String,
-  lastName: String,
+  email: {
+    type: String,
+    minLength: 5,
+    required: true,
+  },
+  firstName: {
+    type: String,
+    minLength: 5,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    minLength: 5,
+    required: true,
+  },
   middleName: String,
-  password: String,
+  password: {
+    type: String,
+    minLength: 3,
+    required: true,
+  },
   type: String,
   isAdmin: Boolean,
-  number: String,
+  number: {
+    type: String,
+    minLength: 11,
+    required: true,
+  },
   dob: String,
   transferPin: String,
 });
