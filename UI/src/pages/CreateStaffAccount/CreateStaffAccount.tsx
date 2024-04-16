@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CreateStaffAccount.scss';
 import FormInput from '../../components/FormInput';
-import { CreateStaff, NewUser } from '../../types';
+import { CreateStaff, NewNotification, NewUser } from '../../types';
 import userService from '../../services/users';
+import notificationsService from '../../services/notifications';
 
 const CreateStaffAccount = () => {
   const navigate = useNavigate();
@@ -102,9 +103,22 @@ const CreateStaffAccount = () => {
       number: values.phoneNumber,
     };
 
-    userService
-      .create(newStaff)
-      .then((staffCreated) => console.log(staffCreated));
+    userService.create(newStaff).then((staffCreated) => {
+      const newNotificationBox: NewNotification = {
+        owner: staffCreated.id,
+        newNotifications: [
+          {
+            message: `Dear ${staffCreated.firstName} ${staffCreated.lastName}, Welcome to Explore Bank!`,
+          },
+        ],
+        oldNotifications: [],
+      };
+
+      notificationsService
+        .create(newNotificationBox)
+        .then((createdNotification) => console.log(createdNotification));
+      console.log(staffCreated);
+    });
 
     navigate('/dashboard-staff');
 
