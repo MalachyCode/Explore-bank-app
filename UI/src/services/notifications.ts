@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { NewNotification, Notification } from '../types';
-const baseUrl = 'http://localhost:3001/notifications';
+const baseUrl = 'http://localhost:3001/api/notifications';
+// const baseUrl = 'http://localhost:3001/notifications';
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);
