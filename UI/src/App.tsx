@@ -33,6 +33,7 @@ import ChangePersonalData from './pages/ChangePersonalData/ChangePersonalData';
 import Loans from './pages/ClientDashboard/sections/Loans/Loans';
 import ReferalRewards from './pages/ClientDashboard/sections/ReferalRewars/ReferalRewars';
 import GenerateStatement from './pages/ClientDashboard/sections/GenerateStatement/GenerateStatement';
+import WelcomePage from './pages/WelcomePage/WelcomePage';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -99,6 +100,7 @@ function App() {
             path='/dashboard-staff/create-staff'
             element={<CreateStaffAccount />}
           />
+          <Route path='/welcome/:id' element={<WelcomePage />} />
           <Route
             path='/dashboard-staff/search/users/:id'
             element={<AccountPage user={user} />}

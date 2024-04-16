@@ -120,7 +120,11 @@ const SignupPage = () => {
     userService.create(newClient).then((clientCreated) => {
       const newNotificationBox: NewNotification = {
         owner: clientCreated.id,
-        newNotifications: [],
+        newNotifications: [
+          {
+            message: `Dear ${clientCreated.firstName} ${clientCreated.lastName}, Welcome to Explore Bank!`,
+          },
+        ],
         oldNotifications: [],
       };
 
