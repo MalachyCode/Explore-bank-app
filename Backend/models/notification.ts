@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const notificationSchema = new mongoose.Schema({
   owner: String,
@@ -22,15 +22,15 @@ const notificationSchema = new mongoose.Schema({
       transactionId: String,
     },
   ],
-});
+})
 
 notificationSchema.set('toJSON', {
   transform: (_document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
   },
-});
+})
 
 // module.exports = mongoose.model('User', userSchema);
-export default mongoose.model('Notification', notificationSchema);
+export default mongoose.model('Notification', notificationSchema)
