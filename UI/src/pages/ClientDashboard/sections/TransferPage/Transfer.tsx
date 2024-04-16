@@ -150,11 +150,11 @@ const Transfer = () => {
               };
 
               accountService
-                .debit(sendingAccount?.id, updatedSendingAccount)
+                .updateAccount(sendingAccount?.id, updatedSendingAccount)
                 .then((response) => console.log(response));
 
               accountService
-                .credit(receivingAccount?.id, updatedRecievingAccount)
+                .updateAccount(receivingAccount?.id, updatedRecievingAccount)
                 .then((response) => console.log(response));
 
               const newCreditTransaction: NewTransaction = {
