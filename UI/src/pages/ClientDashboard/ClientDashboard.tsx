@@ -135,6 +135,8 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
       : oldNotification.message.includes('a new account')
       ? navigate(`/dashboard-client/account-info/${oldNotification?.accountId}`)
+      : oldNotification.message.includes('Welcome to Explore Bank')
+      ? navigate(`/welcome/${user?.id}`)
       : console.log('happiness');
   };
 
@@ -158,6 +160,8 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
       : newNotification.message.includes('a new account')
       ? navigate(`/dashboard-client/account-info/${newNotification?.accountId}`)
+      : newNotification.message.includes('Welcome to Explore Bank')
+      ? navigate(`/welcome/${user?.id}`)
       : console.log('happiness');
   };
 
