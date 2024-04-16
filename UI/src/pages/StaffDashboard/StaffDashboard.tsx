@@ -58,6 +58,8 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
         )
       : oldNotification.message.includes('personal data')
       ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
+      : oldNotification.message.includes('Welcome to Explore Bank')
+      ? navigate(`/welcome/${user?.id}`)
       : console.log('happiness');
   };
 
@@ -79,6 +81,8 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
         )
       : newNotification.message.includes('personal data')
       ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
+      : newNotification.message.includes('Welcome to Explore Bank')
+      ? navigate(`/welcome/${user?.id}`)
       : console.log('happiness');
   };
 
