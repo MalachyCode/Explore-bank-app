@@ -1,5 +1,4 @@
 import './Menu.scss';
-import { useNavigate } from 'react-router-dom';
 
 const ListItem = (props: {
   open: (arg0: boolean) => void | boolean;
@@ -17,8 +16,6 @@ const Menu = (props: {
   menuOpen: boolean;
   setMenuOpen: (arg0: boolean) => void | boolean;
 }) => {
-  const navigate = useNavigate();
-
   return (
     <div className={'menu ' + (props.menuOpen && 'active')}>
       <ul>
@@ -39,36 +36,6 @@ const Menu = (props: {
         </li> */}
         <ListItem message='Contact' open={props.setMenuOpen} href='#contact' />
       </ul>
-      <div className='buttons'>
-        <a
-          // href='/login'
-          className='button type--B'
-          onClick={() => {
-            navigate('/login');
-            props.setMenuOpen(false);
-          }}
-        >
-          <div className='button__line'></div>
-          <div className='button__line'></div>
-          <span className='button__text'>Login</span>
-          <div className='button__drow1'></div>
-          {/* <div className='button__drow2'></div> */}
-        </a>
-        <a
-          // href='/signup'
-          className='button type--A'
-          onClick={() => {
-            navigate('/signup');
-            props.setMenuOpen(false);
-          }}
-        >
-          <div className='button__line'></div>
-          <div className='button__line'></div>
-          <span className='button__text'>Signup</span>
-          <div className='button__drow1'></div>
-          {/* <div className='button__drow2'></div> */}
-        </a>
-      </div>
     </div>
   );
 };
