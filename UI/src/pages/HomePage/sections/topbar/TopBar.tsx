@@ -8,7 +8,11 @@ const TopBar = (props: {
     <div className={'topbar ' + (props.menuOpen && 'active')}>
       <div className='wrapper'>
         <div className='left'>
-          <a href='#intro' className='explore-logo'>
+          <a
+            onClick={() => props.setMenuOpen(false)}
+            href='#intro'
+            className='explore-logo'
+          >
             Explore.
           </a>
         </div>
