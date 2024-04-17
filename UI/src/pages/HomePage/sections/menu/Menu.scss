@@ -9,7 +9,7 @@
   background-color: #32435f;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   justify-content: center;
   transition: all 1s ease;
 
@@ -19,13 +19,14 @@
 
   ul {
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 30px;
     list-style: none;
     font-size: 30px;
     font-weight: 300;
     color: white;
     overflow-y: hidden;
     scrollbar-width: none;
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -33,6 +34,7 @@
     li {
       margin-bottom: 25px;
       transition: all 1s ease;
+
       a {
         font-size: inherit;
         color: inherit;
