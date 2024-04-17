@@ -5,7 +5,8 @@
   height: 0;
   position: relative;
   top: 70px;
-  background-color: $mainColor;
+  // background-color: $mainColor;
+  background-color: #32435f;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,7 +40,7 @@
       }
       &:hover {
         font-weight: 500;
-        color: aquamarine;
+        color: #7c8ca7;
       }
     }
   }
