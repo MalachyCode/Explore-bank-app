@@ -338,7 +338,6 @@
         }
 
         &.active {
-          // transform: ;
           top: 75px;
         }
       }
@@ -386,10 +385,6 @@
           &:hover {
             background: #32435f;
           }
-          // @media (max-width: 768px) {
-          //   width: 90%;
-          //   height: 150px;
-          // }
           @media (max-width: 768px) {
             width: 90vw;
             height: 150px;

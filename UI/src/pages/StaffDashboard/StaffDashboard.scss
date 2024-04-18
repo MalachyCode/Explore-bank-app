@@ -25,7 +25,6 @@ div {
     background: #e1dcd9;
     width: 100vw;
     height: 100vh;
-    // padding-bottom: 25px;
     -ms-overflow-style: none;
     scrollbar-width: none;
     &:-webkit-scrollbar {
@@ -44,7 +43,6 @@ div {
       background: #fff;
       z-index: 5;
       position: fixed;
-      // margin: 0 40px 10px 10px;
 
       h3 {
         color: #5f4945;
@@ -64,7 +62,6 @@ div {
           cursor: pointer;
         }
         .notification-icon-container {
-          // background: pink;
           padding-top: 3px;
           .notification-icon-background {
             display: flex;
@@ -298,7 +295,6 @@ div {
           display: flex;
           margin: auto;
           height: 200px;
-          // background: #8f8681;
           border: 2px solid #8f8681;
           display: flex;
           align-items: center;
@@ -319,7 +315,6 @@ div {
 
           &:hover {
             transform: scale(1.05);
-            // background: #32435f;
             background: url('../../assets/pexels-daniel-enamorado-6826285.jpg');
             background-color: #506b96;
             background-blend-mode: multiply;
