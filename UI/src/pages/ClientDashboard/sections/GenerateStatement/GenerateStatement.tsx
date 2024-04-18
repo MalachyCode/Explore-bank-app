@@ -82,7 +82,6 @@ const GenerateStatement = () => {
         <table>
           <thead>
             <tr>
-              {/* <th>Date</th> */}
               <th>Description</th>
               <th>Amount</th>
               <th className='old-balance'>Old Balance</th>
@@ -92,9 +91,6 @@ const GenerateStatement = () => {
           <tbody>
             {userTransactions.map((transaction) => (
               <tr key={transaction.id}>
-                {/* <td>
-                    {transaction.createdOn}
-                </td> */}
                 <td>{transaction.description}</td>
                 <td>{transaction.amount}</td>
                 <td className='old-balance'>{transaction.oldBalance}</td>

@@ -91,11 +91,9 @@ const OpenAccount = () => {
 
     if (accountOwner) {
       const newAccount: NewAccount = {
-        // id: accounts.length + 1,
         balance: 0,
         createdOn: new Date(),
         owner: accountOwner.id,
-        // owner: accountOwner?.id as number,
         status: 'active',
         accountNumber: Math.floor(Math.random() * 10000000000 + 1),
         type: accountType === 'current' ? 'current' : 'savings',
