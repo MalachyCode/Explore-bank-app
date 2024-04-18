@@ -126,7 +126,6 @@
         }
 
         .notification-icon-container {
-          // background: pink;
           padding-top: 3px;
           .notification-icon-background {
             display: flex;
@@ -176,6 +175,33 @@
           }
           &.active {
             padding-top: 23px;
+          }
+        }
+        .account-icon-container {
+          height: 40px;
+          width: 40px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          border-radius: 50%;
+          transition: all 0.5s ease;
+          overflow: hidden;
+          margin-left: -8px;
+
+          .account-icon {
+            position: relative;
+            z-index: 1;
+            transition: all 0.5s ease;
+
+            &:hover {
+              color: #e1dcd9;
+            }
+          }
+
+          &:hover {
+            background: #7c8ca7;
           }
         }
       }
@@ -374,9 +400,7 @@
       .menu-icons-container {
         width: 90%;
         height: 500px;
-        // background: #5f4945;
         background: #e1dcd9;
-        // border: 1px solid #5f4945;
         margin: auto;
         border-radius: 10px;
         margin-top: 25px;
@@ -388,7 +412,6 @@
           width: 25%;
           margin: 10px;
           height: 25%;
-          // background: white;
           cursor: pointer;
           display: flex;
           flex-direction: column;
@@ -408,7 +431,6 @@
           }
           .loan-icon {
             transform: scale(1.5);
-            // background: red;
           }
           .loan-tag {
             margin-top: 15px;
@@ -421,13 +443,8 @@
       }
       .chart-container {
         width: 90%;
-        height: 500px;
-        // background: #a67f78;
-        // background: #7c8ca7;
+        height: 450px;
         background: #edebd7;
-
-        // background: #e1dcd9;
-        // border: 1px solid #5f4945;
         margin: auto;
         border-radius: 10px;
         margin-top: 25px;
@@ -435,6 +452,10 @@
         align-items: center;
         justify-content: space-around;
         flex-wrap: wrap;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
     }
   }
