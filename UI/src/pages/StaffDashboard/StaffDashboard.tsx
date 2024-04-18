@@ -129,11 +129,13 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
                   {notificationCount}
                 </div>
               </div>
-              <AccountCircleIcon
-                fontSize='large'
-                className='account-icon'
-                onClick={handleProfileClick}
-              />
+              <div className='account-icon-container'>
+                <AccountCircleIcon
+                  fontSize='large'
+                  className='account-icon'
+                  onClick={handleProfileClick}
+                />
+              </div>
             </div>
           </div>
           <div className='body'>
