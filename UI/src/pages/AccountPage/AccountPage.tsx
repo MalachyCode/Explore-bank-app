@@ -10,7 +10,7 @@ import notificationsService from '../../services/notifications';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-interface TransactionType {
+interface TypeForTransaction {
   amount: string;
   description: string;
 }
@@ -41,12 +41,11 @@ const AccountPage = (props: { user: User | null | undefined }) => {
   const [loggedInUser, setLoggedInUser] = useState<User | null>();
   const [users, setUsers] = useState<Array<User>>([]);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
-  const [transactionDetails, setTransactionDetails] = useState<TransactionType>(
-    {
+  const [transactionDetails, setTransactionDetails] =
+    useState<TypeForTransaction>({
       amount: '',
       description: '',
-    }
-  );
+    });
   const [openTransactionBox, setOpenTransactionBox] = useState(false);
   const [transactionType, setTransactionType] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
@@ -88,30 +87,41 @@ const AccountPage = (props: { user: User | null | undefined }) => {
     if (
       window.confirm(`Delete ${props.user?.firstName} ${props.user?.lastName}`)
     ) {
-      userAccounts.forEach((account) =>
-        accountsService
-          .deleteAccount(account?.id)
-          .then((response) => console.log(response))
-      );
+      if (userAccounts) {
+        userAccounts.forEach((account) =>
+          accountsService
+            .deleteAccount(account.id)
+            .then((response) => console.log(response))
+        );
+      }
 
-      usersService.deleteUser(id as string).then((response) => {
-        if (loggedInStaffNotificationBox) {
-          const newDeleteNotification: Notification = {
-            ...loggedInStaffNotificationBox,
-            newNotifications:
-              loggedInStaffNotificationBox?.newNotifications.concat({
-                message: `You deleted an account owned by ${response.firstName} ${response.lastName}`,
-              }),
-          };
+      if (userNotificationBox) {
+        notificationsService
+          .deleteNotification(userNotificationBox.id)
+          .then((response) => console.log(response));
+      }
 
-          notificationsService
-            .updateNotification(
-              loggedInStaffNotificationBox?.id,
-              newDeleteNotification
-            )
-            .then((response) => console.log(response));
-        }
-      });
+      if (id) {
+        usersService.deleteUser(id).then((response) => {
+          if (loggedInStaffNotificationBox) {
+            const newDeleteNotification: Notification = {
+              ...loggedInStaffNotificationBox,
+              newNotifications:
+                loggedInStaffNotificationBox?.newNotifications.concat({
+                  message: `You deleted an account owned by ${props.user?.firstName} ${props.user?.lastName}`,
+                }),
+            };
+            console.log(response);
+
+            notificationsService
+              .updateNotification(
+                loggedInStaffNotificationBox?.id,
+                newDeleteNotification
+              )
+              .then((response) => console.log(response));
+          }
+        });
+      }
     }
     navigate('/dashboard-staff/search/users');
   };
