@@ -19,7 +19,7 @@ const updateAccount = async (id: string, updatedAccount: Account) => {
   return response.data;
 };
 
-const deleteAccount = async (id: string | undefined) => {
+const deleteAccount = async (id: string) => {
   const response = await axios.delete(`${baseUrl}/${id}`);
 
   return response.data;

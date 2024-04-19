@@ -21,8 +21,16 @@ const updateNotification = async (
 
   return response.data;
 };
+
+const deleteNotification = async (id: string) => {
+  const response = await axios.delete(`${baseUrl}/${id}`);
+
+  return response.data;
+};
+
 export default {
-  getAll,
   create,
+  deleteNotification,
+  getAll,
   updateNotification,
 };
