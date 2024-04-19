@@ -18,4 +18,15 @@ const newDebitTransaction = async (transaction: NewTransaction) => {
   return response.data;
 };
 
-export default { getAll, newCreditTransaction, newDebitTransaction };
+const deleteTransaction = async (id: string) => {
+  const response = await axios.delete(`${baseUrl}/${id}`);
+
+  return response.data;
+};
+
+export default {
+  deleteTransaction,
+  getAll,
+  newCreditTransaction,
+  newDebitTransaction,
+};
