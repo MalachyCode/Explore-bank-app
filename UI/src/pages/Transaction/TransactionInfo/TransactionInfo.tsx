@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Account, TransactionType } from '../../../types';
+import { Account, Notification, TransactionType, User } from '../../../types';
 import './TransactionInfo.scss';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import PaymentsIcon from '@mui/icons-material/Payments';
@@ -7,6 +7,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useMatch, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import accountsService from '../../../services/accounts';
+import usersService from '../../../services/users';
+import notificationsService from '../../../services/notifications';
 
 const TransactionInfo = (props: {
   transaction: TransactionType | null | undefined;
@@ -15,6 +17,8 @@ const TransactionInfo = (props: {
   const [reportBoxOpen, setReportBoxOpen] = useState(false);
   const [complaint, setComplaint] = useState('');
   const [accounts, setAccounts] = useState<Array<Account>>();
+  const [users, setUsers] = useState<Array<User>>();
+  const [notifications, setNotifications] = useState<Array<Notification>>();
 
   const matchAccount = useMatch(
     '/dashboard-client/account-info/:id/transactions/:accountNumber/:transactionId'
@@ -23,17 +27,46 @@ const TransactionInfo = (props: {
     ? accounts?.find((account) => account.id === matchAccount.params.id)
     : null;
 
+  useEffect(() => {
+    accountsService.getAll().then((accounts) => setAccounts(accounts));
+    usersService.getAll().then((users) => setUsers(users));
+    notificationsService
+      .getAll()
+      .then((notifications) => setNotifications(notifications));
+  }, []);
+
+  const admin = users?.find(
+    (user) =>
+      user.firstName === 'Malachy' && user.lastName === 'Nwafor' && user.isAdmin
+  );
+
+  const adminNotificationBox = notifications?.find(
+    (notification) => notification.owner === admin?.id
+  );
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (adminNotificationBox) {
+      const newDeleteNotification: Notification = {
+        ...adminNotificationBox,
+        newNotifications: adminNotificationBox?.newNotifications.concat({
+          message: complaint,
+          transactionId: props.transaction?.id,
+          accountId: accountToUse?.id,
+          accountNumber: accountToUse?.accountNumber,
+        }),
+      };
+
+      notificationsService
+        .updateNotification(adminNotificationBox?.id, newDeleteNotification)
+        .then((response) => console.log(response));
+    }
     console.log(complaint);
+    setReportBoxOpen(false);
     setComplaint('');
   };
 
   console.log(accountToUse);
-
-  useEffect(() => {
-    accountsService.getAll().then((accounts) => setAccounts(accounts));
-  }, []);
 
   return (
     <div className='transaction-info'>
