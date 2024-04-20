@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { ForgotPasswordType, Notification, User } from '../../types';
 import usersService from '../../services/users';
 import notificationsService from '../../services/notifications';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ForgotPasswordPage = () => {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -75,12 +77,12 @@ const ForgotPasswordPage = () => {
       (user) => user.email === credentials.email
     );
 
-    const userPasswordReset = {
-      ...userForPasswordReset,
-      password: credentials.password,
-    };
-
     if (userForPasswordReset) {
+      const userPasswordReset = {
+        ...userForPasswordReset,
+        password: credentials.password,
+      };
+
       usersService
         .updateUser(userForPasswordReset?.id, userPasswordReset as User)
         .then((response) => {
@@ -106,15 +108,19 @@ const ForgotPasswordPage = () => {
       // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
       const modifiedObjectForStorage = JSON.stringify(userPasswordReset);
       localStorage.setItem('loggedAppUser', modifiedObjectForStorage);
-    }
 
-    setCredentials({
-      ...credentials,
-      email: '',
-      password: '',
-      confirmPassword: '',
-    });
-    user ? navigate('/dashboard-client') : navigate('/login');
+      setCredentials({
+        ...credentials,
+        email: '',
+        password: '',
+        confirmPassword: '',
+      });
+      user ? navigate('/dashboard-client') : navigate('/login');
+    } else {
+      toast.error('User not found. Please check your email', {
+        position: 'top-center',
+      });
+    }
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -138,6 +144,7 @@ const ForgotPasswordPage = () => {
           Reset
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
