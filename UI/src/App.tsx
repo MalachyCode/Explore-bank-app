@@ -66,6 +66,10 @@ function App() {
     '/dashboard-client/account-info/:id/transactions/:accountNumber/:transactionId'
   );
 
+  const matchTransactionStaff = useMatch(
+    '/dashboard-staff/account-info/:id/transactions/:accountNumber/:transactionId'
+  );
+
   const userTransactions = transactions.filter(
     (transaction) =>
       transaction.accountNumber ===
@@ -76,6 +80,13 @@ function App() {
     ? transactions.find(
         (transaction) =>
           transaction.id === matchTransaction?.params.transactionId
+      )
+    : null;
+
+  const singleTransactionStaff = matchTransactionStaff
+    ? transactions.find(
+        (transaction) =>
+          transaction.id === matchTransactionStaff?.params.transactionId
       )
     : null;
 
@@ -164,6 +175,10 @@ function App() {
           <Route
             path='/dashboard-client/account-info/:id/transactions/:accountNumber/:id'
             element={<TransactionInfo transaction={singleTransaction} />}
+          />
+          <Route
+            path='/dashboard-staff/account-info/:id/transactions/:accountNumber/:id'
+            element={<TransactionInfo transaction={singleTransactionStaff} />}
           />
           <Route
             path='/dashboard-client/:id/transactions/select-account'
