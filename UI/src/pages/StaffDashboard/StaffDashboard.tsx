@@ -54,7 +54,7 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
   const handleOldNotificationClick = (oldNotification: NotificationBody) => {
     oldNotification?.accountNumber
       ? navigate(
-          `/dashboard-client/account-info/${oldNotification?.accountId}/transactions/${oldNotification?.accountNumber}/${oldNotification?.transactionId}`
+          `/dashboard-staff/account-info/${oldNotification?.accountId}/transactions/${oldNotification?.accountNumber}/${oldNotification?.transactionId}`
         )
       : oldNotification.message.includes('personal data')
       ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
@@ -77,7 +77,7 @@ const StaffDashboard = (props: { handleLogout: () => void }) => {
     handleNotificationService();
     newNotification?.accountNumber
       ? navigate(
-          `/dashboard-client/account-info/${newNotification?.accountId}/transactions/${newNotification?.accountNumber}/${newNotification?.transactionId}`
+          `/dashboard-staff/account-info/${newNotification?.accountId}/transactions/${newNotification?.accountNumber}/${newNotification?.transactionId}`
         )
       : newNotification.message.includes('personal data')
       ? navigate(`/dashboard-client/${user?.id}/change-personal-data`)
