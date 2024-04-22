@@ -6,6 +6,7 @@ import usersRouter from './routes/users';
 import accountsRouter from './routes/accounts';
 import transactionsRouter from './routes/transactions';
 import notificationsRouter from './routes/notifications';
+import loginRouter from './routes/login';
 import middleware from './utils/middleware';
 import logger from './utils/logger';
 import mongoose from 'mongoose';
@@ -34,6 +35,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/accounts', accountsRouter);
 app.use('/api/transactions', transactionsRouter);
 app.use('/api/notifications', notificationsRouter);
+app.use('/api/login', loginRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
