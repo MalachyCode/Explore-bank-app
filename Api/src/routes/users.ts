@@ -1,4 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const bcrypt = require('bcrypt');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const usersRouter = require('express').Router();
 import { NextFunction, Request, Response } from 'express';
 import User from '../models/user';
@@ -21,29 +23,35 @@ usersRouter.get('/:id', (req: Request, res: Response, next: NextFunction) => {
     .catch((error) => next(error));
 });
 
-usersRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
-  const body = req.body;
+usersRouter.post(
+  '/',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const body = req.body;
 
-  const user = new User({
-    email: body.email,
-    firstName: body.firstName,
-    lastName: body.lastName,
-    middleName: body.middleName || '',
-    password: body.password,
-    type: body.type,
-    isAdmin: body.isAdmin,
-    number: body.number,
-    dob: body.dob,
-    transferPin: body.transferPin || '',
-  });
+    const saltRounds = 10;
+    const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
-  user
-    .save()
-    .then((savedUser) => {
-      res.json(savedUser);
-    })
-    .catch((error) => next(error));
-});
+    const user = new User({
+      email: body.email,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      middleName: body.middleName || '',
+      password: passwordHash,
+      type: body.type,
+      isAdmin: body.isAdmin,
+      number: body.number,
+      dob: body.dob,
+      transferPin: body.transferPin || '',
+    });
+
+    user
+      .save()
+      .then((savedUser) => {
+        res.json(savedUser);
+      })
+      .catch((error) => next(error));
+  }
+);
 
 usersRouter.delete(
   '/:id',
@@ -56,32 +64,38 @@ usersRouter.delete(
   }
 );
 
-usersRouter.put('/:id', (req: Request, res: Response, next: NextFunction) => {
-  const body = req.body;
+usersRouter.put(
+  '/:id',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const body = req.body;
 
-  const user = {
-    email: body.email,
-    firstName: body.firstName,
-    lastName: body.lastName,
-    middleName: body.middleName,
-    password: body.password,
-    type: body.type,
-    isAdmin: body.isAdmin,
-    number: body.number,
-    dob: body.dob,
-    transferPin: body.transferPin,
-  };
+    const saltRounds = 10;
+    const transferPinHash = await bcrypt.hash(body.transferPin, saltRounds);
 
-  User.findByIdAndUpdate(req.params.id, user, {
-    new: true,
-    runValidators: true,
-    context: 'query',
-  })
-    .then((updatedUser) => {
-      res.json(updatedUser);
+    const user = {
+      email: body.email,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      middleName: body.middleName,
+      password: body.password,
+      type: body.type,
+      isAdmin: body.isAdmin,
+      number: body.number,
+      dob: body.dob,
+      transferPin: transferPinHash,
+    };
+
+    User.findByIdAndUpdate(req.params.id, user, {
+      new: true,
+      runValidators: true,
+      context: 'query',
     })
-    .catch((error) => next(error));
-});
+      .then((updatedUser) => {
+        res.json(updatedUser);
+      })
+      .catch((error) => next(error));
+  }
+);
 
 // module.exports = usersRouter
 export default usersRouter;
