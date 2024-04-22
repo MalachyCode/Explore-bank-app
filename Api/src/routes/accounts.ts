@@ -1,7 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const jwt = require('jsonwebtoken');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const accountsRouter = require('express').Router();
 import { NextFunction, Request, Response } from 'express';
 import Account from '../models/account';
+// import User from '../models/user'
 
 accountsRouter.get('/', (_req: Request, res: Response) => {
   Account.find({}).then((accounts) => {
@@ -24,25 +27,42 @@ accountsRouter.get(
   }
 );
 
-accountsRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
-  const body = req.body;
+const getTokenFrom = (request: Request) => {
+  const authorization = request.get('authorization');
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '');
+  }
+  return null;
+};
 
-  const account = new Account({
-    balance: body.balance,
-    createdOn: body.createdOn,
-    owner: body.owner,
-    status: body.status,
-    accountNumber: body.accountNumber,
-    type: body.type,
-  });
+accountsRouter.post(
+  '/',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const body = req.body;
 
-  account
-    .save()
-    .then((savedAccount) => {
-      res.json(savedAccount);
-    })
-    .catch((error) => next(error));
-});
+    const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET);
+    if (!decodedToken.id) {
+      return res.status(401).json({ error: 'token invalid' });
+    }
+    // const user = await User.findById(decodedToken.id)
+
+    const account = new Account({
+      balance: body.balance,
+      createdOn: body.createdOn,
+      owner: body.owner,
+      status: body.status,
+      accountNumber: body.accountNumber,
+      type: body.type,
+    });
+
+    account
+      .save()
+      .then((savedAccount) => {
+        res.json(savedAccount);
+      })
+      .catch((error) => next(error));
+  }
+);
 
 accountsRouter.delete(
   '/:id',
