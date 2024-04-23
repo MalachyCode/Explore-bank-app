@@ -29,9 +29,6 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       notificationsService.getAll().then((allNotifications) => {
-        // console.log(allNotifications);
-        // console.log(user);
-
         setNotificationCount(
           allNotifications.find(
             (notification: Notification) => notification.owner === user.id
