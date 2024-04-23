@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './LoginPage.scss';
 import FormInput from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
-import { LoginType, User } from '../../types';
-import userService from '../../services/users';
+import { LoginType } from '../../types';
+import loginService from '../../services/login';
+import accountsService from '../../services/accounts';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,10 +14,6 @@ const LoginPage = () => {
     email: '',
     password: '',
   });
-  const [users, setUsers] = useState<Array<User>>([]);
-  useEffect(() => {
-    userService.getAll().then((users) => setUsers(users));
-  }, []);
 
   const formInputs = [
     {
@@ -39,30 +36,23 @@ const LoginPage = () => {
     },
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (users.find((user) => user.email === credentials.email)) {
-      const user = users.find((user) => user.email === credentials.email);
-      console.log(user);
-      if (user?.password === credentials.password) {
-        window.localStorage.setItem('loggedAppUser', JSON.stringify(user));
-        if (user.type === 'client') {
-          navigate('/dashboard-client');
-        }
-        if (user.type === 'staff') {
-          navigate('/dashboard-staff');
-        }
-        console.log(
-          `${credentials.email} with password ${credentials.password} logged in`
-        );
-        setCredentials({ ...credentials, email: '', password: '' });
-      } else {
-        toast.error('Wrong username or password', {
-          position: 'top-center',
-        });
+
+    try {
+      const user = await loginService.login(credentials);
+      accountsService.setToken(user.token);
+
+      window.localStorage.setItem('loggedAppUser', JSON.stringify(user));
+      if (user.type === 'client') {
+        navigate('/dashboard-client');
       }
-    } else {
-      toast.error('User email not found. Please check your email', {
+      if (user.type === 'staff') {
+        navigate('/dashboard-staff');
+      }
+      setCredentials({ ...credentials, email: '', password: '' });
+    } catch (exception) {
+      toast.error('Wrong email or password', {
         position: 'top-center',
       });
     }
