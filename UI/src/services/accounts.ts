@@ -3,13 +3,20 @@ import { Account, NewAccount } from '../types';
 const baseUrl = 'http://localhost:3001/api/accounts';
 // const baseUrl = 'http://localhost:3001/accounts';
 
+let token: string | null = null;
+
+const setToken = (newToken: string) => {
+  token = `Bearer ${newToken}`;
+};
+
 const getAll = async () => {
   const response = await axios.get(baseUrl);
   return response.data;
 };
 
 const create = async (newAccount: NewAccount) => {
-  const response = await axios.post(baseUrl, newAccount);
+  const config = { headers: { Authorization: token } };
+  const response = await axios.post(baseUrl, newAccount, config);
   return response.data;
 };
 
@@ -30,4 +37,5 @@ export default {
   deleteAccount,
   getAll,
   updateAccount,
+  setToken,
 };
