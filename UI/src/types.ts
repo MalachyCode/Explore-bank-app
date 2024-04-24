@@ -33,7 +33,7 @@ export interface FormInputType {
   value: string;
   id: string;
   label: string;
-  placeholder: string;
+  placeholder?: string;
   errorMessage?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   // onChange: (arg0: string) => void;
