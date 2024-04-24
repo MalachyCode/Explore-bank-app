@@ -66,7 +66,7 @@ const MobileTopUp = () => {
       id: 'phoneNumber',
       name: 'phoneNumber',
       type: 'phoneNumber',
-      placeholder: 'Mobile Number',
+      // placeholder: 'Mobile Number',
       label: 'Mobile Number',
       errorMessage: `Phone number should be 11 numbers and shouldn't include any letters`,
       pattern: '^[0-9]{11}$',
@@ -76,7 +76,7 @@ const MobileTopUp = () => {
       id: 'amount',
       name: 'amount',
       type: 'text',
-      placeholder: 'Enter Amount',
+      // placeholder: 'Enter Amount',
       errorMessage: 'Enter topup amount',
       label: 'Amount',
       required: true,
@@ -103,7 +103,7 @@ const MobileTopUp = () => {
                 accountToShow?.balance - Number(topupDetails.amount),
             };
             accountsService
-              .debit(accountToShow?.id, updatedSendingAccount)
+              .updateAccount(accountToShow?.id, updatedSendingAccount)
               .then((response) => console.log(response));
 
             const newDebitTransaction: NewTransaction = {
