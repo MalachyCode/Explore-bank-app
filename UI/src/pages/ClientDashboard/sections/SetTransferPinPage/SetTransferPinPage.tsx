@@ -37,7 +37,7 @@ const SetTransferPinPage = () => {
       id: 'pin',
       name: 'pin',
       type: 'text',
-      placeholder: 'Pin',
+      // placeholder: 'Pin',
       errorMessage: 'Pin should be 4 numbers',
       label: 'Pin',
       pattern: `^(?=.*[0-9])[0-9!]{4}$`,
@@ -47,7 +47,7 @@ const SetTransferPinPage = () => {
       id: 'confirm-pin',
       name: 'confirmPin',
       type: 'text',
-      placeholder: 'Confirm Pin',
+      // placeholder: 'Confirm Pin',
       errorMessage: `Pins don't match`,
       label: 'Confirm Pin',
       pattern: values.pin,
@@ -67,7 +67,7 @@ const SetTransferPinPage = () => {
         ...user,
         transferPin: values.pin,
       };
-      userService.setTransferPin(user?.id, setUserPin).then((response) => {
+      userService.updateUser(user?.id, setUserPin).then((response) => {
         console.log(response);
         if (userAccountNotificationBox) {
           const setPinNotification: Notification = {
