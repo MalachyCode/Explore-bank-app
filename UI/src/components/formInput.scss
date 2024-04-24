@@ -4,40 +4,130 @@
   font-size: 12px;
   padding: 3px;
   color: red;
-  display: none;
+  // display: none;
 }
 
-input:invalid[focused='true'] {
-  border: 1px solid red;
-}
+// input:invalid[focused='true'] {
+//   border: 1px solid red;
+// }
 
-input:invalid[focused='true'] ~ .error-message {
-  display: block;
-}
+// input:invalid[focused='true'] ~ .input-box {
+//   border: 1px solid red;
+// }
 
-.form-label {
-  display: block;
-  font-size: $smallText;
-  margin-bottom: 0.5rem;
-  text-transform: capitalize;
-  letter-spacing: $letterSpacing;
-}
-.form-input,
-.form-textarea {
-  width: 90%;
-  padding: 15px;
-  border-radius: 4px;
-  background: $backgroundColor;
-  border: 1px solid $grey-200;
-  margin: auto;
-  &::placeholder {
-    font-family: inherit;
-    color: $grey-400;
+// input:invalid[focused='true'] ~ .error-message {
+//   display: block;
+// }
+
+.input-box {
+  width: 99.4%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid gray;
+  margin-left: 0;
+  cursor: pointer;
+  overflow: hidden;
+  max-width: $fixed-width;
+  // margin-bottom: 15px;
+  margin-top: 30px;
+  position: relative;
+
+  input {
+    width: 98%;
+    height: 6vh;
+    padding-top: 10px;
+    // max-width: $fixed-width;
+    margin-left: 5px;
+    border: none;
+    font-size: 16px;
+
+    &:focus {
+      outline: none;
+    }
+    &:focus ~ .placeholder {
+      top: 1px;
+      font-size: 11px;
+    }
+  }
+
+  .placeholder {
+    position: absolute;
+    font-size: 16px;
+    pointer-events: none;
+    color: rgb(42, 42, 42);
+    left: 1px;
+    // top: 1px;
+    margin-left: 15px;
+    transition: 0.1s ease all;
+    &.amount {
+      margin-left: 20px;
+    }
+
+    &.active {
+      top: 1px;
+      font-size: 11px;
+    }
+  }
+
+  .show-password-icon {
+    cursor: pointer;
+    margin-right: 15px;
+  }
+
+  &.error {
+    border: 1px solid red;
+  }
+
+  @media (min-width: 992px) {
+    width: 97%;
+  }
+  @media (min-width: 768px) {
+    width: 94%;
+  }
+  @media (max-width: 576px) {
+    width: 98%;
   }
 }
-.form-row {
-  margin-bottom: 1rem;
-}
-.form-textarea {
-  height: 7rem;
-}
+
+// .form-label {
+//   display: block;
+//   font-size: $smallText;
+//   margin-bottom: 0.5rem;
+//   text-transform: capitalize;
+//   letter-spacing: $letterSpacing;
+// }
+// .form-input,
+// .form-textarea {
+//   width: 90%;
+//   padding: 15px;
+//   border-radius: 4px;
+//   background: $backgroundColor;
+//   border: 1px solid $grey-200;
+//   margin: auto;
+//   &::placeholder {
+//     font-family: inherit;
+//     color: $grey-400;
+//   }
+// }
+// .form-row {
+//   margin-bottom: 1rem;
+// }
+// .form-textarea {
+//   height: 7rem;
+// }
+
+// .form-input-container {
+//   // height: 100px;
+//   width: 95%;
+//   // background: green;
+//   margin: 20px 0 0 0;
+
+//   .error-message {
+//     font-size: 12px;
+//     // padding: 3px;
+//     color: red;
+//     // display: none;
+//   }
+// }
