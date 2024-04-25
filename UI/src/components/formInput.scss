@@ -65,7 +65,8 @@
       margin-left: 20px;
     }
 
-    &.active {
+    &.active,
+    &.dob {
       top: 1px;
       font-size: 11px;
     }
