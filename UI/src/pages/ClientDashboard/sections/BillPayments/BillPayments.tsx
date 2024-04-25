@@ -91,6 +91,7 @@ const BillPayments = () => {
   }, []);
 
   // console.log(category);
+  // console.log(category);
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
