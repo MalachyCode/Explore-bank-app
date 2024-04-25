@@ -40,7 +40,8 @@ const SetTransferPinPage = () => {
       // placeholder: 'Pin',
       errorMessage: 'Pin should be 4 numbers',
       label: 'Pin',
-      pattern: `^(?=.*[0-9])[0-9!]{4}$`,
+      regex: `^[0-9]{4}$`,
+      // pattern: `^(?=.*[0-9])[0-9!]{4}$`,
       required: true,
     },
     {
@@ -50,7 +51,8 @@ const SetTransferPinPage = () => {
       // placeholder: 'Confirm Pin',
       errorMessage: `Pins don't match`,
       label: 'Confirm Pin',
-      pattern: values.pin,
+      regex: values.pin,
+      // pattern: values.pin,
       required: true,
     },
   ];
