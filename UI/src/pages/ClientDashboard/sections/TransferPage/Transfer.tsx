@@ -88,6 +88,7 @@ const Transfer = () => {
       // placeholder: 'Bank Name',
       errorMessage: 'Enter a valid bank name',
       label: 'Bank Name',
+      regex: 'Explore Bank',
       required: true,
     },
     {
@@ -98,6 +99,7 @@ const Transfer = () => {
       errorMessage: accountErrorMessage ? accountErrorMessage : '',
       // errorMessage: `Can't find account with account number ${transferDetials.accountNumber}`,
       label: 'Account Number',
+      regex: '^[0-9]{10}$',
       // pattern: accounts.some(
       //   (account) =>
       //     account.accountNumber === Number(transferDetials.accountNumber)
@@ -109,8 +111,9 @@ const Transfer = () => {
       name: 'amount',
       type: 'text',
       // placeholder: 'Amount',
-      errorMessage: 'Enter transfer amount',
+      errorMessage: 'Enter valid transfer amount with minimum 3 numbers',
       label: 'Amount',
+      regex: '^[0-9]{3,}$',
       required: true,
     },
     {
@@ -118,8 +121,10 @@ const Transfer = () => {
       name: 'description',
       type: 'text',
       // placeholder: 'Ddescription',
-      errorMessage: 'Enter transfer description',
+      errorMessage:
+        'Enter valid description. Must start with a capital letter and be at least 3 characters long',
       label: 'Description',
+      regex: `^[A-Z][a-zA-Z ,.'-]{3,}$`,
       required: true,
     },
   ];
