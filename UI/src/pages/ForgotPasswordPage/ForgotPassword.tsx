@@ -41,6 +41,7 @@ const ForgotPasswordPage = () => {
       // placeholder: 'Email',
       errorMessage: 'Enter a valid email address',
       label: 'Email',
+      regex: `^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,})$`,
       required: true,
     },
     {
@@ -51,7 +52,8 @@ const ForgotPasswordPage = () => {
       errorMessage:
         'Password should be between 8 - 20 characters and include 1 letter, 1 number and 1 special character',
       label: 'New Password',
-      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      regex: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       required: true,
     },
     {
@@ -61,7 +63,8 @@ const ForgotPasswordPage = () => {
       // placeholder: 'Confirm New Password',
       errorMessage: `Passwords don't match`,
       label: 'Confirm New Password',
-      pattern: credentials.password,
+      regex: credentials.password,
+      // pattern: credentials.password,
       required: true,
     },
   ];
