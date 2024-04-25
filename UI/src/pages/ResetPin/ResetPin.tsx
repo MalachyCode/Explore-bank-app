@@ -40,7 +40,8 @@ const ResetPin = () => {
       // placeholder: 'Old Pin',
       errorMessage: 'Pin should be 4 numbers',
       label: 'Old Pin',
-      pattern: `^[0-9]{4}$`,
+      regex: `^[0-9]{4}$`,
+      // pattern: `^[0-9]{4}$`,
       required: true,
     },
     {
@@ -50,7 +51,8 @@ const ResetPin = () => {
       // placeholder: 'New Pin',
       errorMessage: 'Pin should be 4 numbers',
       label: 'New Pin',
-      pattern: `^[0-9]{4}$`,
+      regex: `^[0-9]{4}$`,
+      // pattern: `^[0-9]{4}$`,
       required: true,
     },
     {
@@ -60,7 +62,8 @@ const ResetPin = () => {
       // placeholder: 'Confirm New Pin',
       errorMessage: `Pins don't match`,
       label: 'Confirm New Pin',
-      pattern: details.newPin,
+      regex: details.newPin,
+      // pattern: details.newPin,
       required: true,
     },
   ];
