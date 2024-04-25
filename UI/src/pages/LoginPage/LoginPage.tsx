@@ -22,6 +22,7 @@ const LoginPage = () => {
       type: 'email',
       // placeholder: 'Email',
       errorMessage: 'Enter a valid email address',
+      regex: `^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,})$`,
       label: 'Email',
       required: true,
     },
@@ -30,8 +31,9 @@ const LoginPage = () => {
       name: 'password',
       type: 'password',
       // placeholder: 'Password',
-      errorMessage: 'Enter password',
+      errorMessage: 'Enter valid password',
       label: 'Password',
+      regex: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       required: true,
     },
   ];
