@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SelectBox from '../BillPayments/comoponents/SelectBox/SelectBox';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
   billerProductsSportsBet,
   billerProductsTest,
@@ -96,7 +97,7 @@ const SportWalletFunding = () => {
               accountToShow?.balance - Number(paymentDetails.amount),
           };
           accountsService
-            .debit(accountToShow?.id, updatedSendingAccount)
+            .updateAccount(accountToShow?.id, updatedSendingAccount)
             .then((response) => console.log(response));
 
           const newDebitTransaction: NewTransaction = {
@@ -325,10 +326,17 @@ const SportWalletFunding = () => {
                 >
                   Pin
                 </span>
-                <VisibilityIcon
-                  className='show-password-icon'
-                  onClick={() => setShowPassword(!showPassword)}
-                />
+                {showPassword ? (
+                  <VisibilityOffIcon
+                    className='show-password-icon'
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                ) : (
+                  <VisibilityIcon
+                    className='show-password-icon'
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                )}
               </div>
               <button type='submit'>Pay</button>
             </form>
