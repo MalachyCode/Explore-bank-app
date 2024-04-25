@@ -2,6 +2,7 @@ import './formInput.scss';
 import { FormInputType } from '../types';
 import { useEffect, useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 declare module 'react' {
   interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
@@ -19,8 +20,30 @@ const FormInput = (props: FormInputType) => {
     setFocused(false);
   }, [props.value]);
 
+  // new RegExp is used to create a regex expression with the regex varable specified when using this component. The .test function checks if the provided string passes the regex rule
+
   const handleFocus = () => {
-    setFocused(props.value ? false : true);
+    setFocused(
+      new RegExp(`${props.regex}`).test(props.value) === true
+        ? false
+        : props.label === 'Date of Birth'
+        ? false
+        : true
+    );
+  };
+
+  const showVisibilityIcon = () => {
+    return showPassword ? (
+      <VisibilityOffIcon
+        className='show-password-icon'
+        onClick={() => setShowPassword(!showPassword)}
+      />
+    ) : (
+      <VisibilityIcon
+        className='show-password-icon'
+        onClick={() => setShowPassword(!showPassword)}
+      />
+    );
   };
 
   return (
@@ -58,15 +81,16 @@ const FormInput = (props: FormInputType) => {
           } //onFocus===click on input
           focused={focused.toString()}
         />
-        <span className={'placeholder ' + (props.value && 'active')}>
+        <span
+          className={
+            'placeholder ' +
+            (props.value && 'active ') +
+            (props.label === 'Date of Birth' && 'dob')
+          }
+        >
           {label}
         </span>
-        {props.type === 'password' && (
-          <VisibilityIcon
-            className='show-password-icon'
-            onClick={() => setShowPassword(!showPassword)}
-          />
-        )}
+        {props.type === 'password' && showVisibilityIcon()}
       </div>
       {focused && <span className='error-message'>{errorMessage}</span>}
     </div>
