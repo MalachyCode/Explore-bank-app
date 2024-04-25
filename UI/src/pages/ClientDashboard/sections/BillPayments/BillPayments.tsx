@@ -41,6 +41,7 @@ import {
   billerProductsTest,
 } from './comoponents/BillPayCategoriesAndOptions';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import transactionsService from '../../../../services/transactions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -366,10 +367,17 @@ const BillPayments = () => {
                 >
                   Pin
                 </span>
-                <VisibilityIcon
-                  className='show-password-icon'
-                  onClick={() => setShowPassword(!showPassword)}
-                />
+                {showPassword ? (
+                  <VisibilityOffIcon
+                    className='show-password-icon'
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                ) : (
+                  <VisibilityIcon
+                    className='show-password-icon'
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                )}
               </div>
               <button type='submit'>Pay</button>
             </form>
