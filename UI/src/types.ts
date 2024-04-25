@@ -34,6 +34,8 @@ export interface FormInputType {
   id: string;
   label: string;
   placeholder?: string;
+  regex?: string;
+  // pattern?: RegExp;
   errorMessage?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   // onChange: (arg0: string) => void;
