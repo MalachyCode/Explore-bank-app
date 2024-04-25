@@ -29,6 +29,7 @@ const SignupPage = () => {
       // placeholder: 'Email',
       errorMessage: 'Enter a valid email address',
       label: 'Email',
+      regex: `^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,})$`,
       required: true,
     },
     {
@@ -38,7 +39,8 @@ const SignupPage = () => {
       // placeholder: 'First name',
       errorMessage: `First name should be between 3 to 20 characters and shouldn't include any special character`,
       label: 'First name',
-      pattern: '^[A-Za-z0-9]{3,20}$',
+      regex: `^[A-Z][a-zA-Z ,.'-]{0,19}$`,
+      // pattern: '^[A-Za-z0-9]{3,20}$',
       required: true,
     },
     {
@@ -47,7 +49,8 @@ const SignupPage = () => {
       type: 'text',
       // placeholder: 'Middle name',
       errorMessage: `Middle name should be between 3 to 20 characters and shouldn't include any special character`,
-      pattern: '^[A-Za-z0-9]{3,20}$',
+      regex: `^[A-Z][a-zA-Z ,.'-]{0,19}$`,
+      // pattern: '^[A-Za-z0-9]{3,20}$',
       label: 'Middle name',
     },
     {
@@ -56,7 +59,8 @@ const SignupPage = () => {
       type: 'text',
       // placeholder: 'Last name',
       errorMessage: `Last name should be between 3 to 20 characters and shouldn't include any special character`,
-      pattern: '^[A-Za-z0-9]{3,20}$',
+      regex: `^[A-Z][a-zA-Z ,.'-]{0,19}$`,
+      // pattern: '^[A-Za-z0-9]{3,20}$',
       label: 'Last name',
       required: true,
     },
@@ -74,7 +78,8 @@ const SignupPage = () => {
       type: 'text',
       // placeholder: 'Phone Number',
       errorMessage: `Phone number should be 11 numbers and shouldn't include any letters`,
-      pattern: '^[0-9]{11}$',
+      regex: '^[0-9]{11}$',
+      // pattern: '^[0-9]{11}$',
       label: 'Phone Number',
       required: true,
     },
@@ -86,7 +91,8 @@ const SignupPage = () => {
       errorMessage:
         'Password should be between 8 - 20 characters and include 1 letter, 1 number and 1 special character',
       label: 'Password',
-      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      regex: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       required: true,
     },
     {
@@ -96,7 +102,8 @@ const SignupPage = () => {
       // placeholder: 'Confirm Password',
       errorMessage: `Passwords don't match`,
       label: 'Confirm Password',
-      pattern: values.password,
+      regex: values.password,
+      // pattern: values.password,
       required: true,
     },
   ];
