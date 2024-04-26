@@ -14,12 +14,6 @@ const Transactions = (props: {
       <div className='top'>
         <ArrowBackIcon
           className='back-icon'
-          // onClick={() =>
-          //   navigate(
-          //     `/dashboard-client/${props.account?.id}/transactions/select-account`
-          //   )
-          // }
-
           // goes back to previous page
           onClick={() => navigate(-1)}
         />
