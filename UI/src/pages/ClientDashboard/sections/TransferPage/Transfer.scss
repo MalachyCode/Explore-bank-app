@@ -2,7 +2,6 @@
 
 .transfer {
   width: 100vw;
-  // height: 100vh;
   display: flex;
   flex-direction: column;
 
@@ -102,7 +101,6 @@
           background: #a67f78;
           color: white;
           border-radius: 3px;
-          // margin: auto;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -131,11 +129,9 @@
         align-items: center;
         justify-content: space-between;
         width: 96%;
-        // margin: auto;
         margin-top: 30px;
         border: 1px solid #32435f;
         padding: 3px;
-        // background: #a67f78;
         overflow: hidden;
 
         .daily-limit-box-total {
