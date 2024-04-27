@@ -69,7 +69,7 @@ const SetTransferPinPage = () => {
         ...user,
         transferPin: values.pin,
       };
-      userService.updateUser(user?.id, setUserPin).then((response) => {
+      userService.changeTransferPin(user?.id, setUserPin).then((response) => {
         console.log(response);
         if (userAccountNotificationBox) {
           const setPinNotification: Notification = {
