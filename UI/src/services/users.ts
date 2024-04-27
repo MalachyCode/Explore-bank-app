@@ -34,10 +34,27 @@ const changeTransferPin = async (id: string, updatedUser: User) => {
   return response.data;
 };
 
+const resetPassword = async (id: string, updatedUser: User) => {
+  const response = await axios.put(
+    `${baseUrl}/reset-password/${id}`,
+    updatedUser
+  );
+
+  return response.data;
+};
+
+const updateProfilePicture = async (id: string, formData: FormData) => {
+  const response = await axios.put(`${baseUrl}/upload/${id}`, formData);
+
+  return response.data;
+};
+
 export default {
   changeTransferPin,
   create,
   deleteUser,
   getAll,
+  resetPassword,
+  updateProfilePicture,
   updateUser,
 };
