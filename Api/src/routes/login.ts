@@ -41,6 +41,7 @@ loginRouter.post('/', async (req: Request, res: Response) => {
     number: user.number,
     dob: user.dob,
     transferPin: user.transferPin,
+    profilePicture: user.profilePicture,
   });
 });
 
