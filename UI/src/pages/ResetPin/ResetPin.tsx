@@ -81,25 +81,27 @@ const ResetPin = () => {
         transferPin: details.newPin,
       };
 
-      usersService.updateUser(user?.id, userPinReset).then((response) => {
-        console.log(response);
-        if (userAccountNotificationBox) {
-          const pinResetNotification: Notification = {
-            ...userAccountNotificationBox,
-            newNotifications:
-              userAccountNotificationBox?.newNotifications.concat({
-                message: `You reset your transfer pin`,
-              }),
-          };
+      usersService
+        .changeTransferPin(user?.id, userPinReset)
+        .then((response) => {
+          console.log(response);
+          if (userAccountNotificationBox) {
+            const pinResetNotification: Notification = {
+              ...userAccountNotificationBox,
+              newNotifications:
+                userAccountNotificationBox?.newNotifications.concat({
+                  message: `You reset your transfer pin`,
+                }),
+            };
 
-          notificationsService
-            .updateNotification(
-              userAccountNotificationBox?.id,
-              pinResetNotification
-            )
-            .then((response) => console.log(response));
-        }
-      });
+            notificationsService
+              .updateNotification(
+                userAccountNotificationBox?.id,
+                pinResetNotification
+              )
+              .then((response) => console.log(response));
+          }
+        });
 
       // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
       const modifiedObjectForStorage = JSON.stringify(userPinReset);
