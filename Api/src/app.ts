@@ -31,6 +31,8 @@ app.use(cors());
 app.use(express.json());
 app.use(middleware.requestLogger);
 
+app.use('/profilePictures', express.static('profilePictures'));
+
 app.use('/api/users', usersRouter);
 app.use('/api/accounts', accountsRouter);
 app.use('/api/transactions', transactionsRouter);
