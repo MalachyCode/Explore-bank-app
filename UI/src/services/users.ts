@@ -25,7 +25,17 @@ const updateUser = async (id: string, updatedUser: User) => {
   return response.data;
 };
 
+const changeTransferPin = async (id: string, updatedUser: User) => {
+  const response = await axios.put(
+    `${baseUrl}/transfer-pin/${id}`,
+    updatedUser
+  );
+
+  return response.data;
+};
+
 export default {
+  changeTransferPin,
   create,
   deleteUser,
   getAll,
