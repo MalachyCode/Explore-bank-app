@@ -32,6 +32,7 @@ const userSchema = new mongoose.Schema({
   },
   dob: String,
   transferPin: String,
+  profilePicture: String,
 });
 
 userSchema.set('toJSON', {
