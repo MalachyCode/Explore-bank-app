@@ -105,6 +105,7 @@ export interface User {
   number: string;
   transferPin?: string;
   dob?: string;
+  profilePicture?: string;
 }
 // export interface User {
 //   id: number;
