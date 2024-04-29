@@ -10,6 +10,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import './UserProfile.scss';
 import { useNavigate } from 'react-router';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 const RenderOptions = (props: { onClick: () => void; optionName: string }) => (
   <div className='option' onClick={props.onClick}>
@@ -55,6 +56,8 @@ const UserProfile = (props: { handleLogout: () => void }) => {
 
   const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
+  console.log(user);
+
   const optionsToRender = [
     {
       id: 1,
@@ -89,11 +92,23 @@ const UserProfile = (props: { handleLogout: () => void }) => {
             onClick={() => navigate(-1)}
           />
           <h3>User Profile</h3>
-          <div
-            className={'profile-photo ' + (enlargeProfilePicture && 'active')}
-            onClick={() => setEnlargeProfilePicture(!enlargeProfilePicture)}
-          >
-            {/* <img src='../../assets/pexels-aog-pixels-12698491.jpg' alt='' /> */}
+          <div className='profile-photo-container'>
+            <div
+              className={'profile-photo ' + (enlargeProfilePicture && 'active')}
+              onClick={() => setEnlargeProfilePicture(!enlargeProfilePicture)}
+            >
+              <img
+                src={`http://localhost:3001/${user?.profilePicture}`}
+                alt=''
+              />
+            </div>
+
+            <CameraAltIcon
+              className={'camera-icon ' + (enlargeProfilePicture && 'hide')}
+              onClick={() =>
+                navigate(`/dashboard-client/${user?.id}/change-profile-picture`)
+              }
+            />
           </div>
           <div className='user-name'>
             {user?.firstName.toUpperCase()} {user?.lastName.toUpperCase()}
