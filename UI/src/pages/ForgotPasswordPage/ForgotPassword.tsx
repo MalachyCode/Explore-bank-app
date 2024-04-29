@@ -87,7 +87,7 @@ const ForgotPasswordPage = () => {
       };
 
       usersService
-        .updateUser(userForPasswordReset?.id, userPasswordReset as User)
+        .resetPassword(userForPasswordReset?.id, userPasswordReset as User)
         .then((response) => {
           console.log(response);
           if (userAccountNotificationBox) {
