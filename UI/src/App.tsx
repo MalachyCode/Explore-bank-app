@@ -34,6 +34,7 @@ import Loans from './pages/ClientDashboard/sections/Loans/Loans';
 import ReferalRewards from './pages/ClientDashboard/sections/ReferalRewars/ReferalRewars';
 import GenerateStatement from './pages/ClientDashboard/sections/GenerateStatement/GenerateStatement';
 import WelcomePage from './pages/WelcomePage/WelcomePage';
+import ChangeProfilePicture from './pages/ClientDashboard/sections/ChangeProfilePicture/ChangeProfilePicture';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -134,6 +135,10 @@ function App() {
           <Route
             path='/dashboard-client/:id/change-personal-data'
             element={<ChangePersonalData />}
+          />
+          <Route
+            path='/dashboard-client/:id/change-profile-picture'
+            element={<ChangeProfilePicture />}
           />
           <Route
             path='/dashboard-client/:id/reset-pin'
