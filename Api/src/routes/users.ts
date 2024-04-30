@@ -176,5 +176,71 @@ usersRouter.put(
   }
 );
 
+usersRouter.put(
+  '/transfer-pin/:id',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const body = req.body;
+
+    const saltRounds = 10;
+    const transferPinHash = await bcrypt.hash(body.transferPin, saltRounds);
+
+    const user = {
+      email: body.email,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      middleName: body.middleName,
+      password: body.password,
+      type: body.type,
+      isAdmin: body.isAdmin,
+      number: body.number,
+      dob: body.dob,
+      transferPin: transferPinHash,
+    };
+
+    User.findByIdAndUpdate(req.params.id, user, {
+      new: true,
+      runValidators: true,
+      context: 'query',
+    })
+      .then((updatedUser) => {
+        res.json(updatedUser);
+      })
+      .catch((error) => next(error));
+  }
+);
+
+usersRouter.put(
+  '/reset-password/:id',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const body = req.body;
+
+    const saltRounds = 10;
+    const passwordHash = await bcrypt.hash(body.password, saltRounds);
+
+    const user = {
+      email: body.email,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      middleName: body.middleName,
+      password: passwordHash,
+      type: body.type,
+      isAdmin: body.isAdmin,
+      number: body.number,
+      dob: body.dob,
+      transferPin: body.transferPin,
+    };
+
+    User.findByIdAndUpdate(req.params.id, user, {
+      new: true,
+      runValidators: true,
+      context: 'query',
+    })
+      .then((updatedUser) => {
+        res.json(updatedUser);
+      })
+      .catch((error) => next(error));
+  }
+);
+
 // module.exports = usersRouter
 export default usersRouter;
