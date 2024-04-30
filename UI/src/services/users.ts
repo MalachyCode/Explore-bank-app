@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NewUser, User } from '../types';
+import { ConfirmUserPin, NewUser, User } from '../types';
 const baseUrl = 'http://localhost:3001/api/users';
 // const baseUrl = 'http://localhost:3001/users';
 
@@ -49,8 +49,14 @@ const updateProfilePicture = async (id: string, formData: FormData) => {
   return response.data;
 };
 
+const checkPin = async (user: ConfirmUserPin) => {
+  const response = await axios.post(`${baseUrl}/check-pin`, user);
+  return response.data;
+};
+
 export default {
   changeTransferPin,
+  checkPin,
   create,
   deleteUser,
   getAll,
