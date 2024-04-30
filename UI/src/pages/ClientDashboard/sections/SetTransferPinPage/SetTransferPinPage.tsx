@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Notification, User } from '../../../../types';
 import userService from '../../../../services/users';
 import notificationsService from '../../../../services/notifications';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface SetPin {
   pin: string;
@@ -64,36 +66,42 @@ const SetTransferPinPage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (user) {
-      const setUserPin = {
-        ...user,
-        transferPin: values.pin,
-      };
-      userService.changeTransferPin(user?.id, setUserPin).then((response) => {
-        console.log(response);
-        if (userAccountNotificationBox) {
-          const setPinNotification: Notification = {
-            ...userAccountNotificationBox,
-            newNotifications:
-              userAccountNotificationBox?.newNotifications.concat({
-                message: `New transfer pin set`,
-              }),
-          };
+    if (values.pin === values.confirmPin) {
+      if (user) {
+        const setUserPin = {
+          ...user,
+          transferPin: values.pin,
+        };
+        userService.changeTransferPin(user?.id, setUserPin).then((response) => {
+          console.log(response);
+          if (userAccountNotificationBox) {
+            const setPinNotification: Notification = {
+              ...userAccountNotificationBox,
+              newNotifications:
+                userAccountNotificationBox?.newNotifications.concat({
+                  message: `New transfer pin set`,
+                }),
+            };
 
-          notificationsService
-            .updateNotification(
-              userAccountNotificationBox.id,
-              setPinNotification
-            )
-            .then((response) => console.log(response));
-        }
+            notificationsService
+              .updateNotification(
+                userAccountNotificationBox.id,
+                setPinNotification
+              )
+              .then((response) => console.log(response));
+          }
+        });
+
+        // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
+        const modifiedObjectForStorage = JSON.stringify(setUserPin);
+        localStorage.setItem('loggedAppUser', modifiedObjectForStorage);
+
+        navigate('/dashboard-client');
+      }
+    } else {
+      toast.error(`Pins don't match`, {
+        position: 'top-center',
       });
-
-      // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
-      const modifiedObjectForStorage = JSON.stringify(setUserPin);
-      localStorage.setItem('loggedAppUser', modifiedObjectForStorage);
-
-      navigate('/dashboard-client');
     }
   };
 
@@ -118,6 +126,7 @@ const SetTransferPinPage = () => {
           Set Pin
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
