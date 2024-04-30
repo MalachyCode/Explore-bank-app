@@ -107,21 +107,13 @@ export interface User {
   dob?: string;
   profilePicture?: string;
 }
-// export interface User {
-//   id: number;
-//   email: string;
-//   firstName: string;
-//   middleName?: string;
-//   lastName: string;
-//   password: string;
-//   type: string;
-//   isAdmin: boolean;
-//   number: string;
-//   transferPin?: string;
-//   dob?: string;
-// }
 
 export type NewUser = Omit<User, 'id'>;
+
+export interface ConfirmUserPin {
+  email: string;
+  transferPin: string;
+}
 
 export interface UpdateUser {
   email: string | undefined;
@@ -140,15 +132,6 @@ export interface Account {
   accountNumber: number;
   type: string;
 }
-// export interface Account {
-//   id: number;
-//   accountNumber: number;
-//   createdOn: Date;
-//   owner: number;
-//   type: string;
-//   status: string;
-//   balance: number;
-// }
 
 export type NewAccount = Omit<Account, 'id'>;
 
