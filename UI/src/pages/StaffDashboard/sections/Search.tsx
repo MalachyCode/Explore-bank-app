@@ -3,13 +3,15 @@ import userService from '../../../services/users';
 import accountsService from '../../../services/accounts';
 import { useEffect, useState } from 'react';
 import { Account, User } from '../../../types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
 };
 
 const Search = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User>();
   const [users, setUsers] = useState<Array<User>>([]);
   const [accounts, setAccounts] = useState<Array<Account>>([]);
@@ -46,6 +48,13 @@ const Search = () => {
 
   return (
     <div className='search'>
+      <div className='top'>
+        <ArrowBackIcon
+          className='back-icon'
+          onClick={() => navigate('/dashboard-staff')}
+        />
+        <h2>Find Account</h2>
+      </div>
       <form onSubmit={handleSubmit}>
         <input
           type='text'
