@@ -45,6 +45,21 @@ accountsRouter.post(
   }
 );
 
+accountsRouter.post(
+  '/user-accounts',
+  async (req: Request, res: Response, _next: NextFunction) => {
+    // const user = await User.findOne({ email });
+    const { owner } = req.body;
+
+    Account.find({}).then((accounts) => {
+      const userAccounts = accounts.filter(
+        (account) => account.owner === owner
+      );
+      res.json(userAccounts);
+    });
+  }
+);
+
 const getTokenFrom = (request: Request) => {
   const authorization = request.get('authorization');
   if (authorization && authorization.startsWith('Bearer ')) {
