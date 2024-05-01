@@ -160,6 +160,16 @@
 
       .form-input-container {
         overflow: hidden;
+
+        .input-box {
+          background: #fff;
+        }
+
+        .success-message {
+          font-size: 12px;
+          padding: 3px;
+          color: #32435f;
+        }
       }
 
       .set-pin {
