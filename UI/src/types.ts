@@ -198,3 +198,11 @@ export interface Notification {
 }
 
 export type NewNotification = Omit<Notification, 'id'>;
+
+export interface FindByAccountNumberType {
+  accountNumber: number;
+}
+
+export interface FindUserAccountsType {
+  owner: string;
+}
