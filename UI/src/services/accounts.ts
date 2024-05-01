@@ -14,6 +14,15 @@ const getAll = async () => {
   return response.data;
 };
 
+interface FindByAccountNumberType {
+  accountNumber: number;
+}
+
+const findByAccountNumber = async (accountNumber: FindByAccountNumberType) => {
+  const response = await axios.post(`${baseUrl}/find-account`, accountNumber);
+  return response.data;
+};
+
 const create = async (newAccount: NewAccount) => {
   const config = { headers: { Authorization: token } };
   const response = await axios.post(baseUrl, newAccount, config);
@@ -35,6 +44,7 @@ const deleteAccount = async (id: string) => {
 export default {
   create,
   deleteAccount,
+  findByAccountNumber,
   getAll,
   updateAccount,
   setToken,
