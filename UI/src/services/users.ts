@@ -8,6 +8,11 @@ const getAll = async () => {
   return response.data;
 };
 
+const getSingle = async (id: string) => {
+  const response = await axios.get(`${baseUrl}/${id}`);
+  return response.data;
+};
+
 const create = async (newUser: NewUser) => {
   const response = await axios.post(baseUrl, newUser);
   return response.data;
@@ -60,6 +65,7 @@ export default {
   create,
   deleteUser,
   getAll,
+  getSingle,
   resetPassword,
   updateProfilePicture,
   updateUser,
