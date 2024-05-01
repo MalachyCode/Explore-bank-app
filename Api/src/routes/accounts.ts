@@ -27,6 +27,24 @@ accountsRouter.get(
   }
 );
 
+accountsRouter.post(
+  '/find-account',
+  async (req: Request, res: Response, _next: NextFunction) => {
+    // const user = await User.findOne({ email });
+    const { accountNumber } = req.body;
+
+    const account = await Account.findOne({ accountNumber });
+
+    if (!account) {
+      return res.status(404).json({
+        error: 'Account not found',
+      });
+    }
+
+    res.status(200).json(account);
+  }
+);
+
 const getTokenFrom = (request: Request) => {
   const authorization = request.get('authorization');
   if (authorization && authorization.startsWith('Bearer ')) {
