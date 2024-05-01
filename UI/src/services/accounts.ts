@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { Account, NewAccount } from '../types';
+import {
+  Account,
+  FindByAccountNumberType,
+  FindUserAccountsType,
+  NewAccount,
+} from '../types';
 const baseUrl = 'http://localhost:3001/api/accounts';
 // const baseUrl = 'http://localhost:3001/accounts';
 
@@ -14,12 +19,13 @@ const getAll = async () => {
   return response.data;
 };
 
-interface FindByAccountNumberType {
-  accountNumber: number;
-}
-
 const findByAccountNumber = async (accountNumber: FindByAccountNumberType) => {
   const response = await axios.post(`${baseUrl}/find-account`, accountNumber);
+  return response.data;
+};
+
+const findUserAccounts = async (owner: FindUserAccountsType) => {
+  const response = await axios.post(`${baseUrl}/user-accounts`, owner);
   return response.data;
 };
 
@@ -45,6 +51,7 @@ export default {
   create,
   deleteAccount,
   findByAccountNumber,
+  findUserAccounts,
   getAll,
   updateAccount,
   setToken,
