@@ -246,14 +246,15 @@ usersRouter.post('/check-pin', async (req: Request, res: Response) => {
   const { email, transferPin } = req.body;
 
   const user = await User.findOne({ email });
-  const pinCorrect =
-    user === null ? false : await bcrypt.compare(transferPin, user.transferPin);
 
   if (!user) {
-    return res.status(401).json({
-      error: 'invalid email',
+    return res.status(404).json({
+      error: 'Email not found',
     });
   }
+
+  const pinCorrect = await bcrypt.compare(transferPin, user.transferPin);
+
   if (!pinCorrect) {
     return res.status(401).json({
       error: 'Wrong transfer pin',
