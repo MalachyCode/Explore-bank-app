@@ -67,7 +67,7 @@ const MobileTopUp = () => {
       // placeholder: 'Mobile Number',
       label: 'Mobile Number',
       errorMessage: `Phone number should be 11 numbers and shouldn't include any letters`,
-      // regex: '^[0-9]{11}$',
+      regex: '^[0-9]{11}$',
       // pattern: '^[0-9]{11}$',
       required: true,
     },
@@ -78,7 +78,7 @@ const MobileTopUp = () => {
       // placeholder: 'Enter Amount',
       errorMessage: 'Enter valid topup amount. Must be at least 10 Naira.',
       label: 'Amount',
-      // regex: '^[0-9]{2,7}$',
+      regex: '^[0-9]{2,7}$',
       required: true,
     },
   ];
