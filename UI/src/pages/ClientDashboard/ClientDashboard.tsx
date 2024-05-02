@@ -19,36 +19,37 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [user, setUser] = useState<User>();
   const [profileOpen, setProfileOpen] = useState(false);
-  const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
+  const [userAccounts, setUserAccounts] = useState<Array<Account>>();
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
+      const retrievedUser = JSON.parse(loggedUserJSON);
       notificationsService.getAll().then((allNotifications) => {
         setNotificationCount(
           allNotifications.find(
-            (notification: Notification) => notification.owner === user.id
+            (notification: Notification) =>
+              notification.owner === retrievedUser.id
           )?.newNotifications.length || 0
         );
         setNotifications(allNotifications);
       });
-      setUser(user);
-    }
-    accountService.getAll().then((accounts) => setAccounts(accounts));
-  }, []);
+      setUser(retrievedUser);
 
-  const userAccounts = accounts.filter((account) => account.owner === user?.id);
+      accountService
+        .findUserAccounts({ owner: retrievedUser.id })
+        .then((retrievedUserAccounts) => {
+          setUserAccounts(retrievedUserAccounts);
+        });
+    }
+  }, []);
 
   const userNotifications = notifications.filter(
     (notification) => notification.owner === user?.id
   );
-
-  // console.log(userNotifications);
-  // console.log(userNotifications[0].new.length);
 
   const iconInputs = [
     {
@@ -312,7 +313,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             ))}
           </div>
           <div className='totals-container'>
-            {userAccounts.map((account) => (
+            {userAccounts?.map((account) => (
               <RenderTotals
                 key={account.id}
                 status={account.status}
