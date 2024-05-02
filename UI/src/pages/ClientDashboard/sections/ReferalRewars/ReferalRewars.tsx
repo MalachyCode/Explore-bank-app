@@ -13,7 +13,7 @@ const ReferalRewards = () => {
   const [openAccountSelectBox, setOpenAccountSelectBox] = useState(false);
   const [accountToShow, setAccountToShow] = useState<Account>();
   const [user, setUser] = useState<User>();
-  const [accounts, setAccounts] = useState<Array<Account>>([]);
+  const [userAccounts, setUserAccounts] = useState<Array<Account>>();
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -21,18 +21,15 @@ const ReferalRewards = () => {
       const retrievedUser = JSON.parse(loggedUserJSON);
       setUser(retrievedUser);
 
-      accountsService.getAll().then((accounts) => {
-        setAccounts(accounts);
-        setAccountToShow(
-          accounts.filter(
-            (account: Account) => account.owner === retrievedUser.id
-          )[0]
-        );
-      });
+      accountsService
+        .findUserAccounts({ owner: retrievedUser.id })
+        .then((retrievedUserAccounts) => {
+          setAccountToShow(retrievedUserAccounts[0]);
+
+          setUserAccounts(retrievedUserAccounts);
+        });
     }
   }, []);
-
-  const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,7 +79,7 @@ const ReferalRewards = () => {
         >
           <div className='account-select-box'>
             <div>Account</div>
-            {userAccounts.map((account) => (
+            {userAccounts?.map((account) => (
               <div
                 className='account-to-select'
                 onClick={() => {
