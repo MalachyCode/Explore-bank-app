@@ -17,11 +17,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notificationsService from '../../../../services/notifications';
+import usersService from '../../../../services/users';
 
 const MobileTopUp = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User>();
-  const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [topupDetails, setTopupDetails] = useState<MobileTopUpType>({
     phoneNumber: '',
     amount: '',
@@ -33,6 +33,7 @@ const MobileTopUp = () => {
   const [openConfirm, setOpenConfirm] = useState(false);
   const [transferPin, setTransferPin] = useState<string>('');
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
+  const [userAccounts, setUserAccounts] = useState<Array<Account>>();
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -40,14 +41,13 @@ const MobileTopUp = () => {
       const retrievedUser = JSON.parse(loggedUserJSON);
       setUser(retrievedUser);
 
-      accountsService.getAll().then((accounts) => {
-        setAccounts(accounts);
-        setAccountToShow(
-          accounts.filter(
-            (account: Account) => account.owner === retrievedUser.id
-          )[0]
-        );
-      });
+      accountsService
+        .findUserAccounts({ owner: retrievedUser.id })
+        .then((retrievedUserAccounts) => {
+          setAccountToShow(retrievedUserAccounts[0]);
+
+          setUserAccounts(retrievedUserAccounts);
+        });
     }
 
     notificationsService
@@ -56,8 +56,6 @@ const MobileTopUp = () => {
         setNotifications(retrievedNotifications)
       );
   }, []);
-
-  const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
   console.log(selected);
 
@@ -69,7 +67,8 @@ const MobileTopUp = () => {
       // placeholder: 'Mobile Number',
       label: 'Mobile Number',
       errorMessage: `Phone number should be 11 numbers and shouldn't include any letters`,
-      pattern: '^[0-9]{11}$',
+      // regex: '^[0-9]{11}$',
+      // pattern: '^[0-9]{11}$',
       required: true,
     },
     {
@@ -77,8 +76,9 @@ const MobileTopUp = () => {
       name: 'amount',
       type: 'text',
       // placeholder: 'Enter Amount',
-      errorMessage: 'Enter topup amount',
+      errorMessage: 'Enter valid topup amount. Must be at least 10 Naira.',
       label: 'Amount',
+      // regex: '^[0-9]{2,7}$',
       required: true,
     },
   ];
@@ -89,67 +89,98 @@ const MobileTopUp = () => {
 
   console.log(userAccountNotificationBox);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (selected) {
-      if (user?.transferPin === transferPin) {
+    if (user) {
+      if (selected) {
         if (accountToShow?.status === 'active') {
-          if (accountToShow.balance >= Number(topupDetails.amount)) {
-            const updatedSendingAccount = {
-              ...accountToShow,
-              balance:
-                accountToShow &&
-                accountToShow?.balance - Number(topupDetails.amount),
-            };
-            accountsService
-              .updateAccount(accountToShow?.id, updatedSendingAccount)
-              .then((response) => console.log(response));
+          if (topupDetails.amount) {
+            if (topupDetails.phoneNumber?.length === 11) {
+              if (accountToShow.balance >= Number(topupDetails.amount)) {
+                try {
+                  const isPinValid = await usersService.checkPin({
+                    email: user.email,
+                    transferPin: transferPin,
+                  });
 
-            const newDebitTransaction: NewTransaction = {
-              accountNumber: accountToShow?.accountNumber,
-              createdOn: new Date(),
-              type: 'debit',
-              amount: Number(topupDetails.amount),
-              oldBalance: accountToShow?.balance,
-              newBalance: updatedSendingAccount.balance,
-              description: `Mobile TopUp of ${topupDetails.amount} For ${topupDetails.phoneNumber}`,
-            };
-            transactionsService
-              .newDebitTransaction(newDebitTransaction)
-              .then((mobileTopUpTransaction) => {
-                if (userAccountNotificationBox) {
-                  const mobileTopupNotification: Notification = {
-                    ...userAccountNotificationBox,
-                    newNotifications:
-                      userAccountNotificationBox?.newNotifications.concat({
-                        message: mobileTopUpTransaction.description,
-                        accountId: accountToShow.id,
-                        accountNumber: accountToShow.accountNumber,
-                        transactionId: mobileTopUpTransaction.id,
-                      }),
-                  };
+                  if (isPinValid) {
+                    const updatedSendingAccount = {
+                      ...accountToShow,
+                      balance:
+                        accountToShow &&
+                        accountToShow?.balance - Number(topupDetails.amount),
+                    };
+                    accountsService
+                      .updateAccount(accountToShow?.id, updatedSendingAccount)
+                      .then((response) => console.log(response));
 
-                  notificationsService
-                    .updateNotification(
-                      userAccountNotificationBox?.id,
-                      mobileTopupNotification
-                    )
-                    .then((response) => console.log(response));
+                    const newDebitTransaction: NewTransaction = {
+                      accountNumber: accountToShow?.accountNumber,
+                      createdOn: new Date(),
+                      type: 'debit',
+                      amount: Number(topupDetails.amount),
+                      oldBalance: accountToShow?.balance,
+                      newBalance: updatedSendingAccount.balance,
+                      description: `Mobile TopUp of ${topupDetails.amount} For ${topupDetails.phoneNumber}`,
+                    };
+                    transactionsService
+                      .newDebitTransaction(newDebitTransaction)
+                      .then((mobileTopUpTransaction) => {
+                        if (userAccountNotificationBox) {
+                          const mobileTopupNotification: Notification = {
+                            ...userAccountNotificationBox,
+                            newNotifications:
+                              userAccountNotificationBox?.newNotifications.concat(
+                                {
+                                  message: mobileTopUpTransaction.description,
+                                  accountId: accountToShow.id,
+                                  accountNumber: accountToShow.accountNumber,
+                                  transactionId: mobileTopUpTransaction.id,
+                                }
+                              ),
+                          };
+
+                          notificationsService
+                            .updateNotification(
+                              userAccountNotificationBox?.id,
+                              mobileTopupNotification
+                            )
+                            .then((response) => console.log(response));
+                        }
+                      });
+
+                    navigate('/dashboard-client');
+
+                    setTopupDetails({
+                      ...topupDetails,
+                      amount: '',
+                      phoneNumber: '',
+                    });
+                  }
+                } catch (e: any) {
+                  toast.error(e.response.data.error, {
+                    position: 'top-center',
+                  });
+                  setOpenConfirm(false);
                 }
+              } else {
+                toast.error('Insufficient balance', {
+                  position: 'top-center',
+                });
+                setOpenConfirm(false);
+              }
+            } else {
+              toast.error('Enter a valid phone number', {
+                position: 'top-center',
               });
-
-            navigate('/dashboard-client');
-
-            setTopupDetails({
-              ...topupDetails,
-              amount: '',
-              phoneNumber: '',
-            });
+              setOpenConfirm(false);
+            }
           } else {
-            toast.error('Insufficient balance', {
+            toast.error('Specify a valid amount', {
               position: 'top-center',
             });
+            setOpenConfirm(false);
           }
         } else {
           toast.error(
@@ -162,18 +193,16 @@ const MobileTopUp = () => {
           setTransferPin('');
         }
       } else {
-        toast.error('Wrong transfer pin', {
+        toast.error('Select a network provider', {
           position: 'top-center',
         });
         setOpenConfirm(false);
         setTransferPin('');
       }
     } else {
-      toast.error('Select a network provider', {
+      toast.error('No user', {
         position: 'top-center',
       });
-      setOpenConfirm(false);
-      setTransferPin('');
     }
   };
 
@@ -257,7 +286,7 @@ const MobileTopUp = () => {
       >
         <div className='account-select-box'>
           <div>Account</div>
-          {userAccounts.map((account) => (
+          {userAccounts?.map((account) => (
             <div
               className='account-to-select'
               onClick={() => {
