@@ -20,17 +20,18 @@ import notificationsService from '../../../../services/notifications';
 const Transfer = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User>();
-  const [users, setUsers] = useState<Array<User>>();
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
-  const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [accountForTransfer, setAccountForTransfer] = useState<number>();
   const [transferPin, setTransferPin] = useState<string>('');
   const [selected, setSelected] = useState(false);
+  const [receivingAccountOwner, setReceivingAccountOwner] = useState<User>();
+  const [receivingAccount, setReceivingAccount] = useState<Account>();
+  const [sendingAccount, setSendingAccount] = useState<Account>();
+  const [userAccounts, setUserAccounts] = useState<Array<Account>>();
   const [openConfirm, setOpenConfirm] = useState(false);
-  const [accountErrorMessage, setAccountErrorMessage] = useState<string | null>(
-    null
-  );
-  const dailyLimit = 1000000;
+  const [accountErrorMessage, setAccountErrorMessage] = useState('');
+  const [accountSuccessMessage, setAccountSuccessMessage] =
+    useState<string>('');
 
   const [transferDetials, setTransferDetials] = useState<TransferType>({
     bankName: '',
@@ -40,14 +41,21 @@ const Transfer = () => {
     description: '',
   });
 
+  const dailyLimit = 1000000;
+
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      setUser(retrievedUser);
+      accountService
+        .findUserAccounts({ owner: retrievedUser.id })
+        .then((retrievedUserAccounts) => {
+          console.log(retrievedUserAccounts);
+
+          setUserAccounts(retrievedUserAccounts);
+        });
     }
-    userService.getAll().then((users) => setUsers(users));
-    accountService.getAll().then((accounts) => setAccounts(accounts));
     notificationsService
       .getAll()
       .then((retrievedNotifications) =>
@@ -55,18 +63,52 @@ const Transfer = () => {
       );
   }, []);
 
-  const userAccounts = accounts.filter((account) => account.owner === user?.id);
+  useEffect(() => {
+    if (!transferDetials.accountNumber.length) {
+      setAccountErrorMessage('');
+      return;
+    }
 
-  const sendingAccount = accounts.find(
-    (account) => account.accountNumber === accountForTransfer
-  );
-  const receivingAccount = accounts.find(
-    (account) => account.accountNumber === Number(transferDetials.accountNumber)
-  );
+    if (transferDetials.accountNumber.length < 10) {
+      setAccountErrorMessage(`Expected 10 Numbers`);
+      setAccountSuccessMessage(``);
+      return;
+    }
 
-  const receivingAccountOwner = users?.find(
-    (user) => user.id === receivingAccount?.owner
-  );
+    accountService
+      .findByAccountNumber({
+        accountNumber: Number(transferDetials.accountNumber),
+      })
+      .then((retreivedAccount) => {
+        setReceivingAccount(retreivedAccount);
+        userService.getSingle(retreivedAccount.owner).then((retreivedUser) => {
+          setReceivingAccountOwner(retreivedUser);
+          setAccountSuccessMessage(
+            `${retreivedUser.firstName} ${retreivedUser.lastName}`
+          );
+        });
+        setAccountErrorMessage(``);
+      })
+      .catch((e) => {
+        setAccountSuccessMessage(``);
+        setAccountErrorMessage(e.response.data.error);
+      });
+  }, [transferDetials.accountNumber]);
+
+  useEffect(() => {
+    if (accountForTransfer) {
+      accountService
+        .findByAccountNumber({
+          accountNumber: Number(accountForTransfer),
+        })
+        .then((retrievedAccount) => setSendingAccount(retrievedAccount))
+        .catch((e) => {
+          toast.error(e.response.data.error, {
+            position: 'top-center',
+          });
+        });
+    }
+  }, [accountForTransfer]);
 
   const receivingAccountNotificationBox = notifications.find(
     (notification) => notification.owner === receivingAccount?.owner
@@ -76,36 +118,7 @@ const Transfer = () => {
     (notification) => notification.owner === sendingAccount?.owner
   );
 
-  // console.log(receivingAccountNotificationBox);
-  // console.log(sendingAccountNotificationBox);
-  // console.log(notifications);
-
   const formInputs = [
-    {
-      id: 'bankName',
-      name: 'bankName',
-      type: 'text',
-      // placeholder: 'Bank Name',
-      errorMessage: 'Enter a valid bank name',
-      label: 'Bank Name',
-      regex: 'Explore Bank',
-      required: true,
-    },
-    {
-      id: 'accountNumber',
-      name: 'accountNumber',
-      type: 'text',
-      // placeholder: 'Account Number',
-      errorMessage: accountErrorMessage ? accountErrorMessage : '',
-      // errorMessage: `Can't find account with account number ${transferDetials.accountNumber}`,
-      label: 'Account Number',
-      regex: '^[0-9]{10}$',
-      // pattern: accounts.some(
-      //   (account) =>
-      //     account.accountNumber === Number(transferDetials.accountNumber)
-      // ),
-      required: true,
-    },
     {
       id: 'amount',
       name: 'amount',
@@ -120,7 +133,7 @@ const Transfer = () => {
       id: 'description',
       name: 'description',
       type: 'text',
-      // placeholder: 'Ddescription',
+      // placeholder: 'Description',
       errorMessage:
         'Enter valid description. Must start with a capital letter and be at least 3 characters long',
       label: 'Description',
@@ -129,188 +142,207 @@ const Transfer = () => {
     },
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     let creditMessage: string;
     let creditId: string;
 
     if (accountForTransfer) {
-      if (user?.transferPin === transferPin) {
-        if (sendingAccount?.status === 'active') {
-          if (sendingAccount.balance >= Number(transferDetials.amount)) {
-            if (receivingAccount) {
-              const updatedSendingAccount = {
-                ...sendingAccount,
-                balance:
-                  sendingAccount &&
-                  sendingAccount?.balance - Number(transferDetials.amount),
-              };
+      if (user) {
+        try {
+          const isPinValid = await userService.checkPin({
+            email: user.email,
+            transferPin: transferPin,
+          });
 
-              const updatedRecievingAccount = {
-                ...receivingAccount,
-                balance:
-                  receivingAccount &&
-                  receivingAccount?.balance + Number(transferDetials.amount),
-              };
+          if (isPinValid) {
+            console.log(true);
+            if (sendingAccount?.status === 'active') {
+              if (sendingAccount.balance >= Number(transferDetials.amount)) {
+                if (receivingAccount) {
+                  const updatedSendingAccount = {
+                    ...sendingAccount,
+                    balance:
+                      sendingAccount &&
+                      sendingAccount?.balance - Number(transferDetials.amount),
+                  };
 
-              accountService
-                .updateAccount(sendingAccount?.id, updatedSendingAccount)
-                .then((response) => console.log(response));
+                  const updatedRecievingAccount = {
+                    ...receivingAccount,
+                    balance:
+                      receivingAccount &&
+                      receivingAccount?.balance +
+                        Number(transferDetials.amount),
+                  };
 
-              accountService
-                .updateAccount(receivingAccount?.id, updatedRecievingAccount)
-                .then((response) => console.log(response));
+                  accountService
+                    .updateAccount(sendingAccount?.id, updatedSendingAccount)
+                    .then((response) => console.log(response));
 
-              const newCreditTransaction: NewTransaction = {
-                accountNumber: receivingAccount?.accountNumber,
-                createdOn: new Date(),
-                type: 'credit',
-                amount: Number(transferDetials.amount),
-                oldBalance: receivingAccount?.balance,
-                newBalance: updatedRecievingAccount.balance,
-                description: `Frm:${user.firstName} ${user.lastName}, ${transferDetials.bankName}Mobile; ${transferDetials.description}`,
-              };
+                  accountService
+                    .updateAccount(
+                      receivingAccount?.id,
+                      updatedRecievingAccount
+                    )
+                    .then((response) => console.log(response));
 
-              const newDebitTransaction: NewTransaction = {
-                accountNumber: sendingAccount?.accountNumber,
-                createdOn: new Date(),
-                type: 'debit',
-                amount: Number(transferDetials.amount),
-                oldBalance: sendingAccount?.balance,
-                newBalance: updatedSendingAccount.balance,
-                description: `To:${receivingAccountOwner?.firstName} ${receivingAccountOwner?.lastName}, ${transferDetials.bankName}Mobile; ${transferDetials.description}`,
-              };
+                  const newCreditTransaction: NewTransaction = {
+                    accountNumber: receivingAccount?.accountNumber,
+                    createdOn: new Date(),
+                    type: 'credit',
+                    amount: Number(transferDetials.amount),
+                    oldBalance: receivingAccount?.balance,
+                    newBalance: updatedRecievingAccount.balance,
+                    description: `Frm:${user.firstName} ${user.lastName}, ${transferDetials.bankName}Mobile; ${transferDetials.description}`,
+                  };
 
-              transactionsService
-                .newCreditTransaction(newCreditTransaction)
-                .then((creditTransaction) => {
-                  // console.log(creditTransaction);
-                  if (
-                    receivingAccountNotificationBox ===
-                    sendingAccountNotificationBox
-                  ) {
-                    creditMessage = creditTransaction.description;
-                    creditId = creditTransaction.id;
-                  } else {
-                    if (receivingAccountNotificationBox) {
-                      const creditNotification: Notification = {
-                        ...receivingAccountNotificationBox,
-                        newNotifications:
-                          receivingAccountNotificationBox?.newNotifications.concat(
-                            {
-                              message: creditTransaction.description,
-                              accountId: receivingAccount.id,
-                              accountNumber: receivingAccount.accountNumber,
-                              transactionId: creditTransaction.id,
-                            }
-                          ),
-                      };
+                  const newDebitTransaction: NewTransaction = {
+                    accountNumber: sendingAccount?.accountNumber,
+                    createdOn: new Date(),
+                    type: 'debit',
+                    amount: Number(transferDetials.amount),
+                    oldBalance: sendingAccount?.balance,
+                    newBalance: updatedSendingAccount.balance,
+                    description: `To:${receivingAccountOwner?.firstName} ${receivingAccountOwner?.lastName}, ${transferDetials.bankName}Mobile; ${transferDetials.description}`,
+                  };
 
-                      notificationsService
-                        .updateNotification(
-                          receivingAccountNotificationBox?.id,
-                          creditNotification
-                        )
-                        .then((response) => console.log(response));
-                    }
-                  }
+                  transactionsService
+                    .newCreditTransaction(newCreditTransaction)
+                    .then((creditTransaction) => {
+                      // console.log(creditTransaction);
+                      if (
+                        receivingAccountNotificationBox ===
+                        sendingAccountNotificationBox
+                      ) {
+                        creditMessage = creditTransaction.description;
+                        creditId = creditTransaction.id;
+                      } else {
+                        if (receivingAccountNotificationBox) {
+                          const creditNotification: Notification = {
+                            ...receivingAccountNotificationBox,
+                            newNotifications:
+                              receivingAccountNotificationBox?.newNotifications.concat(
+                                {
+                                  message: creditTransaction.description,
+                                  accountId: receivingAccount.id,
+                                  accountNumber: receivingAccount.accountNumber,
+                                  transactionId: creditTransaction.id,
+                                }
+                              ),
+                          };
+
+                          notificationsService
+                            .updateNotification(
+                              receivingAccountNotificationBox?.id,
+                              creditNotification
+                            )
+                            .then((response) => console.log(response));
+                        }
+                      }
+                    });
+
+                  transactionsService
+                    .newDebitTransaction(newDebitTransaction)
+                    .then((debitTransaction) => {
+                      // console.log(debitTransaction);
+                      if (
+                        receivingAccountNotificationBox ===
+                        sendingAccountNotificationBox
+                      ) {
+                        if (sendingAccountNotificationBox) {
+                          const debitNotification: Notification = {
+                            ...sendingAccountNotificationBox,
+                            newNotifications:
+                              sendingAccountNotificationBox?.newNotifications.concat(
+                                {
+                                  message: debitTransaction.description,
+                                  accountId: sendingAccount.id,
+                                  accountNumber: sendingAccount.accountNumber,
+                                  transactionId: debitTransaction.id,
+                                }
+                              ),
+                          };
+                          const creditNotification: Notification = {
+                            ...debitNotification,
+                            newNotifications:
+                              debitNotification.newNotifications.concat({
+                                message: creditMessage,
+                                accountId: receivingAccount.id,
+                                accountNumber: receivingAccount.accountNumber,
+                                transactionId: creditId,
+                              }),
+                          };
+
+                          notificationsService
+                            .updateNotification(
+                              receivingAccountNotificationBox?.id,
+                              creditNotification
+                            )
+                            .then((response) => console.log(response));
+                        }
+                      } else {
+                        if (sendingAccountNotificationBox) {
+                          const debitNotification: Notification = {
+                            ...sendingAccountNotificationBox,
+                            newNotifications:
+                              sendingAccountNotificationBox?.newNotifications.concat(
+                                {
+                                  message: debitTransaction.description,
+                                  accountId: sendingAccount.id,
+                                  accountNumber: sendingAccount.accountNumber,
+                                  transactionId: debitTransaction.id,
+                                }
+                              ),
+                          };
+
+                          notificationsService
+                            .updateNotification(
+                              sendingAccountNotificationBox?.id,
+                              debitNotification
+                            )
+                            .then((response) => console.log(response));
+                        }
+                      }
+                    });
+
+                  navigate('/dashboard-client');
+
+                  setTransferDetials({
+                    ...transferDetials,
+                    bankName: '',
+                    amount: '',
+                    accountNumber: '',
+                  });
+                } else {
+                  setAccountErrorMessage(
+                    `Can't find account with account number ${transferDetials.accountNumber}`
+                  );
+                }
+              } else {
+                toast.error('Insufficient balance', {
+                  position: 'top-center',
                 });
-
-              transactionsService
-                .newDebitTransaction(newDebitTransaction)
-                .then((debitTransaction) => {
-                  // console.log(debitTransaction);
-                  if (
-                    receivingAccountNotificationBox ===
-                    sendingAccountNotificationBox
-                  ) {
-                    if (sendingAccountNotificationBox) {
-                      const debitNotification: Notification = {
-                        ...sendingAccountNotificationBox,
-                        newNotifications:
-                          sendingAccountNotificationBox?.newNotifications.concat(
-                            {
-                              message: debitTransaction.description,
-                              accountId: sendingAccount.id,
-                              accountNumber: sendingAccount.accountNumber,
-                              transactionId: debitTransaction.id,
-                            }
-                          ),
-                      };
-                      const creditNotification: Notification = {
-                        ...debitNotification,
-                        newNotifications:
-                          debitNotification.newNotifications.concat({
-                            message: creditMessage,
-                            accountId: receivingAccount.id,
-                            accountNumber: receivingAccount.accountNumber,
-                            transactionId: creditId,
-                          }),
-                      };
-
-                      notificationsService
-                        .updateNotification(
-                          receivingAccountNotificationBox?.id,
-                          creditNotification
-                        )
-                        .then((response) => console.log(response));
-                    }
-                  } else {
-                    if (sendingAccountNotificationBox) {
-                      const debitNotification: Notification = {
-                        ...sendingAccountNotificationBox,
-                        newNotifications:
-                          sendingAccountNotificationBox?.newNotifications.concat(
-                            {
-                              message: debitTransaction.description,
-                              accountId: sendingAccount.id,
-                              accountNumber: sendingAccount.accountNumber,
-                              transactionId: debitTransaction.id,
-                            }
-                          ),
-                      };
-
-                      notificationsService
-                        .updateNotification(
-                          sendingAccountNotificationBox?.id,
-                          debitNotification
-                        )
-                        .then((response) => console.log(response));
-                    }
-                  }
-                });
-
-              navigate('/dashboard-client');
-
-              setTransferDetials({
-                ...transferDetials,
-                bankName: '',
-                amount: '',
-                accountNumber: '',
-              });
+                setOpenConfirm(false);
+              }
             } else {
-              setAccountErrorMessage(
-                `Can't find account with account number ${transferDetials.accountNumber}`
+              toast.error(
+                'Your account is not active for transfers. Please visit our branch near you',
+                {
+                  position: 'top-center',
+                }
               );
+              setOpenConfirm(false);
             }
-          } else {
-            toast.error('Insufficient balance', {
-              position: 'top-center',
-            });
-            setOpenConfirm(false);
           }
-        } else {
-          toast.error(
-            'Your account is not active for transfers. Please visit our branch near you',
-            {
-              position: 'top-center',
-            }
-          );
+        } catch (e: any) {
+          toast.error(e.response.data.error, {
+            position: 'top-center',
+          });
           setOpenConfirm(false);
         }
       } else {
-        toast.error('Wrong transfer pin', {
+        toast.error('No user', {
           position: 'top-center',
         });
         setOpenConfirm(false);
@@ -327,16 +359,6 @@ const Transfer = () => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTransferDetials({ ...transferDetials, [e.target.name]: e.target.value });
-    if (e.target.name === 'accountNumber') {
-      accounts.some(
-        (account) =>
-          account.accountNumber === Number(transferDetials.accountNumber)
-      )
-        ? setAccountErrorMessage(null)
-        : setAccountErrorMessage(
-            `Can't find account with account number ${transferDetials.accountNumber}!`
-          );
-    }
   };
 
   return (
@@ -385,7 +407,7 @@ const Transfer = () => {
           }}
         >
           <div className='account-balance-container'>
-            {userAccounts.map((account) => (
+            {userAccounts?.map((account) => (
               <div
                 key={account.id}
                 className={
@@ -411,6 +433,33 @@ const Transfer = () => {
             <div className='remaining'>
               <span>remaining</span>950,000
             </div>
+          </div>
+          <div className='form-input-container'>
+            <div className={'input-box ' + (accountErrorMessage && 'error')}>
+              <input
+                type='text'
+                value={transferDetials.accountNumber}
+                onChange={(e) =>
+                  setTransferDetials({
+                    ...transferDetials,
+                    accountNumber: e.target.value,
+                  })
+                }
+              />
+              <span
+                className={
+                  'placeholder ' + (transferDetials.accountNumber && 'active')
+                }
+              >
+                Account Number
+              </span>
+            </div>
+            {accountErrorMessage && (
+              <span className='error-message'>{accountErrorMessage}</span>
+            )}
+            {accountSuccessMessage && (
+              <span className='success-message'>{accountSuccessMessage}</span>
+            )}
           </div>
           {formInputs.map((input) => (
             <FormInput
