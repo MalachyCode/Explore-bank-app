@@ -24,6 +24,7 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notificationsService from '../../../../services/notifications';
+import usersService from '../../../../services/users';
 
 // import sgMail from '@sendgrid/mail';
 // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -38,7 +39,6 @@ import notificationsService from '../../../../services/notifications';
 const SportWalletFunding = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User>();
-  const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [accountToShow, setAccountToShow] = useState<Account>();
   // const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [openAccountSelectBox, setOpenAccountSelectBox] = useState(false);
@@ -54,6 +54,7 @@ const SportWalletFunding = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
+  const [userAccounts, setUserAccounts] = useState<Array<Account>>();
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -61,14 +62,13 @@ const SportWalletFunding = () => {
       const retrievedUser = JSON.parse(loggedUserJSON);
       setUser(retrievedUser);
 
-      accountsService.getAll().then((accounts) => {
-        setAccounts(accounts);
-        setAccountToShow(
-          accounts.filter(
-            (account: Account) => account.owner === retrievedUser.id
-          )[0]
-        );
-      });
+      accountsService
+        .findUserAccounts({ owner: retrievedUser.id })
+        .then((retrievedUserAccounts) => {
+          setAccountToShow(retrievedUserAccounts[0]);
+
+          setUserAccounts(retrievedUserAccounts);
+        });
     }
 
     notificationsService
@@ -78,87 +78,120 @@ const SportWalletFunding = () => {
       );
   }, []);
 
-  const userAccounts = accounts.filter((account) => account.owner === user?.id);
-
   const userAccountNotificationBox = notifications.find(
     (notification) => notification.owner === user?.id
   );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (user?.transferPin === paymentDetails.pin) {
-      if (accountToShow?.status === 'active') {
-        if (accountToShow.balance >= Number(paymentDetails.amount)) {
-          const updatedSendingAccount = {
-            ...accountToShow,
-            balance:
-              accountToShow &&
-              accountToShow?.balance - Number(paymentDetails.amount),
-          };
-          accountsService
-            .updateAccount(accountToShow?.id, updatedSendingAccount)
-            .then((response) => console.log(response));
+    if (biller && product) {
+      if (user) {
+        if (accountToShow?.status === 'active') {
+          if (paymentDetails.amount) {
+            if (paymentDetails.phoneNumber?.length === 11) {
+              if (accountToShow.balance >= Number(paymentDetails.amount)) {
+                try {
+                  const isPinValid = await usersService.checkPin({
+                    email: user.email,
+                    transferPin: paymentDetails.pin,
+                  });
 
-          const newDebitTransaction: NewTransaction = {
-            accountNumber: accountToShow?.accountNumber,
-            createdOn: new Date(),
-            type: 'debit',
-            amount: Number(paymentDetails.amount),
-            oldBalance: accountToShow?.balance,
-            newBalance: updatedSendingAccount.balance,
-            description: `Top up ${paymentDetails.amount} for user ${paymentDetails.phoneNumber} To ${biller} account. For service ${product}: ${paymentDetails.description}`,
-          };
-          transactionsService
-            .newDebitTransaction(newDebitTransaction)
-            .then((sportWalletFundingTransaction) => {
-              if (userAccountNotificationBox) {
-                const sportWalletFundingNotification: Notification = {
-                  ...userAccountNotificationBox,
-                  newNotifications:
-                    userAccountNotificationBox?.newNotifications.concat({
-                      message: sportWalletFundingTransaction.description,
-                      accountId: accountToShow.id,
-                      accountNumber: accountToShow.accountNumber,
-                      transactionId: sportWalletFundingTransaction.id,
-                    }),
-                };
+                  if (isPinValid) {
+                    const updatedSendingAccount = {
+                      ...accountToShow,
+                      balance:
+                        accountToShow &&
+                        accountToShow?.balance - Number(paymentDetails.amount),
+                    };
+                    accountsService
+                      .updateAccount(accountToShow?.id, updatedSendingAccount)
+                      .then((response) => console.log(response));
 
-                notificationsService
-                  .updateNotification(
-                    userAccountNotificationBox?.id,
-                    sportWalletFundingNotification
-                  )
-                  .then((response) => console.log(response));
+                    const newDebitTransaction: NewTransaction = {
+                      accountNumber: accountToShow?.accountNumber,
+                      createdOn: new Date(),
+                      type: 'debit',
+                      amount: Number(paymentDetails.amount),
+                      oldBalance: accountToShow?.balance,
+                      newBalance: updatedSendingAccount.balance,
+                      description: `Top up ${paymentDetails.amount} for user ${paymentDetails.phoneNumber} To ${biller} account. For service ${product}: ${paymentDetails.description}`,
+                    };
+                    transactionsService
+                      .newDebitTransaction(newDebitTransaction)
+                      .then((sportWalletFundingTransaction) => {
+                        if (userAccountNotificationBox) {
+                          const sportWalletFundingNotification: Notification = {
+                            ...userAccountNotificationBox,
+                            newNotifications:
+                              userAccountNotificationBox?.newNotifications.concat(
+                                {
+                                  message:
+                                    sportWalletFundingTransaction.description,
+                                  accountId: accountToShow.id,
+                                  accountNumber: accountToShow.accountNumber,
+                                  transactionId:
+                                    sportWalletFundingTransaction.id,
+                                }
+                              ),
+                          };
+
+                          notificationsService
+                            .updateNotification(
+                              userAccountNotificationBox?.id,
+                              sportWalletFundingNotification
+                            )
+                            .then((response) => console.log(response));
+                        }
+                      });
+
+                    navigate('/dashboard-client');
+
+                    setBiller('');
+                    setProduct('');
+                    setPaymentDetails({
+                      ...paymentDetails,
+                      amount: '',
+                      pin: '',
+                      description: '',
+                      phoneNumber: '',
+                    });
+                  }
+                } catch (e: any) {
+                  toast.error(e.response.data.error, {
+                    position: 'top-center',
+                  });
+                }
+              } else {
+                toast.error('Insufficient balance', {
+                  position: 'top-center',
+                });
               }
+            } else {
+              toast.error('Enter a valid phone number', {
+                position: 'top-center',
+              });
+            }
+          } else {
+            toast.error('Specify a valid amount', {
+              position: 'top-center',
             });
-
-          navigate('/dashboard-client');
-
-          setBiller('');
-          setProduct('');
-          setPaymentDetails({
-            ...paymentDetails,
-            amount: '',
-            pin: '',
-            description: '',
-            phoneNumber: '',
-          });
+          }
         } else {
-          toast.error('Insufficient balance', {
-            position: 'top-center',
-          });
+          toast.error(
+            'Your account is not active. Please visit our branch near you to reactivate',
+            {
+              position: 'top-center',
+            }
+          );
         }
       } else {
-        toast.error(
-          'Your account is not active. Please visit our branch near you to reactivate',
-          {
-            position: 'top-center',
-          }
-        );
+        toast.error('No user', {
+          position: 'top-center',
+        });
       }
     } else {
-      toast.error('Wrong transfer pin', {
+      toast.error('Biller and Product are required fields', {
         position: 'top-center',
       });
     }
@@ -200,7 +233,7 @@ const SportWalletFunding = () => {
         >
           <div className='account-select-box'>
             <div>Account</div>
-            {userAccounts.map((account) => (
+            {userAccounts?.map((account) => (
               <div
                 className='account-to-select'
                 onClick={() => {
