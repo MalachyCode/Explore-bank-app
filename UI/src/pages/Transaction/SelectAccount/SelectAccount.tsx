@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react';
 import { RenderTotals } from '../../../components/RenderIconsandTotals';
 import accountsService from '../../../services/accounts';
-import { Account, User } from '../../../types';
+import { Account } from '../../../types';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './SelectAccount.scss';
 import { useNavigate } from 'react-router-dom';
 
 const SelectAccount = () => {
   const navigate = useNavigate();
-  const [accounts, setAccounts] = useState<Array<Account>>([]);
-  const [user, setUser] = useState<User>();
+  const [userAccounts, setUserAccounts] = useState<Array<Account>>();
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      const retrievedUser = JSON.parse(loggedUserJSON);
+      accountsService
+        .findUserAccounts({ owner: retrievedUser.id })
+        .then((retrievedUserAccounts) => {
+          setUserAccounts(retrievedUserAccounts);
+        });
     }
-    accountsService.getAll().then((transactions) => setAccounts(transactions));
   }, []);
-
-  const userAccounts = accounts.filter((account) => account.owner === user?.id);
 
   return (
     <div className='select-account'>
@@ -33,7 +33,7 @@ const SelectAccount = () => {
       </div>
       <div className='container'>
         <h3 className='header'>Select Account</h3>
-        {userAccounts.map((account) => (
+        {userAccounts?.map((account) => (
           <RenderTotals
             key={account.id}
             status={account.status}
