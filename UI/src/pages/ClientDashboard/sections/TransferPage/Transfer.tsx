@@ -30,6 +30,7 @@ const Transfer = () => {
   const [userAccounts, setUserAccounts] = useState<Array<Account>>();
   const [openConfirm, setOpenConfirm] = useState(false);
   const [accountErrorMessage, setAccountErrorMessage] = useState('');
+  const [disableButton, setDisableButton] = useState(true);
   const [accountSuccessMessage, setAccountSuccessMessage] =
     useState<string>('');
 
@@ -51,8 +52,6 @@ const Transfer = () => {
       accountService
         .findUserAccounts({ owner: retrievedUser.id })
         .then((retrievedUserAccounts) => {
-          console.log(retrievedUserAccounts);
-
           setUserAccounts(retrievedUserAccounts);
         });
     }
@@ -109,6 +108,51 @@ const Transfer = () => {
         });
     }
   }, [accountForTransfer]);
+
+  useEffect(() => {
+    if (user) {
+      if (accountForTransfer) {
+        if (
+          receivingAccount &&
+          receivingAccount?.accountNumber !== sendingAccount?.accountNumber
+        ) {
+          if (
+            transferDetials.amount &&
+            !isNaN(Number(transferDetials.amount)) &&
+            transferDetials.amount.length > 2
+          ) {
+            if (transferDetials.description.length > 3) {
+              if (sendingAccount?.status === 'active') {
+                if (sendingAccount.balance >= Number(transferDetials.amount)) {
+                  setDisableButton(false);
+                  return;
+                } else {
+                  toast.error('Insufficient balance', {
+                    position: 'top-center',
+                  });
+                }
+              } else {
+                toast.error(
+                  'Your account is not active for transfers. Please visit our branch near you',
+                  {
+                    position: 'top-center',
+                  }
+                );
+              }
+            }
+          }
+        }
+      }
+    }
+    setDisableButton(true);
+  }, [
+    accountForTransfer,
+    receivingAccount,
+    sendingAccount,
+    transferDetials.amount,
+    transferDetials.description.length,
+    user,
+  ]);
 
   const receivingAccountNotificationBox = notifications.find(
     (notification) => notification.owner === receivingAccount?.owner
@@ -469,7 +513,11 @@ const Transfer = () => {
               onChange={onChange}
             />
           ))}
-          <button type='submit' className='btn'>
+          <button
+            type='submit'
+            className={'btn ' + (disableButton && 'disabled')}
+            disabled={disableButton}
+          >
             Transfer
           </button>
           {user?.transferPin === '' && (
