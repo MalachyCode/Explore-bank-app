@@ -172,6 +172,15 @@
         }
       }
 
+      .btn {
+        &.disabled {
+          background: #7c8ca7;
+          opacity: 0.5;
+          box-shadow: none;
+          cursor: not-allowed;
+        }
+      }
+
       .set-pin {
         margin: -10px 0;
         padding: 0;
