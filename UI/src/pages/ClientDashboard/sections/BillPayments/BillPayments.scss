@@ -8,5 +8,19 @@
     width: 100%;
     height: 90%;
     overflow: hidden;
+
+    .product-and-form-container {
+      form {
+        .btn {
+          margin-top: 0;
+          &.disabled {
+            background: #7c8ca7;
+            opacity: 0.5;
+            box-shadow: none;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
   }
 }
