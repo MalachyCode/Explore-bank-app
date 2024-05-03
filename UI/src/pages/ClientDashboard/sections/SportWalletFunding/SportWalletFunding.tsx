@@ -55,6 +55,7 @@ const SportWalletFunding = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
   const [userAccounts, setUserAccounts] = useState<Array<Account>>();
+  const [disableButton, setDisableButton] = useState(true);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -77,6 +78,50 @@ const SportWalletFunding = () => {
         setNotifications(retrievedNotifications)
       );
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      if (biller && product) {
+        if (accountToShow?.status === 'active') {
+          if (
+            paymentDetails.amount &&
+            !isNaN(Number(paymentDetails.amount)) &&
+            paymentDetails.amount.length > 2
+          ) {
+            if (accountToShow.balance >= Number(paymentDetails.amount)) {
+              if (
+                paymentDetails.phoneNumber?.length === 11 &&
+                !isNaN(Number(paymentDetails.phoneNumber))
+              ) {
+                setDisableButton(false);
+                return;
+              }
+            } else {
+              toast.error('Insufficient balance', {
+                position: 'top-center',
+              });
+            }
+          }
+        } else {
+          toast.error(
+            'Your account is not active for transfers. Please visit our branch near you',
+            {
+              position: 'top-center',
+            }
+          );
+        }
+      }
+    }
+    setDisableButton(true);
+  }, [
+    accountToShow?.balance,
+    accountToShow?.status,
+    biller,
+    paymentDetails.amount,
+    paymentDetails.phoneNumber,
+    product,
+    user,
+  ]);
 
   const userAccountNotificationBox = notifications.find(
     (notification) => notification.owner === user?.id
@@ -371,7 +416,13 @@ const SportWalletFunding = () => {
                   />
                 )}
               </div>
-              <button type='submit'>Pay</button>
+              <button
+                className={'btn ' + (disableButton && 'disabled')}
+                type='submit'
+                disabled={disableButton}
+              >
+                Pay
+              </button>
             </form>
           </div>
         )}
