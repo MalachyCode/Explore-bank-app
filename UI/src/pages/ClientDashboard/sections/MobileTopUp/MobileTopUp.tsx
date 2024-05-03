@@ -34,6 +34,7 @@ const MobileTopUp = () => {
   const [transferPin, setTransferPin] = useState<string>('');
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
   const [userAccounts, setUserAccounts] = useState<Array<Account>>();
+  const [disableButton, setDisableButton] = useState(true);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -57,7 +58,48 @@ const MobileTopUp = () => {
       );
   }, []);
 
-  console.log(selected);
+  useEffect(() => {
+    if (user) {
+      if (selected) {
+        if (accountToShow?.status === 'active') {
+          if (
+            topupDetails.amount &&
+            !isNaN(Number(topupDetails.amount)) &&
+            topupDetails.amount.length > 2
+          ) {
+            if (accountToShow.balance >= Number(topupDetails.amount)) {
+              if (
+                topupDetails.phoneNumber.length === 11 &&
+                !isNaN(Number(topupDetails.phoneNumber))
+              ) {
+                setDisableButton(false);
+                return;
+              }
+            } else {
+              toast.error('Insufficient balance', {
+                position: 'top-center',
+              });
+            }
+          }
+        } else {
+          toast.error(
+            'Your account is not active for transfers. Please visit our branch near you',
+            {
+              position: 'top-center',
+            }
+          );
+        }
+      }
+    }
+    setDisableButton(true);
+  }, [
+    accountToShow?.balance,
+    accountToShow?.status,
+    selected,
+    topupDetails.amount,
+    topupDetails.phoneNumber,
+    user,
+  ]);
 
   const formInputs = [
     {
@@ -369,7 +411,11 @@ const MobileTopUp = () => {
             </div>
           ))}
         </div>
-        <button type='submit' className='btn'>
+        <button
+          disabled={disableButton}
+          type='submit'
+          className={'btn ' + (disableButton && 'disabled')}
+        >
           Proceed
         </button>
       </form>
