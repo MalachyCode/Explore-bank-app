@@ -113,6 +113,11 @@ accountsRouter.put(
   (req: Request, res: Response, next: NextFunction) => {
     const body = req.body;
 
+    const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET);
+    if (!decodedToken.id) {
+      return res.status(401).json({ error: 'token invalid' });
+    }
+
     const account = {
       balance: body.balance,
       createdOn: body.createdOn,
