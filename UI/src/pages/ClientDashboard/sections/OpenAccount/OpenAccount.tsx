@@ -31,6 +31,8 @@ const OpenAccount = () => {
     if (loggedUserJSON) {
       const retrievedUser = JSON.parse(loggedUserJSON);
       setUser(retrievedUser);
+    } else {
+      navigate('/login');
     }
 
     notificationsService
