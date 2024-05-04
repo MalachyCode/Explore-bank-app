@@ -36,7 +36,9 @@ const create = async (newAccount: NewAccount) => {
 };
 
 const updateAccount = async (id: string, updatedAccount: Account) => {
-  const response = await axios.put(`${baseUrl}/${id}`, updatedAccount);
+  const config = { headers: { Authorization: token } };
+
+  const response = await axios.put(`${baseUrl}/${id}`, updatedAccount, config);
 
   return response.data;
 };
