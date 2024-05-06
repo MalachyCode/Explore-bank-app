@@ -163,42 +163,50 @@ const BillPayments = () => {
           };
           accountsService
             .updateAccount(accountToShow?.id, updatedSendingAccount)
-            .then((response) => console.log(response));
+            .then((response) => {
+              console.log(response);
 
-          const newDebitTransaction: NewTransaction = {
-            accountNumber: accountToShow?.accountNumber,
-            createdOn: new Date(),
-            type: 'debit',
-            amount: Number(paymentDetails.amount),
-            oldBalance: accountToShow?.balance,
-            newBalance: updatedSendingAccount.balance,
-            description: `Bill Payment: Paid ${paymentDetails.amount} To ${biller} For service ${product}: ${paymentDetails.phoneNumber}`,
-          };
-          transactionsService
-            .newDebitTransaction(newDebitTransaction)
-            .then((billPaymentTransaction) => {
-              if (userAccountNotificationBox) {
-                const debitNotification: Notification = {
-                  ...userAccountNotificationBox,
-                  newNotifications:
-                    userAccountNotificationBox?.newNotifications.concat({
-                      message: billPaymentTransaction.description,
-                      accountId: accountToShow.id,
-                      accountNumber: accountToShow.accountNumber,
-                      transactionId: billPaymentTransaction.id,
-                    }),
-                };
+              const newDebitTransaction: NewTransaction = {
+                accountNumber: accountToShow?.accountNumber,
+                createdOn: new Date(),
+                type: 'debit',
+                amount: Number(paymentDetails.amount),
+                oldBalance: accountToShow?.balance,
+                newBalance: updatedSendingAccount.balance,
+                description: `Bill Payment: Paid ${paymentDetails.amount} To ${biller} For service ${product}: ${paymentDetails.phoneNumber}`,
+              };
+              transactionsService
+                .newDebitTransaction(newDebitTransaction)
+                .then((billPaymentTransaction) => {
+                  if (userAccountNotificationBox) {
+                    const debitNotification: Notification = {
+                      ...userAccountNotificationBox,
+                      newNotifications:
+                        userAccountNotificationBox?.newNotifications.concat({
+                          message: billPaymentTransaction.description,
+                          accountId: accountToShow.id,
+                          accountNumber: accountToShow.accountNumber,
+                          transactionId: billPaymentTransaction.id,
+                        }),
+                    };
 
-                notificationsService
-                  .updateNotification(
-                    userAccountNotificationBox?.id,
-                    debitNotification
-                  )
-                  .then((response) => console.log(response));
-              }
+                    notificationsService
+                      .updateNotification(
+                        userAccountNotificationBox?.id,
+                        debitNotification
+                      )
+                      .then((response) => console.log(response));
+                  }
+                });
+
+              navigate('/dashboard-client');
+            })
+            .catch((e) => {
+              console.log(e);
+              window.localStorage.clear();
+
+              navigate('/login');
             });
-
-          navigate('/dashboard-client');
 
           setCategory('');
           setBiller('');
