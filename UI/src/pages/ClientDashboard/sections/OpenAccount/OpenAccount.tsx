@@ -108,31 +108,39 @@ const OpenAccount = () => {
           type: accountType === 'current' ? 'current' : 'savings',
         };
 
-        accountService.create(newAccount).then((createdAccount) => {
-          if (userAccountNotificationBox) {
-            const creatAccountNotification: Notification = {
-              ...userAccountNotificationBox,
-              newNotifications:
-                userAccountNotificationBox?.newNotifications.concat({
-                  message: `You created a new account with account number ${createdAccount.accountNumber}`,
-                  accountId: createdAccount.id,
-                }),
-            };
+        accountService
+          .create(newAccount)
+          .then((createdAccount) => {
+            if (userAccountNotificationBox) {
+              const creatAccountNotification: Notification = {
+                ...userAccountNotificationBox,
+                newNotifications:
+                  userAccountNotificationBox?.newNotifications.concat({
+                    message: `You created a new account with account number ${createdAccount.accountNumber}`,
+                    accountId: createdAccount.id,
+                  }),
+              };
 
-            notificationsService
-              .updateNotification(
-                userAccountNotificationBox?.id,
-                creatAccountNotification
-              )
-              .then((response) => console.log(response));
-          }
-        });
+              notificationsService
+                .updateNotification(
+                  userAccountNotificationBox?.id,
+                  creatAccountNotification
+                )
+                .then((response) => console.log(response));
+            }
 
-        if (user?.type === 'staff') {
-          navigate('/dashboard-staff');
-        } else {
-          navigate('/dashboard-client');
-        }
+            if (user?.type === 'staff') {
+              navigate('/dashboard-staff');
+            } else {
+              navigate('/dashboard-client');
+            }
+          })
+          .catch((e) => {
+            console.log(e);
+            window.localStorage.clear();
+
+            navigate('/login');
+          });
       } else {
         toast.error(
           'Wrong first or last name. Please confirm your first and last name',
