@@ -130,113 +130,85 @@ const SportWalletFunding = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (biller && product) {
-      if (user) {
-        if (accountToShow?.status === 'active') {
-          if (paymentDetails.amount) {
-            if (paymentDetails.phoneNumber?.length === 11) {
-              if (accountToShow.balance >= Number(paymentDetails.amount)) {
-                try {
-                  const isPinValid = await usersService.checkPin({
-                    email: user.email,
-                    transferPin: paymentDetails.pin,
-                  });
+    if (user && accountToShow) {
+      try {
+        const isPinValid = await usersService.checkPin({
+          email: user.email,
+          transferPin: paymentDetails.pin,
+        });
 
-                  if (isPinValid) {
-                    const updatedSendingAccount = {
-                      ...accountToShow,
-                      balance:
-                        accountToShow &&
-                        accountToShow?.balance - Number(paymentDetails.amount),
+        if (isPinValid) {
+          const updatedSendingAccount = {
+            ...accountToShow,
+            balance:
+              accountToShow &&
+              accountToShow?.balance - Number(paymentDetails.amount),
+          };
+
+          accountsService
+            .updateAccount(accountToShow?.id, updatedSendingAccount)
+            .then((response) => {
+              console.log(response);
+
+              const newDebitTransaction: NewTransaction = {
+                accountNumber: accountToShow?.accountNumber,
+                createdOn: new Date(),
+                type: 'debit',
+                amount: Number(paymentDetails.amount),
+                oldBalance: accountToShow?.balance,
+                newBalance: updatedSendingAccount.balance,
+                description: `Top up ${paymentDetails.amount} for user ${paymentDetails.phoneNumber} To ${biller} account. For service ${product}: ${paymentDetails.description}`,
+              };
+              transactionsService
+                .newDebitTransaction(newDebitTransaction)
+                .then((sportWalletFundingTransaction) => {
+                  if (userAccountNotificationBox) {
+                    const sportWalletFundingNotification: Notification = {
+                      ...userAccountNotificationBox,
+                      newNotifications:
+                        userAccountNotificationBox?.newNotifications.concat({
+                          message: sportWalletFundingTransaction.description,
+                          accountId: accountToShow.id,
+                          accountNumber: accountToShow.accountNumber,
+                          transactionId: sportWalletFundingTransaction.id,
+                        }),
                     };
-                    accountsService
-                      .updateAccount(accountToShow?.id, updatedSendingAccount)
+
+                    notificationsService
+                      .updateNotification(
+                        userAccountNotificationBox?.id,
+                        sportWalletFundingNotification
+                      )
                       .then((response) => console.log(response));
-
-                    const newDebitTransaction: NewTransaction = {
-                      accountNumber: accountToShow?.accountNumber,
-                      createdOn: new Date(),
-                      type: 'debit',
-                      amount: Number(paymentDetails.amount),
-                      oldBalance: accountToShow?.balance,
-                      newBalance: updatedSendingAccount.balance,
-                      description: `Top up ${paymentDetails.amount} for user ${paymentDetails.phoneNumber} To ${biller} account. For service ${product}: ${paymentDetails.description}`,
-                    };
-                    transactionsService
-                      .newDebitTransaction(newDebitTransaction)
-                      .then((sportWalletFundingTransaction) => {
-                        if (userAccountNotificationBox) {
-                          const sportWalletFundingNotification: Notification = {
-                            ...userAccountNotificationBox,
-                            newNotifications:
-                              userAccountNotificationBox?.newNotifications.concat(
-                                {
-                                  message:
-                                    sportWalletFundingTransaction.description,
-                                  accountId: accountToShow.id,
-                                  accountNumber: accountToShow.accountNumber,
-                                  transactionId:
-                                    sportWalletFundingTransaction.id,
-                                }
-                              ),
-                          };
-
-                          notificationsService
-                            .updateNotification(
-                              userAccountNotificationBox?.id,
-                              sportWalletFundingNotification
-                            )
-                            .then((response) => console.log(response));
-                        }
-                      });
-
-                    navigate('/dashboard-client');
-
-                    setBiller('');
-                    setProduct('');
-                    setPaymentDetails({
-                      ...paymentDetails,
-                      amount: '',
-                      pin: '',
-                      description: '',
-                      phoneNumber: '',
-                    });
                   }
-                } catch (e: any) {
-                  toast.error(e.response.data.error, {
-                    position: 'top-center',
-                  });
-                }
-              } else {
-                toast.error('Insufficient balance', {
-                  position: 'top-center',
                 });
-              }
-            } else {
-              toast.error('Enter a valid phone number', {
-                position: 'top-center',
-              });
-            }
-          } else {
-            toast.error('Specify a valid amount', {
-              position: 'top-center',
+
+              navigate('/dashboard-client');
+            })
+            .catch((e) => {
+              console.log(e);
+              window.localStorage.clear();
+
+              navigate('/login');
             });
-          }
-        } else {
-          toast.error(
-            'Your account is not active. Please visit our branch near you to reactivate',
-            {
-              position: 'top-center',
-            }
-          );
+
+          setBiller('');
+          setProduct('');
+          setPaymentDetails({
+            ...paymentDetails,
+            amount: '',
+            pin: '',
+            description: '',
+            phoneNumber: '',
+          });
         }
-      } else {
-        toast.error('No user', {
+      } catch (e: any) {
+        toast.error(e.response.data.error, {
           position: 'top-center',
         });
       }
     } else {
-      toast.error('Biller and Product are required fields', {
+      toast.error('Account not selected or User not logged in', {
         position: 'top-center',
       });
     }
