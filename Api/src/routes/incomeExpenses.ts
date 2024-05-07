@@ -59,10 +59,11 @@ incomeExpenseRouter.put(
   (req: Request, res: Response, next: NextFunction) => {
     const body = req.body;
 
-    const updateIncomeExpenseInfo = new IncomeExpenseInfo({
+    const updateIncomeExpenseInfo = {
       owner: body.owner,
       barData: body.barData,
-    });
+    };
+
     IncomeExpenseInfo.findByIdAndUpdate(
       req.params.id,
       updateIncomeExpenseInfo,
