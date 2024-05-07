@@ -10,9 +10,16 @@ import {
   RenderIcons,
   RenderTotals,
 } from '../../components/RenderIconsandTotals';
-import { Account, Notification, NotificationBody, User } from '../../types';
+import {
+  Account,
+  BarChartInfo,
+  Notification,
+  NotificationBody,
+  User,
+} from '../../types';
 import accountService from '../../services/accounts';
 import notificationsService from '../../services/notifications';
+import incomeExpenseService from '../../services/incomeExpense';
 
 const ClientDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
@@ -20,6 +27,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
   const [user, setUser] = useState<User>();
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
+  const [barChartInfo, setBarChartInfo] = useState<Array<BarChartInfo>>([]);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
   const [userAccounts, setUserAccounts] = useState<Array<Account>>();
@@ -44,8 +52,14 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
         .then((retrievedUserAccounts) => {
           setUserAccounts(retrievedUserAccounts);
         });
+
+      incomeExpenseService
+        .getAll()
+        .then((returnedData) => setBarChartInfo(returnedData));
     }
   }, []);
+
+  const userBarChartInfo = barChartInfo.find((info) => info.owner === user?.id);
 
   const userNotifications = notifications.filter(
     (notification) => notification.owner === user?.id
@@ -351,7 +365,9 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             <div className='item free'></div>
           </div>
           <div className='chart-container'>
-            <BarChartComponent />
+            {userBarChartInfo && (
+              <BarChartComponent data={userBarChartInfo.barData} />
+            )}
           </div>
         </div>
       </div>
