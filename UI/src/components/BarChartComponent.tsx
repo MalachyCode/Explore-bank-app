@@ -11,7 +11,18 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const BarChartComponent = () => {
+interface IncomeExpenseData {
+  name: string;
+  difference: number;
+  income: number;
+  expensis: number;
+}
+
+interface IncomeExpenseType {
+  data: Array<IncomeExpenseData>;
+}
+
+const BarChartComponent = (props: IncomeExpenseType) => {
   const date = new Date();
   let month = date.getMonth();
   const numberOfMonthsToShow = 6;
@@ -39,51 +50,52 @@ const BarChartComponent = () => {
     month -= 1;
   }
 
-  const data = [
-    {
-      name: monthsToUse[5],
-      difference: 2000,
-      income: 9800,
-      expensis: 2290,
-    },
-    {
-      name: monthsToUse[4],
-      difference: 3000,
-      income: 1398,
-      expensis: 2210,
-    },
-    {
-      name: monthsToUse[3],
-      difference: 4000,
-      income: 4400,
-      expensis: 2400,
-    },
-    {
-      name: monthsToUse[2],
-      difference: 2000,
-      income: 9800,
-      expensis: 2290,
-    },
-    {
-      name: monthsToUse[1],
-      difference: 3000,
-      income: 1398,
-      expensis: 2210,
-    },
-    {
-      name: monthsToUse[0],
-      difference: 2000,
-      income: 4400,
-      expensis: 2400,
-    },
-  ];
+  // const data = [
+  //   {
+  //     name: monthsToUse[5],
+  //     difference: 2000,
+  //     income: 9800,
+  //     expensis: 2290,
+  //   },
+  //   {
+  //     name: monthsToUse[4],
+  //     difference: 3000,
+  //     income: 1398,
+  //     expensis: 2210,
+  //   },
+  //   {
+  //     name: monthsToUse[3],
+  //     difference: 4000,
+  //     income: 4400,
+  //     expensis: 2400,
+  //   },
+  //   {
+  //     name: monthsToUse[2],
+  //     difference: 2000,
+  //     income: 9800,
+  //     expensis: 2290,
+  //   },
+  //   {
+  //     name: monthsToUse[1],
+  //     difference: 3000,
+  //     income: 1398,
+  //     expensis: 2210,
+  //   },
+  //   {
+  //     name: monthsToUse[0],
+  //     difference: 2000,
+  //     income: 4400,
+  //     expensis: 2400,
+  //   },
+  // ];
 
   return (
     <ResponsiveContainer width='100%' height='100%'>
       <BarChart
         width={500}
         height={300}
-        data={data}
+        data={props.data}
+        // data={data}
         margin={{
           top: 20,
           right: 30,
