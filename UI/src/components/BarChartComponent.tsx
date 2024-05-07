@@ -44,37 +44,37 @@ const BarChartComponent = () => {
       name: monthsToUse[5],
       difference: 2000,
       income: 9800,
-      spent: 2290,
+      expensis: 2290,
     },
     {
       name: monthsToUse[4],
       difference: 3000,
       income: 1398,
-      spent: 2210,
+      expensis: 2210,
     },
     {
       name: monthsToUse[3],
       difference: 4000,
       income: 4400,
-      spent: 2400,
+      expensis: 2400,
     },
     {
       name: monthsToUse[2],
       difference: 2000,
       income: 9800,
-      spent: 2290,
+      expensis: 2290,
     },
     {
       name: monthsToUse[1],
       difference: 3000,
       income: 1398,
-      spent: 2210,
+      expensis: 2210,
     },
     {
       name: monthsToUse[0],
       difference: 2000,
       income: 4400,
-      spent: 2400,
+      expensis: 2400,
     },
   ];
 
@@ -97,7 +97,7 @@ const BarChartComponent = () => {
         <Tooltip />
         <Legend />
         <Bar dataKey='income' stackId='a' fill='#82ca9d' />
-        <Bar dataKey='spent' stackId='a' fill='#ff0000' />
+        <Bar dataKey='expensis' stackId='a' fill='#ff0000' />
         <Bar dataKey='difference' fill='#E3B23C' />
       </BarChart>
     </ResponsiveContainer>
