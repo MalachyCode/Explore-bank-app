@@ -10,6 +10,7 @@ import loginRouter from './routes/login';
 import middleware from './utils/middleware';
 import logger from './utils/logger';
 import mongoose from 'mongoose';
+import incomeExpenseRouter from './routes/incomeExpenses';
 
 mongoose.set('strictQuery', false);
 
@@ -36,6 +37,7 @@ app.use('/profilePictures', express.static('profilePictures'));
 app.use('/api/users', usersRouter);
 app.use('/api/accounts', accountsRouter);
 app.use('/api/transactions', transactionsRouter);
+app.use('/api/bar-chart-info', incomeExpenseRouter);
 app.use('/api/notifications', notificationsRouter);
 app.use('/api/login', loginRouter);
 
