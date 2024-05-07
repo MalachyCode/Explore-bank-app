@@ -197,6 +197,19 @@ export interface Notification {
   oldNotifications: Array<NotificationBody>;
 }
 
+export interface BarChartInfo {
+  id: string;
+  owner: string;
+  barData: [
+    {
+      name: string;
+      difference: number;
+      income: number;
+      expensis: number;
+    }
+  ];
+}
+
 export type NewNotification = Omit<Notification, 'id'>;
 
 export interface FindByAccountNumberType {
