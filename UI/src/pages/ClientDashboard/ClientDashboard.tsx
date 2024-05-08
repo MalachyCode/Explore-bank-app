@@ -20,6 +20,7 @@ import {
 import accountService from '../../services/accounts';
 import notificationsService from '../../services/notifications';
 import incomeExpenseService from '../../services/incomeExpense';
+import barChartInfoUpdater from '../../functions/barChartInfoUpdater';
 
 const ClientDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
   const [user, setUser] = useState<User>();
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
-  const [barChartInfo, setBarChartInfo] = useState<Array<BarChartInfo>>([]);
+  const [userBarChartInfo, setUserBarChartInfo] = useState<BarChartInfo>();
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
   const [userAccounts, setUserAccounts] = useState<Array<Account>>();
@@ -54,12 +55,14 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
         });
 
       incomeExpenseService
-        .getAll()
-        .then((returnedData) => setBarChartInfo(returnedData));
+        .findUserBarChartInfo({ owner: retrievedUser.id })
+        .then((returnedData) => setUserBarChartInfo(returnedData));
+
+      if (userBarChartInfo) {
+        barChartInfoUpdater(userBarChartInfo, 'debit', 3000);
+      }
     }
   }, []);
-
-  const userBarChartInfo = barChartInfo.find((info) => info.owner === user?.id);
 
   const userNotifications = notifications.filter(
     (notification) => notification.owner === user?.id
@@ -366,7 +369,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
           </div>
           <div className='chart-container'>
             {userBarChartInfo && (
-              <BarChartComponent data={userBarChartInfo.barData} />
+              <BarChartComponent data={userBarChartInfo?.barData} />
             )}
           </div>
         </div>
