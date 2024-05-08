@@ -197,20 +197,24 @@ export interface Notification {
   oldNotifications: Array<NotificationBody>;
 }
 
+export type NewNotification = Omit<Notification, 'id'>;
+
+export interface BarDataBody {
+  id: string;
+  name: string;
+  difference: number;
+  income: number;
+  expensis: number;
+}
+
 export interface BarChartInfo {
   id: string;
   owner: string;
-  barData: [
-    {
-      name: string;
-      difference: number;
-      income: number;
-      expensis: number;
-    }
-  ];
+  barData: Array<BarDataBody | NewBarDataBody>;
 }
 
-export type NewNotification = Omit<Notification, 'id'>;
+export type NewBarChartInfo = Omit<BarChartInfo, 'id'>;
+export type NewBarDataBody = Omit<BarDataBody, 'id'>;
 
 export interface FindByAccountNumberType {
   accountNumber: number;
