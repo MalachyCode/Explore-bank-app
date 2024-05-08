@@ -43,6 +43,21 @@ incomeExpenseRouter.post(
   }
 );
 
+incomeExpenseRouter.post(
+  '/user-bar-chart-info',
+  async (req: Request, res: Response, _next: NextFunction) => {
+    // const user = await User.findOne({ email });
+    const { owner } = req.body;
+
+    IncomeExpenseInfo.find({}).then((allBarChartInfo) => {
+      const userBarChartInfo = allBarChartInfo.find(
+        (barChartInfo) => barChartInfo.owner === owner
+      );
+      res.json(userBarChartInfo);
+    });
+  }
+);
+
 incomeExpenseRouter.delete(
   '/:id',
   (req: Request, res: Response, next: NextFunction) => {
