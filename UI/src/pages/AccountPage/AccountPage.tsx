@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Account, NewTransaction, Notification, User } from '../../types';
+import {
+  Account,
+  BarChartInfo,
+  NewTransaction,
+  Notification,
+  User,
+} from '../../types';
 import './AccountPage.scss';
 import accountsService from '../../services/accounts';
 import usersService from '../../services/users';
@@ -9,6 +15,8 @@ import transactionsService from '../../services/transactions';
 import notificationsService from '../../services/notifications';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import incomeExpenseService from '../../services/incomeExpense';
+import barChartInfoUpdater from '../../functions/barChartInfoUpdater';
 
 interface TypeForTransaction {
   amount: string;
@@ -51,6 +59,7 @@ const AccountPage = (props: { user: User | null | undefined }) => {
   const [accountNumber, setAccountNumber] = useState('');
   const [activeDeactivateBox, setActiveDeactivateBox] = useState(false);
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
+  const [userBarChartInfo, setUserBarChartInfo] = useState<BarChartInfo>();
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -58,8 +67,17 @@ const AccountPage = (props: { user: User | null | undefined }) => {
       const retrievedUser = JSON.parse(loggedUserJSON);
       setLoggedInUser(retrievedUser);
     }
+
+    if (props.user) {
+      incomeExpenseService
+        .findUserBarChartInfo({ owner: props.user.id })
+        .then((returnedData) => setUserBarChartInfo(returnedData));
+    }
+
     usersService.getAll().then((users) => setUsers(users));
+
     accountsService.getAll().then((accounts) => setAccounts(accounts));
+
     notificationsService
       .getAll()
       .then((retrievedNotifications) =>
@@ -148,6 +166,19 @@ const AccountPage = (props: { user: User | null | undefined }) => {
                 Number(transactionDetails.amount),
           };
 
+          accountsService
+            .updateAccount(accountToUpdateForDebit?.id, debitedAccount)
+            .then((response) => {
+              console.log(response);
+              if (userBarChartInfo) {
+                barChartInfoUpdater(
+                  userBarChartInfo,
+                  'debit',
+                  Number(transactionDetails.amount)
+                );
+              }
+            });
+
           // create transaction for client after their account is debited
 
           const newDebitTransaction: NewTransaction = {
@@ -160,10 +191,6 @@ const AccountPage = (props: { user: User | null | undefined }) => {
             newBalance: debitedAccount.balance,
             description: `Over counter debit transaction at Explore Bank branch by cashier: ${loggedInUser?.firstName} ${loggedInUser?.lastName}; ${transactionDetails.description}`,
           };
-
-          accountsService
-            .updateAccount(accountToUpdateForDebit?.id, debitedAccount)
-            .then((response) => console.log(response));
 
           transactionsService
             .newDebitTransaction(newDebitTransaction)
@@ -252,6 +279,20 @@ const AccountPage = (props: { user: User | null | undefined }) => {
               Number(transactionDetails.amount),
         };
 
+        accountsService
+          .updateAccount(accountToUpdateForCredit?.id, creditedAccount)
+          .then((response) => {
+            console.log(response);
+
+            if (userBarChartInfo) {
+              barChartInfoUpdater(
+                userBarChartInfo,
+                'credit',
+                Number(transactionDetails.amount)
+              );
+            }
+          });
+
         // create transaction for client after their account is credited
 
         const newCreditTransaction: NewTransaction = {
@@ -264,10 +305,6 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           newBalance: creditedAccount.balance,
           description: `Over counter credit transaction at Explore Bank branch by cashier: ${loggedInUser?.firstName} ${loggedInUser?.lastName}; ${transactionDetails.description}`,
         };
-
-        accountsService
-          .updateAccount(accountToUpdateForCredit?.id, creditedAccount)
-          .then((response) => console.log(response));
 
         transactionsService
           .newCreditTransaction(newCreditTransaction)
