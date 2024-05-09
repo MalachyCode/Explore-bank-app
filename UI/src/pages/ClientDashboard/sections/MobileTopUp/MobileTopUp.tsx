@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './MobileTopUp.scss';
 import {
   Account,
+  BarChartInfo,
   MobileTopUpType,
   NewTransaction,
   Notification,
@@ -18,6 +19,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notificationsService from '../../../../services/notifications';
 import usersService from '../../../../services/users';
+import barChartInfoUpdater from '../../../../functions/barChartInfoUpdater';
+import incomeExpenseService from '../../../../services/incomeExpense';
 
 const MobileTopUp = () => {
   const navigate = useNavigate();
@@ -35,6 +38,7 @@ const MobileTopUp = () => {
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
   const [userAccounts, setUserAccounts] = useState<Array<Account>>();
   const [disableButton, setDisableButton] = useState(true);
+  const [userBarChartInfo, setUserBarChartInfo] = useState<BarChartInfo>();
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -49,6 +53,10 @@ const MobileTopUp = () => {
 
           setUserAccounts(retrievedUserAccounts);
         });
+
+      incomeExpenseService
+        .findUserBarChartInfo({ owner: retrievedUser.id })
+        .then((returnedData) => setUserBarChartInfo(returnedData));
     }
 
     notificationsService
@@ -153,6 +161,14 @@ const MobileTopUp = () => {
             .updateAccount(accountToShow?.id, updatedSendingAccount)
             .then((response) => {
               console.log(response);
+
+              if (userBarChartInfo) {
+                barChartInfoUpdater(
+                  userBarChartInfo,
+                  'debit',
+                  Number(topupDetails.amount)
+                );
+              }
 
               const newDebitTransaction: NewTransaction = {
                 accountNumber: accountToShow?.accountNumber,
