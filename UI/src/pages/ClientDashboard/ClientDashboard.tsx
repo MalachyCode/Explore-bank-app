@@ -20,7 +20,6 @@ import {
 import accountService from '../../services/accounts';
 import notificationsService from '../../services/notifications';
 import incomeExpenseService from '../../services/incomeExpense';
-import barChartInfoUpdater from '../../functions/barChartInfoUpdater';
 
 const ClientDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
@@ -57,10 +56,6 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       incomeExpenseService
         .findUserBarChartInfo({ owner: retrievedUser.id })
         .then((returnedData) => setUserBarChartInfo(returnedData));
-
-      if (userBarChartInfo) {
-        barChartInfoUpdater(userBarChartInfo, 'debit', 3000);
-      }
     }
   }, []);
 
