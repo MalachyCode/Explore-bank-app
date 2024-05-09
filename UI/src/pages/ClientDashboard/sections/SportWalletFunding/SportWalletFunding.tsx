@@ -5,6 +5,7 @@ import transactionsService from '../../../../services/transactions';
 import './SportWalletFunding.scss';
 import {
   Account,
+  BarChartInfo,
   BillPaymentType,
   NewTransaction,
   Notification,
@@ -25,6 +26,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notificationsService from '../../../../services/notifications';
 import usersService from '../../../../services/users';
+import barChartInfoUpdater from '../../../../functions/barChartInfoUpdater';
+import incomeExpenseService from '../../../../services/incomeExpense';
 
 // import sgMail from '@sendgrid/mail';
 // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -56,6 +59,7 @@ const SportWalletFunding = () => {
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
   const [userAccounts, setUserAccounts] = useState<Array<Account>>();
   const [disableButton, setDisableButton] = useState(true);
+  const [userBarChartInfo, setUserBarChartInfo] = useState<BarChartInfo>();
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -70,6 +74,10 @@ const SportWalletFunding = () => {
 
           setUserAccounts(retrievedUserAccounts);
         });
+
+      incomeExpenseService
+        .findUserBarChartInfo({ owner: retrievedUser.id })
+        .then((returnedData) => setUserBarChartInfo(returnedData));
     }
 
     notificationsService
@@ -149,6 +157,14 @@ const SportWalletFunding = () => {
             .updateAccount(accountToShow?.id, updatedSendingAccount)
             .then((response) => {
               console.log(response);
+
+              if (userBarChartInfo) {
+                barChartInfoUpdater(
+                  userBarChartInfo,
+                  'debit',
+                  Number(paymentDetails.amount)
+                );
+              }
 
               const newDebitTransaction: NewTransaction = {
                 accountNumber: accountToShow?.accountNumber,
