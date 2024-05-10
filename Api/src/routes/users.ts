@@ -144,6 +144,23 @@ usersRouter.post(
   }
 );
 
+usersRouter.post(
+  '/find-main-admin',
+  async (req: Request, res: Response, _next: NextFunction) => {
+    const { email } = req.body;
+    User.find().then((admin) => {
+      const mainAdmin = admin.find(
+        (mainAdmin) =>
+          mainAdmin.firstName === 'Malachy' &&
+          mainAdmin.lastName === 'Nwafor' &&
+          mainAdmin.isAdmin &&
+          mainAdmin.email === email
+      );
+      res.json(mainAdmin);
+    });
+  }
+);
+
 usersRouter.delete(
   '/:id',
   (req: Request, res: Response, next: NextFunction) => {
