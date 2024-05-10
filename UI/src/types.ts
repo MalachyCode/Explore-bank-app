@@ -223,3 +223,7 @@ export interface FindByAccountNumberType {
 export interface FindUserAccountsType {
   owner: string;
 }
+
+export interface FindUserByEmailType {
+  email: string;
+}

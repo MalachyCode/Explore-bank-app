@@ -1,10 +1,15 @@
 import axios from 'axios';
-import { ConfirmUserPin, NewUser, User } from '../types';
+import { ConfirmUserPin, FindUserByEmailType, NewUser, User } from '../types';
 const baseUrl = 'http://localhost:3001/api/users';
 // const baseUrl = 'http://localhost:3001/users';
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);
+  return response.data;
+};
+
+const findMainAdmin = async (email: FindUserByEmailType) => {
+  const response = await axios.post(`${baseUrl}/find-main-admin`, email);
   return response.data;
 };
 
@@ -64,6 +69,7 @@ export default {
   checkPin,
   create,
   deleteUser,
+  findMainAdmin,
   getAll,
   getSingle,
   resetPassword,
