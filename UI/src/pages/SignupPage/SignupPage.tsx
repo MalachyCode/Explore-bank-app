@@ -124,45 +124,49 @@ const SignupPage = () => {
       transferPin: '',
     };
 
-    userService.create(newClient).then((clientCreated) => {
-      const newNotificationBox: NewNotification = {
-        owner: clientCreated.id,
-        newNotifications: [
+    userService
+      .create(newClient)
+      .then((clientCreated) => {
+        const newNotificationBox: NewNotification = {
+          owner: clientCreated.id,
+          newNotifications: [
+            {
+              message: `Dear ${clientCreated.firstName} ${clientCreated.lastName}, Welcome to Explore Bank!`,
+            },
+          ],
+          oldNotifications: [],
+        };
+
+        notificationsService
+          .create(newNotificationBox)
+          .then((createdNotification) => console.log(createdNotification));
+
+        toast.success(
+          `User with firstname: ${values.firstName}, middlename: ${values.middleName}, lastname: ${values.lastName}, dob: ${values.dateOfBirth} and password ${values.password} created an account`,
           {
-            message: `Dear ${clientCreated.firstName} ${clientCreated.lastName}, Welcome to Explore Bank!`,
-          },
-        ],
-        oldNotifications: [],
-      };
+            position: 'top-center',
+          }
+        );
 
-      notificationsService
-        .create(newNotificationBox)
-        .then((createdNotification) => console.log(createdNotification));
-      console.log(clientCreated);
-    });
-    toast.success(
-      `User with firstname: ${values.firstName}, middlename: ${values.middleName}, lastname: ${values.lastName}, dob: ${values.dateOfBirth} and password ${values.password} created an account`,
-      {
-        position: 'top-center',
-      }
-    );
+        navigate('/login');
 
-    navigate('/login');
-    // setTimeout(() => {
-    //   navigate('/login');
-    // }, 5000);
-
-    setValues({
-      ...values,
-      email: '',
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      dateOfBirth: '',
-      phoneNumber: '',
-      password: '',
-      confirmPassword: '',
-    });
+        setValues({
+          ...values,
+          email: '',
+          firstName: '',
+          middleName: '',
+          lastName: '',
+          dateOfBirth: '',
+          phoneNumber: '',
+          password: '',
+          confirmPassword: '',
+        });
+      })
+      .catch((e) => {
+        toast.error(e.response.data.error, {
+          position: 'top-center',
+        });
+      });
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
