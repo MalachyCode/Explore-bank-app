@@ -110,6 +110,15 @@ usersRouter.post(
   async (req: Request, res: Response, next: NextFunction) => {
     const body = req.body;
 
+    const emailUnique = await User.findOne({ email: body.email });
+
+    if (emailUnique) {
+      return res.status(401).json({
+        error:
+          'Provided email is linked to an existing account. Change your email or log into your account.',
+      });
+    }
+
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
