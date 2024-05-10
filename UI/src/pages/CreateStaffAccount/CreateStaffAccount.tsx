@@ -5,6 +5,8 @@ import FormInput from '../../components/FormInput';
 import { CreateStaff, NewNotification, NewUser } from '../../types';
 import userService from '../../services/users';
 import notificationsService from '../../services/notifications';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateStaffAccount = () => {
   const navigate = useNavigate();
@@ -109,37 +111,41 @@ const CreateStaffAccount = () => {
       number: values.phoneNumber,
     };
 
-    userService.create(newStaff).then((staffCreated) => {
-      const newNotificationBox: NewNotification = {
-        owner: staffCreated.id,
-        newNotifications: [
-          {
-            message: `Dear ${staffCreated.firstName} ${staffCreated.lastName}, Welcome to Explore Bank!`,
-          },
-        ],
-        oldNotifications: [],
-      };
+    userService
+      .create(newStaff)
+      .then((staffCreated) => {
+        const newNotificationBox: NewNotification = {
+          owner: staffCreated.id,
+          newNotifications: [
+            {
+              message: `Dear ${staffCreated.firstName} ${staffCreated.lastName}, Welcome to Explore Bank!`,
+            },
+          ],
+          oldNotifications: [],
+        };
 
-      notificationsService
-        .create(newNotificationBox)
-        .then((createdNotification) => console.log(createdNotification));
-      console.log(staffCreated);
-    });
+        notificationsService
+          .create(newNotificationBox)
+          .then((createdNotification) => console.log(createdNotification));
 
-    navigate('/dashboard-staff');
+        setValues({
+          ...values,
+          email: '',
+          firstName: '',
+          lastName: '',
+          dateOfBirth: '',
+          phoneNumber: '',
+          password: '',
+          confirmPassword: '',
+        });
 
-    // console.log(newStaff);
-
-    setValues({
-      ...values,
-      email: '',
-      firstName: '',
-      lastName: '',
-      dateOfBirth: '',
-      phoneNumber: '',
-      password: '',
-      confirmPassword: '',
-    });
+        navigate('/dashboard-staff');
+      })
+      .catch((e) => {
+        toast.error(e.response.data.error, {
+          position: 'top-center',
+        });
+      });
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -176,6 +182,7 @@ const CreateStaffAccount = () => {
           Create Staff
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
