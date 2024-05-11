@@ -7,6 +7,7 @@ import userService from '../../services/users';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notificationsService from '../../services/notifications';
+import createBarChartInfo from '../../functions/createBarChartInfo';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -140,6 +141,8 @@ const SignupPage = () => {
         notificationsService
           .create(newNotificationBox)
           .then((createdNotification) => console.log(createdNotification));
+
+        createBarChartInfo(clientCreated.id);
 
         toast.success(
           `User with firstname: ${values.firstName}, middlename: ${values.middleName}, lastname: ${values.lastName}, dob: ${values.dateOfBirth} and password ${values.password} created an account`,
