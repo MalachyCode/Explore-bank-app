@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Account, Notification, TransactionType } from '../../../types';
+import { Account, Notification, TransactionType, User } from '../../../types';
 import './TransactionInfo.scss';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import PaymentsIcon from '@mui/icons-material/Payments';
@@ -17,8 +17,8 @@ const TransactionInfo = (props: {
   const [reportBoxOpen, setReportBoxOpen] = useState(false);
   const [complaint, setComplaint] = useState('');
   const [accounts, setAccounts] = useState<Array<Account>>();
-  const [adminNotificationBox, setAdminNotificationBox] =
-    useState<Notification>();
+  const [users, setUsers] = useState<Array<User>>();
+  const [notifications, setNotifications] = useState<Array<Notification>>();
 
   const matchAccount = useMatch(
     '/dashboard-client/account-info/:id/transactions/:accountNumber/:transactionId'
@@ -29,23 +29,23 @@ const TransactionInfo = (props: {
 
   useEffect(() => {
     accountsService.getAll().then((accounts) => setAccounts(accounts));
-
-    usersService
-      .findMainAdmin({ email: 'malachyN3@gmail.com' })
-      .then((mainAdmin) => {
-        notificationsService
-          .findUserNotificationBox({ owner: mainAdmin.id })
-          .then((userNotificationBox) => {
-            return setAdminNotificationBox(userNotificationBox);
-          });
-      });
+    usersService.getAll().then((users) => setUsers(users));
+    notificationsService
+      .getAll()
+      .then((notifications) => setNotifications(notifications));
   }, []);
 
-  console.log(adminNotificationBox);
+  const admin = users?.find(
+    (user) =>
+      user.firstName === 'Malachy' && user.lastName === 'Nwafor' && user.isAdmin
+  );
+
+  const adminNotificationBox = notifications?.find(
+    (notification) => notification.owner === admin?.id
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (adminNotificationBox) {
       const newDeleteNotification: Notification = {
         ...adminNotificationBox,
@@ -61,10 +61,12 @@ const TransactionInfo = (props: {
         .updateNotification(adminNotificationBox?.id, newDeleteNotification)
         .then((response) => console.log(response));
     }
-
+    console.log(complaint);
     setReportBoxOpen(false);
     setComplaint('');
   };
+
+  console.log(accountToUse);
 
   return (
     <div className='transaction-info'>
