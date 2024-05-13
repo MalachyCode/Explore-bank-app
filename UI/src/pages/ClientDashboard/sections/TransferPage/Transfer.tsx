@@ -3,6 +3,7 @@ import FormInput from '../../../../components/FormInput';
 import './Transfer.scss';
 import {
   Account,
+  BarChartInfo,
   NewTransaction,
   Notification,
   TransferType,
@@ -16,6 +17,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import notificationsService from '../../../../services/notifications';
+import incomeExpenseService from '../../../../services/incomeExpense';
+import barChartInfoUpdater from '../../../../functions/barChartInfoUpdater';
 
 const Transfer = () => {
   const navigate = useNavigate();
@@ -31,6 +34,10 @@ const Transfer = () => {
   const [openConfirm, setOpenConfirm] = useState(false);
   const [accountErrorMessage, setAccountErrorMessage] = useState('');
   const [disableButton, setDisableButton] = useState(true);
+  const [senderBarChartInfo, setSenderBarChartInfo] = useState<BarChartInfo>();
+  const [receiverBarChartInfo, setReceiverBarChartInfo] =
+    useState<BarChartInfo>();
+
   const [accountSuccessMessage, setAccountSuccessMessage] =
     useState<string>('');
 
@@ -86,6 +93,11 @@ const Transfer = () => {
             `${retreivedUser.firstName} ${retreivedUser.lastName}`
           );
         });
+
+        incomeExpenseService
+          .findUserBarChartInfo({ owner: retreivedAccount.owner })
+          .then((returnedData) => setReceiverBarChartInfo(returnedData));
+
         setAccountErrorMessage(``);
       })
       .catch((e) => {
@@ -100,7 +112,12 @@ const Transfer = () => {
         .findByAccountNumber({
           accountNumber: Number(accountForTransfer),
         })
-        .then((retrievedAccount) => setSendingAccount(retrievedAccount))
+        .then((retrievedAccount) => {
+          setSendingAccount(retrievedAccount);
+          incomeExpenseService
+            .findUserBarChartInfo({ owner: retrievedAccount.owner })
+            .then((returnedData) => setSenderBarChartInfo(returnedData));
+        })
         .catch((e) => {
           toast.error(e.response.data.error, {
             position: 'top-center',
@@ -220,6 +237,18 @@ const Transfer = () => {
             .then((response) => {
               console.log(response);
 
+              if (
+                receiverBarChartInfo &&
+                senderBarChartInfo &&
+                receiverBarChartInfo.owner !== senderBarChartInfo.owner
+              ) {
+                barChartInfoUpdater(
+                  receiverBarChartInfo,
+                  'credit',
+                  Number(transferDetials.amount)
+                );
+              }
+
               const newCreditTransaction: NewTransaction = {
                 accountNumber: receivingAccount?.accountNumber,
                 createdOn: new Date(),
@@ -276,6 +305,66 @@ const Transfer = () => {
             .updateAccount(sendingAccount?.id, updatedSendingAccount)
             .then((response) => {
               console.log(response);
+
+              if (
+                receiverBarChartInfo &&
+                senderBarChartInfo &&
+                senderBarChartInfo.owner === receiverBarChartInfo.owner
+              ) {
+                const date = new Date();
+                const month = date.getMonth();
+                const months = [
+                  'Jan',
+                  'Feb',
+                  'Mar',
+                  'Apr',
+                  'May',
+                  'Jun',
+                  'Jul',
+                  'Aug',
+                  'Sep',
+                  'Oct',
+                  'Nov',
+                  'Dec',
+                ];
+                const monthName = months[month];
+
+                if (senderBarChartInfo) {
+                  const resorceToUpdate = senderBarChartInfo.barData.find(
+                    (info) => info.name === monthName
+                  );
+
+                  // senderBarChartInfo is updated for income and then sent to the function for expenses because sender and receiver bar chart info are the same
+                  if (resorceToUpdate) {
+                    const newIncome =
+                      resorceToUpdate.income + Number(transferDetials.amount);
+
+                    senderBarChartInfo.barData.map((data) => {
+                      if (data.name === monthName) {
+                        data.income = newIncome;
+                        data.difference = newIncome - resorceToUpdate.expensis;
+                      }
+                    });
+
+                    console.log(senderBarChartInfo);
+
+                    barChartInfoUpdater(
+                      senderBarChartInfo,
+                      'debit',
+                      Number(transferDetials.amount)
+                    );
+                  }
+                }
+              } else {
+                if (senderBarChartInfo) {
+                  barChartInfoUpdater(
+                    senderBarChartInfo,
+                    'debit',
+                    Number(transferDetials.amount)
+                  );
+                }
+              }
+
               const newDebitTransaction: NewTransaction = {
                 accountNumber: sendingAccount?.accountNumber,
                 createdOn: new Date(),
