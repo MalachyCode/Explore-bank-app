@@ -44,6 +44,24 @@ notificationsRouter.post(
   }
 );
 
+notificationsRouter.post(
+  '/user-notification-box',
+  async (req: Request, res: Response, _next: NextFunction) => {
+    // const user = await User.findOne({ email });
+    const { owner } = req.body;
+
+    const notificationBox = await Notification.findOne({ owner });
+
+    if (!notificationBox) {
+      return res.status(404).json({
+        error: 'User notification box not found',
+      });
+    }
+
+    res.status(200).json(notificationBox);
+  }
+);
+
 notificationsRouter.delete(
   '/:id',
   (req: Request, res: Response, next: NextFunction) => {
