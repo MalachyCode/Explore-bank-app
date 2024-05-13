@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NewNotification, Notification } from '../types';
+import { FindUserAccountsType, NewNotification, Notification } from '../types';
 const baseUrl = 'http://localhost:3001/api/notifications';
 // const baseUrl = 'http://localhost:3001/notifications';
 
@@ -28,9 +28,15 @@ const deleteNotification = async (id: string) => {
   return response.data;
 };
 
+const findUserNotificationBox = async (owner: FindUserAccountsType) => {
+  const response = await axios.post(`${baseUrl}/user-notification-box`, owner);
+  return response.data;
+};
+
 export default {
   create,
   deleteNotification,
+  findUserNotificationBox,
   getAll,
   updateNotification,
 };
