@@ -7,8 +7,10 @@ import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import { useState } from 'react';
 import { contactsData } from './contactsData';
 import RenderFooterContactInfoBigScreen from '../../../../components/RenderFooterContactInfoBigScreen';
+import { useNavigate } from 'react-router-dom';
 
 const Contact = () => {
+  const navigate = useNavigate();
   const [ourHoursOpen, setOurHoursOpen] = useState<boolean>(false);
   const [contactUsOpen, setContactUsOpen] = useState<boolean>(false);
   const [quickLinksOpen, setQuickLinksOpen] = useState<boolean>(false);
@@ -85,7 +87,9 @@ const Contact = () => {
             <div className={'service-list-box ' + (contactUsOpen && 'active')}>
               <ul>
                 <li>We Care +2347080000000</li>
-                <li>explorebank@mail.com</li>
+                <li onClick={() => navigate('/contact/mail')}>
+                  explorebank@mail.com
+                </li>
                 <li>Branch Locator</li>
               </ul>
             </div>
