@@ -1,0 +1,93 @@
+// @import '../../global.scss';
+
+.mail-contact-page {
+  width: 100vw;
+  height: 100vh;
+  background: url('../../assets/pexels-henry-&-co-2059736.jpg');
+  background-color: #e1dcd9;
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    width: 80%;
+    height: 80%;
+    border-radius: 5px;
+    display: flex;
+    max-width: 750px;
+    // box-shadow: $shadow-3;
+
+    .form {
+      box-shadow: none;
+
+      .form-header {
+        padding: 0;
+        margin: 0;
+        color: #32435f;
+      }
+
+      .line {
+        background: #32435f;
+        width: 100%;
+        margin: 10px 0 0 0;
+        height: 1.5px;
+      }
+
+      .input-box {
+        input {
+          margin-left: 0;
+          width: 98%;
+        }
+
+        &.textarea-box {
+          height: 20vh;
+        }
+
+        .textarea {
+          width: 98%;
+          height: 16vh;
+          position: relative;
+          top: 6px;
+          padding-top: 10px;
+          padding-left: 10px;
+          // max-width: $fixed-width;
+          margin-left: 5px;
+          border: none;
+          font-size: 16px;
+
+          &:focus {
+            outline: none;
+          }
+
+          &:focus ~ .placeholder {
+            top: 1px;
+            font-size: 11px;
+          }
+        }
+        .placeholder {
+          position: absolute;
+          font-size: 16px;
+          pointer-events: none;
+          color: rgb(42, 42, 42);
+          left: 1px;
+          top: 1px;
+          margin-left: 15px;
+          transition: 0.1s ease all;
+
+          &.amount {
+            margin-left: 20px;
+          }
+
+          &.active {
+            top: 1px;
+            font-size: 11px;
+          }
+        }
+      }
+    }
+  }
+}
