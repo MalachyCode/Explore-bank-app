@@ -54,6 +54,7 @@
         margin-top: 50px;
         position: relative;
         top: 20px;
+
         .line {
           background: #e1dcd9;
           height: 2.5px;
@@ -68,6 +69,10 @@
           padding: 8px;
           text-align: left;
           align-items: start;
+
+          li {
+            cursor: pointer;
+          }
         }
       }
       @media (max-width: 992px) {
@@ -146,6 +151,8 @@
               transition: all 0.5s ease;
               border-radius: 5px;
               padding: 1px;
+              cursor: pointer;
+
               &:hover {
                 background: $mainColor;
                 color: white;
