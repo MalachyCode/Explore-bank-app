@@ -227,3 +227,9 @@ export interface FindUserAccountsType {
 export interface FindUserByEmailType {
   email: string;
 }
+
+export interface MailContactType {
+  name: string;
+  email: string;
+  message: string;
+}
