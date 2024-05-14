@@ -35,6 +35,7 @@ import ReferalRewards from './pages/ClientDashboard/sections/ReferalRewars/Refer
 import GenerateStatement from './pages/ClientDashboard/sections/GenerateStatement/GenerateStatement';
 import WelcomePage from './pages/WelcomePage/WelcomePage';
 import ChangeProfilePicture from './pages/ClientDashboard/sections/ChangeProfilePicture/ChangeProfilePicture';
+import MailContactPage from './pages/MailContactPage/MailContactPage';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -113,6 +114,7 @@ function App() {
             element={<CreateStaffAccount />}
           />
           <Route path='/welcome/:id' element={<WelcomePage />} />
+          <Route path='/contact/mail' element={<MailContactPage />} />
           <Route
             path='/dashboard-staff/search/users/:id'
             element={<AccountPage user={user} />}
