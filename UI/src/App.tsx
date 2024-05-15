@@ -101,7 +101,6 @@ function App() {
   const handleLogout = () => {
     // window.localStorage.removeItem('loggedAppUser');
     window.localStorage.clear();
-    // setUser(null);
     navigate('/login');
   };
 

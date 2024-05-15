@@ -8,10 +8,7 @@ const WelcomePage = () => {
   const [users, setUsers] = useState<Array<User>>([]);
 
   const match = useMatch('/welcome/:id');
-  const user = match
-    ? users.find((user) => user.id === match.params.id)
-    : // ? users.find((user) => user.id === Number(match.params.id))
-      null;
+  const user = match ? users.find((user) => user.id === match.params.id) : null;
 
   useEffect(() => {
     usersService.getAll().then((users) => setUsers(users));
