@@ -31,6 +31,15 @@ const MailContactPage = () => {
       regex: `^[A-Z][a-zA-Z ,.'-]{0,19}$`,
       required: true,
     },
+    {
+      id: 'subject',
+      name: 'subject',
+      type: 'text',
+      errorMessage: `Subject should be between 3 to 40 characters and shouldn't include any special character`,
+      label: 'Subject',
+      regex: `^[A-Z][a-zA-Z ,.'-]{0,19}$`,
+      required: true,
+    },
   ];
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
