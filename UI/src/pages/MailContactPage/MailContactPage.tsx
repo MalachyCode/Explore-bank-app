@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormInput from '../../components/FormInput';
 import './MailContactPage.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MailContactType } from '../../types';
+import emailjs from '@emailjs/browser';
 
 const MailContactPage = () => {
   const [values, setValues] = useState<MailContactType>({
@@ -11,17 +12,17 @@ const MailContactPage = () => {
     name: '',
     message: '',
   });
+  const [disableButton, setDisableButton] = useState(true);
+
+  useEffect(() => {
+    if (values.name && values.email && values.message) {
+      setDisableButton(false);
+      return;
+    }
+    setDisableButton(true);
+  }, [values.email, values.message, values.name]);
 
   const formInputs = [
-    {
-      id: 'mail',
-      name: 'email',
-      type: 'email',
-      errorMessage: 'Enter a valid email address',
-      label: 'Email',
-      regex: `^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,})$`,
-      required: true,
-    },
     {
       id: 'name',
       name: 'name',
@@ -32,12 +33,12 @@ const MailContactPage = () => {
       required: true,
     },
     {
-      id: 'subject',
-      name: 'subject',
-      type: 'text',
-      errorMessage: `Subject should be between 3 to 40 characters and shouldn't include any special character`,
-      label: 'Subject',
-      regex: `^[A-Z][a-zA-Z ,.'-]{0,19}$`,
+      id: 'mail',
+      name: 'email',
+      type: 'email',
+      errorMessage: 'Enter a valid email address',
+      label: 'Email',
+      regex: `^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,})$`,
       required: true,
     },
   ];
@@ -48,9 +49,38 @@ const MailContactPage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast.success(`${values.name} ${values.message} ${values.email}`, {
-      position: 'top-center',
-    });
+
+    const serviceId = process.env.REACT_APP_serviceId;
+    const templateId = process.env.REACT_APP_templateId;
+    const publicKey = process.env.REACT_APP_publicKey;
+
+    const templateParams = {
+      name: values.name,
+      email: values.email,
+      message: values.message,
+    };
+
+    if (serviceId && templateId && publicKey) {
+      emailjs
+        .send(serviceId, templateId, templateParams, publicKey)
+        .then((response) => {
+          console.log(response);
+
+          setValues({
+            ...values,
+            email: '',
+            name: '',
+            message: '',
+          });
+
+          toast.success(`Thanks for the feedback!`, {
+            position: 'top-center',
+          });
+        })
+        .catch((err) => {
+          return console.error('Error sending mail', err);
+        });
+    }
   };
 
   return (
@@ -83,7 +113,11 @@ const MailContactPage = () => {
               </span>
             </div>
 
-            <button type='submit' className='btn'>
+            <button
+              type='submit'
+              className={'btn ' + (disableButton && 'disabled')}
+              disabled={disableButton}
+            >
               Send
             </button>
           </form>
