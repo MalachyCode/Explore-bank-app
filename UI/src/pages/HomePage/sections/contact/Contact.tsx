@@ -138,7 +138,7 @@ const Contact = () => {
             </div>
             <div className={'service-list-box ' + (aboutUsOpen && 'active')}>
               <ul>
-                <li>Our History</li>
+                <li onClick={() => navigate('/our-history')}>Our History</li>
                 <li>Corporate profile</li>
                 <li>Board and Management Team</li>
               </ul>
