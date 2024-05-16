@@ -60,6 +60,7 @@
           top: 6px;
           padding-top: 10px;
           padding-left: 10px;
+          padding-right: 10px;
           // max-width: $fixed-width;
           margin-left: 5px;
           border: none;
@@ -95,6 +96,15 @@
             font-size: 11px;
             margin-top: 0;
           }
+        }
+      }
+
+      .btn {
+        &.disabled {
+          background: #7c8ca7;
+          opacity: 0.5;
+          box-shadow: none;
+          cursor: not-allowed;
         }
       }
     }
