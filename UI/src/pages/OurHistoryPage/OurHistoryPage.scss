@@ -1,0 +1,20 @@
+.our-history {
+  width: 100vw;
+  height: 100vh;
+  background: url('../../assets/pexels-henry-&-co-2059736.jpg');
+  background-color: #e1dcd9;
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+
+  .container {
+    width: 90%;
+    // height: 90%;
+    max-width: 750px;
+    margin: auto;
+    border-radius: 5px;
+    padding: 10px;
+  }
+}
