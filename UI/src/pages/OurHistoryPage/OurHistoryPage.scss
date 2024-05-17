@@ -1,6 +1,6 @@
 .our-history {
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   background: url('../../assets/pexels-henry-&-co-2059736.jpg');
   background-color: #e1dcd9;
   background-blend-mode: multiply;
@@ -30,9 +30,9 @@
     margin: auto;
     border-radius: 5px;
     padding: 10px 20px;
+    margin-bottom: 25px;
     position: relative;
-    margin-top: 25px;
-    top: 15%;
+    top: 20vh;
 
     .line {
       width: 95%;
