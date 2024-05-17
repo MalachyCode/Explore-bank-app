@@ -21,10 +21,9 @@ const About = () => {
       <div className='financial-tools-writeup'>
         <h4>Financial Tools</h4>
         <p>
-          At Eplore bank, we offer a range of financial tools from budget
-          planner to savings calculator, to financial health checks and currency
-          converter to keep you in th knoe of your finances and various currency
-          trends
+          We offer a range of financial tools from budget planner to savings
+          calculator, financial health checks and currency converter to keep you
+          in th know of your finances and various currency trends
         </p>
       </div>
       <div className='boxes'>
