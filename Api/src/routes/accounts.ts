@@ -77,7 +77,6 @@ accountsRouter.post(
     if (!decodedToken.id) {
       return res.status(401).json({ error: 'token invalid' });
     }
-    // const user = await User.findById(decodedToken.id)
 
     const account = new Account({
       balance: body.balance,
