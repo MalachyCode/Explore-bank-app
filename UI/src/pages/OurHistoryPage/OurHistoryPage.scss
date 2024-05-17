@@ -8,13 +8,41 @@
   background-size: cover;
   background-position: center;
   display: flex;
+  flex-direction: column;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .top {
+    position: fixed;
+    background: #32435f;
+    color: #e1dcd9;
+    padding-left: 25px;
+    height: 15vh;
+    z-index: 2;
+    font-size: 25px;
+  }
 
   .container {
-    width: 90%;
-    // height: 90%;
+    width: calc(90% - 40px);
     max-width: 750px;
     margin: auto;
     border-radius: 5px;
-    padding: 10px;
+    padding: 10px 20px;
+    position: relative;
+    margin-top: 25px;
+    top: 15%;
+
+    .line {
+      width: 95%;
+      height: 1.5px;
+      background: #d6ba73;
+      margin: auto;
+    }
+
+    h3 {
+      color: #7c8ca7;
+    }
   }
 }
