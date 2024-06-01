@@ -195,6 +195,20 @@
             }
           }
 
+          .profile-photo {
+            width: 80%;
+            height: 80%;
+            border: 1px solid #e3b23c;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+          }
+
           &:hover {
             background: #7c8ca7;
           }
