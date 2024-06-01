@@ -250,12 +250,20 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
                 {notificationCount}
               </div>
             </div>
-            <div className='account-icon-container'>
-              <AccountCircleIcon
-                fontSize='large'
-                className='account-icon'
-                onClick={handleProfileClick}
-              />
+            <div
+              className='account-icon-container'
+              onClick={handleProfileClick}
+            >
+              {!user?.profilePicture ? (
+                <AccountCircleIcon fontSize='large' className='account-icon' />
+              ) : (
+                <div className={'profile-photo'}>
+                  <img
+                    src={`http://localhost:3001/${user?.profilePicture}`}
+                    alt=''
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
