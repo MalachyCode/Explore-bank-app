@@ -1,6 +1,7 @@
 import { Account, TransactionType, User } from '../../../../types';
 import './AccountInfo.scss';
 import transactionsService from '../../../../services/transactions';
+import accountsService from '../../../../services/accounts';
 import { useEffect, useState } from 'react';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import HistoryIcon from '@mui/icons-material/History';
@@ -12,6 +13,7 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
   const navigate = useNavigate();
   const [transactions, setTransactions] = useState<Array<TransactionType>>([]);
   const [user, setUser] = useState<User>();
+  const [openDeleteAcctBox, setOpenDeleteAcctBox] = useState(false);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedAppUser');
@@ -37,6 +39,16 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
     .slice(0, 3);
 
   console.log(user);
+
+  const handleAcctDelete = () => {
+    if (props.account) {
+      accountsService
+        .deleteAccount(props.account.id)
+        .then((response) => console.log(response));
+    }
+
+    navigate(-1);
+  };
 
   return (
     <div className='account-info'>
@@ -84,7 +96,10 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
               {<HistoryIcon fontSize='large' />}
               <div className='content'>Transactions</div>
             </div>
-            <div className='close-acct-btn'>
+            <div
+              className='close-acct-btn'
+              onClick={() => setOpenDeleteAcctBox(true)}
+            >
               <DeleteForeverIcon fontSize='large' className='close-acct-icon' />
               <div className='content'>Close Account</div>
             </div>
@@ -112,6 +127,29 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
               </div>
             </div>
           ))}
+        </div>
+        <div
+          className={
+            'delete-acct-confirm-box ' + (openDeleteAcctBox && ' active')
+          }
+          onClick={() => setOpenDeleteAcctBox(false)}
+        >
+          <div className='confirm-delete'>
+            <div className='message'>
+              <div className='message-head'>
+                Close account {props.account?.accountNumber}{' '}
+              </div>
+              <p>
+                <strong>
+                  Closing and deleting your account is an irreversible action.
+                  Are you sure you want to continue?
+                </strong>
+              </p>
+            </div>
+            <div className='confirm-btn' onClick={handleAcctDelete}>
+              <p>Confirm Delete</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
