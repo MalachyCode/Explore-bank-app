@@ -128,5 +128,69 @@
         }
       }
     }
+
+    .delete-acct-confirm-box {
+      width: 100%;
+      height: 100%;
+      background: rgb(50, 67, 95, 0.3);
+      transition: all 0.8s ease;
+      position: fixed;
+      top: 100%;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.active {
+        top: 0;
+      }
+
+      .confirm-delete {
+        width: 70%;
+        height: 50%;
+        background: white;
+        border-radius: 5px;
+        max-width: 650px;
+
+        .message {
+          width: calc(100% - 30px);
+          height: 80%;
+          padding: 0 15px 0 15px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-size: 25px;
+          text-align: center;
+
+          p {
+            overflow: hidden;
+            margin-top: 10px;
+          }
+
+          .message-head {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #860202;
+          }
+        }
+        .confirm-btn {
+          width: 100%;
+          height: 20%;
+          color: rgb(255, 0, 0);
+          font-size: large;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.5s ease;
+          cursor: pointer;
+
+          &:hover {
+            background: #860202;
+            color: #e1dcd9;
+          }
+        }
+      }
+    }
   }
 }
