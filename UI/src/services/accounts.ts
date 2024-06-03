@@ -44,7 +44,9 @@ const updateAccount = async (id: string, updatedAccount: Account) => {
 };
 
 const deleteAccount = async (id: string) => {
-  const response = await axios.delete(`${baseUrl}/${id}`);
+  const config = { headers: { Authorization: token } };
+
+  const response = await axios.delete(`${baseUrl}/${id}`, config);
 
   return response.data;
 };
