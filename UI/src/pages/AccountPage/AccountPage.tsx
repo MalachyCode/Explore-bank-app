@@ -119,6 +119,12 @@ const AccountPage = (props: { user: User | null | undefined }) => {
           .then((response) => console.log(response));
       }
 
+      if (userBarChartInfo) {
+        incomeExpenseService
+          .deleteBarChartInfo(userBarChartInfo?.id)
+          .then((response) => console.log(response));
+      }
+
       if (id) {
         usersService.deleteUser(id).then((response) => {
           if (loggedInStaffNotificationBox) {
