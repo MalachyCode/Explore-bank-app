@@ -4,6 +4,7 @@ import transactionsService from '../../../../services/transactions';
 import { useEffect, useState } from 'react';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import HistoryIcon from '@mui/icons-material/History';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 // import { RenderIcons } from '../../components/RenderIconsandTotals';
 import { useNavigate } from 'react-router-dom';
 
@@ -55,14 +56,14 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
         </div>
         <div className='body'>
           <div className='buttons-container'>
-            <div
+            {/* <div
               onClick={() => navigate(`/dashboard-client/${user?.id}/transfer`)}
             >
               <div className='item'>
                 <img src='../../assets/icons8-money-transfer-48.png' alt='' />
               </div>
               <div className='content'>Transfer</div>
-            </div>
+            </div> */}
             <div
               onClick={() =>
                 navigate(
@@ -82,6 +83,10 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
             >
               {<HistoryIcon fontSize='large' />}
               <div className='content'>Transactions</div>
+            </div>
+            <div className='close-acct-btn'>
+              <DeleteForeverIcon fontSize='large' className='close-acct-icon' />
+              <div className='content'>Close Account</div>
             </div>
           </div>
           <h3 className='header'>Transactions</h3>
