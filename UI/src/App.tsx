@@ -37,6 +37,7 @@ import WelcomePage from './pages/WelcomePage/WelcomePage';
 import ChangeProfilePicture from './pages/ClientDashboard/sections/ChangeProfilePicture/ChangeProfilePicture';
 import MailContactPage from './pages/MailContactPage/MailContactPage';
 import OurHistoryPage from './pages/OurHistoryPage/OurHistoryPage';
+import CurrencyConverterPage from './pages/HomePage/sections/currencyConverter/CurrencyConverterPage';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -116,6 +117,10 @@ function App() {
           <Route path='/welcome/:id' element={<WelcomePage />} />
           <Route path='/contact/mail' element={<MailContactPage />} />
           <Route path='/our-history' element={<OurHistoryPage />} />
+          <Route
+            path='/currency-converter'
+            element={<CurrencyConverterPage />}
+          />
           <Route
             path='/dashboard-staff/search/users/:id'
             element={<AccountPage user={user} />}
