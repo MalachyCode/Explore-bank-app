@@ -37,9 +37,7 @@ const CurrencyConverterPage = () => {
 
   // Function to convert the currency
   const convert = () => {
-    // const rate = info[to];
     const rate = info[to];
-    // const rate = 10;
     setOutput(input * rate);
   };
 
