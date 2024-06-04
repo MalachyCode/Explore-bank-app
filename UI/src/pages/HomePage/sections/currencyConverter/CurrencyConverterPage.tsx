@@ -6,6 +6,7 @@ import 'react-dropdown/style.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './CurrencyConverterPage.scss';
 import { useNavigate } from 'react-router-dom';
+import CurrencyInput from 'react-currency-input-field';
 
 const CurrencyConverterPage = () => {
   const navigate = useNavigate();
@@ -61,10 +62,17 @@ const CurrencyConverterPage = () => {
         <div className='container'>
           <div className='left'>
             <h3>Amount</h3>
-            <input
+            {/* <input
               type='text'
               placeholder='Enter the amount'
               onChange={(e) => setInput(Number(e.target.value))}
+            /> */}
+            <CurrencyInput
+              value={input ? input : 0}
+              onValueChange={(amount) => setInput(Number(amount ? amount : 0))}
+              intlConfig={{ locale: 'en-US', currency: from }}
+              allowDecimals={true}
+              allowNegativeValue={false}
             />
           </div>
           <div className='right-container'>
