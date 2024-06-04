@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import './About.scss';
 const About = () => {
+  const navigate = useNavigate();
   return (
     <div className='about' id='about'>
       <div className='about-message'>
@@ -21,7 +23,7 @@ const About = () => {
       <div className='financial-tools-writeup'>
         <h4>Financial Tools</h4>
         <p>
-          We offer a range of financial tools to keep you in th know of your
+          We offer a range of financial tools to keep you in the know of your
           finances and various currency trends
         </p>
       </div>
@@ -41,7 +43,10 @@ const About = () => {
               Financial Health Check: Get a snapshot of your financial health.
             </p>
           </div>
-          <div className='tool five'>
+          <div
+            className='tool five'
+            onClick={() => navigate('/currency-converter')}
+          >
             <p>Currency Converter: Check live exchange rates.</p>
           </div>
         </div>
