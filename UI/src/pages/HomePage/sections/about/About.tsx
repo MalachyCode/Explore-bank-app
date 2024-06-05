@@ -38,7 +38,10 @@ const About = () => {
           <div className='tool three'>
             <p>Retirement Planner: Plan your retirement savings.</p>
           </div>
-          <div className='tool four'>
+          <div
+            className='tool four'
+            onClick={() => navigate('/financial-health-check')}
+          >
             <p>
               Financial Health Check: Get a snapshot of your financial health.
             </p>
