@@ -130,15 +130,38 @@
       .color-bar-container {
         width: 80%;
         height: 50px;
-        border: 1px solid #32435f;
         overflow: hidden;
         display: flex;
 
         div {
           width: 20%;
           height: 96%;
-          background: #7c8ca7;
-          border: 1px solid white;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: end;
+
+          span {
+            height: 5px;
+            width: 80%;
+            background: white;
+            margin-bottom: 3px;
+            &.excellent {
+              background: #44ce1b;
+            }
+            &.great {
+              background: #bbdb44;
+            }
+            &.good {
+              background: #f7e379;
+            }
+            &.okay {
+              background: #f2a134;
+            }
+            &.critical {
+              background: #e51f1f;
+            }
+          }
         }
       }
     }
