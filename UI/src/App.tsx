@@ -38,6 +38,7 @@ import ChangeProfilePicture from './pages/ClientDashboard/sections/ChangeProfile
 import MailContactPage from './pages/MailContactPage/MailContactPage';
 import OurHistoryPage from './pages/OurHistoryPage/OurHistoryPage';
 import CurrencyConverterPage from './pages/HomePage/sections/currencyConverter/CurrencyConverterPage';
+import FinancialHealthCheckPage from './pages/HomePage/sections/FinancialHealthCheck/FinancialHealthCheckPage';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -120,6 +121,10 @@ function App() {
           <Route
             path='/currency-converter'
             element={<CurrencyConverterPage />}
+          />
+          <Route
+            path='/financial-health-check'
+            element={<FinancialHealthCheckPage />}
           />
           <Route
             path='/dashboard-staff/search/users/:id'
