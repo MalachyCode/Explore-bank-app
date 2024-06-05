@@ -1,0 +1,146 @@
+.financial-health-check {
+  width: 100vw;
+  height: 100vh;
+  background: url('../../../../assets/pexels-henry-&-co-2059736.jpg');
+  background-color: #e1dcd9;
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  .body {
+    width: 90%;
+    height: 85%;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+
+    .form {
+      h2 {
+        text-align: center;
+        margin-top: 0;
+        color: #32435f;
+      }
+
+      .form-input {
+        width: 89%;
+        margin-right: 100px;
+        border: 1px solid #32435f;
+
+        @media (max-width: 576px) {
+          width: 86%;
+        }
+        @media (min-width: 576px) and (max-width: 768px) {
+          width: 87%;
+        }
+      }
+
+      .btn {
+        margin-bottom: 10px;
+
+        &.disabled {
+          background: #7c8ca7;
+          opacity: 0.5;
+          box-shadow: none;
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    .check-result-box {
+      width: 90%;
+      height: calc(50% - 10px);
+      background: #fff;
+      border-radius: 5px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      padding: 5px;
+
+      .account-circle-container {
+        width: 50%;
+        height: 60%;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .account-circle {
+          background: #fff;
+          border-radius: 50%;
+          width: 90%;
+          height: 90%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          .header,
+          .account-balance,
+          .account-number {
+            padding: 2px 5px;
+            font-weight: 900;
+            color: #32435f;
+          }
+          .header {
+            font-size: 17px;
+          }
+          .account-balance {
+            font-size: 35px;
+            &.Excellent {
+              color: #44ce1b;
+            }
+            &.Great {
+              color: #bbdb44;
+            }
+            &.Good {
+              color: #f7e379;
+            }
+            &.Okay {
+              color: #f2a134;
+            }
+            &.Critical {
+              color: #e51f1f;
+            }
+          }
+          .account-number {
+            font-size: 13px;
+          }
+        }
+
+        &.Excellent {
+          // background: #0ec00e;
+          background: #44ce1b;
+        }
+        &.Great {
+          background: #bbdb44;
+        }
+        &.Good {
+          background: #f7e379;
+        }
+        &.Okay {
+          background: #f2a134;
+        }
+        &.Critical {
+          background: #e51f1f;
+        }
+      }
+      .color-bar-container {
+        width: 80%;
+        height: 50px;
+        border: 1px solid #32435f;
+        overflow: hidden;
+        display: flex;
+
+        div {
+          width: 20%;
+          height: 96%;
+          background: #7c8ca7;
+          border: 1px solid white;
+        }
+      }
+    }
+  }
+}
