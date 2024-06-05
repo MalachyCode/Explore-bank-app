@@ -126,11 +126,31 @@ const FinancialHealthCheckPage = () => {
               </div>
             </div>
             <div className='color-bar-container'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
+              <div>
+                <span className='critical'></span>
+              </div>
+              <div>
+                <span className='okay'></span>
+                <span className='critical'></span>
+              </div>
+              <div>
+                <span className='good'></span>
+                <span className='okay'></span>
+                <span className='critical'></span>
+              </div>
+              <div>
+                <span className='great'></span>
+                <span className='good'></span>
+                <span className='okay'></span>
+                <span className='critical'></span>
+              </div>
+              <div>
+                <span className='excellent'></span>
+                <span className='great'></span>
+                <span className='good'></span>
+                <span className='okay'></span>
+                <span className='critical'></span>
+              </div>
             </div>
             <div className='financial-status-container'>
               Financial Status: {financialStatus}
