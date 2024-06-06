@@ -28,6 +28,7 @@ const FinancialHealthCheckPage = () => {
       toast.error('Account number must be 10 numbers', {
         position: 'top-center',
       });
+      setDisableButton(true);
     } else {
       setDisableButton(true);
     }
@@ -103,7 +104,7 @@ const FinancialHealthCheckPage = () => {
           setFinancialStatus(financialStat);
         }
 
-        toast.success(`Account found successfully! ${response.status}`, {
+        toast.success(`Account found successfully!`, {
           position: 'top-center',
         });
       })
