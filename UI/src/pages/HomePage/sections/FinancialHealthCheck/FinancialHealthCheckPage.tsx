@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import accountsService from '../../../../services/accounts';
 import { Account } from '../../../../types';
+import showHealthCheckBar from './helpers/showHealthCheckBar';
 
 const FinancialHealthCheckPage = () => {
   const navigate = useNavigate();
@@ -52,42 +53,6 @@ const FinancialHealthCheckPage = () => {
     }
   };
 
-  const CriticalBar = () => (
-    <div>
-      <span className='critical'></span>
-    </div>
-  );
-  const OkayBar = () => (
-    <div>
-      <span className='okay'></span>
-      <span className='critical'></span>
-    </div>
-  );
-  const GoodBar = () => (
-    <div>
-      <span className='good'></span>
-      <span className='okay'></span>
-      <span className='critical'></span>
-    </div>
-  );
-  const GreatBar = () => (
-    <div>
-      <span className='great'></span>
-      <span className='good'></span>
-      <span className='okay'></span>
-      <span className='critical'></span>
-    </div>
-  );
-  const ExcellentBar = () => (
-    <div>
-      <span className='excellent'></span>
-      <span className='great'></span>
-      <span className='good'></span>
-      <span className='okay'></span>
-      <span className='critical'></span>
-    </div>
-  );
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -117,53 +82,6 @@ const FinancialHealthCheckPage = () => {
     setAccountNumber('');
   };
 
-  const showHealthCheckBar = (financialStatus: string) => {
-    if (financialStatus === 'Critical') {
-      return (
-        <div className='color-bar-container'>
-          <CriticalBar />
-        </div>
-      );
-    }
-    if (financialStatus === 'Okay') {
-      return (
-        <div className='color-bar-container'>
-          <CriticalBar />
-          <OkayBar />
-        </div>
-      );
-    }
-    if (financialStatus === 'Good') {
-      return (
-        <div className='color-bar-container'>
-          <CriticalBar />
-          <OkayBar />
-          <GoodBar />
-        </div>
-      );
-    }
-    if (financialStatus === 'Great') {
-      return (
-        <div className='color-bar-container'>
-          <CriticalBar />
-          <OkayBar />
-          <GoodBar />
-          <GreatBar />
-        </div>
-      );
-    }
-    if (financialStatus === 'Excellent') {
-      return (
-        <div className='color-bar-container'>
-          <CriticalBar />
-          <OkayBar />
-          <GoodBar />
-          <GreatBar />
-          <ExcellentBar />
-        </div>
-      );
-    }
-  };
   console.log(account);
 
   return (
