@@ -5,8 +5,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MailContactType } from '../../types';
 import emailjs from '@emailjs/browser';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 
 const MailContactPage = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState<MailContactType>({
     email: '',
     name: '',
@@ -85,6 +88,10 @@ const MailContactPage = () => {
 
   return (
     <div className='mail-contact-page'>
+      <div className='top'>
+        <ArrowBackIcon className='back-icon' onClick={() => navigate(-1)} />
+        <h2>Contact Us</h2>
+      </div>
       <div className='container'>
         <div className='form'>
           <div className='form-header'>Contact Us</div>
