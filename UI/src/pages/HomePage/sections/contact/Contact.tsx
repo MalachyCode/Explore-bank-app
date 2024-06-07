@@ -90,7 +90,9 @@ const Contact = () => {
                 <li onClick={() => navigate('/contact/mail')}>
                   explorebank@mail.com
                 </li>
-                <li>Branch Locator</li>
+                <li onClick={() => navigate('branch-locator')}>
+                  Branch Locator
+                </li>
               </ul>
             </div>
           </div>
