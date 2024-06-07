@@ -39,6 +39,7 @@ import MailContactPage from './pages/MailContactPage/MailContactPage';
 import OurHistoryPage from './pages/OurHistoryPage/OurHistoryPage';
 import CurrencyConverterPage from './pages/HomePage/sections/currencyConverter/CurrencyConverterPage';
 import FinancialHealthCheckPage from './pages/HomePage/sections/FinancialHealthCheck/FinancialHealthCheckPage';
+import BranchLocatorPage from './pages/HomePage/sections/BranchLocatorPage/BranchLocatorPage';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -118,6 +119,7 @@ function App() {
           <Route path='/welcome/:id' element={<WelcomePage />} />
           <Route path='/contact/mail' element={<MailContactPage />} />
           <Route path='/our-history' element={<OurHistoryPage />} />
+          <Route path='/branch-locator' element={<BranchLocatorPage />} />
           <Route
             path='/currency-converter'
             element={<CurrencyConverterPage />}
