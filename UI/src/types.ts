@@ -233,3 +233,9 @@ export interface MailContactType {
   email: string;
   message: string;
 }
+
+export interface ReportScamType {
+  name: string;
+  email: string;
+  report: string;
+}
