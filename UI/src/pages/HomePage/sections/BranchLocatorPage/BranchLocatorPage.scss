@@ -1,0 +1,58 @@
+.branch-locator {
+  background: url('../../../../assets/pexels-henry-&-co-2059736.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+
+  .body {
+    width: 90%;
+    height: calc(80% - 20px);
+    background: #fff;
+    margin: auto;
+    position: relative;
+    top: 30px;
+    max-width: 700px;
+    padding-bottom: 20px;
+
+    .message-container {
+      width: 90%;
+      height: 50%;
+      margin: auto;
+    }
+
+    .map-container {
+      width: 90%;
+      height: 50%;
+      margin: auto;
+      display: flex;
+      position: relative;
+      cursor: pointer;
+
+      .map-box {
+        width: 100%;
+        height: 100%;
+        background: url('../../../../assets/map-image.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-radius: 5px;
+        position: absolute;
+      }
+
+      .notice {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgb(0, 0, 0, 0.4);
+        color: black;
+        font-size: 30px;
+        font-weight: 700;
+      }
+    }
+  }
+}
