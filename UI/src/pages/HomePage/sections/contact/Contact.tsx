@@ -146,7 +146,9 @@ const Contact = () => {
                 <li onClick={() => navigate('corporate-profile')}>
                   Corporate profile
                 </li>
-                <li>Board and Management Team</li>
+                <li onClick={() => navigate('our-philosophy')}>
+                  Our Philosophy
+                </li>
               </ul>
             </div>
           </div>
