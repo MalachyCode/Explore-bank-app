@@ -116,7 +116,9 @@ const Contact = () => {
             <div className={'service-list-box ' + (quickLinksOpen && 'active')}>
               <ul>
                 <li>Online Banking</li>
-                <li>Support Center</li>
+                <li onClick={() => navigate('/support-center')}>
+                  Support Center
+                </li>
                 <li onClick={() => navigate('/report-scam')}>
                   Report Scam and Fraud Attempts
                 </li>
