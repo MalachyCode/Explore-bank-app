@@ -43,6 +43,7 @@ import BranchLocatorPage from './pages/HomePage/sections/BranchLocatorPage/Branc
 import CorporateProfilePage from './pages/HomePage/sections/CorporateProfile/CorporateProfilePage';
 import ReportScamPage from './pages/HomePage/sections/ReportScamPage/ReportScamPage';
 import OurPhilosophyPage from './pages/HomePage/sections/OurPhilosophyPage/OurPhilosophyPage';
+import SupportCenterPage from './pages/HomePage/sections/SupportCenterPage/SupportCenterPage';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -126,6 +127,7 @@ function App() {
           <Route path='/corporate-profile' element={<CorporateProfilePage />} />
           <Route path='/our-philosophy' element={<OurPhilosophyPage />} />
           <Route path='/report-scam' element={<ReportScamPage />} />
+          <Route path='/support-center' element={<SupportCenterPage />} />
           <Route
             path='/currency-converter'
             element={<CurrencyConverterPage />}
