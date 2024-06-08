@@ -1,0 +1,137 @@
+.support-center {
+  width: 100vw;
+  height: 100vh;
+  background: url('../../../../assets/pexels-henry-&-co-2059736.jpg');
+  background-color: #e1dcd9;
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+
+  .body {
+    width: 100%;
+    height: calc(100% - 65px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .brief-intro {
+      width: 100%;
+      background: white;
+      position: fixed;
+      top: 65px;
+      max-width: 700px;
+      text-align: center;
+    }
+
+    .container {
+      width: 70%;
+      height: 70%;
+      max-width: 350px;
+
+      .container-top {
+        width: 100%;
+        height: calc(15% - 25px);
+        padding: 15px 0 15px 10px;
+        background: #32435f;
+        color: #e1dcd9;
+      }
+      .container-body {
+        width: 100%;
+        height: 85%;
+        display: flex;
+        flex-direction: column;
+        // justify-content: space-around;
+
+        span {
+          transition: all 0.5s ease;
+          padding: 20px;
+
+          &:hover {
+            background: #7c8ca7;
+            color: white;
+          }
+
+          &.mail-us {
+            cursor: pointer;
+          }
+        }
+
+        form {
+          .input-box {
+            &.textarea-box {
+              width: 100%;
+              height: 20vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              position: relative;
+              top: -25px;
+              border: none;
+            }
+
+            .textarea {
+              width: calc(80% - 15px);
+              height: 70%;
+              background: #e1dcd9;
+              position: relative;
+              top: 10%;
+              padding-top: 20px;
+              padding-left: 15px;
+              padding-right: 10px;
+              border: none;
+              font-size: 16px;
+
+              &:focus {
+                outline: none;
+              }
+
+              &:focus ~ .placeholder {
+                top: 1px;
+                font-size: 11px;
+                margin-top: 3px;
+              }
+            }
+            .placeholder {
+              position: absolute;
+              font-size: 16px;
+              pointer-events: none;
+              color: rgb(42, 42, 42);
+              margin-top: 10px;
+              left: 1px;
+              top: 1px;
+              margin-left: 20px;
+              transition: 0.1s ease all;
+
+              &.amount {
+                margin-left: 20px;
+              }
+
+              &.active {
+                top: 1px;
+                font-size: 11px;
+                margin-top: 3px;
+              }
+            }
+          }
+
+          .btn {
+            width: 84%;
+            margin: auto;
+            margin-left: 8%;
+            margin-top: -10px;
+
+            &.disabled {
+              background: #7c8ca7;
+              opacity: 0.5;
+              box-shadow: none;
+              cursor: not-allowed;
+            }
+          }
+        }
+      }
+    }
+  }
+}
