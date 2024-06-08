@@ -47,7 +47,7 @@ const TransactionInfo = (props: {
     e.preventDefault();
 
     if (adminNotificationBox) {
-      const newDeleteNotification: Notification = {
+      const newComplaintNotification: Notification = {
         ...adminNotificationBox,
         newNotifications: adminNotificationBox?.newNotifications.concat({
           message: complaint,
@@ -58,7 +58,7 @@ const TransactionInfo = (props: {
       };
 
       notificationsService
-        .updateNotification(adminNotificationBox?.id, newDeleteNotification)
+        .updateNotification(adminNotificationBox?.id, newComplaintNotification)
         .then((response) => console.log(response));
     }
 
