@@ -117,7 +117,9 @@ const Contact = () => {
               <ul>
                 <li>Online Banking</li>
                 <li>Support Center</li>
-                <li>Report Scam and Fraud Attempts</li>
+                <li onClick={() => navigate('/report-scam')}>
+                  Report Scam and Fraud Attempts
+                </li>
               </ul>
             </div>
           </div>
