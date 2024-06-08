@@ -42,6 +42,7 @@ import FinancialHealthCheckPage from './pages/HomePage/sections/FinancialHealthC
 import BranchLocatorPage from './pages/HomePage/sections/BranchLocatorPage/BranchLocatorPage';
 import CorporateProfilePage from './pages/HomePage/sections/CorporateProfile/CorporateProfilePage';
 import ReportScamPage from './pages/HomePage/sections/ReportScamPage/ReportScamPage';
+import OurPhilosophyPage from './pages/HomePage/sections/OurPhilosophyPage/OurPhilosophyPage';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -123,6 +124,7 @@ function App() {
           <Route path='/our-history' element={<OurHistoryPage />} />
           <Route path='/branch-locator' element={<BranchLocatorPage />} />
           <Route path='/corporate-profile' element={<CorporateProfilePage />} />
+          <Route path='/our-philosophy' element={<OurPhilosophyPage />} />
           <Route path='/report-scam' element={<ReportScamPage />} />
           <Route
             path='/currency-converter'
