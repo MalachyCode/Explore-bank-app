@@ -71,7 +71,7 @@ const ReportScamPage = () => {
     e.preventDefault();
 
     if (adminNotificationBox) {
-      const newDeleteNotification: Notification = {
+      const newReportNotification: Notification = {
         ...adminNotificationBox,
         newNotifications: adminNotificationBox?.newNotifications.concat({
           message: `${values.report} by ${values.name} with mail ${values.email}`,
@@ -79,7 +79,7 @@ const ReportScamPage = () => {
       };
 
       notificationsService
-        .updateNotification(adminNotificationBox?.id, newDeleteNotification)
+        .updateNotification(adminNotificationBox?.id, newReportNotification)
         .then((response) => console.log(response));
 
       toast.success(`Thanks for the feedback!`, {
