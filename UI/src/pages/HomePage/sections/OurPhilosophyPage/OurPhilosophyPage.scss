@@ -1,0 +1,41 @@
+.our-philosophy {
+  width: 100vw;
+  height: 100vh;
+  background: url('../../../../assets/pexels-henry-&-co-2059736.jpg');
+  background-color: #e1dcd9;
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  .body {
+    height: calc(100% - 65px);
+    width: 100%;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .container {
+      width: calc(90% - 40px);
+      max-width: 750px;
+      margin: auto;
+      border-radius: 5px;
+      padding: 10px 20px;
+      margin-bottom: 40px;
+      position: relative;
+      top: 20px;
+
+      .line {
+        width: 95%;
+        height: 1.5px;
+        background: #d6ba73;
+        margin: auto;
+      }
+
+      h3 {
+        color: #32435f;
+      }
+    }
+  }
+}
