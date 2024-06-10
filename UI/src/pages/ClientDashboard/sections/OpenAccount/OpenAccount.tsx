@@ -176,7 +176,6 @@ const OpenAccount = () => {
       <form className='form' onSubmit={handleSubmit}>
         <strong className='form-header'>Open An Account</strong>
         <div className='form-header-seperator'></div>
-        <label htmlFor='isAdmin'>Account Type</label>
         <select
           name='isAmin'
           id='isAmin'
@@ -184,6 +183,7 @@ const OpenAccount = () => {
           className='form-select'
           onChange={(e) => setAccountType(e.target.value)}
         >
+          <option value='savings'>Account Type</option>
           <option value='savings'>Savings</option>
           <option value='current'>Current</option>
         </select>
