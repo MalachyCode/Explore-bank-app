@@ -115,7 +115,9 @@ const Contact = () => {
             </div>
             <div className={'service-list-box ' + (quickLinksOpen && 'active')}>
               <ul>
-                <li>Online Banking</li>
+                <li onClick={() => navigate('/online-security-tips')}>
+                  Online Security Tips
+                </li>
                 <li onClick={() => navigate('/support-center')}>
                   Support Center
                 </li>
