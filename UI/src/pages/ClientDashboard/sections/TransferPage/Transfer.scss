@@ -2,6 +2,12 @@
 
 .transfer {
   width: 100vw;
+  background: url('../../../../assets/pexels-henry-&-co-2059736.jpg');
+  background-color: #e1dcd9;
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
 
@@ -88,7 +94,7 @@
       margin: auto;
       margin-top: 10px;
       margin-bottom: 10px;
-      background: #e1dcd9;
+      // background: #e1dcd9;
 
       .account-balance-container {
         width: 98%;
@@ -98,7 +104,8 @@
         justify-content: space-between;
         .account-balance {
           width: 47%;
-          background: #a67f78;
+          // background: #a67f78;
+          background: #32435f;
           color: white;
           border-radius: 3px;
           display: flex;
@@ -110,7 +117,8 @@
           cursor: pointer;
 
           &.active {
-            border: 5px solid #32435f;
+            border: 3px solid #32435f;
+            background: #7c8ca7;
           }
         }
         @media (min-width: 992px) {

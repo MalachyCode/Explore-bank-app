@@ -2,9 +2,9 @@
 
 .open-account {
   width: 100vw;
-  // height: 100%;
-  background: url('../../assets/pexels-henry-&-co-2059736.jpg');
-  background-color: #fff;
+  height: 100%;
+  background: url('../../../../assets/pexels-henry-&-co-2059736.jpg');
+  background-color: #e1dcd9;
   background-blend-mode: multiply;
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,10 +16,9 @@
 
   .form {
     margin: 20px 0;
-    background-color: #e1dcd9;
 
     .form-select {
-      margin-top: 10px;
+      margin-top: 20px;
       width: 98%;
       padding: 11px;
       border-radius: 4px;
