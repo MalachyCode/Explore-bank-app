@@ -45,6 +45,7 @@ import ReportScamPage from './pages/HomePage/sections/ReportScamPage/ReportScamP
 import OurPhilosophyPage from './pages/HomePage/sections/OurPhilosophyPage/OurPhilosophyPage';
 import SupportCenterPage from './pages/HomePage/sections/SupportCenterPage/SupportCenterPage';
 import OnlineSecurityTipsPage from './pages/HomePage/sections/OnlineSecurityTipsPage/OnlineSecurityTipsPage';
+import BudgetPlannerPage from './pages/HomePage/sections/BudgetPlannerPage/BudgetPlannerPage';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -129,6 +130,7 @@ function App() {
           <Route path='/our-philosophy' element={<OurPhilosophyPage />} />
           <Route path='/report-scam' element={<ReportScamPage />} />
           <Route path='/support-center' element={<SupportCenterPage />} />
+          <Route path='/budget-planner' element={<BudgetPlannerPage />} />
           <Route
             path='/online-security-tips'
             element={<OnlineSecurityTipsPage />}
