@@ -1,0 +1,38 @@
+.budget-planner {
+  width: 100vw;
+  height: 100vh;
+  background: url('../../../../assets/pexels-henry-&-co-2059736.jpg');
+  background-color: #e1dcd9;
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  .chart-container {
+    width: 90%;
+    height: 450px;
+    background: #edebd7;
+    margin: auto;
+    border-radius: 10px;
+    margin-top: 70px;
+    max-width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .login {
+    height: 90%;
+    margin: auto;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    .form {
+      margin-top: 60px;
+    }
+  }
+}
