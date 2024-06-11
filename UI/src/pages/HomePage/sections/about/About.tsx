@@ -29,7 +29,7 @@ const About = () => {
       </div>
       <div className='boxes'>
         <div className='div-slide'>
-          <div className='tool one'>
+          <div className='tool one' onClick={() => navigate('/budget-planner')}>
             <p>Budget Planner: Track your income and expenses.</p>
           </div>
           <div className='tool two'>
