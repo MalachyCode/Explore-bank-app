@@ -1,10 +1,7 @@
-// import { PureComponent } from 'react';
 import {
   BarChart,
   Bar,
-  // Cell,
   XAxis,
-  // YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
@@ -50,57 +47,18 @@ const BarChartComponent = (props: IncomeExpenseType) => {
     month -= 1;
   }
 
-  // const data = [
-  //   {
-  //     name: monthsToUse[5],
-  //     difference: 2000,
-  //     income: 9800,
-  //     expensis: 2290,
-  //   },
-  //   {
-  //     name: monthsToUse[4],
-  //     difference: 3000,
-  //     income: 1398,
-  //     expensis: 2210,
-  //   },
-  //   {
-  //     name: monthsToUse[3],
-  //     difference: 4000,
-  //     income: 4400,
-  //     expensis: 2400,
-  //   },
-  //   {
-  //     name: monthsToUse[2],
-  //     difference: 2000,
-  //     income: 9800,
-  //     expensis: 2290,
-  //   },
-  //   {
-  //     name: monthsToUse[1],
-  //     difference: 3000,
-  //     income: 1398,
-  //     expensis: 2210,
-  //   },
-  //   {
-  //     name: monthsToUse[0],
-  //     difference: 2000,
-  //     income: 4400,
-  //     expensis: 2400,
-  //   },
-  // ];
-
   return (
     <ResponsiveContainer width='100%' height='100%'>
       <BarChart
-        width={500}
-        height={300}
+        style={{
+          overflow: 'hidden',
+        }}
         data={props.data}
-        // data={data}
         margin={{
           top: 20,
-          right: 30,
+          right: 20,
           left: 20,
-          bottom: 5,
+          bottom: 10,
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
