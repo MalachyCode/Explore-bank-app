@@ -239,3 +239,16 @@ export interface ReportScamType {
   email: string;
   report: string;
 }
+
+export interface SavingInfoType {
+  age: number;
+  retirementSavings: number;
+}
+
+export type RetirementPlannerType = Array<SavingInfoType>;
+
+export interface RetirementBarChartInfoType {
+  endAmt: number;
+  retireAmt: number;
+}
+export type RetirementBarChartType = Array<RetirementBarChartInfoType>;
