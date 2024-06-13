@@ -17,7 +17,7 @@ const SliderComponent = (props: TitleType) => {
 
   return (
     <Box sx={{ width: 150 }}>
-      <Typography id='input-slider' gutterBottom>
+      <Typography id='input-slider' gutterBottom fontSize={13}>
         {props.title}: {value}
       </Typography>
       <Stack spacing={2} direction='row' sx={{ mb: 1 }} alignItems='center'>
