@@ -16,7 +16,9 @@ const SliderComponent = (props: TitleType) => {
         {props.title}:{' '}
         {props.title === 'Salary'
           ? 'NGN'
-          : props.title !== 'Age' && props.title !== 'Retirement Age'
+          : props.title !== 'Age' &&
+            props.title !== 'Retirement Age' &&
+            props.title !== 'Number of Years'
           ? '%'
           : ''}
         {props.value}
