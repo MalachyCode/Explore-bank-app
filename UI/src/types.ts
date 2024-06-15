@@ -242,13 +242,13 @@ export interface ReportScamType {
 
 export interface SavingInfoType {
   age: number;
-  retirementSavings: number;
+  savings: number;
 }
 
 export type RetirementPlannerType = Array<SavingInfoType>;
 
 export interface RetirementBarChartInfoType {
   endAmt: number;
-  retireAmt: number;
+  desiredAmt: number;
 }
 export type RetirementBarChartType = Array<RetirementBarChartInfoType>;
