@@ -28,14 +28,14 @@ const RetirementBarChart = (props: BarChartType) => {
   let endAmtFill;
 
   if (barData) {
-    if (barData.endAmt && barData.retireAmt) {
-      barData.endAmt >= barData.retireAmt
+    if (barData.endAmt && barData.desiredAmt) {
+      barData.endAmt >= barData.desiredAmt
         ? (endAmtFill = '#82ca9d')
         : (endAmtFill = '#860202');
     }
   }
 
-  console.log(barData?.retireAmt);
+  console.log(barData?.desiredAmt);
 
   return (
     <ResponsiveContainer width='100%' height='100%'>
@@ -59,7 +59,11 @@ const RetirementBarChart = (props: BarChartType) => {
           formatter={(money) => `NGN${formatMoney(+money, 0)}`}
         /> */}
         <Legend />
-        <Bar dataKey='retireAmt' fill='#8884d8' background={{ fill: '#eee' }} />
+        <Bar
+          dataKey='desiredAmt'
+          fill='#8884d8'
+          background={{ fill: '#eee' }}
+        />
         <Bar
           dataKey='endAmt'
           // fill='#82ca9d'
