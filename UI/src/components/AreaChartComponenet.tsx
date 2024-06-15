@@ -33,7 +33,7 @@ const AreaChartComponent = (props: AreaChartType) => {
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='age' />
         <YAxis
-          dataKey='retirementSavings'
+          dataKey='savings'
           tickFormatter={(money) => 'NGN' + formatMoney(+money, 0)}
         />
         <Tooltip
@@ -43,7 +43,7 @@ const AreaChartComponent = (props: AreaChartType) => {
         />
         <Area
           type='monotone'
-          dataKey='retirementSavings'
+          dataKey='savings'
           stroke='#8884d8'
           fill='#8884d8'
         />
