@@ -47,6 +47,7 @@ import SupportCenterPage from './pages/HomePage/sections/SupportCenterPage/Suppo
 import OnlineSecurityTipsPage from './pages/HomePage/sections/OnlineSecurityTipsPage/OnlineSecurityTipsPage';
 import BudgetPlannerPage from './pages/HomePage/sections/BudgetPlannerPage/BudgetPlannerPage';
 import RetirementPlannerPage from './pages/HomePage/sections/RetirementPlannerPage/RetirementPlannerPage';
+import SavingsCalculatorPage from './pages/HomePage/sections/SavingsCalculatorPage/SavingsCalculatorPage';
 
 function App() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -135,6 +136,10 @@ function App() {
           <Route
             path='/retirement-planner'
             element={<RetirementPlannerPage />}
+          />
+          <Route
+            path='/savings-calculator'
+            element={<SavingsCalculatorPage />}
           />
           <Route
             path='/online-security-tips'
