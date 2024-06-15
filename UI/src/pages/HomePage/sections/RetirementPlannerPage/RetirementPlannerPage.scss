@@ -11,6 +11,10 @@
   .body {
     width: 100%;
     height: calc(100% - 65px);
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     .charts-container {
       width: 90%;
