@@ -4,7 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AreaChartComponent from '../../../../components/AreaChartComponenet';
 // import SalarySliderComponent from '../../../../components/SalarySliderComponent';
 import SliderComponent from '../../../../components/SliderComponent';
-import savingsCalculator from '../../../../functions/retirementSavingsCalculator';
+import retirementSavingsCalculator from '../../../../functions/savingsCalculator';
 import RetirementBarChart from '../../../../components/RetirementPlannerBarChart';
 import { RetirementBarChartType } from '../../../../types';
 import { useEffect, useState } from 'react';
@@ -52,31 +52,22 @@ const RetirementPlannerPage = () => {
     }
   }, [targetInput]);
 
-  const retirementData = savingsCalculator(
+  const retirementData = retirementSavingsCalculator(
     currentAge,
     retirementAge,
     salaryForCalculation * 10000,
     salaryIncreaseRate,
     savingsRate,
-    investmentReturnRate
+    investmentReturnRate,
+    'Retirement'
   );
   const endRetirementData = retirementData[retirementData.length - 1];
   const retirementBarChartData: RetirementBarChartType = [
     {
-      endAmt: endRetirementData.retirementSavings,
-      retireAmt: target,
+      endAmt: endRetirementData.savings,
+      desiredAmt: target,
     },
   ];
-
-  // console.log(`salaryInput: ${salaryInput}`);
-  console.log(`target: ${target}`);
-  // console.log(`salary: ${salary}`);
-  // console.log(`salaryForCalculation: ${salaryForCalculation}`);
-  // console.log(`age: ${currentAge}`);
-  // console.log(`retirementAge: ${retirementAge}`);
-  // console.log(`investmentReturn: ${investmentReturnRate}`);
-  // console.log(`salaryIncrease: ${salaryIncreaseRate}`);
-  // console.log(`savingsRate: ${savingsRate}`);
 
   const handleSalarySliderChange = (
     event: Event,
