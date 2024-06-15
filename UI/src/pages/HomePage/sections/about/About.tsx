@@ -32,7 +32,10 @@ const About = () => {
           <div className='tool one' onClick={() => navigate('/budget-planner')}>
             <p>Budget Planner: Track your income and expenses.</p>
           </div>
-          <div className='tool two'>
+          <div
+            className='tool two'
+            onClick={() => navigate('/savings-calculator')}
+          >
             <p>Savings Calculator: See how your savings can grow.</p>
           </div>
           <div
