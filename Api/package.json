@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
+    "build:ui": "rm -rf dist && cd ../UI/ && npm run build && cp -r dist ../Api",
     "dev": "cross-env NODE_ENV=development ts-node-dev src/index.ts",
     "lint": "eslint --ext .ts .",
     "start": "cross-env NODE_ENV=production node build/src/index.js"
