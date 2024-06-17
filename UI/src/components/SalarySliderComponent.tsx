@@ -13,7 +13,7 @@ const Input = styled(MuiInput)`
 const SalarySliderComponent = () => {
   const [value, setValue] = useState(10000);
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
     setValue(newValue as number);
   };
 
