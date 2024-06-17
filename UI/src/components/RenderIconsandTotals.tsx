@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Icons } from '../types';
+import { formatMoney } from '../functions/formatMoney';
 
 export const RenderIcons = (props: Icons) => (
   <div className={props.className} onClick={props.onClick}>
@@ -32,7 +33,8 @@ export const RenderTotals = (props: {
       <div className='total-info'>
         <h3>{`Account: ${props.accountNum}`}</h3>
         <strong>
-          <h2 className='amount'>&#8358; {props.balance}</h2>
+          <h2 className='amount'>&#8358; {formatMoney(+props.balance, 0)}</h2>
+          {/* <h2 className='amount'>&#8358; {props.balance}</h2> */}
         </strong>
         <p className='savings-percentage'>{`Status: ${props.status}`}</p>
       </div>
