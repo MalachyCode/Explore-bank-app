@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { HiSwitchHorizontal } from 'react-icons/hi';
-import 'react-dropdown/style.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './CurrencyConverterPage.scss';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +8,7 @@ import CurrencyInput from 'react-currency-input-field';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const CurrencyConverterPage = () => {
+  // useNavigate Function
   const navigate = useNavigate();
   // Initializing all the state variables
   const [info, setInfo] = useState<string[]>([]);
