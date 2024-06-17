@@ -7,6 +7,7 @@ import accountsService from '../../../../services/accounts';
 import './ReferalRewards.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { formatMoney } from '../../../../functions/formatMoney';
 
 const ReferalRewards = () => {
   const navigate = useNavigate();
@@ -63,7 +64,10 @@ const ReferalRewards = () => {
           <div className='total-info'>
             <h3>{`Account: ${accountToShow?.accountNumber}`}</h3>
             <strong>
-              <h2 className='amount'>&#8358; {accountToShow?.balance}</h2>
+              <h2 className='amount'>
+                &#8358;{' '}
+                {accountToShow && formatMoney(+accountToShow?.balance, 0)}
+              </h2>
             </strong>
             <p className='savings-percentage'>{`Status: ${accountToShow?.status}`}</p>
           </div>

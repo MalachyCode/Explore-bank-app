@@ -19,6 +19,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import notificationsService from '../../../../services/notifications';
 import incomeExpenseService from '../../../../services/incomeExpense';
 import barChartInfoUpdater from '../../../../functions/barChartInfoUpdater';
+import { formatMoney } from '../../../../functions/formatMoney';
 
 const Transfer = () => {
   const navigate = useNavigate();
@@ -537,7 +538,7 @@ const Transfer = () => {
                   setAccountForTransfer(account.accountNumber);
                 }}
               >
-                &#8358; {account.balance}
+                &#8358; {formatMoney(+account.balance, 0)}
               </div>
             ))}
           </div>

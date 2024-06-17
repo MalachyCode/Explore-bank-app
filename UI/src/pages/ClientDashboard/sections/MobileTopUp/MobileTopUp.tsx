@@ -21,6 +21,7 @@ import notificationsService from '../../../../services/notifications';
 import usersService from '../../../../services/users';
 import barChartInfoUpdater from '../../../../functions/barChartInfoUpdater';
 import incomeExpenseService from '../../../../services/incomeExpense';
+import { formatMoney } from '../../../../functions/formatMoney';
 
 const MobileTopUp = () => {
   const navigate = useNavigate();
@@ -348,7 +349,10 @@ const MobileTopUp = () => {
           <div className='total-info'>
             <h3>{`Account: ${accountToShow?.accountNumber}`}</h3>
             <strong>
-              <h2 className='amount'>&#8358; {accountToShow?.balance}</h2>
+              <h2 className='amount'>
+                &#8358;{' '}
+                {accountToShow && formatMoney(+accountToShow?.balance, 0)}
+              </h2>
             </strong>
             <p className='savings-percentage'>{`Status: ${accountToShow?.status}`}</p>
           </div>
