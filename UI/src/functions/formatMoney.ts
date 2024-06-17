@@ -9,7 +9,8 @@ export const formatMoney = (
   t = t === undefined ? ',' : t;
   const s = n < 0 ? '-' : '';
   const i = String(
-    parseInt((n = Math.abs(Number(n) || 0).toFixed(c as number)), 10)
+    parseInt(Math.abs(Number(n) || 0).toFixed(c as number), 10)
+    // parseInt((n = Math.abs(Number(n) || 0).toFixed(c as number)), 10)
   );
   let j;
   j = (j = i.length) > 3 ? j % 3 : 0;
