@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ConfirmUserPin, FindUserByEmailType, NewUser, User } from '../types';
-const baseUrl = 'http://localhost:3001/api/users';
-// const baseUrl = 'http://localhost:3001/users';
+const baseUrl = '/api/users';
+// const baseUrl = 'http://localhost:3001/api/users';
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);

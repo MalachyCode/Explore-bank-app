@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { NewTransaction } from '../types';
-const baseUrl = 'http://localhost:3001/api/transactions';
-// const baseUrl = 'http://localhost:3001/transactions';
+const baseUrl = '/api/transactions';
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);

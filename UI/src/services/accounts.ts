@@ -5,8 +5,8 @@ import {
   FindUserAccountsType,
   NewAccount,
 } from '../types';
-const baseUrl = 'http://localhost:3001/api/accounts';
-// const baseUrl = 'http://localhost:3001/accounts';
+const baseUrl = '/api/accounts';
+// const baseUrl = 'http://localhost:3001/api/accounts';
 
 let token: string | null = null;
 
