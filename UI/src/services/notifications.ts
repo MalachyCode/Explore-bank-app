@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FindUserAccountsType, NewNotification, Notification } from '../types';
-const baseUrl = 'http://localhost:3001/api/notifications';
-// const baseUrl = 'http://localhost:3001/notifications';
+const baseUrl = '/api/notifications';
+// const baseUrl = 'http://localhost:3001/api/notifications';
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);
