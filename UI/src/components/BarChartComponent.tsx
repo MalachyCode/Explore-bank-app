@@ -7,6 +7,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { formatMoney } from '../functions/formatMoney';
 
 interface IncomeExpenseData {
   name: string;
@@ -64,7 +65,12 @@ const BarChartComponent = (props: IncomeExpenseType) => {
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='name' />
         {/* <YAxis /> */}
-        <Tooltip />
+        {/* <Tooltip /> */}
+        <Tooltip
+          label={'month'}
+          labelFormatter={(month) => `Month: ${month}`}
+          formatter={(money) => `NGN${formatMoney(+money, 0)}`}
+        />
         <Legend />
         <Bar dataKey='income' stackId='a' fill='#82ca9d' />
         <Bar dataKey='expensis' stackId='a' fill='#ff0000' />
