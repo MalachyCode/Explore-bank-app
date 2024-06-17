@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build:api": "cd Api/ && rm -rf build && npm install && npm run tsc",
+    "build:api": "cd Api/ && rm -rf build && npm install && npm run tsc && npm run build:ui",
     "start": "cd Api/ && npm start"
   }
 }
