@@ -70,7 +70,7 @@ const RetirementPlannerPage = () => {
   ];
 
   const handleSalarySliderChange = (
-    event: Event,
+    _event: Event,
     newValue: number | number[]
   ) => {
     setSalary(newValue as number);
@@ -78,35 +78,35 @@ const RetirementPlannerPage = () => {
   };
 
   const handleRetirementAgeSliderChange = (
-    event: Event,
+    _event: Event,
     newValue: number | number[]
   ) => {
     setRetirementAge(newValue as number);
   };
 
   const handleCurrentAgeSliderChange = (
-    event: Event,
+    _event: Event,
     newValue: number | number[]
   ) => {
     setCurrentAge(newValue as number);
   };
 
   const handleInvestmentReturnSliderChange = (
-    event: Event,
+    _event: Event,
     newValue: number | number[]
   ) => {
     setInvestmentReturnRate(newValue as number);
   };
 
   const handleSalaryIncreaseSliderChange = (
-    event: Event,
+    _event: Event,
     newValue: number | number[]
   ) => {
     setSalaryIncreaseRate(newValue as number);
   };
 
   const handleSavingsRateSliderChange = (
-    event: Event,
+    _event: Event,
     newValue: number | number[]
   ) => {
     setSavingsRate(newValue as number);
