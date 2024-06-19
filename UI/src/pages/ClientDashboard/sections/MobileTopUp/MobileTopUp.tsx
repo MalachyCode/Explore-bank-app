@@ -279,7 +279,7 @@ const MobileTopUp = () => {
         <div className='confirm'>
           <h3>Top Up Confirmation</h3>
           <div className='seperator'></div>
-          <p>
+          <p className='confirm-message'>
             Recharge &#8358;{topupDetails.amount} for {topupDetails.phoneNumber}
           </p>
           <form className='form' onSubmit={handleSubmit}>
