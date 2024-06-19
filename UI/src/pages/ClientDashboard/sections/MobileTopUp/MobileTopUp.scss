@@ -2,7 +2,9 @@
 
 .mobile-topup {
   width: 100vw;
-  // height: 100vh;
+  height: calc(100vh + 65px);
+  position: relative;
+  top: 65px;
   background: url('../../../../assets/pexels-henry-&-co-2059736.jpg');
   background-color: #e1dcd9;
   background-blend-mode: multiply;
@@ -18,17 +20,65 @@
     display: none;
   }
 
+  .top {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+  }
+
   .confirm-container {
     top: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-right: 20px;
+
+    .confirm {
+      height: 75%;
+      margin-top: 50px;
+      .confirm-message {
+        @media (max-width: 576px) {
+          font-size: 14px;
+        }
+      }
+
+      .form {
+        width: 70%;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        input {
+          border: none;
+          width: 85%;
+          border: 1px solid #dde3ed;
+        }
+
+        @media (max-width: 576px) {
+          width: 65%;
+        }
+      }
+    }
   }
 
   .form {
     position: relative;
-    // top: 2%;
+    top: 15px;
     // background: #d6ba73;
     margin: 10px 0;
+    margin: auto;
 
     .total {
+      .total-info {
+        @media (max-width: 576px) {
+          h3 {
+            font-size: 18px;
+          }
+        }
+      }
       @media (min-width: 576px) {
         margin-left: 2px;
         width: 95%;
