@@ -4,10 +4,8 @@
   width: 100%;
   height: calc(70vh - 70px);
   position: fixed;
-  top: -50vh;
-  // background-color: $mainColor;
+  top: -75vh;
   background-color: #32435f;
-  background-color: green;
   display: flex;
   flex-direction: column;
   // align-items: center;
@@ -49,7 +47,35 @@
     }
   }
 
+  .buttons-container {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    width: 90%;
+    height: 15%;
+    overflow: hidden;
+    justify-content: space-between;
+
+    button {
+      border-radius: 5px;
+      width: 40%;
+      height: 70%;
+      overflow: hidden;
+      border: 2px solid #32435f;
+      transition: all 0.5s ease;
+      background: none;
+      color: white;
+      border: 2px solid white;
+      padding: 2px;
+      &:hover {
+        border-radius: 10px;
+        font-size: large;
+        border: 3px solid #fff;
+      }
+    }
+  }
+
   @media (max-width: 576px) {
-    height: calc(60vh - 70px);
+    height: calc(75vh - 70px);
   }
 }
