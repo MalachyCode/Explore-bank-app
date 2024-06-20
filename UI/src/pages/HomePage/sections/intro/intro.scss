@@ -40,23 +40,19 @@
       transition: all 2s ease;
 
       .welcome-note {
-        padding: 2em;
+        // padding: 2em;
         width: 95%;
         margin: auto;
         height: 100%;
         color: #32435f;
-        // color: $mainColor;
         transition: all 1s ease;
         display: flex;
         flex-direction: column;
         overflow: hidden;
         align-items: center;
         position: relative;
-        top: 100px;
-        // justify-content: space-between;
-        // &:hover {
-        //   color: $mainColor;
-        // }
+        top: 135px;
+
         .header {
           overflow: hidden;
           margin-bottom: 3px;
