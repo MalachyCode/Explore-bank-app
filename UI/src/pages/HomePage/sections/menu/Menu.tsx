@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import './Menu.scss';
 
 const ListItem = (props: {
@@ -16,6 +17,7 @@ const Menu = (props: {
   menuOpen: boolean;
   setMenuOpen: (arg0: boolean) => void | boolean;
 }) => {
+  const navigate = useNavigate();
   return (
     <div className={'menu ' + (props.menuOpen && 'active')}>
       <ul>
@@ -36,6 +38,24 @@ const Menu = (props: {
         </li> */}
         <ListItem message='Contact' open={props.setMenuOpen} href='#contact' />
       </ul>
+      <div className='buttons-container'>
+        <button
+          className='button-1'
+          onClick={() => {
+            navigate('/signup');
+          }}
+        >
+          Get Started
+        </button>
+        <button
+          className='button-2'
+          onClick={() => {
+            navigate('/login');
+          }}
+        >
+          Continue
+        </button>
+      </div>
     </div>
   );
 };
