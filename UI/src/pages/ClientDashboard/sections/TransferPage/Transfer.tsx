@@ -488,7 +488,7 @@ const Transfer = () => {
         <div className='confirm'>
           <h3>Tranfer Confirmation</h3>
           <div className='seperator'></div>
-          <p>
+          <p className='confirm-message'>
             Transfer &#8358;{transferDetials.amount} to{' '}
             {receivingAccountOwner?.firstName} {receivingAccountOwner?.lastName}{' '}
             with account number {receivingAccount?.accountNumber} of{' '}
