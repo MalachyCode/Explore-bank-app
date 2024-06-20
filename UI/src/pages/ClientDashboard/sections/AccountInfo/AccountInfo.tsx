@@ -55,7 +55,8 @@ const AccountInfo = (props: { account: Account | null | undefined }) => {
       <div className='container'>
         <div className='top'>
           <div>
-            Number <span>{props.account?.accountNumber}</span>
+            Number{' '}
+            <span className='number'>{props.account?.accountNumber}</span>
           </div>
           <span className='seperator'></span>
           <div>
