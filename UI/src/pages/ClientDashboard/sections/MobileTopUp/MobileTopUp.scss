@@ -72,10 +72,11 @@
     margin: auto;
 
     .total {
+      overflow: hidden;
       .total-info {
         @media (max-width: 576px) {
           h3 {
-            font-size: 18px;
+            font-size: 16px;
           }
         }
       }

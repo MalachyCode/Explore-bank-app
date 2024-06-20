@@ -30,6 +30,12 @@
         span {
           font-size: 20px;
           font-weight: bold;
+
+          &.number {
+            @media (max-width: 576px) {
+              font-size: 16px;
+            }
+          }
         }
       }
       .seperator {
