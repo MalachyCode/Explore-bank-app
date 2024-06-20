@@ -266,4 +266,10 @@
       }
     }
   }
+
+  @media (max-width: 576px) {
+    p {
+      font-size: 13.5px;
+    }
+  }
 }
