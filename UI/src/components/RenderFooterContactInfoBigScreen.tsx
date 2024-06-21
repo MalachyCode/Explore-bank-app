@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import { Info } from '../types';
 
 const RenderFooterContactInfoBigScreen = (props: { info: Info }) => {
+  const navigate = useNavigate();
   return (
     <div className='footer-column one'>
       <div className='line'></div>
@@ -8,7 +10,14 @@ const RenderFooterContactInfoBigScreen = (props: { info: Info }) => {
       <div className='line'></div>
       <ul>
         {props.info.infoContents.map((content) => (
-          <li key={content.id}>{content.text}</li>
+          <li
+            onClick={() =>
+              navigate(content.onClickValue ? content.onClickValue : '')
+            }
+            key={content.id}
+          >
+            {content.text}
+          </li>
         ))}
       </ul>
     </div>
