@@ -14,7 +14,9 @@ const RenderServices = (props: { service: Service }) => (
     <div className='body'>
       <ul>
         {props.service.contents.map((content) => (
-          <li key={content.id}>{content.text}</li>
+          <li key={content.id} style={{ color: '#32435f' }}>
+            {content.text}
+          </li>
         ))}
       </ul>
     </div>
