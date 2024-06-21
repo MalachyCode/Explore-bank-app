@@ -28,10 +28,12 @@ export const contactsData = [
       {
         id: '2b',
         text: 'explorebank@mail.com',
+        onClickValue: '/contact/mail',
       },
       {
         id: '2c',
         text: 'Branch Locator',
+        onClickValue: '/branch-locator',
       },
     ],
   },
@@ -41,15 +43,18 @@ export const contactsData = [
     infoContents: [
       {
         id: '3a',
-        text: 'Online Banking',
+        text: 'Online Security Tips',
+        onClickValue: '/online-security-tips',
       },
       {
         id: '3b',
         text: 'Support Center',
+        onClickValue: '/support-center',
       },
       {
         id: '3c',
         text: 'Report Scam and Fraud Attempts',
+        onClickValue: '/report-scam',
       },
     ],
   },
@@ -60,14 +65,17 @@ export const contactsData = [
       {
         id: '4a',
         text: 'Our History',
+        onClickValue: '/our-history',
       },
       {
         id: '4b',
         text: 'Corporate profile',
+        onClickValue: '/corporate-profile',
       },
       {
         id: '4c',
-        text: 'Board and Management Team',
+        text: 'Our Philosophy',
+        onClickValue: '/our-philosophy',
       },
     ],
   },
