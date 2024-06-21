@@ -1,6 +1,5 @@
 .our-history {
   width: 100vw;
-  // height: 100vh;
   background: url('../../assets/pexels-henry-&-co-2059736.jpg');
   background-color: #e1dcd9;
   background-blend-mode: multiply;
@@ -43,6 +42,19 @@
 
     h3 {
       color: #7c8ca7;
+    }
+  }
+  @media (min-width: 576px) {
+    height: 100vh;
+
+    .container {
+      top: 10vh;
+    }
+  }
+
+  @media (min-width: 576px) and (max-width: 768px) {
+    .container {
+      top: 16vh;
     }
   }
 }
