@@ -90,7 +90,7 @@ const Contact = () => {
                 <li onClick={() => navigate('/contact/mail')}>
                   explorebank@mail.com
                 </li>
-                <li onClick={() => navigate('branch-locator')}>
+                <li onClick={() => navigate('/branch-locator')}>
                   Branch Locator
                 </li>
               </ul>
@@ -147,10 +147,10 @@ const Contact = () => {
             <div className={'service-list-box ' + (aboutUsOpen && 'active')}>
               <ul>
                 <li onClick={() => navigate('/our-history')}>Our History</li>
-                <li onClick={() => navigate('corporate-profile')}>
+                <li onClick={() => navigate('/corporate-profile')}>
                   Corporate profile
                 </li>
-                <li onClick={() => navigate('our-philosophy')}>
+                <li onClick={() => navigate('/our-philosophy')}>
                   Our Philosophy
                 </li>
               </ul>
