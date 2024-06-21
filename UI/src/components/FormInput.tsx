@@ -3,6 +3,7 @@ import { FormInputType } from '../types';
 import { useEffect, useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import PersonIcon from '@mui/icons-material/Person';
 
 declare module 'react' {
   interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
@@ -90,7 +91,11 @@ const FormInput = (props: FormInputType) => {
         >
           {label}
         </span>
-        {props.type === 'password' && showVisibilityIcon()}
+        {props.type === 'password' ? (
+          showVisibilityIcon()
+        ) : (
+          <PersonIcon style={{ color: 'white' }} />
+        )}
       </div>
       {focused && <span className='error-message'>{errorMessage}</span>}
     </div>
