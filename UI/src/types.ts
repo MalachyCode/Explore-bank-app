@@ -2,10 +2,6 @@ interface Content {
   id: string;
   text: string;
 }
-interface InfoContent {
-  id: string;
-  text: string;
-}
 
 export interface Service {
   id: number;
@@ -20,6 +16,12 @@ export interface Icons {
   iconClassName?: string;
   spanClassName?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
+}
+
+interface InfoContent {
+  id: string;
+  text: string;
+  onClickValue?: string;
 }
 
 export interface Info {
