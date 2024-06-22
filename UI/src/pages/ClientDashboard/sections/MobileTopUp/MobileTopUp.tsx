@@ -127,7 +127,8 @@ const MobileTopUp = () => {
       name: 'amount',
       type: 'text',
       // placeholder: 'Enter Amount',
-      errorMessage: 'Enter valid topup amount. Must be at least 10 Naira.',
+      errorMessage:
+        'Enter valid topup amount. Must be at least 10 Naira and not more than 1000000 Naira.',
       label: 'Amount',
       regex: '^[0-9]{2,7}$',
       required: true,
@@ -138,7 +139,7 @@ const MobileTopUp = () => {
     (notification) => notification.owner === user?.id
   );
 
-  console.log(userAccountNotificationBox);
+  // console.log(userAccountNotificationBox);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -235,6 +236,8 @@ const MobileTopUp = () => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTopupDetails({ ...topupDetails, [e.target.name]: e.target.value });
   };
+
+  console.log(topupDetails);
 
   const logoInputs = [
     {
