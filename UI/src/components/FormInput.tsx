@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import PersonIcon from '@mui/icons-material/Person';
+import { formatMoney } from '../functions/formatMoney';
 
 declare module 'react' {
   interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
@@ -14,11 +15,19 @@ declare module 'react' {
 
 const FormInput = (props: FormInputType) => {
   const [focused, setFocused] = useState(false);
-  const { label, errorMessage, onChange, id, type, ...inputProps } = props;
+  const [valueToShow, setValueToShow] = useState('');
+  const { label, errorMessage, onChange, id, value, type, ...inputProps } =
+    props;
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     setFocused(false);
+    if (label === 'Amount') {
+      console.log('Amount');
+      setValueToShow(value);
+      // setAmountValue(e.target.value);
+    }
+    console.log('Not Amount');
   }, [props.value]);
 
   // new RegExp is used to create a regex expression with the regex varable specified when using this component. The .test function checks if the provided string passes the regex rule
@@ -31,6 +40,9 @@ const FormInput = (props: FormInputType) => {
         ? false
         : true
     );
+    label === 'Amount'
+      ? setValueToShow(formatMoney(+value, 0))
+      : setValueToShow('');
   };
 
   const showVisibilityIcon = () => {
@@ -70,16 +82,19 @@ const FormInput = (props: FormInputType) => {
       <div className={'input-box ' + (focused && 'error')}>
         <input
           {...inputProps}
+          value={label === 'Amount' && valueToShow ? valueToShow : value}
           type={
             type === 'password' ? (showPassword ? 'text' : 'password') : type
           }
           className='form-input'
           id={id}
+          // onChange={label === 'Amount' ? onChangeAmount : onChange}
           onChange={onChange}
           onBlur={handleFocus} //onBlur===click and leave input
-          onFocus={() =>
-            inputProps.name === 'confirmPassword' && setFocused(true)
-          } //onFocus===click on input
+          onFocus={() => {
+            inputProps.name === 'confirmPassword' && setFocused(true);
+            setValueToShow(value);
+          }} //onFocus===click on input
           focused={focused.toString()}
         />
         <span
