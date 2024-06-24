@@ -97,10 +97,7 @@ const UserProfile = (props: { handleLogout: () => void }) => {
               className={'profile-photo ' + (enlargeProfilePicture && 'active')}
               onClick={() => setEnlargeProfilePicture(!enlargeProfilePicture)}
             >
-              <img
-                src={`http://localhost:3001/${user?.profilePicture}`}
-                alt=''
-              />
+              <img src={`${user?.profilePicture}`} alt='' />
             </div>
 
             <CameraAltIcon
