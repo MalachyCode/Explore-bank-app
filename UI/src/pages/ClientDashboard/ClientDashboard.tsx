@@ -258,10 +258,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
                 <AccountCircleIcon fontSize='large' className='account-icon' />
               ) : (
                 <div className={'profile-photo'}>
-                  <img
-                    src={`http://localhost:3001/${user?.profilePicture}`}
-                    alt=''
-                  />
+                  <img src={`${user?.profilePicture}`} alt='' />
                 </div>
               )}
             </div>
