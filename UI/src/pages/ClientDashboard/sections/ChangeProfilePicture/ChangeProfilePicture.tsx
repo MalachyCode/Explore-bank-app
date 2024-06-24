@@ -5,6 +5,9 @@ import './ChangeProfilePicture.scss';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { storage } from '../../../../services/firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { v4 } from 'uuid';
 
 const ChangeProfilePicture = () => {
   const navigate = useNavigate();
@@ -21,25 +24,56 @@ const ChangeProfilePicture = () => {
     }
   }, []);
 
+  // const uploadProfilePicture = () => {
+  //   const formData = new FormData();
+  //   if (profilePicture) {
+  //     formData.append('profilePicture', profilePicture);
+
+  //     if (user) {
+  //       usersService
+  //         .updateProfilePicture(user?.id, formData)
+  //         .then((response) => {
+  //           // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
+  //           const modifiedObjectForStorage = JSON.stringify(response);
+  //           localStorage.setItem('loggedAppUser', modifiedObjectForStorage);
+  //         })
+  //         .catch((e) => console.log(e));
+
+  //       navigate(-1);
+  //     }
+  //   }
+  // };
+
   const uploadProfilePicture = () => {
-    const formData = new FormData();
-    if (profilePicture) {
-      formData.append('profilePicture', profilePicture);
+    if (user) {
+      if (profilePicture) {
+        const imageRef = ref(
+          storage,
+          `profile-pictures/${profilePicture?.name} owner: ${user?.firstName} ${
+            user?.lastName
+          } ${v4()}`
+        );
+        uploadBytes(imageRef, profilePicture).then((response) => {
+          console.log(response);
+          getDownloadURL(response.ref).then((url) => {
+            const updatedUser = { ...user, profilePicture: url };
 
-      if (user) {
-        usersService
-          .updateProfilePicture(user?.id, formData)
-          .then((response) => {
             // Modifies the object, converts it to a string and replaces the existing `ship` in LocalStorage
-            const modifiedObjectForStorage = JSON.stringify(response);
+            const modifiedObjectForStorage = JSON.stringify(updatedUser);
             localStorage.setItem('loggedAppUser', modifiedObjectForStorage);
-          })
-          .catch((e) => console.log(e));
 
-        navigate(-1);
+            usersService
+              .updateUser(user.id, updatedUser)
+              .then((response) => console.log(response));
+          });
+          navigate(-1);
+        });
+      } else {
+        return;
       }
     }
   };
+  // console.log(user);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
