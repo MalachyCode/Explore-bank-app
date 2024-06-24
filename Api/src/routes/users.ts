@@ -188,6 +188,7 @@ usersRouter.put(
       number: body.number,
       dob: body.dob,
       transferPin: body.transferPin,
+      profilePicture: body.profilePicture,
     };
 
     User.findByIdAndUpdate(req.params.id, user, {
