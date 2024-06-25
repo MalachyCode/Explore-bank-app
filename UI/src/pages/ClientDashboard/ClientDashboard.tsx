@@ -20,6 +20,8 @@ import {
 import accountService from '../../services/accounts';
 import notificationsService from '../../services/notifications';
 import incomeExpenseService from '../../services/incomeExpense';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ClientDashboard = (props: { handleLogout: () => void }) => {
   const navigate = useNavigate();
@@ -63,6 +65,15 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
     (notification) => notification.owner === user?.id
   );
 
+  const notifyNoAccount = () => {
+    return toast.warn(
+      `You don't have an account yet and you need one to access this service. Click on Open Acoount to open an account.`,
+      {
+        position: 'top-center',
+      }
+    );
+  };
+
   const iconInputs = [
     {
       id: 'openAccount',
@@ -76,21 +87,30 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       name: 'billPayment',
       icon: '../../assets/icons8-bill-48.png',
       label: 'Bill Payment',
-      onClick: () => navigate(`/dashboard-client/${user?.id}/bill-payments`),
+      onClick:
+        userAccounts && userAccounts?.length > 0
+          ? () => navigate(`/dashboard-client/${user?.id}/bill-payments`)
+          : () => notifyNoAccount(),
     },
     {
       id: 'mobileTopup',
       name: 'mobileTopup',
       icon: '../../assets/icons8-topup-payment-48.png',
       label: 'Mobile Topup',
-      onClick: () => navigate(`/dashboard-client/${user?.id}/mobile-topup`),
+      onClick:
+        userAccounts && userAccounts?.length > 0
+          ? () => navigate(`/dashboard-client/${user?.id}/mobile-topup`)
+          : () => notifyNoAccount(),
     },
     {
       id: 'transfer',
       name: 'transfer',
       icon: '../../assets/icons8-money-transfer-48.png',
       label: 'Transfer',
-      onClick: () => navigate(`/dashboard-client/${user?.id}/transfer`),
+      onClick:
+        userAccounts && userAccounts?.length > 0
+          ? () => navigate(`/dashboard-client/${user?.id}/transfer`)
+          : () => notifyNoAccount(),
     },
     {
       id: 'loans',
@@ -99,7 +119,10 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       label: 'Loans',
       iconClassName: 'loan-icon',
       spanClassName: 'loan-tag',
-      onClick: () => navigate(`/dashboard-client/${user?.id}/loans`),
+      onClick:
+        userAccounts && userAccounts?.length > 0
+          ? () => navigate(`/dashboard-client/${user?.id}/loans`)
+          : () => notifyNoAccount(),
     },
     {
       id: 'referalReward',
@@ -107,15 +130,20 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
       icon: '../../assets/icons8-reward-48.png',
       label: 'Referal & Rewards',
       iconClassName: 'rewards-icon',
-      onClick: () => navigate(`/dashboard-client/${user?.id}/referal-rewards`),
+      onClick:
+        userAccounts && userAccounts?.length > 0
+          ? () => navigate(`/dashboard-client/${user?.id}/referal-rewards`)
+          : () => notifyNoAccount(),
     },
     {
       id: 'sportWalletFunding',
       name: 'sportWalletFunding',
       icon: '../../assets/icons8-volleyball-48.png',
       label: 'Sport Wallet Funding',
-      onClick: () =>
-        navigate(`/dashboard-client/${user?.id}/sport-wallet-funding`),
+      onClick:
+        userAccounts && userAccounts?.length > 0
+          ? () => navigate(`/dashboard-client/${user?.id}/sport-wallet-funding`)
+          : () => notifyNoAccount(),
     },
   ];
 
@@ -203,10 +231,13 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
           ))}
           <div
             className='item'
-            onClick={() =>
-              navigate(
-                `/dashboard-client/${user?.id}/transactions/select-account`
-              )
+            onClick={
+              userAccounts && userAccounts?.length > 0
+                ? () =>
+                    navigate(
+                      `/dashboard-client/${user?.id}/transactions/select-account`
+                    )
+                : () => notifyNoAccount()
             }
           >
             <HistoryIcon className='icon' />
@@ -356,10 +387,13 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
             ))}
             <div
               className='item'
-              onClick={() =>
-                navigate(
-                  `/dashboard-client/${user?.id}/transactions/select-account`
-                )
+              onClick={
+                userAccounts && userAccounts?.length > 0
+                  ? () =>
+                      navigate(
+                        `/dashboard-client/${user?.id}/transactions/select-account`
+                      )
+                  : () => notifyNoAccount()
               }
             >
               <HistoryIcon className='icon' />
@@ -374,6 +408,7 @@ const ClientDashboard = (props: { handleLogout: () => void }) => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
