@@ -330,6 +330,7 @@ $transition: 0.3s ease-in-out all;
   cursor: pointer;
   overflow: hidden;
   max-width: $fixed-width;
+  color: #32435f;
 
   .text {
     padding: 10px;
@@ -380,6 +381,7 @@ $transition: 0.3s ease-in-out all;
       max-width: $fixed-width;
       margin-bottom: 15px;
       position: relative;
+      color: #32435f;
 
       .naira-symbol {
         padding-top: 8px;
@@ -393,6 +395,7 @@ $transition: 0.3s ease-in-out all;
         margin-left: 5px;
         border: none;
         font-size: 16px;
+        color: #32435f;
 
         &:focus {
           outline: none;
