@@ -1,11 +1,15 @@
 @import '../../../../global.scss';
 
-.btn {
-  margin-top: 0;
-  &.disabled {
-    background: #7c8ca7;
-    opacity: 0.5;
-    box-shadow: none;
-    cursor: not-allowed;
+.sport-wallet-funding {
+  height: 100vh;
+
+  .btn {
+    margin-top: 0;
+    &.disabled {
+      background: #7c8ca7;
+      opacity: 0.5;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
   }
 }
