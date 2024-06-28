@@ -69,6 +69,7 @@
           align-items: center;
           justify-content: center;
           cursor: pointer;
+          color: #32435f;
 
           &.close-acct-btn {
             &:hover {
@@ -95,6 +96,7 @@
 
       .header {
         text-align: center;
+        color: #32435f;
       }
 
       .transaction {
@@ -166,7 +168,7 @@
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          font-size: 25px;
+          font-size: 20px;
           text-align: center;
 
           p {
@@ -175,7 +177,7 @@
           }
 
           .message-head {
-            font-size: 20px;
+            font-size: 17px;
             margin-top: 10px;
             color: #860202;
           }
