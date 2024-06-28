@@ -4,6 +4,7 @@ import FormInput from '../../../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
 import {
   Account,
+  BarChartInfo,
   NewAccount,
   Notification,
   OpenAccountType,
@@ -15,14 +16,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import notificationsService from '../../../../services/notifications';
+import barChartInfoUpdater from '../../../../functions/barChartInfoUpdater';
+import incomeExpenseService from '../../../../services/incomeExpense';
 
 const OpenAccount = () => {
   const navigate = useNavigate();
-  const [accountType, setAccountType] = useState('savings');
+  const [accountType, setAccountType] = useState('');
   const [accounts, setAccounts] = useState<Array<Account>>([]);
   const [users, setUsers] = useState<Array<User>>([]);
   const [user, setUser] = useState<User>();
   const [notifications, setNotifications] = useState<Array<Notification>>([]);
+  const [receiverBarChartInfo, setReceiverBarChartInfo] =
+    useState<BarChartInfo>();
 
   useEffect(() => {
     userService.getAll().then((users) => setUsers(users));
@@ -31,6 +36,12 @@ const OpenAccount = () => {
     if (loggedUserJSON) {
       const retrievedUser = JSON.parse(loggedUserJSON);
       setUser(retrievedUser);
+
+      incomeExpenseService
+        .findUserBarChartInfo({
+          owner: retrievedUser.id,
+        })
+        .then((returnedData) => setReceiverBarChartInfo(returnedData));
     } else {
       navigate('/login');
     }
@@ -47,6 +58,8 @@ const OpenAccount = () => {
     lastName: '',
     email: '',
   });
+
+  console.log(receiverBarChartInfo);
 
   const formInputs = [
     {
@@ -100,7 +113,7 @@ const OpenAccount = () => {
         accountOwner.lastName === details.lastName
       ) {
         const newAccount: NewAccount = {
-          balance: 0,
+          balance: 50000,
           createdOn: new Date(),
           owner: accountOwner.id,
           status: 'active',
@@ -127,6 +140,10 @@ const OpenAccount = () => {
                   creatAccountNotification
                 )
                 .then((response) => console.log(response));
+            }
+
+            if (receiverBarChartInfo) {
+              barChartInfoUpdater(receiverBarChartInfo, 'credit', 50000);
             }
 
             if (user?.type === 'staff') {
@@ -183,7 +200,7 @@ const OpenAccount = () => {
           className='form-select'
           onChange={(e) => setAccountType(e.target.value)}
         >
-          <option value='savings'>Account Type</option>
+          <option value=''>Account Type</option>
           <option value='savings'>Savings</option>
           <option value='current'>Current</option>
         </select>
